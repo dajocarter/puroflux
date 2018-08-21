@@ -18,5 +18,25 @@ module.exports = {
     },
     'gatsby-plugin-offline',
     'gatsby-plugin-styled-components',
+    {
+      resolve: 'gatsby-source-wordpress',
+      options: {
+        baseUrl: 'pf.local',
+        protocol: 'http',
+        hostingWPCOM: false,
+        useACF: true,
+        acfOptionPageIds: [],
+        auth: {},
+        verboseOutput: true,
+        perPage: 100,
+        // Search and Replace Urls across WordPress content.
+        searchAndReplaceContentUrls: {
+          sourceUrl: '//pf.local',
+          replacementUrl: '//localhost:8000',
+        },
+        concurrentRequests: 10,
+        excludedRoutes: ['/*/*/comments', '/yoast/**'],
+      },
+    },
   ],
 }
