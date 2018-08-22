@@ -38,5 +38,7 @@ module.exports = {
         excludedRoutes: ['/*/*/comments', '/yoast/**'],
       },
     },
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
   ],
 }
