@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 
 const Container = styled.header`
-  background: rebeccapurple;
+  background: black;
   margin-bottom: 1.45rem;
 `
 const Nav = styled.nav`
