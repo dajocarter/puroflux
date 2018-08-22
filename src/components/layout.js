@@ -22,6 +22,34 @@ const Layout = ({ children, data }) => (
             title
           }
         }
+        wordpressWpApiMenusMenusItems(slug: { eq: "main-menu" }) {
+          wordpress_id
+          name
+          slug
+          count
+          items {
+            wordpress_id
+            order
+            wordpress_parent
+            title
+            attr
+            target
+            classes
+            object_id
+            object_slug
+            wordpress_children {
+              wordpress_id
+              order
+              wordpress_parent
+              title
+              attr
+              target
+              classes
+              object_id
+              object_slug
+            }
+          }
+        }
       }
     `}
     render={data => (
@@ -35,7 +63,10 @@ const Layout = ({ children, data }) => (
         >
           <html lang="en" />
         </Helmet>
-        <Header siteTitle={data.site.siteMetadata.title} />
+        <Header
+          siteTitle={data.site.siteMetadata.title}
+          menu={data.wordpressWpApiMenusMenusItems}
+        />
         <Main>{children}</Main>
       </>
     )}

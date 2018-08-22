@@ -19,12 +19,46 @@ const BrandLink = styled(Link)`
   text-decoration: none;
 `
 
-const Header = ({ siteTitle }) => (
+const NavMenu = styled.ul`
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+`
+
+const NavItem = styled.li`
+  flex: 0 0 auto;
+`
+
+const NavLink = styled(Link)`
+  color: #fff;
+  text-decoration: none;
+  &.active {
+    color: #05c6c7;
+  }
+`
+
+const Header = props => (
   <Container>
-    <Nav>
+    <Nav role={`navigation`} aria-label={props.menu.name}>
       <NavBrand>
-        <BrandLink to="/">{siteTitle}</BrandLink>
+        <BrandLink to="/">{props.siteTitle}</BrandLink>
       </NavBrand>
+      <NavMenu>
+        {props.menu.items.map(item => (
+          <NavItem key={item.wordpress_id}>
+            <NavLink
+              activeClassName={`active`}
+              to={item.object_slug === 'home' ? `/` : `/${item.object_slug}`}
+            >
+              {item.title}
+            </NavLink>
+          </NavItem>
+        ))}
+      </NavMenu>
     </Nav>
   </Container>
 )
