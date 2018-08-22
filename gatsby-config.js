@@ -13,7 +13,7 @@ module.exports = {
         background_color: '#000',
         theme_color: '#05C6C7',
         display: 'minimal-ui',
-        icon: 'src/images/purofluxlogo-white_2x.png', // This path is relative to the root of the site.
+        icon: 'src/images/purofluxlogo_white_2x.png', // This path is relative to the root of the site.
       },
     },
     'gatsby-plugin-offline',
