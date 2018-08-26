@@ -8,10 +8,7 @@ import Header from './header'
 import Footer from './footer'
 
 const Main = styled.main`
-  margin: 0 auto;
-  max-width: 960px;
-  padding: 0px 1.0875rem 1.45rem;
-  padding-top: 0;
+  font-family: 'Lato', sans-serif;
 `
 
 const Layout = ({ children, data }) => (
