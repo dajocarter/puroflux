@@ -22,7 +22,16 @@ const Layout = ({ children, data }) => (
             title
           }
         }
-        wordpressWpApiMenusMenusItems(slug: { eq: "main-menu" }) {
+        logo: wordpressWpMedia(slug: { eq: "purofluxlogo_white_2x" }) {
+          localFile {
+            childImageSharp {
+              fixed(width: 267, height: 56) {
+                ...GatsbyImageSharpFixed_withWebp_tracedSVG
+              }
+            }
+          }
+        }
+        mainMenu: wordpressWpApiMenusMenusItems(slug: { eq: "main-menu" }) {
           wordpress_id
           name
           slug
@@ -64,8 +73,9 @@ const Layout = ({ children, data }) => (
           <html lang="en" />
         </Helmet>
         <Header
+          logo={data.logo}
           siteTitle={data.site.siteMetadata.title}
-          menu={data.wordpressWpApiMenusMenusItems}
+          menu={data.mainMenu}
         />
         <Main>{children}</Main>
       </>
