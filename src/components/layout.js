@@ -5,6 +5,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import Header from './header'
+import Footer from './footer'
 
 const Main = styled.main`
   margin: 0 auto;
@@ -59,6 +60,62 @@ const Layout = ({ children, data }) => (
             }
           }
         }
+        pagesMenu: wordpressWpApiMenusMenusItems(slug: { eq: "explore" }) {
+          wordpress_id
+          name
+          slug
+          count
+          items {
+            wordpress_id
+            order
+            wordpress_parent
+            title
+            attr
+            target
+            classes
+            object_id
+            object_slug
+            wordpress_children {
+              wordpress_id
+              order
+              wordpress_parent
+              title
+              attr
+              target
+              classes
+              object_id
+              object_slug
+            }
+          }
+        }
+        productsMenu: wordpressWpApiMenusMenusItems(slug: { eq: "products" }) {
+          wordpress_id
+          name
+          slug
+          count
+          items {
+            wordpress_id
+            order
+            wordpress_parent
+            title
+            attr
+            target
+            classes
+            object_id
+            object_slug
+            wordpress_children {
+              wordpress_id
+              order
+              wordpress_parent
+              title
+              attr
+              target
+              classes
+              object_id
+              object_slug
+            }
+          }
+        }
       }
     `}
     render={data => (
@@ -78,6 +135,7 @@ const Layout = ({ children, data }) => (
           menu={data.mainMenu}
         />
         <Main>{children}</Main>
+        <Footer productsMenu={data.productsMenu} pagesMenu={data.pagesMenu} />
       </>
     )}
   />
