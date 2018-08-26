@@ -31,8 +31,8 @@ module.exports = {
         perPage: 100,
         // Search and Replace Urls across WordPress content.
         searchAndReplaceContentUrls: {
-          sourceUrl: '//pf.local',
-          replacementUrl: '//localhost:8000',
+          sourceUrl: 'http://pf.local',
+          replacementUrl: '',
         },
         concurrentRequests: 10,
         excludedRoutes: ['/*/*/comments', '/yoast/**'],
