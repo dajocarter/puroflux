@@ -175,7 +175,10 @@ const Footer = props => {
       <Copyright>
         <p>&copy; 2017 - PUROFLUX. All rights reserved.</p>
         <a href="https://www.netlify.com">
-          <img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg" />
+          <img
+            alt="Deployed by Netlify"
+            src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"
+          />
         </a>
       </Copyright>
     </FooterWrapper>
