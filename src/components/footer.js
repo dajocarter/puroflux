@@ -151,7 +151,7 @@ const Footer = props => {
           <ColumnTitle>{props.productsMenu.name}</ColumnTitle>
           <Menu>
             {props.productsMenu.items.map((item, index) => (
-              <MenuItem>
+              <MenuItem key={index}>
                 <MenuLink to={`/${item.object_slug}`}>{item.title}</MenuLink>
               </MenuItem>
             ))}
@@ -161,7 +161,7 @@ const Footer = props => {
           <ColumnTitle>{props.pagesMenu.name}</ColumnTitle>
           <Menu>
             {props.pagesMenu.items.map((item, index) => (
-              <MenuItem>
+              <MenuItem key={index}>
                 <MenuLink to={`/${item.object_slug}`}>{item.title}</MenuLink>
               </MenuItem>
             ))}
