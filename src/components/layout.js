@@ -2,10 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
-import styled from 'styled-components'
+import styled, { injectGlobal } from 'styled-components'
+import styledNormalize from 'styled-normalize'
 
 import Header from './header'
 import Footer from './footer'
+
+injectGlobal`
+  ${styledNormalize}
+`
 
 const Main = styled.main`
   font-family: 'Lato', sans-serif;
