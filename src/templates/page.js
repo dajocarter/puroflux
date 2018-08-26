@@ -1,14 +1,32 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { graphql } from 'gatsby'
+import styled from 'styled-components'
 
 import Layout from '../components/layout'
+import Hero from '../components/hero'
 
-const PageTemplate = () => (
+const Content = styled.div`
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 1.45rem 1.0875rem;
+`
+
+const PageTemplate = ({ data }) => (
   <Layout>
-    <h1>Hi from the page template</h1>
-    <p>Welcome to page 2</p>
-    <Link to="/">Go back to the homepage</Link>
+    <Hero html={data.page.acf.content} />
+    <Content dangerouslySetInnerHTML={{ __html: data.page.content }} />
   </Layout>
 )
 
 export default PageTemplate
+
+export const query = graphql`
+  query PageQuery($id: String!) {
+    page: wordpressPage(id: { eq: $id }) {
+      content
+      acf {
+        content
+      }
+    }
+  }
+`
