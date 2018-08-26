@@ -1,4 +1,5 @@
 import React from 'react'
+import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
@@ -33,13 +34,45 @@ const Content = styled.div`
   width: 80%;
 `
 
-const Hero = props => {
-  return (
-    <Background isHome={props.isHome}>
-      <HeroImg fluid={props.isHome ? props.homeHero : props.defHero} />
-      <Content dangerouslySetInnerHTML={{ __html: props.html }} />
-    </Background>
-  )
-}
+const Hero = props => (
+  <StaticQuery
+    query={graphql`
+      query HeroQuery {
+        defaultHero: wordpressWpMedia(
+          slug: { eq: "puroflux_home_hero_sample" }
+        ) {
+          localFile {
+            childImageSharp {
+              fluid(maxHeight: 420) {
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              }
+            }
+          }
+        }
+        homeHero: wordpressWpMedia(slug: { eq: "puroflux_home_hero_pf_4060" }) {
+          localFile {
+            childImageSharp {
+              fluid(maxHeight: 420) {
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              }
+            }
+          }
+        }
+      }
+    `}
+    render={data => (
+      <Background isHome={props.isHome}>
+        <HeroImg
+          fluid={
+            props.isHome
+              ? data.homeHero.localFile.childImageSharp.fluid
+              : data.defaultHero.localFile.childImageSharp.fluid
+          }
+        />
+        <Content dangerouslySetInnerHTML={{ __html: props.html }} />
+      </Background>
+    )}
+  />
+)
 
 export default Hero

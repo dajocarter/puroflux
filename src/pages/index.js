@@ -62,26 +62,6 @@ const IndexPage = () => (
   <StaticQuery
     query={graphql`
       query HomeQuery {
-        defaultHero: wordpressWpMedia(
-          slug: { eq: "puroflux_home_hero_sample" }
-        ) {
-          localFile {
-            childImageSharp {
-              fluid(maxHeight: 420) {
-                ...GatsbyImageSharpFluid_withWebp_tracedSVG
-              }
-            }
-          }
-        }
-        homeHero: wordpressWpMedia(slug: { eq: "puroflux_home_hero_pf_4060" }) {
-          localFile {
-            childImageSharp {
-              fluid(maxHeight: 420) {
-                ...GatsbyImageSharpFluid_withWebp_tracedSVG
-              }
-            }
-          }
-        }
         page: wordpressPage(slug: { eq: "home" }) {
           acf {
             content
@@ -147,12 +127,7 @@ const IndexPage = () => (
     `}
     render={data => (
       <Layout>
-        <Hero
-          isHome
-          html={data.page.acf.content}
-          homeHero={data.homeHero.localFile.childImageSharp.fluid}
-          defHero={data.defaultHero.localFile.childImageSharp.fluid}
-        />
+        <Hero isHome html={data.page.acf.content} />
         <Container>
           <Row>
             <Column>
