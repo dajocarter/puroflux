@@ -27,9 +27,19 @@ const Column = styled.div`
   align-items: center;
   flex: 0 0 auto;
   width: 100%;
-  @media (min-width: 768px) {
-    width: 50%;
+
+  > .gatsby-image-outer-wrapper {
+    width: 100%;
   }
+
+  @media (min-width: 768px) {
+    width: 45%;
+  }
+`
+
+const FeatureImage = styled(Img)`
+  height: auto;
+  width: 100%;
 `
 
 const FeatureTitle = styled.h2`
@@ -132,7 +142,7 @@ const IndexPage = () => (
           <Row>
             <Column>
               {data.page.acf.featured_image && (
-                <Img
+                <FeatureImage
                   fluid={
                     data.page.acf.featured_image.localFile.childImageSharp.fluid
                   }
