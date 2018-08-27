@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: 'Puroflux',
@@ -21,8 +25,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-wordpress',
       options: {
-        baseUrl: 'pf.local',
-        protocol: 'http',
+        baseUrl: `${process.env.BASE_URL}`,
+        protocol: `${process.env.PROTOCOL}`,
         hostingWPCOM: false,
         useACF: true,
         acfOptionPageIds: [],
@@ -31,7 +35,7 @@ module.exports = {
         perPage: 100,
         // Search and Replace Urls across WordPress content.
         searchAndReplaceContentUrls: {
-          sourceUrl: 'http://pf.local',
+          sourceUrl: `${process.env.SOURCE_URL}`,
           replacementUrl: '',
         },
         concurrentRequests: 10,
