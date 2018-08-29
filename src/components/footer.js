@@ -16,6 +16,11 @@ const CallToAction = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
+
+  @media (max-width: 767px) {
+    flex-flow: column nowrap;
+    padding: 16px 0 20px 0;
+  }
 `
 
 const Headline = styled.h2`
