@@ -44,7 +44,7 @@ const Hero = props => (
           localFile {
             childImageSharp {
               fluid(maxHeight: 420) {
-                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                ...GatsbyImageSharpFluid_withWebp
               }
             }
           }
@@ -53,7 +53,7 @@ const Hero = props => (
           localFile {
             childImageSharp {
               fluid(maxHeight: 420) {
-                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                ...GatsbyImageSharpFluid_withWebp
               }
             }
           }

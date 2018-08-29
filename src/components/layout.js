@@ -29,7 +29,7 @@ const Layout = ({ children, data }) => (
           localFile {
             childImageSharp {
               fixed(width: 267, height: 56) {
-                ...GatsbyImageSharpFixed_withWebp_tracedSVG
+                ...GatsbyImageSharpFixed_withWebp
               }
             }
           }

@@ -80,7 +80,7 @@ const IndexPage = () => (
               localFile {
                 childImageSharp {
                   fluid(maxWidth: 768) {
-                    ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                    ...GatsbyImageSharpFluid_withWebp
                   }
                 }
               }
@@ -101,7 +101,7 @@ const IndexPage = () => (
                   localFile {
                     childImageSharp {
                       fluid(maxWidth: 768) {
-                        ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                        ...GatsbyImageSharpFluid_withWebp
                       }
                     }
                   }
@@ -117,7 +117,7 @@ const IndexPage = () => (
                   localFile {
                     childImageSharp {
                       fluid(maxWidth: 768) {
-                        ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                        ...GatsbyImageSharpFluid_withWebp
                       }
                     }
                   }
