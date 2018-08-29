@@ -59,21 +59,30 @@ const Container = styled.div`
   align-items: center;
 `
 
+const Content = styled.div`
+  text-align: center;
+  margin-bottom: 1.25rem;
+`
+
 const LeftContainer = styled(Container)`
   @media (min-width: 768px) {
     align-items: flex-end;
+    & ${Content} {
+      text-align: right;
+    }
   }
 `
 
 const RightContainer = styled(Container)`
   @media (min-width: 768px) {
     align-items: flex-start;
+    & ${Content} {
+      text-align: left;
+    }
   }
 `
 
 const Title = styled.h2``
-
-const Content = styled.div``
 
 const ButtonLink = styled(Link)`
   border: 3px solid #ffa200;
