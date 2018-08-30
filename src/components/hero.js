@@ -25,6 +25,7 @@ const HeroImg = styled(Img)`
 
 const Content = styled.div`
   color: white;
+  font-size: 1.25rem;
   letter-spacing: 1px;
   line-height: 38px;
   position: absolute;
