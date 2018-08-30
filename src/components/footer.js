@@ -155,6 +155,10 @@ const Copyright = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
+
+  @media (max-width: 479px) {
+    justify-content: center;
+  }
 `
 
 const Footer = props => {
