@@ -8,14 +8,33 @@ const FooterWrapper = styled.footer`
   font-family: 'Lato', sans-serif;
 `
 
-const CallToAction = styled.div`
+const Container = styled.div`
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 1.45rem 1.0875rem;
+`
+
+const Row = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+`
+
+const CallToAction = styled(Row)`
   background: #ffa200;
   text-transform: uppercase;
+`
+
+const CTAcontainer = styled(Container)`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  text-align: center;
+  width: 100%;
 
   @media (max-width: 767px) {
     flex-flow: column nowrap;
@@ -35,6 +54,7 @@ const PhoneNumber = styled.a`
   color: black;
   font-weight: bold;
   text-decoration: none;
+  padding: 0 0.5rem;
 `
 
 const ButtonLink = styled(Link)`
@@ -58,6 +78,7 @@ const ButtonLink = styled(Link)`
 const CTAlink = styled(ButtonLink)`
   background-color: black;
   color: white;
+  margin: 0.5rem 0.5rem 0;
 
   &:hover,
   &:focus {
@@ -66,18 +87,13 @@ const CTAlink = styled(ButtonLink)`
   }
 `
 
-const Row = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-`
-
 const Column = styled.div`
   flex: 0 0 auto;
   width: 100%;
+  text-align: center;
   @media (min-width: 768px) {
     width: 30%;
+    text-align: left;
   }
 `
 
@@ -98,7 +114,10 @@ const Menu = styled.ul`
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  @media (min-width: 768px) {
+    align-items: flex-start;
+  }
 `
 
 const MenuItem = styled.li`
@@ -142,41 +161,45 @@ const Footer = props => {
   return (
     <FooterWrapper>
       <CallToAction>
-        <Headline>Ready to get started?</Headline>
-        <Action>
-          Call us at{' '}
-          <PhoneNumber href="tel:805-579-0216" title="Dial (805) 579-0216">
-            (805) 579-0216
-          </PhoneNumber>{' '}
-          or <CTAlink to="/contact">Contact Us</CTAlink>
-        </Action>
+        <CTAcontainer>
+          <Headline>Ready to get started?</Headline>
+          <Action>
+            Call us at{' '}
+            <PhoneNumber href="tel:805-579-0216" title="Dial (805) 579-0216">
+              (805) 579-0216
+            </PhoneNumber>{' '}
+            or <CTAlink to="/contact">Contact Us</CTAlink>
+          </Action>
+        </CTAcontainer>
       </CallToAction>
-      <Row>
-        <ProductsColumn>
-          <ColumnTitle>{props.productsMenu.name}</ColumnTitle>
-          <Menu>
-            {props.productsMenu.items.map((item, index) => (
-              <MenuItem key={index}>
-                <MenuLink to={`/${item.object_slug}`}>{item.title}</MenuLink>
-              </MenuItem>
-            ))}
-          </Menu>
-        </ProductsColumn>
-        <PagesColumn>
-          <ColumnTitle>{props.pagesMenu.name}</ColumnTitle>
-          <Menu>
-            {props.pagesMenu.items.map((item, index) => (
-              <MenuItem key={index}>
-                <MenuLink to={`/${item.object_slug}`}>{item.title}</MenuLink>
-              </MenuItem>
-            ))}
-          </Menu>
-        </PagesColumn>
-        <SignUpColumn>
-          <ColumnTitle>Sign up for our newsletter</ColumnTitle>
-          <SignUpLink to={`#`}>Sign Up</SignUpLink>
-        </SignUpColumn>
-      </Row>
+      <Container>
+        <Row>
+          <ProductsColumn>
+            <ColumnTitle>{props.productsMenu.name}</ColumnTitle>
+            <Menu>
+              {props.productsMenu.items.map((item, index) => (
+                <MenuItem key={index}>
+                  <MenuLink to={`/${item.object_slug}`}>{item.title}</MenuLink>
+                </MenuItem>
+              ))}
+            </Menu>
+          </ProductsColumn>
+          <PagesColumn>
+            <ColumnTitle>{props.pagesMenu.name}</ColumnTitle>
+            <Menu>
+              {props.pagesMenu.items.map((item, index) => (
+                <MenuItem key={index}>
+                  <MenuLink to={`/${item.object_slug}`}>{item.title}</MenuLink>
+                </MenuItem>
+              ))}
+            </Menu>
+          </PagesColumn>
+          <SignUpColumn>
+            <ColumnTitle>Sign up for our newsletter</ColumnTitle>
+            <SignUpLink to={`#`}>Sign Up</SignUpLink>
+          </SignUpColumn>
+        </Row>
+      </Container>
       <Copyright>
         <p>&copy; 2017 - PUROFLUX. All rights reserved.</p>
         <a href="https://www.netlify.com">
