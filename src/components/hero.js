@@ -43,7 +43,8 @@ const Links = styled.div`
 `
 
 const ButtonLink = styled(Link)`
-  border: 3px solid #ffa200;
+  border-width: 3px;
+  border-style: solid;
   background-color: transparent;
   color: white;
   display: inline-block;
@@ -54,11 +55,16 @@ const ButtonLink = styled(Link)`
   text-decoration: none;
   text-transform: uppercase;
   transition: all 0.15s ease-in;
-  &:hover,
-  &:focus {
-    background-color: #ffa200;
+
+  &:nth-child(odd) {
+    border-color: #ffa200;
+    &:hover,
+    &:focus {
+      background-color: #ffa200;
+    }
   }
-  & + & {
+
+  &:nth-child(even) {
     border-color: #05c6c7;
     &:hover,
     &:focus {
