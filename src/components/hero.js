@@ -1,5 +1,5 @@
 import React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
+import { StaticQuery, graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
@@ -33,6 +33,38 @@ const Content = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
+`
+
+const Links = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+`
+
+const ButtonLink = styled(Link)`
+  border: 3px solid #ffa200;
+  background-color: transparent;
+  color: white;
+  display: inline-block;
+  letter-spacing: 1px;
+  margin: 1rem;
+  padding: 1rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.15s ease-in;
+  &:hover,
+  &:focus {
+    background-color: #ffa200;
+  }
+  & + & {
+    border-color: #05c6c7;
+    &:hover,
+    &:focus {
+      background-color: #05c6c7;
+    }
+  }
 `
 
 const Hero = props => (
@@ -70,7 +102,21 @@ const Hero = props => (
               : data.defaultHero.localFile.childImageSharp.fluid
           }
         />
-        <Content dangerouslySetInnerHTML={{ __html: props.html }} />
+        <Content>
+          <div dangerouslySetInnerHTML={{ __html: props.html }} />
+          {props.links && (
+            <Links>
+              {props.links.map((link, i) => (
+                <ButtonLink
+                  to={link.button_link.url}
+                  target={link.button_link.target}
+                >
+                  {link.button_link.title}
+                </ButtonLink>
+              ))}
+            </Links>
+          )}
+        </Content>
       </Background>
     )}
   />

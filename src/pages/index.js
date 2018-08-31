@@ -75,6 +75,13 @@ const IndexPage = () => (
         page: wordpressPage(slug: { eq: "home" }) {
           acf {
             content
+            buttons {
+              button_link {
+                title
+                target
+                url
+              }
+            }
             featured_content
             featured_image {
               localFile {
@@ -137,7 +144,11 @@ const IndexPage = () => (
     `}
     render={data => (
       <Layout>
-        <Hero isHome html={data.page.acf.content} />
+        <Hero
+          isHome
+          html={data.page.acf.content}
+          links={data.page.acf.buttons}
+        />
         <Container>
           <Row>
             <Column>

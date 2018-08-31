@@ -13,7 +13,7 @@ const Content = styled.div`
 
 const PageTemplate = ({ data }) => (
   <Layout>
-    <Hero html={data.page.acf.content} />
+    <Hero html={data.page.acf.content} links={data.page.acf.buttons} />
     <Content dangerouslySetInnerHTML={{ __html: data.page.content }} />
   </Layout>
 )
@@ -26,6 +26,13 @@ export const query = graphql`
       content
       acf {
         content
+        buttons {
+          button_link {
+            title
+            target
+            url
+          }
+        }
       }
     }
   }
