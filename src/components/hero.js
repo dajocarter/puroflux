@@ -7,6 +7,7 @@ const Background = styled.div`
   height: 420px;
   width: 100%;
   position: relative;
+  background-color: #097e72;
 `
 
 const HeroImg = styled(Img)`
