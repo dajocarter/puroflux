@@ -58,11 +58,13 @@ const NavLink = styled(Link)`
 const Header = props => (
   <Container>
     <Nav role={`navigation`} aria-label={props.menu.name}>
-      <NavBrand>
-        <Link to="/" title={props.siteTitle}>
-          <Img fixed={props.logo.localFile.childImageSharp.fixed} />
-        </Link>
-      </NavBrand>
+      {props.logo && (
+        <NavBrand>
+          <Link to="/" title={props.siteTitle}>
+            <Img fixed={props.logo.localFile.childImageSharp.fixed} />
+          </Link>
+        </NavBrand>
+      )}
       <NavMenu>
         {props.menu.items.map(item => (
           <NavItem key={item.wordpress_id}>

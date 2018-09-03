@@ -102,13 +102,16 @@ const Hero = props => (
     `}
     render={data => (
       <Background isHome={props.isHome}>
-        <HeroImg
-          fluid={
-            props.isHome
-              ? data.homeHero.localFile.childImageSharp.fluid
-              : data.defaultHero.localFile.childImageSharp.fluid
-          }
-        />
+        {data.homeHero &&
+          data.defaultHero && (
+            <HeroImg
+              fluid={
+                props.isHome
+                  ? data.homeHero.localFile.childImageSharp.fluid
+                  : data.defaultHero.localFile.childImageSharp.fluid
+              }
+            />
+          )}
         <Content>
           <div dangerouslySetInnerHTML={{ __html: props.html }} />
           {props.links && (
