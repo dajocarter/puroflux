@@ -16,6 +16,7 @@ exports.createPages = ({ graphql, actions }) => {
             node {
               id
               slug
+              template
             }
           }
         }
@@ -26,16 +27,66 @@ exports.createPages = ({ graphql, actions }) => {
           console.log(result.errors)
           reject(result.errors)
         }
+
+        const dontCreatePagesFor = ['home']
         const pageTemplate = path.resolve('./src/templates/page.js')
-        result.data.allWordpressPage.edges.forEach(({ node }) => {
-          createPage({
-            path: `/${node.slug}/`,
-            component: slash(pageTemplate),
-            context: {
-              id: node.id,
-            },
+        const contactTemplate = path.resolve('./src/templates/page_contact.js')
+        const galleryTemplate = path.resolve('./src/templates/page_gallery.js')
+        const libraryTemplate = path.resolve('./src/templates/page_library.js')
+        const typInstallTemplate = path.resolve(
+          './src/templates/page_typInstall.js'
+        )
+
+        result.data.allWordpressPage.edges
+          .filter(({ node }) => !dontCreatePagesFor.includes(node.slug))
+          .forEach(({ node }) => {
+            switch (node.template) {
+              case 'page_contact.php':
+                createPage({
+                  path: `/${node.slug}/`,
+                  component: slash(contactTemplate),
+                  context: {
+                    id: node.id,
+                  },
+                })
+                break
+              case 'page_gallery.php':
+                createPage({
+                  path: `/${node.slug}/`,
+                  component: slash(galleryTemplate),
+                  context: {
+                    id: node.id,
+                  },
+                })
+                break
+              case 'page_library.php':
+                createPage({
+                  path: `/${node.slug}/`,
+                  component: slash(libraryTemplate),
+                  context: {
+                    id: node.id,
+                  },
+                })
+                break
+              case 'page_typical-installations.php':
+                createPage({
+                  path: `/${node.slug}/`,
+                  component: slash(typInstallTemplate),
+                  context: {
+                    id: node.id,
+                  },
+                })
+                break
+              default:
+                createPage({
+                  path: `/${node.slug}/`,
+                  component: slash(pageTemplate),
+                  context: {
+                    id: node.id,
+                  },
+                })
+            }
           })
-        })
       })
       // ==== END PAGES ====
 
