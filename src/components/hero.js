@@ -115,6 +115,7 @@ const Hero = props => (
             <Links>
               {props.links.map((link, i) => (
                 <ButtonLink
+                  key={i}
                   to={link.button_link.url}
                   target={link.button_link.target}
                 >
