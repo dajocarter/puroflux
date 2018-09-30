@@ -23,6 +23,7 @@ const Row = styled.div`
 
 const CallToAction = styled(Row)`
   background: #ffa200;
+  border-top: 1px solid white;
   text-transform: uppercase;
 `
 
