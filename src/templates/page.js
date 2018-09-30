@@ -14,7 +14,9 @@ const Content = styled.div`
 const PageTemplate = ({ data }) => (
   <Layout>
     <Hero html={data.page.acf.content} links={data.page.acf.buttons} />
-    <Content dangerouslySetInnerHTML={{ __html: data.page.content }} />
+    {data.page.content && (
+      <Content dangerouslySetInnerHTML={{ __html: data.page.content }} />
+    )}
   </Layout>
 )
 
