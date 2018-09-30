@@ -33,6 +33,10 @@ const Content = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
+
+  a {
+    color: white;
+  }
 `
 
 const Links = styled.div`
