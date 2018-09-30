@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
+import { FormGroup, FormControl, FormLabel, Button } from 'react-bootstrap'
 import styled from 'styled-components'
 
 const HoneyPot = styled.p`
@@ -11,19 +11,19 @@ export default class Form extends Component {
     return (
       <form netlify name="contact" method="POST">
         <FormGroup controlId="name">
-          <ControlLabel>Name</ControlLabel>
+          <FormLabel>Name</FormLabel>
           <FormControl type="text" placeholder="Your name" />
         </FormGroup>
         <FormGroup controlId="email">
-          <ControlLabel>Email</ControlLabel>
+          <FormLabel>Email</FormLabel>
           <FormControl type="email" placeholder="Your email" />
         </FormGroup>
         <FormGroup controlId="message">
-          <ControlLabel>Message</ControlLabel>
+          <FormLabel>Message</FormLabel>
           <FormControl componentClass="textarea" placeholder="Your message" />
         </FormGroup>
         <FormGroup controlId="location">
-          <ControlLabel>Location</ControlLabel>
+          <FormLabel>Location</FormLabel>
           <FormControl type="text" placeholder="Your location" />
         </FormGroup>
         <HoneyPot>
