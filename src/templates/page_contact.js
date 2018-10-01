@@ -1,20 +1,23 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
+import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
+import 'bootstrap/dist/css/bootstrap.css'
 
 import Layout from '../components/layout'
 import Hero from '../components/hero'
 import Form from '../components/form'
 
-const Container = styled.div``
-
-const Row = styled.div``
-
-const Col = styled.div``
-
 const ColumnTitle = styled.h2``
 
-const Map = styled.div``
+const Map = styled.div`
+  iframe {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+  }
+`
 
 const Address = styled.p``
 
@@ -28,7 +31,7 @@ const Contact = () => (
   <StaticQuery
     query={graphql`
       query ContactQuery {
-        page: wordpressPage(slug: { eq: "contact" }) {
+        page: wordpressPage(template: { eq: "page_contact.php" }) {
           acf {
             content
             buttons {
@@ -38,6 +41,15 @@ const Contact = () => (
                 url
               }
             }
+            location {
+              address
+              lat
+              lng
+            }
+            address
+            phone_number
+            fax_number
+            contact_email
           }
         }
       }
@@ -45,9 +57,9 @@ const Contact = () => (
     render={data => (
       <Layout>
         <Hero html={data.page.acf.content} links={data.page.acf.buttons} />
-        <Container>
+        <Container fluid>
           <Row>
-            <Col>
+            <Col md={6}>
               <ColumnTitle>Contact Information</ColumnTitle>
               <Map>
                 <iframe
@@ -74,7 +86,7 @@ const Contact = () => (
                 </Value>
               </ContactInfo>
             </Col>
-            <Col>
+            <Col md={6}>
               <ColumnTitle>Contact Form</ColumnTitle>
               <Form />
             </Col>
