@@ -140,7 +140,7 @@ const MenuLink = styled(Link)`
 `
 
 const SignUpLink = styled(ButtonLink)`
-  background-color: #fa200;
+  background-color: #ffa200;
   color: white;
   &:hover,
   &:focus {
