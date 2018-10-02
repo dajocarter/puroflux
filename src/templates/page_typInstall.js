@@ -1,9 +1,10 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import Layout from '../components/layout'
 import Hero from '../components/hero'
+import Accordion from '../components/Accordion'
 
 const Content = styled.div`
   margin: 0 auto;
@@ -11,29 +12,136 @@ const Content = styled.div`
   padding: 1.45rem 1.0875rem;
 `
 
-const TypInstallTemplate = ({ data }) => (
-  <Layout>
-    <Hero html={data.page.acf.content} links={data.page.acf.buttons} />
-    <Content dangerouslySetInnerHTML={{ __html: data.page.content }} />
-  </Layout>
-)
+const Installation = styled.div`
+  .text--center {
+    text-align: center;
+  }
 
-export default TypInstallTemplate
+  h2 {
+    text-transform: uppercase;
+  }
 
-export const query = graphql`
-  query TypInstallQuery($id: String!) {
-    page: wordpressPage(id: { eq: $id }) {
-      content
-      acf {
-        content
-        buttons {
-          button_link {
-            title
-            target
-            url
+  h4 {
+    color: #ccc;
+  }
+`
+
+const TypInstallTemplate = () => (
+  <StaticQuery
+    query={graphql`
+      query TypInstallQuery {
+        page: wordpressPage(
+          template: { eq: "page_typical-installations.php" }
+        ) {
+          content
+          acf {
+            content
+            buttons {
+              button_link {
+                title
+                target
+                url
+              }
+            }
+          }
+        }
+        models: allWordpressWpProducts {
+          edges {
+            node {
+              id
+              title
+              categories {
+                slug
+              }
+              acf {
+                full_flow_files {
+                  file {
+                    wordpress_id
+                    title
+                    url {
+                      source_url
+                    }
+                  }
+                }
+                side_stream_files {
+                  file {
+                    wordpress_id
+                    title
+                    url {
+                      source_url
+                    }
+                  }
+                }
+                slip_stream_files {
+                  file {
+                    wordpress_id
+                    title
+                    url {
+                      source_url
+                    }
+                  }
+                }
+                sweeper_piping_files {
+                  file {
+                    wordpress_id
+                    title
+                    url {
+                      source_url
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
-    }
-  }
-`
+    `}
+    render={data => {
+      const filterInstalls = data.models.edges
+        .filter(({ node }) =>
+          node.categories.some(cat => cat.slug === 'permanent-media-filters')
+        )
+        .reverse()
+      const sepInstalls = data.models.edges
+        .filter(({ node }) =>
+          node.categories.some(cat => cat.slug === 'separators')
+        )
+        .reverse()
+      return (
+        <Layout>
+          <Hero html={data.page.acf.content} links={data.page.acf.buttons} />
+          {data.page.content && (
+            <Content dangerouslySetInnerHTML={{ __html: data.page.content }} />
+          )}
+          {filterInstalls && (
+            <Installation>
+              <div className="text--center">
+                <h2>Filter Installations</h2>
+                <h3>Select a Model</h3>
+                <h4>View product summary</h4>
+              </div>
+              <Accordion files={filterInstalls} slipStream sweeperPiping />
+            </Installation>
+          )}
+          {sepInstalls && (
+            <Installation>
+              <div className="text--center">
+                <h2>Separator Installations</h2>
+                <h3>Select a Model</h3>
+                <h4>View product summary</h4>
+              </div>
+              <Accordion
+                files={sepInstalls}
+                sweeperPiping
+                fullFlow
+                sideStream
+              />
+            </Installation>
+          )}
+        </Layout>
+      )
+    }}
+  />
+)
+
+export default TypInstallTemplate
