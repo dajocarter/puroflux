@@ -85,16 +85,14 @@ const LibraryTemplate = () => (
             <LibraryGroup key={i}>
               <h2>{group.group_name}</h2>
               <ul>
-                {group.files.map(item => (
-                  <li key={item.file.wordpress_id}>
+                {group.files.map(({ file }) => (
+                  <li key={file.wordpress_id}>
                     <a
-                      href={`${process.env.SOURCE_URL}${
-                        item.file.url.source_url
-                      }`}
+                      href={`${process.env.SOURCE_URL}${file.url.source_url}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {item.file.title}
+                      {file.title}
                     </a>
                   </li>
                 ))}
