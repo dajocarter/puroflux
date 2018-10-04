@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { FormGroup, FormControl, FormLabel, Button } from 'react-bootstrap'
 import styled from 'styled-components'
 
+import 'bootstrap/dist/css/bootstrap.css'
+
 const HoneyPot = styled.p`
   display: none;
 `
