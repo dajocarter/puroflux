@@ -206,7 +206,7 @@ const Footer = props => {
         </Row>
       </Container>
       <Copyright>
-        <p>&copy; 2017 - PUROFLUX. All rights reserved.</p>
+        <p>&copy; Copyright 2018 - PUROFLUX. All rights reserved.</p>
         <a href="https://www.netlify.com">
           <img
             alt="Deployed by Netlify"
