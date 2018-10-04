@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Collapse } from 'react-bootstrap'
 import styled from 'styled-components'
+import 'bootstrap/dist/css/bootstrap.css'
 
 const Model = styled.div``
 
