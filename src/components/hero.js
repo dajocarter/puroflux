@@ -1,7 +1,9 @@
 import React from 'react'
-import { StaticQuery, graphql, Link } from 'gatsby'
+import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
+
+import Button from './styled/button'
 
 const Background = styled.div`
   height: 420px;
@@ -44,37 +46,6 @@ const Links = styled.div`
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-`
-
-const ButtonLink = styled(Link)`
-  border-width: 3px;
-  border-style: solid;
-  background-color: transparent;
-  color: white;
-  display: inline-block;
-  letter-spacing: 1px;
-  margin: 1rem;
-  padding: 1rem;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: all 0.15s ease-in;
-
-  &:nth-child(odd) {
-    border-color: #ffa200;
-    &:hover,
-    &:focus {
-      background-color: #ffa200;
-    }
-  }
-
-  &:nth-child(even) {
-    border-color: #05c6c7;
-    &:hover,
-    &:focus {
-      background-color: #05c6c7;
-    }
-  }
 `
 
 const Hero = props => (
@@ -120,13 +91,15 @@ const Hero = props => (
           {props.links && (
             <Links>
               {props.links.map((link, i) => (
-                <ButtonLink
+                <Button
                   key={i}
                   to={link.button_link.url}
                   target={link.button_link.target}
+                  primary={i % 2 === 0}
+                  secondary={i % 2 === 1}
                 >
                   {link.button_link.title}
-                </ButtonLink>
+                </Button>
               ))}
             </Links>
           )}
