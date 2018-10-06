@@ -18,7 +18,7 @@ const Button = styled(Link)`
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-  transition: all 0.15s ease-in;
+  transition: background-color 0.15s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   &:hover,
   &:focus {
     background-color: ${props =>
@@ -28,6 +28,7 @@ const Button = styled(Link)`
           ? props.theme.secondary
           : props.theme.alt};
     color: white;
+    text-decoration: none;
   }
 `
 
