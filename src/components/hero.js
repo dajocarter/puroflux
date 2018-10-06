@@ -17,7 +17,7 @@ const HeroImg = styled(Img)`
   left: 0;
   width: 100%;
   z-index: -1;
-  height: 420px;
+  height: 400px;
   & > img {
     object-fit: cover !important; // or whatever
     object-position: 50% 50% !important; // or whatever
@@ -35,6 +35,15 @@ const Content = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
+  max-width: 480px;
+
+  .content {
+    margin-bottom: 53px;
+
+    h1 {
+      font-size: 2rem;
+    }
+  }
 
   a {
     color: white;
@@ -44,7 +53,7 @@ const Content = styled.div`
 const Links = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `
 
@@ -87,7 +96,10 @@ const Hero = props => (
             />
           )}
         <Content>
-          <div dangerouslySetInnerHTML={{ __html: props.html }} />
+          <div
+            className="content"
+            dangerouslySetInnerHTML={{ __html: props.html }}
+          />
           {props.links && (
             <Links>
               {props.links.map((link, i) => (
