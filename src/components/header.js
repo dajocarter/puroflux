@@ -1,21 +1,29 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
+import { Container, Row, Col } from 'react-bootstrap'
+import { FaBars, FaTimes } from 'react-icons/fa'
 import styled from 'styled-components'
 
-const Container = styled.header`
+const Wrapper = styled(Container)`
   background: black;
+  position: relative;
 `
+
 const Nav = styled.nav`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin: 0 auto;
   max-width: 960px;
   padding: 1.45rem 1.0875rem;
 `
-const NavBrand = styled.span`
-  margin: 0;
+const NavBrand = styled.div`
+  margin: 6px 0 0;
+
+  a {
+    display: block;
+  }
 `
 
 const NavMenu = styled.ul`
@@ -55,31 +63,133 @@ const NavLink = styled(Link)`
   }
 `
 
-const Header = props => (
-  <Container>
-    <Nav role={`navigation`} aria-label={props.menu.name}>
-      {props.logo && (
-        <NavBrand>
-          <Link to="/" title={props.siteTitle}>
-            <Img fixed={props.logo.localFile.childImageSharp.fixed} />
-          </Link>
-        </NavBrand>
-      )}
-      <NavMenu>
-        {props.menu.items.map(item => (
-          <NavItem key={item.wordpress_id}>
-            <NavLink
-              activeClassName={`active`}
-              className={item.object_slug === 'rep-login' ? `alt` : ``}
-              to={item.object_slug === 'home' ? `/` : `/${item.object_slug}`}
-            >
-              {item.title}
-            </NavLink>
-          </NavItem>
-        ))}
-      </NavMenu>
-    </Nav>
-  </Container>
-)
+const MenuToggle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-export default Header
+  > svg {
+    color: ${props =>
+      props.menuIsOpen ? props.theme.primary : props.theme.secondary};
+    font-size: 2rem;
+    cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+`
+
+const Overlay = styled.div`
+  position: ${props => (props.menuIsOpen ? `fixed` : `absolute`)};
+  top: 0;
+  right: 0;
+  width: ${props => (props.menuIsOpen ? `100vw` : `0px`)};
+  height: ${props => (props.menuIsOpen ? `100vh` : `0px`)};
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 10;
+  transition: all 0.15s ease-in-out;
+
+  ${Nav} {
+    display: ${props => (props.menuIsOpen ? `flex` : `none`)};
+    justify-content: flex-start;
+    padding-left: 3rem;
+
+    ul {
+      flex-flow: column nowrap;
+      align-items: flex-start;
+
+      li {
+        margin-bottom: 2.5rem;
+      }
+
+      a {
+        font-size: 2rem;
+        font-style: normal;
+      }
+    }
+  }
+`
+
+export default class Header extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { menuIsOpen: false }
+  }
+  render() {
+    const { logo, siteTitle, menu } = this.props
+    const { menuIsOpen } = this.state
+
+    return (
+      <Wrapper fluid as="header">
+        <Row>
+          {logo && (
+            <Col xs={9} lg={3}>
+              <NavBrand>
+                <Link to="/" title={siteTitle}>
+                  <Img fixed={logo.localFile.childImageSharp.fixed} />
+                </Link>
+              </NavBrand>
+            </Col>
+          )}
+          {menu && (
+            <>
+              <Col className="d-none d-lg-block" lg={9}>
+                <Nav role={`navigation`} aria-label={menu.name}>
+                  <NavMenu>
+                    {menu.items.map(item => (
+                      <NavItem key={item.wordpress_id}>
+                        <NavLink
+                          activeClassName={`active`}
+                          className={
+                            item.object_slug === 'rep-login' ? `alt` : ``
+                          }
+                          to={
+                            item.object_slug === 'home'
+                              ? `/`
+                              : `/${item.object_slug}`
+                          }
+                        >
+                          {item.title}
+                        </NavLink>
+                      </NavItem>
+                    ))}
+                  </NavMenu>
+                </Nav>
+              </Col>
+              <Overlay className="d-lg-none" menuIsOpen={menuIsOpen}>
+                <MenuToggle
+                  menuIsOpen={menuIsOpen}
+                  onClick={() => this.setState({ menuIsOpen: !menuIsOpen })}
+                >
+                  {menuIsOpen ? <FaTimes /> : <FaBars />}
+                </MenuToggle>
+                <Nav role={`navigation`} aria-label={menu.name}>
+                  <NavMenu>
+                    {menu.items.map(item => (
+                      <NavItem key={item.wordpress_id}>
+                        <NavLink
+                          activeClassName={`active`}
+                          className={
+                            item.object_slug === 'rep-login' ? `alt` : ``
+                          }
+                          to={
+                            item.object_slug === 'home'
+                              ? `/`
+                              : `/${item.object_slug}`
+                          }
+                        >
+                          {item.title}
+                        </NavLink>
+                      </NavItem>
+                    ))}
+                  </NavMenu>
+                </Nav>
+              </Overlay>
+            </>
+          )}
+        </Row>
+      </Wrapper>
+    )
+  }
+}
