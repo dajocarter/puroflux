@@ -158,24 +158,22 @@ const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.9);
   z-index: 10;
   transition: all 0.15s ease-in-out;
-  overflow-y: ${props => (props.menuIsOpen ? `auto` : `inherit`)};
 
   ${Nav} {
     display: ${props => (props.menuIsOpen ? `flex` : `none`)};
     justify-content: flex-start;
-    padding-left: 3rem;
+    padding: 1rem 3rem;
+    height: 100%;
 
     ul {
+      height: 100%;
       flex-flow: column nowrap;
       align-items: flex-start;
-
-      li {
-        margin-bottom: 2.5rem;
-      }
 
       a {
         font-size: 2rem;
         font-style: normal;
+        padding: 0;
       }
     }
   }
