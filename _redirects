@@ -1,2 +1,0 @@
-# Redirect default Netlify subdomain to primary domain
-https://puroflux.netlify.com/* https://puroflux.dajocarter.rocks/:splat 301!
