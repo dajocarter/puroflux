@@ -2,15 +2,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
-import styled, { injectGlobal } from 'styled-components'
+import styled, { injectGlobal, ThemeProvider } from 'styled-components'
 import styledNormalize from 'styled-normalize'
 
+import 'bootstrap/dist/css/bootstrap.min.css'
 import Header from './header'
 import Footer from './footer'
 
 injectGlobal`
   ${styledNormalize}
 `
+
+const theme = {
+  primary: '#05c6c7',
+  secondary: '#ffa200',
+  alt: '#000000',
+}
 
 const Main = styled.main`
   font-family: 'Lato', sans-serif;
@@ -59,6 +66,17 @@ const Layout = ({ children, data }) => (
               classes
               object_id
               object_slug
+              wordpress_children {
+                wordpress_id
+                order
+                wordpress_parent
+                title
+                attr
+                target
+                classes
+                object_id
+                object_slug
+              }
             }
           }
         }
@@ -121,24 +139,26 @@ const Layout = ({ children, data }) => (
       }
     `}
     render={data => (
-      <>
-        <Helmet
-          title={data.site.siteMetadata.title}
-          meta={[
-            { name: 'description', content: 'Sample' },
-            { name: 'keywords', content: 'sample, something' },
-          ]}
-        >
-          <html lang="en" />
-        </Helmet>
-        <Header
-          logo={data.logo}
-          siteTitle={data.site.siteMetadata.title}
-          menu={data.mainMenu}
-        />
-        <Main>{children}</Main>
-        <Footer productsMenu={data.productsMenu} pagesMenu={data.pagesMenu} />
-      </>
+      <ThemeProvider theme={theme}>
+        <>
+          <Helmet
+            title={data.site.siteMetadata.title}
+            meta={[
+              { name: 'description', content: 'Sample' },
+              { name: 'keywords', content: 'sample, something' },
+            ]}
+          >
+            <html lang="en" />
+          </Helmet>
+          <Header
+            logo={data.logo}
+            siteTitle={data.site.siteMetadata.title}
+            menu={data.mainMenu}
+          />
+          <Main>{children}</Main>
+          <Footer productsMenu={data.productsMenu} pagesMenu={data.pagesMenu} />
+        </>
+      </ThemeProvider>
     )}
   />
 )
