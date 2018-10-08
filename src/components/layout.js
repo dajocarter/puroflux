@@ -65,6 +65,17 @@ const Layout = ({ children, data }) => (
               classes
               object_id
               object_slug
+              wordpress_children {
+                wordpress_id
+                order
+                wordpress_parent
+                title
+                attr
+                target
+                classes
+                object_id
+                object_slug
+              }
             }
           }
         }
