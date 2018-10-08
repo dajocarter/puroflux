@@ -5,6 +5,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import styled, { injectGlobal, ThemeProvider } from 'styled-components'
 import styledNormalize from 'styled-normalize'
 
+import 'bootstrap/dist/css/bootstrap.min.css'
 import Header from './header'
 import Footer from './footer'
 
