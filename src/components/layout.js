@@ -13,8 +13,8 @@ injectGlobal`
 `
 
 const theme = {
-  primary: '#ffa200',
-  secondary: '#05c6c7',
+  primary: '#05c6c7',
+  secondary: '#ffa200',
   alt: '#000000',
 }
 
