@@ -22,10 +22,14 @@ const CTArow = styled(Row)`
 
 const Headline = styled.h2`
   color: black;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 21px 0;
 `
 
 const Action = styled.p`
   color: white;
+  margin-bottom: 0;
 `
 
 const PhoneNumber = styled.a`
@@ -33,6 +37,10 @@ const PhoneNumber = styled.a`
   font-weight: bold;
   text-decoration: none;
   padding: 0 0.5rem;
+
+  &:hover {
+    color: black;
+  }
 `
 
 const ButtonLink = styled(Link)`
@@ -41,7 +49,8 @@ const ButtonLink = styled(Link)`
   color: black;
   display: inline-block;
   letter-spacing: 1px;
-  padding: 1rem;
+  padding: 0.75rem 2.25rem;
+  width: 192px;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
@@ -56,13 +65,25 @@ const ButtonLink = styled(Link)`
 const CTAlink = styled(ButtonLink)`
   background-color: black;
   color: white;
-  margin: 0.5rem 0.5rem 0;
+  margin: 0.5rem;
 
   &:hover,
   &:focus {
     background-color: white;
     color: black;
   }
+
+  @media (min-width: 768px) and (max-width: 840px) {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 767px) {
+    margin-bottom: 21px;
+  }
+`
+
+const MenusRow = styled(Row)`
+  margin-top: 2rem;
 `
 
 const Column = styled(Col)`
@@ -81,6 +102,7 @@ const SignUpColumn = styled(Column)``
 const ColumnTitle = styled.h4`
   color: white;
   text-transform: uppercase;
+  font-size: 18px;
 `
 
 const Menu = styled.ul`
@@ -102,6 +124,7 @@ const MenuItem = styled.li`
 
 const MenuLink = styled(Link)`
   color: #05c6c7;
+  font-size: 14px;
   letter-spacing: 1px;
   text-decoration: none;
   text-transform: uppercase;
@@ -130,6 +153,8 @@ const Copyright = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
+  letter-spacing: 2px;
+  font-size: 11px;
 
   @media (max-width: 479px) {
     justify-content: center;
@@ -156,7 +181,7 @@ const Footer = props => {
         </CTArow>
       </CallToAction>
       <Container fluid>
-        <Row>
+        <MenusRow>
           <ProductsColumn xs={12} sm={4}>
             <ColumnTitle>{props.productsMenu.name}</ColumnTitle>
             <Menu>
@@ -181,7 +206,7 @@ const Footer = props => {
             <ColumnTitle>Sign up for our newsletter</ColumnTitle>
             <SignUpLink to={`#`}>Sign Up</SignUpLink>
           </SignUpColumn>
-        </Row>
+        </MenusRow>
       </Container>
       <Copyright>
         <p>&copy; Copyright 2018 - PUROFLUX. All rights reserved.</p>
