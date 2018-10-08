@@ -5,6 +5,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import styled, { injectGlobal, ThemeProvider } from 'styled-components'
 import styledNormalize from 'styled-normalize'
 
+import 'bootstrap/dist/css/bootstrap.min.css'
 import Header from './header'
 import Footer from './footer'
 
@@ -13,8 +14,8 @@ injectGlobal`
 `
 
 const theme = {
-  primary: '#ffa200',
-  secondary: '#05c6c7',
+  primary: '#05c6c7',
+  secondary: '#ffa200',
   alt: '#000000',
 }
 
@@ -65,6 +66,17 @@ const Layout = ({ children, data }) => (
               classes
               object_id
               object_slug
+              wordpress_children {
+                wordpress_id
+                order
+                wordpress_parent
+                title
+                attr
+                target
+                classes
+                object_id
+                object_slug
+              }
             }
           }
         }
