@@ -16,8 +16,8 @@ const Nav = styled.nav`
   align-items: center;
   margin: 0 auto;
   max-width: 960px;
-  padding: 1.45rem 1.0875rem;
 `
+
 const NavBrand = styled.div`
   margin: 6px 0 0;
 
@@ -36,21 +36,89 @@ const NavMenu = styled.ul`
   align-items: center;
 `
 
+const SubMenu = styled(NavMenu)`
+  display: none;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: absolute;
+  border-top: ${props => `4px solid ${props.theme.primary}`};
+  width: max-content;
+  min-width: 120px;
+  z-index: 20;
+
+  li {
+    padding-right: 0.5rem;
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-right: 0;
+    }
+  }
+
+  a {
+    padding: 0.45rem 0 0.45rem 0.45rem;
+  }
+`
+
+const ChildMenu = styled(SubMenu)`
+  background-color: white;
+  top: 100%;
+  left: 0;
+  padding-top: 1rem;
+
+  a {
+    color: ${props => props.theme.primary};
+  }
+`
+
+const GrandChildMenu = styled(SubMenu)`
+  background-color: ${props => props.theme.primary};
+  border-top: 0;
+  top: 0;
+  left: 100%;
+
+  li {
+    &:hover {
+      background-color: #ccc;
+    }
+  }
+
+  a {
+    color: white;
+
+    &:hover {
+      color: white;
+    }
+  }
+`
+
 const NavItem = styled.li`
   flex: 0 0 auto;
+  position: relative;
 
   &:not(:last-child) {
     margin-right: 10px;
   }
+
+  &:hover {
+    > ul {
+      display: flex;
+    }
+  }
 `
+
+const SubMenuItem = styled(NavItem)``
 
 const NavLink = styled(Link)`
   color: #fff;
+  display: block;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 0.8rem;
   font-style: italic;
   text-decoration: none;
   text-transform: uppercase;
+  padding: 24.5px 0;
 
   &.alt {
     color: #ffa200; // orange
@@ -63,10 +131,15 @@ const NavLink = styled(Link)`
   }
 `
 
+const SubMenuLink = styled(NavLink)``
+
 const MenuToggle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
+  top: 0;
+  right: 0;
 
   > svg {
     color: ${props =>
@@ -88,6 +161,7 @@ const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.9);
   z-index: 10;
   transition: all 0.15s ease-in-out;
+  overflow-y: ${props => (props.menuIsOpen ? `auto` : `inherit`)};
 
   ${Nav} {
     display: ${props => (props.menuIsOpen ? `flex` : `none`)};
@@ -152,6 +226,38 @@ export default class Header extends Component {
                         >
                           {item.title}
                         </NavLink>
+                        {item.wordpress_children && (
+                          <ChildMenu>
+                            {item.wordpress_children.map(child => (
+                              <SubMenuItem key={child.wordpress_id}>
+                                <SubMenuLink
+                                  activeClassName={`active`}
+                                  to={child.object_slug}
+                                >
+                                  {child.title}
+                                </SubMenuLink>
+                                {child.wordpress_children && (
+                                  <GrandChildMenu>
+                                    {child.wordpress_children.map(
+                                      grandchild => (
+                                        <SubMenuItem
+                                          key={grandchild.wordpress_id}
+                                        >
+                                          <SubMenuLink
+                                            activeClassName={`active`}
+                                            to={grandchild.object_slug}
+                                          >
+                                            {grandchild.title}
+                                          </SubMenuLink>
+                                        </SubMenuItem>
+                                      )
+                                    )}
+                                  </GrandChildMenu>
+                                )}
+                              </SubMenuItem>
+                            ))}
+                          </ChildMenu>
+                        )}
                       </NavItem>
                     ))}
                   </NavMenu>
