@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 
 const FooterWrapper = styled.footer`
@@ -8,39 +9,15 @@ const FooterWrapper = styled.footer`
   font-family: 'Lato', sans-serif;
 `
 
-const Container = styled.div`
-  margin: 0 auto;
-  max-width: 960px;
-  padding: 1.45rem 1.0875rem;
-`
-
-const Row = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-`
-
-const CallToAction = styled(Row)`
+const CallToAction = styled(Container)`
   background: #ffa200;
   border-top: 1px solid white;
+  padding: 0.5rem 0;
   text-transform: uppercase;
 `
 
-const CTAcontainer = styled(Container)`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 0;
-  padding-bottom: 0;
+const CTArow = styled(Row)`
   text-align: center;
-  width: 100%;
-
-  @media (max-width: 767px) {
-    flex-flow: column nowrap;
-    padding: 16px 0 20px 0;
-  }
 `
 
 const Headline = styled.h2`
@@ -88,12 +65,9 @@ const CTAlink = styled(ButtonLink)`
   }
 `
 
-const Column = styled.div`
-  flex: 0 0 auto;
-  width: 100%;
+const Column = styled(Col)`
   text-align: center;
   @media (min-width: 768px) {
-    width: 30%;
     text-align: left;
   }
 `
@@ -165,21 +139,25 @@ const Copyright = styled.div`
 const Footer = props => {
   return (
     <FooterWrapper>
-      <CallToAction>
-        <CTAcontainer>
-          <Headline>Ready to get started?</Headline>
-          <Action>
-            Call us at{' '}
-            <PhoneNumber href="tel:805-579-0216" title="Dial (805) 579-0216">
-              (805) 579-0216
-            </PhoneNumber>{' '}
-            or <CTAlink to="/contact">Contact Us</CTAlink>
-          </Action>
-        </CTAcontainer>
+      <CallToAction fluid>
+        <CTArow>
+          <Col xs={12} md={5}>
+            <Headline>Ready to get started?</Headline>
+          </Col>
+          <Col xs={12} md={7}>
+            <Action>
+              Call us at{' '}
+              <PhoneNumber href="tel:805-579-0216" title="Dial (805) 579-0216">
+                (805) 579-0216
+              </PhoneNumber>{' '}
+              or <CTAlink to="/contact">Contact Us</CTAlink>
+            </Action>
+          </Col>
+        </CTArow>
       </CallToAction>
-      <Container>
+      <Container fluid>
         <Row>
-          <ProductsColumn>
+          <ProductsColumn xs={12} sm={4}>
             <ColumnTitle>{props.productsMenu.name}</ColumnTitle>
             <Menu>
               {props.productsMenu.items.map((item, index) => (
@@ -189,7 +167,7 @@ const Footer = props => {
               ))}
             </Menu>
           </ProductsColumn>
-          <PagesColumn>
+          <PagesColumn xs={12} sm={4}>
             <ColumnTitle>{props.pagesMenu.name}</ColumnTitle>
             <Menu>
               {props.pagesMenu.items.map((item, index) => (
@@ -199,7 +177,7 @@ const Footer = props => {
               ))}
             </Menu>
           </PagesColumn>
-          <SignUpColumn>
+          <SignUpColumn xs={12} sm={4}>
             <ColumnTitle>Sign up for our newsletter</ColumnTitle>
             <SignUpLink to={`#`}>Sign Up</SignUpLink>
           </SignUpColumn>
