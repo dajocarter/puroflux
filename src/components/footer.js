@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 
-import Button from './styled/Button'
+import Button from './styled/button'
 
 const FooterWrapper = styled.footer`
   background: black;
