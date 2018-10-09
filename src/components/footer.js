@@ -3,33 +3,49 @@ import { Link } from 'gatsby'
 import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 
+import Button from './styled/Button'
+
 const FooterWrapper = styled.footer`
   background: black;
   color: white;
   font-family: 'Lato', sans-serif;
 `
 
-const CallToAction = styled(Container)`
-  background: #ffa200;
+const CallToAction = styled.div`
+  background: ${props => props.theme.secondary};
   border-top: 1px solid white;
   padding: 0.5rem 0;
   text-transform: uppercase;
 `
 
-const CTArow = styled(Row)`
-  text-align: center;
-`
+const CTAcontainer = styled(Container)``
+
+const CTArow = styled(Row)``
 
 const Headline = styled.h2`
   color: black;
   font-size: 1.5rem;
   font-weight: bold;
-  margin: 21px 0;
+  margin: 25px 0;
+  text-align: left;
+
+  @media (max-width: 767px) {
+    text-align: center;
+  }
+
+  @media (min-width: 992px) {
+    margin: 13px 0;
+  }
 `
 
 const Action = styled.p`
   color: white;
   margin-bottom: 0;
+  text-align: center;
+
+  @media (min-width: 992px) {
+    text-align: right;
+  }
 `
 
 const PhoneNumber = styled.a`
@@ -43,29 +59,10 @@ const PhoneNumber = styled.a`
   }
 `
 
-const ButtonLink = styled(Link)`
-  border: 3px solid #ffa200;
-  background-color: transparent;
-  color: black;
-  display: inline-block;
-  letter-spacing: 1px;
-  padding: 0.75rem 2.25rem;
-  width: 192px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: all 0.15s ease-in;
-  &:hover,
-  &:focus {
-    background-color: #ffa200;
-    color: white;
-  }
-`
-
-const CTAlink = styled(ButtonLink)`
+const CTAlink = styled(Button)`
   background-color: black;
   color: white;
-  margin: 0.5rem;
+  margin: 0.5rem 0 0.5rem 0.5rem;
 
   &:hover,
   &:focus {
@@ -78,7 +75,7 @@ const CTAlink = styled(ButtonLink)`
   }
 
   @media (max-width: 767px) {
-    margin-bottom: 21px;
+    margin-bottom: 25px;
   }
 `
 
@@ -87,17 +84,16 @@ const MenusRow = styled(Row)`
 `
 
 const Column = styled(Col)`
-  text-align: center;
-  @media (min-width: 768px) {
-    text-align: left;
-  }
+  text-align: left;
 `
 
 const ProductsColumn = styled(Column)``
 
 const PagesColumn = styled(Column)``
 
-const SignUpColumn = styled(Column)``
+const SignUpColumn = styled(Column)`
+  text-align: right;
+`
 
 const ColumnTitle = styled.h4`
   color: white;
@@ -110,20 +106,17 @@ const Menu = styled.ul`
   padding: 0;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  @media (min-width: 768px) {
-    align-items: flex-start;
-  }
+  justify-content: flex-start;
+  align-items: flex-start;
 `
 
 const MenuItem = styled.li`
   flex: 0 0 auto;
-  padding: 0.5rem 0;
+  padding: 0.5rem 0 0;
 `
 
 const MenuLink = styled(Link)`
-  color: #05c6c7;
+  color: ${props => props.theme.primary};
   font-size: 14px;
   letter-spacing: 1px;
   text-decoration: none;
@@ -131,14 +124,17 @@ const MenuLink = styled(Link)`
 
   &:hover,
   &:focus {
+    color: ${props => props.theme.primary};
     text-decoration: underline;
-    text-decoration-color: #ffa200;
+    text-decoration-color: ${props => props.theme.secondary};
   }
 `
 
-const SignUpLink = styled(ButtonLink)`
-  background-color: #ffa200;
+const SignUpLink = styled(Button)`
+  background-color: ${props => props.theme.secondary};
   color: white;
+  max-width: 100%;
+
   &:hover,
   &:focus {
     background-color: white;
@@ -151,10 +147,14 @@ const Copyright = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   padding: 1rem 2rem;
   letter-spacing: 2px;
   font-size: 11px;
+
+  p {
+    margin: 0;
+  }
 
   @media (max-width: 479px) {
     justify-content: center;
@@ -164,25 +164,33 @@ const Copyright = styled.div`
 const Footer = props => {
   return (
     <FooterWrapper>
-      <CallToAction fluid>
-        <CTArow>
-          <Col xs={12} md={5}>
-            <Headline>Ready to get started?</Headline>
-          </Col>
-          <Col xs={12} md={7}>
-            <Action>
-              Call us at{' '}
-              <PhoneNumber href="tel:805-579-0216" title="Dial (805) 579-0216">
-                (805) 579-0216
-              </PhoneNumber>{' '}
-              or <CTAlink to="/contact">Contact Us</CTAlink>
-            </Action>
-          </Col>
-        </CTArow>
+      <CallToAction>
+        <CTAcontainer>
+          <CTArow>
+            <Col xs={12} md={6} lg={5}>
+              <Headline>Ready to get started?</Headline>
+            </Col>
+            <Col xs={12} md={6} lg={7}>
+              <Action>
+                Call us at{' '}
+                <PhoneNumber
+                  href="tel:805-579-0216"
+                  title="Dial (805) 579-0216"
+                >
+                  (805) 579-0216
+                </PhoneNumber>{' '}
+                or{' '}
+                <CTAlink alt to="/contact">
+                  Contact Us
+                </CTAlink>
+              </Action>
+            </Col>
+          </CTArow>
+        </CTAcontainer>
       </CallToAction>
-      <Container fluid>
+      <Container>
         <MenusRow>
-          <ProductsColumn xs={12} sm={4}>
+          <ProductsColumn xs={12} sm={4} md={3}>
             <ColumnTitle>{props.productsMenu.name}</ColumnTitle>
             <Menu>
               {props.productsMenu.items.map((item, index) => (
@@ -192,7 +200,7 @@ const Footer = props => {
               ))}
             </Menu>
           </ProductsColumn>
-          <PagesColumn xs={12} sm={4}>
+          <PagesColumn xs={12} sm={4} md={3}>
             <ColumnTitle>{props.pagesMenu.name}</ColumnTitle>
             <Menu>
               {props.pagesMenu.items.map((item, index) => (
@@ -202,9 +210,17 @@ const Footer = props => {
               ))}
             </Menu>
           </PagesColumn>
-          <SignUpColumn xs={12} sm={4}>
-            <ColumnTitle>Sign up for our newsletter</ColumnTitle>
-            <SignUpLink to={`#`}>Sign Up</SignUpLink>
+          <SignUpColumn xs={12} sm={4} md={6}>
+            <Row>
+              <Col sm={12} md={6} lg={8}>
+                <ColumnTitle>Sign up for our newsletter</ColumnTitle>
+              </Col>
+              <Col sm={12} md={6} lg={4}>
+                <SignUpLink secondary to={`#`}>
+                  Sign Up
+                </SignUpLink>
+              </Col>
+            </Row>
           </SignUpColumn>
         </MenusRow>
       </Container>
