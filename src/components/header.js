@@ -5,9 +5,12 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import styled from 'styled-components'
 
-const Wrapper = styled(Container)`
+const Wrapper = styled.header`
   background: black;
-  position: relative;
+
+  .container {
+    position: relative;
+  }
 `
 
 const Nav = styled.nav`
@@ -19,7 +22,7 @@ const Nav = styled.nav`
 `
 
 const NavBrand = styled.div`
-  margin: 6px 0 0;
+  margin: 10px 0;
 
   a {
     display: block;
@@ -140,7 +143,7 @@ const MenuToggle = styled.div`
 
   > svg {
     color: ${props =>
-      props.menuIsOpen ? props.theme.primary : props.theme.secondary};
+      props.menuIsOpen ? props.theme.secondary : props.theme.primary};
     font-size: 2rem;
     cursor: pointer;
     position: absolute;
@@ -190,106 +193,108 @@ export default class Header extends Component {
     const { menuIsOpen } = this.state
 
     return (
-      <Wrapper fluid as="header">
-        <Row>
-          {logo && (
-            <Col xs={9} lg={3}>
-              <NavBrand>
-                <Link to="/" title={siteTitle}>
-                  <Img fixed={logo.localFile.childImageSharp.fixed} />
-                </Link>
-              </NavBrand>
-            </Col>
-          )}
-          {menu && (
-            <>
-              <Col className="d-none d-lg-block" lg={9}>
-                <Nav role={`navigation`} aria-label={menu.name}>
-                  <NavMenu>
-                    {menu.items.map(item => (
-                      <NavItem key={item.wordpress_id}>
-                        <NavLink
-                          activeClassName={`active`}
-                          className={
-                            item.object_slug === 'rep-login' ? `alt` : ``
-                          }
-                          to={
-                            item.object_slug === 'home'
-                              ? `/`
-                              : `/${item.object_slug}`
-                          }
-                        >
-                          {item.title}
-                        </NavLink>
-                        {item.wordpress_children && (
-                          <ChildMenu>
-                            {item.wordpress_children.map(child => (
-                              <SubMenuItem key={child.wordpress_id}>
-                                <SubMenuLink
-                                  activeClassName={`active`}
-                                  to={child.object_slug}
-                                >
-                                  {child.title}
-                                </SubMenuLink>
-                                {child.wordpress_children && (
-                                  <GrandChildMenu>
-                                    {child.wordpress_children.map(
-                                      grandchild => (
-                                        <SubMenuItem
-                                          key={grandchild.wordpress_id}
-                                        >
-                                          <SubMenuLink
-                                            activeClassName={`active`}
-                                            to={grandchild.object_slug}
-                                          >
-                                            {grandchild.title}
-                                          </SubMenuLink>
-                                        </SubMenuItem>
-                                      )
-                                    )}
-                                  </GrandChildMenu>
-                                )}
-                              </SubMenuItem>
-                            ))}
-                          </ChildMenu>
-                        )}
-                      </NavItem>
-                    ))}
-                  </NavMenu>
-                </Nav>
+      <Wrapper>
+        <Container>
+          <Row>
+            {logo && (
+              <Col xs={9} lg={3}>
+                <NavBrand>
+                  <Link to="/" title={siteTitle}>
+                    <Img fixed={logo.localFile.childImageSharp.fixed} />
+                  </Link>
+                </NavBrand>
               </Col>
-              <Overlay className="d-lg-none" menuIsOpen={menuIsOpen}>
-                <MenuToggle
-                  menuIsOpen={menuIsOpen}
-                  onClick={() => this.setState({ menuIsOpen: !menuIsOpen })}
-                >
-                  {menuIsOpen ? <FaTimes /> : <FaBars />}
-                </MenuToggle>
-                <Nav role={`navigation`} aria-label={menu.name}>
-                  <NavMenu>
-                    {menu.items.map(item => (
-                      <NavItem key={item.wordpress_id}>
-                        <NavLink
-                          activeClassName={`active`}
-                          className={
-                            item.object_slug === 'rep-login' ? `alt` : ``
-                          }
-                          to={
-                            item.object_slug === 'home'
-                              ? `/`
-                              : `/${item.object_slug}`
-                          }
-                        >
-                          {item.title}
-                        </NavLink>
-                      </NavItem>
-                    ))}
-                  </NavMenu>
-                </Nav>
-              </Overlay>
-            </>
-          )}
-        </Row>
+            )}
+            {menu && (
+              <>
+                <Col className="d-none d-lg-block" lg={9}>
+                  <Nav role={`navigation`} aria-label={menu.name}>
+                    <NavMenu>
+                      {menu.items.map(item => (
+                        <NavItem key={item.wordpress_id}>
+                          <NavLink
+                            activeClassName={`active`}
+                            className={
+                              item.object_slug === 'rep-login' ? `alt` : ``
+                            }
+                            to={
+                              item.object_slug === 'home'
+                                ? `/`
+                                : `/${item.object_slug}`
+                            }
+                          >
+                            {item.title}
+                          </NavLink>
+                          {item.wordpress_children && (
+                            <ChildMenu>
+                              {item.wordpress_children.map(child => (
+                                <SubMenuItem key={child.wordpress_id}>
+                                  <SubMenuLink
+                                    activeClassName={`active`}
+                                    to={child.object_slug}
+                                  >
+                                    {child.title}
+                                  </SubMenuLink>
+                                  {child.wordpress_children && (
+                                    <GrandChildMenu>
+                                      {child.wordpress_children.map(
+                                        grandchild => (
+                                          <SubMenuItem
+                                            key={grandchild.wordpress_id}
+                                          >
+                                            <SubMenuLink
+                                              activeClassName={`active`}
+                                              to={grandchild.object_slug}
+                                            >
+                                              {grandchild.title}
+                                            </SubMenuLink>
+                                          </SubMenuItem>
+                                        )
+                                      )}
+                                    </GrandChildMenu>
+                                  )}
+                                </SubMenuItem>
+                              ))}
+                            </ChildMenu>
+                          )}
+                        </NavItem>
+                      ))}
+                    </NavMenu>
+                  </Nav>
+                </Col>
+                <Overlay className="d-lg-none" menuIsOpen={menuIsOpen}>
+                  <MenuToggle
+                    menuIsOpen={menuIsOpen}
+                    onClick={() => this.setState({ menuIsOpen: !menuIsOpen })}
+                  >
+                    {menuIsOpen ? <FaTimes /> : <FaBars />}
+                  </MenuToggle>
+                  <Nav role={`navigation`} aria-label={menu.name}>
+                    <NavMenu>
+                      {menu.items.map(item => (
+                        <NavItem key={item.wordpress_id}>
+                          <NavLink
+                            activeClassName={`active`}
+                            className={
+                              item.object_slug === 'rep-login' ? `alt` : ``
+                            }
+                            to={
+                              item.object_slug === 'home'
+                                ? `/`
+                                : `/${item.object_slug}`
+                            }
+                          >
+                            {item.title}
+                          </NavLink>
+                        </NavItem>
+                      ))}
+                    </NavMenu>
+                  </Nav>
+                </Overlay>
+              </>
+            )}
+          </Row>
+        </Container>
       </Wrapper>
     )
   }

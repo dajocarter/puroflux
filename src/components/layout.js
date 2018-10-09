@@ -35,7 +35,7 @@ const Layout = ({ children, data }) => (
         logo: wordpressWpMedia(slug: { eq: "purofluxlogo_white_2x" }) {
           localFile {
             childImageSharp {
-              fixed(width: 267, height: 56) {
+              fixed(width: 200, height: 42) {
                 ...GatsbyImageSharpFixed_withWebp
               }
             }
