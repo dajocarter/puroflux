@@ -133,6 +133,10 @@ const MenuLink = styled(Link)`
   text-decoration: none;
   text-transform: uppercase;
 
+  &.alt {
+    color: ${props => props.theme.secondary};
+  }
+
   &:hover,
   &:focus {
     color: ${props => props.theme.primary};
@@ -220,7 +224,12 @@ const Footer = props => {
             <Menu>
               {props.pagesMenu.items.map((item, index) => (
                 <MenuItem key={index}>
-                  <MenuLink to={`/${item.object_slug}`}>{item.title}</MenuLink>
+                  <MenuLink
+                    className={item.object_slug === 'rep-login' ? `alt` : ``}
+                    to={`/${item.object_slug}`}
+                  >
+                    {item.title}
+                  </MenuLink>
                 </MenuItem>
               ))}
             </Menu>
