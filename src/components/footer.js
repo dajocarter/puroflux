@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
+
+import Button from './styled/button'
 
 const FooterWrapper = styled.footer`
   background: black;
@@ -8,47 +11,41 @@ const FooterWrapper = styled.footer`
   font-family: 'Lato', sans-serif;
 `
 
-const Container = styled.div`
-  margin: 0 auto;
-  max-width: 960px;
-  padding: 1.45rem 1.0875rem;
-`
-
-const Row = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-`
-
-const CallToAction = styled(Row)`
-  background: #ffa200;
+const CallToAction = styled.div`
+  background: ${props => props.theme.secondary};
   border-top: 1px solid white;
+  padding: 0.5rem 0;
   text-transform: uppercase;
 `
 
-const CTAcontainer = styled(Container)`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 0;
-  padding-bottom: 0;
-  text-align: center;
-  width: 100%;
+const CTAcontainer = styled(Container)``
 
-  @media (max-width: 767px) {
-    flex-flow: column nowrap;
-    padding: 16px 0 20px 0;
-  }
-`
+const CTArow = styled(Row)``
 
 const Headline = styled.h2`
   color: black;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 25px 0;
+  text-align: left;
+
+  @media (max-width: 767px) {
+    text-align: center;
+  }
+
+  @media (min-width: 992px) {
+    margin: 13px 0;
+  }
 `
 
 const Action = styled.p`
   color: white;
+  margin-bottom: 0;
+  text-align: right;
+
+  @media (max-width: 767px) {
+    text-align: center;
+  }
 `
 
 const PhoneNumber = styled.a`
@@ -56,45 +53,41 @@ const PhoneNumber = styled.a`
   font-weight: bold;
   text-decoration: none;
   padding: 0 0.5rem;
-`
 
-const ButtonLink = styled(Link)`
-  border: 3px solid #ffa200;
-  background-color: transparent;
-  color: black;
-  display: inline-block;
-  letter-spacing: 1px;
-  padding: 1rem;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: all 0.15s ease-in;
-  &:hover,
-  &:focus {
-    background-color: #ffa200;
-    color: white;
+  &:hover {
+    color: black;
   }
 `
 
-const CTAlink = styled(ButtonLink)`
+const CTAlink = styled(Button)`
   background-color: black;
   color: white;
-  margin: 0.5rem 0.5rem 0;
+  margin: 0.5rem 0 0.5rem 0.5rem;
 
   &:hover,
   &:focus {
     background-color: white;
     color: black;
   }
+
+  @media (min-width: 768px) and (max-width: 840px) {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 767px) {
+    margin-bottom: 25px;
+  }
 `
 
-const Column = styled.div`
-  flex: 0 0 auto;
-  width: 100%;
-  text-align: center;
-  @media (min-width: 768px) {
-    width: 30%;
-    text-align: left;
+const MenusRow = styled(Row)`
+  margin-top: 2rem;
+`
+
+const Column = styled(Col)`
+  text-align: left;
+
+  @media (max-width: 575px) {
+    text-align: center;
   }
 `
 
@@ -102,11 +95,16 @@ const ProductsColumn = styled(Column)``
 
 const PagesColumn = styled(Column)``
 
-const SignUpColumn = styled(Column)``
+const SignUpColumn = styled(Column)`
+  @media (min-width: 576px) {
+    text-align: right;
+  }
+`
 
 const ColumnTitle = styled.h4`
   color: white;
   text-transform: uppercase;
+  font-size: 18px;
 `
 
 const Menu = styled.ul`
@@ -114,34 +112,41 @@ const Menu = styled.ul`
   padding: 0;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  @media (min-width: 768px) {
-    align-items: flex-start;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  @media (max-width: 575px) {
+    align-items: center;
   }
 `
 
 const MenuItem = styled.li`
   flex: 0 0 auto;
-  padding: 0.5rem 0;
+  padding: 0.5rem 0 0;
 `
 
 const MenuLink = styled(Link)`
-  color: #05c6c7;
+  color: ${props => props.theme.primary};
+  font-size: 14px;
   letter-spacing: 1px;
   text-decoration: none;
   text-transform: uppercase;
 
   &:hover,
   &:focus {
+    color: ${props => props.theme.primary};
     text-decoration: underline;
-    text-decoration-color: #ffa200;
+    text-decoration-color: ${props => props.theme.secondary};
   }
 `
 
-const SignUpLink = styled(ButtonLink)`
-  background-color: #ffa200;
+const SignUpLink = styled(Button)`
+  background-color: ${props => props.theme.secondary};
   color: white;
+  max-width: 100%;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+
   &:hover,
   &:focus {
     background-color: white;
@@ -154,11 +159,19 @@ const Copyright = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   padding: 1rem 2rem;
+  letter-spacing: 2px;
+  font-size: 11px;
 
-  @media (max-width: 479px) {
+  @media (max-width: 537px) {
     justify-content: center;
+  }
+
+  @media (min-width: 538px) {
+    p {
+      margin-bottom: 0;
+    }
   }
 `
 
@@ -167,19 +180,31 @@ const Footer = props => {
     <FooterWrapper>
       <CallToAction>
         <CTAcontainer>
-          <Headline>Ready to get started?</Headline>
-          <Action>
-            Call us at{' '}
-            <PhoneNumber href="tel:805-579-0216" title="Dial (805) 579-0216">
-              (805) 579-0216
-            </PhoneNumber>{' '}
-            or <CTAlink to="/contact">Contact Us</CTAlink>
-          </Action>
+          <CTArow>
+            <Col xs={12} md={6} lg={5}>
+              <Headline>Ready to get started?</Headline>
+            </Col>
+            <Col xs={12} md={6} lg={7}>
+              <Action>
+                Call us at{' '}
+                <PhoneNumber
+                  href="tel:805-579-0216"
+                  title="Dial (805) 579-0216"
+                >
+                  (805) 579-0216
+                </PhoneNumber>{' '}
+                or{' '}
+                <CTAlink alt to="/contact">
+                  Contact Us
+                </CTAlink>
+              </Action>
+            </Col>
+          </CTArow>
         </CTAcontainer>
       </CallToAction>
       <Container>
-        <Row>
-          <ProductsColumn>
+        <MenusRow>
+          <ProductsColumn xs={12} sm={4} md={3}>
             <ColumnTitle>{props.productsMenu.name}</ColumnTitle>
             <Menu>
               {props.productsMenu.items.map((item, index) => (
@@ -189,7 +214,7 @@ const Footer = props => {
               ))}
             </Menu>
           </ProductsColumn>
-          <PagesColumn>
+          <PagesColumn xs={12} sm={4} md={{ span: 3, offset: 1 }}>
             <ColumnTitle>{props.pagesMenu.name}</ColumnTitle>
             <Menu>
               {props.pagesMenu.items.map((item, index) => (
@@ -199,14 +224,22 @@ const Footer = props => {
               ))}
             </Menu>
           </PagesColumn>
-          <SignUpColumn>
-            <ColumnTitle>Sign up for our newsletter</ColumnTitle>
-            <SignUpLink to={`#`}>Sign Up</SignUpLink>
+          <SignUpColumn xs={12} sm={4} md={5}>
+            <Row>
+              <Col sm={12} md={6} lg={7} xl={8}>
+                <ColumnTitle>Sign up for our newsletter</ColumnTitle>
+              </Col>
+              <Col sm={12} md={6} lg={5} xl={4}>
+                <SignUpLink secondary to={`#`}>
+                  Sign Up
+                </SignUpLink>
+              </Col>
+            </Row>
           </SignUpColumn>
-        </Row>
+        </MenusRow>
       </Container>
       <Copyright>
-        <p>&copy; 2017 - PUROFLUX. All rights reserved.</p>
+        <p>&copy; Copyright 2018 - PUROFLUX. All rights reserved.</p>
         <a href="https://www.netlify.com">
           <img
             alt="Deployed by Netlify"
