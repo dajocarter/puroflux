@@ -1,7 +1,8 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
+
+import Btn from '../../styled/button'
 
 const Row = styled.div`
   display: flex;
@@ -84,29 +85,8 @@ const RightContainer = styled(Container)`
 
 const Title = styled.h2``
 
-const ButtonLink = styled(Link)`
-  border: 3px solid #ffa200;
-  background-color: transparent;
+const ButtonLink = styled(Btn)`
   color: white;
-  display: inline-block;
-  letter-spacing: 1px;
-  padding: 1rem;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: all 0.15s ease-in;
-  &:hover,
-  &:focus {
-    background-color: #ffa200;
-  }
-`
-
-const LeftLink = styled(ButtonLink)`
-  border-color: #05c6c7;
-  &:hover,
-  &:focus {
-    background-color: #05c6c7;
-  }
 `
 
 const SplitContent = props => {
@@ -126,12 +106,13 @@ const SplitContent = props => {
             dangerouslySetInnerHTML={{ __html: props.acf.left_content }}
           />
           {props.acf.left_link && (
-            <LeftLink
+            <ButtonLink
+              primary="true"
               to={props.acf.left_link.url}
               target={props.acf.left_link.target}
             >
               {props.acf.left_link.title}
-            </LeftLink>
+            </ButtonLink>
           )}
         </LeftContainer>
       </LeftSide>
@@ -150,6 +131,7 @@ const SplitContent = props => {
           />
           {props.acf.right_link && (
             <ButtonLink
+              secondary="true"
               to={props.acf.right_link.url}
               target={props.acf.right_link.target}
             >

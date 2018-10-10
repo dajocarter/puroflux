@@ -1,39 +1,50 @@
 import React from 'react'
-import { StaticQuery, graphql, Link } from 'gatsby'
+import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
+import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 
 import Layout from '../components/layout'
 import Hero from '../components/hero'
 import FlexibleContent from '../components/flexible-content'
+import Btn from '../components/styled/button'
 
-const Container = styled.div`
-  margin: 0 auto;
-  max-width: 960px;
-  padding: 1.45rem 1.0875rem;
+const FeatureContainer = styled(Container)`
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  > .row > .col {
+    position: relative;
+    height: 73px;
+  }
 `
 
-const Row = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
-`
-
-const Column = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  flex: 0 0 auto;
-  width: 100%;
-
+const Column = styled(Col)`
   > .gatsby-image-outer-wrapper {
     width: 100%;
   }
 
-  @media (min-width: 768px) {
-    width: 45%;
+  blockquote {
+    border-left: ${props => `0.5rem solid ${props.theme.primary}`};
+    padding: 1rem;
+    background: #f7f7f7;
+    font-style: italic;
+
+    > p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &:first-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: 991px) {
+    &:last-of-type {
+      margin-top: 2rem;
+    }
   }
 `
 
@@ -43,28 +54,19 @@ const FeatureImage = styled(Img)`
 `
 
 const FeatureTitle = styled.h2`
-  border-bottom: 3px solid #05c6c7;
+  border-bottom: ${props => `3px solid ${props.theme.primary}`};
   color: #7f7f7f;
-  padding: 1.5rem;
+  padding: 0 0.5rem 0.5rem;
   font-family: 'Josefin Sans', sans-serif;
   text-transform: uppercase;
-`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 
-const ButtonLink = styled(Link)`
-  border: 3px solid #ffa200;
-  background-color: transparent;
-  color: black;
-  display: inline-block;
-  letter-spacing: 1px;
-  padding: 1rem;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: all 0.15s ease-in;
-  &:hover,
-  &:focus {
-    background-color: #ffa200;
-    color: white;
+  @media (min-width: 992px) {
+    left: 75%;
+    transform: translateX(-75%);
   }
 `
 
@@ -149,9 +151,14 @@ const IndexPage = () => (
           html={data.page.acf.content}
           links={data.page.acf.buttons}
         />
-        <Container>
+        <FeatureContainer>
           <Row>
-            <Column>
+            <Col>
+              <FeatureTitle>Featured</FeatureTitle>
+            </Col>
+          </Row>
+          <Row>
+            <Column xs={12} lg={6}>
               {data.page.acf.featured_image && (
                 <FeatureImage
                   fluid={
@@ -160,17 +167,18 @@ const IndexPage = () => (
                 />
               )}
             </Column>
-            <Column>
-              <FeatureTitle>Featured</FeatureTitle>
+            <Column xs={12} lg={6}>
               <div
                 dangerouslySetInnerHTML={{
                   __html: data.page.acf.featured_content,
                 }}
               />
-              <ButtonLink to={`/gallery`}>View Gallery</ButtonLink>
+              <Btn secondary="true" to={`/gallery`}>
+                View Gallery
+              </Btn>
             </Column>
           </Row>
-        </Container>
+        </FeatureContainer>
         {data.page.acf.layouts_page && (
           <FlexibleContent layouts={data.page.acf.layouts_page} />
         )}

@@ -1,7 +1,8 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
+
+import Btn from '../../styled/button'
 
 const Row = styled.div`
   background-color: rgba(127, 127, 127, 0.1);
@@ -33,23 +34,7 @@ const Content = styled.div`
   letter-spacing: 1px;
 `
 
-const ButtonLink = styled(Link)`
-  border: 3px solid #ffa200;
-  background-color: transparent;
-  color: black;
-  display: inline-block;
-  letter-spacing: 1px;
-  padding: 1rem;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: all 0.15s ease-in;
-  &:hover,
-  &:focus {
-    background-color: #ffa200;
-    color: white;
-  }
-`
+const ButtonLink = styled(Btn)``
 
 const FullWidthContent = props => {
   return (
@@ -62,7 +47,11 @@ const FullWidthContent = props => {
         )}
         <Content dangerouslySetInnerHTML={{ __html: props.acf.content }} />
         {props.acf.link && (
-          <ButtonLink to={props.acf.link.url} target={props.acf.link.target}>
+          <ButtonLink
+            secondary="true"
+            to={props.acf.link.url}
+            target={props.acf.link.target}
+          >
             {props.acf.link.title}
           </ButtonLink>
         )}
