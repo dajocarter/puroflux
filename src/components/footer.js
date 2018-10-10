@@ -67,6 +67,7 @@ const CTAlink = styled(Button)`
   &:hover,
   &:focus {
     background-color: white;
+    border-color: white;
     color: black;
   }
 
