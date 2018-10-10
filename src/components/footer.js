@@ -41,10 +41,10 @@ const Headline = styled.h2`
 const Action = styled.p`
   color: white;
   margin-bottom: 0;
-  text-align: center;
+  text-align: right;
 
-  @media (min-width: 992px) {
-    text-align: right;
+  @media (max-width: 767px) {
+    text-align: center;
   }
 `
 
@@ -144,6 +144,8 @@ const SignUpLink = styled(Button)`
   background-color: ${props => props.theme.secondary};
   color: white;
   max-width: 100%;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 
   &:hover,
   &:focus {
@@ -212,7 +214,7 @@ const Footer = props => {
               ))}
             </Menu>
           </ProductsColumn>
-          <PagesColumn xs={12} sm={4} md={3}>
+          <PagesColumn xs={12} sm={4} md={{ span: 3, offset: 1 }}>
             <ColumnTitle>{props.pagesMenu.name}</ColumnTitle>
             <Menu>
               {props.pagesMenu.items.map((item, index) => (
@@ -222,12 +224,12 @@ const Footer = props => {
               ))}
             </Menu>
           </PagesColumn>
-          <SignUpColumn xs={12} sm={4} md={6}>
+          <SignUpColumn xs={12} sm={4} md={5}>
             <Row>
-              <Col sm={12} md={6} lg={8}>
+              <Col sm={12} md={6} lg={7} xl={8}>
                 <ColumnTitle>Sign up for our newsletter</ColumnTitle>
               </Col>
-              <Col sm={12} md={6} lg={4}>
+              <Col sm={12} md={6} lg={5} xl={4}>
                 <SignUpLink secondary to={`#`}>
                   Sign Up
                 </SignUpLink>
