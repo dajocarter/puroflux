@@ -18,7 +18,10 @@ const Button = styled(Link)`
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-  transition: background-color 0.15s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.15s;
+  transition-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
   &:hover,
   &:focus {
     background-color: ${props =>
