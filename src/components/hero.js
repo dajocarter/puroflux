@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import Btn from './styled/button'
 
 const Background = styled.div`
-  height: 420px;
+  height: 450px;
   width: 100%;
   position: relative;
 `
@@ -17,7 +17,7 @@ const HeroImg = styled(Img)`
   left: 0;
   width: 100%;
   z-index: -1;
-  height: 400px;
+  height: 450px;
   & > img {
     object-fit: cover !important; // or whatever
     object-position: 50% 50% !important; // or whatever
@@ -38,7 +38,7 @@ const Content = styled.div`
   max-width: 480px;
 
   .content {
-    margin-bottom: 53px;
+    margin-bottom: 2rem;
 
     h1 {
       font-size: 2rem;
@@ -58,13 +58,14 @@ const Content = styled.div`
 const Links = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: ${props => (props.single ? `center` : `space-between`)};
   align-items: center;
 `
 
 const Button = styled(Btn)`
   font-size: 18px;
   color: white;
+  margin: 0.5rem;
 `
 
 const Hero = props => (
@@ -76,7 +77,7 @@ const Hero = props => (
         ) {
           localFile {
             childImageSharp {
-              fluid(maxHeight: 420) {
+              fluid(maxHeight: 450) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
@@ -85,7 +86,7 @@ const Hero = props => (
         homeHero: wordpressWpMedia(slug: { eq: "puroflux_home_hero_pf_4060" }) {
           localFile {
             childImageSharp {
-              fluid(maxHeight: 420) {
+              fluid(maxHeight: 450) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
@@ -111,7 +112,7 @@ const Hero = props => (
             dangerouslySetInnerHTML={{ __html: props.html }}
           />
           {props.links && (
-            <Links>
+            <Links single={props.links.length > 1 ? `false` : `true`}>
               {props.links.map((link, i) => (
                 <Button
                   key={i}
