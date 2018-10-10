@@ -64,6 +64,7 @@ const Links = styled.div`
 
 const Button = styled(Btn)`
   font-size: 18px;
+  color: white;
 `
 
 const Hero = props => (
