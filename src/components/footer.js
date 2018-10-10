@@ -85,6 +85,10 @@ const MenusRow = styled(Row)`
 
 const Column = styled(Col)`
   text-align: left;
+
+  @media (max-width: 575px) {
+    text-align: center;
+  }
 `
 
 const ProductsColumn = styled(Column)``
@@ -92,7 +96,9 @@ const ProductsColumn = styled(Column)``
 const PagesColumn = styled(Column)``
 
 const SignUpColumn = styled(Column)`
-  text-align: right;
+  @media (min-width: 576px) {
+    text-align: right;
+  }
 `
 
 const ColumnTitle = styled.h4`
@@ -108,6 +114,10 @@ const Menu = styled.ul`
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: flex-start;
+
+  @media (max-width: 575px) {
+    align-items: center;
+  }
 `
 
 const MenuItem = styled.li`
@@ -152,12 +162,14 @@ const Copyright = styled.div`
   letter-spacing: 2px;
   font-size: 11px;
 
-  p {
-    margin: 0;
+  @media (max-width: 537px) {
+    justify-content: center;
   }
 
-  @media (max-width: 479px) {
-    justify-content: center;
+  @media (min-width: 538px) {
+    p {
+      margin-bottom: 0;
+    }
   }
 `
 
