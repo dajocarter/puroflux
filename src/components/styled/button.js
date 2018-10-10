@@ -25,11 +25,11 @@ const Button = styled(Link)`
   &:hover,
   &:focus {
     background-color: ${props =>
-      (props.primary = 'true'
+      props.primary === 'true'
         ? props.theme.primary
-        : (props.secondary = 'true'
-            ? props.theme.secondary
-            : props.theme.alt))};
+        : props.secondary === 'true'
+          ? props.theme.secondary
+          : props.theme.alt};
     color: white;
     text-decoration: none;
   }
