@@ -3,7 +3,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
-import Button from './styled/button'
+import Btn from './styled/button'
 
 const Background = styled.div`
   height: 420px;
@@ -43,10 +43,15 @@ const Content = styled.div`
     h1 {
       font-size: 2rem;
     }
-  }
 
-  a {
-    color: white;
+    a {
+      color: white;
+      font-size: 1.5rem;
+
+      &:hover {
+        color: white;
+      }
+    }
   }
 `
 
@@ -55,6 +60,10 @@ const Links = styled.div`
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
+`
+
+const Button = styled(Btn)`
+  font-size: 18px;
 `
 
 const Hero = props => (
@@ -107,8 +116,8 @@ const Hero = props => (
                   key={i}
                   to={link.button_link.url}
                   target={link.button_link.target}
-                  primary={i % 2 === 0}
-                  secondary={i % 2 === 1}
+                  primary={i % 2 === 0 ? `true` : `false`}
+                  secondary={i % 2 === 1 ? `true` : `false`}
                 >
                   {link.button_link.title}
                 </Button>

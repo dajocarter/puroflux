@@ -5,9 +5,9 @@ const Button = styled(Link)`
   border-width: 3px;
   border-style: solid;
   border-color: ${props =>
-    props.primary
+    props.primary === 'true'
       ? props.theme.primary
-      : props.secondary
+      : props.secondary === 'true'
         ? props.theme.secondary
         : props.theme.alt};
   background-color: transparent;
@@ -22,11 +22,11 @@ const Button = styled(Link)`
   &:hover,
   &:focus {
     background-color: ${props =>
-      props.primary
+      (props.primary = 'true'
         ? props.theme.primary
-        : props.secondary
-          ? props.theme.secondary
-          : props.theme.alt};
+        : (props.secondary = 'true'
+            ? props.theme.secondary
+            : props.theme.alt))};
     color: white;
     text-decoration: none;
   }
