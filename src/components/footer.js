@@ -194,7 +194,7 @@ const Footer = props => {
                   (805) 579-0216
                 </PhoneNumber>{' '}
                 or{' '}
-                <CTAlink alt to="/contact">
+                <CTAlink alt="true" to="/contact">
                   Contact Us
                 </CTAlink>
               </Action>
@@ -230,7 +230,7 @@ const Footer = props => {
                 <ColumnTitle>Sign up for our newsletter</ColumnTitle>
               </Col>
               <Col sm={12} md={6} lg={5} xl={4}>
-                <SignUpLink secondary to={`#`}>
+                <SignUpLink secondary="true" to={`#`}>
                   Sign Up
                 </SignUpLink>
               </Col>
