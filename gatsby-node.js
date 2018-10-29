@@ -9,7 +9,7 @@ exports.createPages = ({ graphql, actions }) => {
     // ==== PAGES ====
     graphql(`
       {
-        allWordpressPage {
+        allWordpressPage(filter: { slug: { ne: "home" } }) {
           edges {
             node {
               id
@@ -26,7 +26,6 @@ exports.createPages = ({ graphql, actions }) => {
           reject(result.errors)
         }
 
-        const dontCreatePagesFor = ['home']
         const pageTemplate = path.resolve('./src/templates/page.js')
         const contactTemplate = path.resolve('./src/templates/page_contact.js')
         const galleryTemplate = path.resolve('./src/templates/page_gallery.js')
@@ -35,56 +34,54 @@ exports.createPages = ({ graphql, actions }) => {
           './src/templates/page_typInstall.js'
         )
 
-        result.data.allWordpressPage.edges
-          .filter(({ node }) => !dontCreatePagesFor.includes(node.slug))
-          .forEach(({ node }) => {
-            switch (node.template) {
-              case 'page_contact.php':
-                createPage({
-                  path: `/${node.slug}/`,
-                  context: {
-                    id: node.id,
-                  },
-                })
-                break
-              case 'page_gallery.php':
-                createPage({
-                  path: `/${node.slug}/`,
-                  context: {
-                    id: node.id,
-                  },
-                })
-                break
-              case 'page_library.php':
-                createPage({
-                  path: `/${node.slug}/`,
-                  context: {
-                    id: node.id,
-                  },
-                })
-                break
-              case 'page_typical-installations.php':
-                createPage({
-                  path: `/${node.slug}/`,
-                  context: {
-                    id: node.id,
-                  },
-                })
-                break
-              default:
-                createPage({
-                  path: `/${node.slug}/`,
-                  context: {
-                    id: node.id,
-                  },
-                })
-            }
-          })
+        result.data.allWordpressPage.edges.forEach(({ node }) => {
+          switch (node.template) {
+            case 'page_contact.php':
+              createPage({
+                path: `/${node.slug}/`,
                 component: contactTemplate,
+                context: {
+                  id: node.id,
+                },
+              })
+              break
+            case 'page_gallery.php':
+              createPage({
+                path: `/${node.slug}/`,
                 component: galleryTemplate,
+                context: {
+                  id: node.id,
+                },
+              })
+              break
+            case 'page_library.php':
+              createPage({
+                path: `/${node.slug}/`,
                 component: libraryTemplate,
+                context: {
+                  id: node.id,
+                },
+              })
+              break
+            case 'page_typical-installations.php':
+              createPage({
+                path: `/${node.slug}/`,
                 component: typInstallTemplate,
+                context: {
+                  id: node.id,
+                },
+              })
+              break
+            default:
+              createPage({
+                path: `/${node.slug}/`,
                 component: pageTemplate,
+                context: {
+                  id: node.id,
+                },
+              })
+          }
+        })
       })
       // ==== END PAGES ====
 
@@ -124,7 +121,7 @@ exports.createPages = ({ graphql, actions }) => {
       .then(() => {
         graphql(`
           {
-            allWordpressCategory {
+            allWordpressCategory(filter: { slug: { ne: "uncategorized" } }) {
               edges {
                 node {
                   id
