@@ -49,7 +49,7 @@ const FullWidthContent = props => {
         {props.acf.link && (
           <ButtonLink
             secondary="true"
-            to={props.acf.link.url}
+            to={`/${props.acf.link.url}/`}
             target={props.acf.link.target}
           >
             {props.acf.link.title}

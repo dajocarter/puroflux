@@ -108,7 +108,7 @@ const SplitContent = props => {
           {props.acf.left_link && (
             <ButtonLink
               primary="true"
-              to={props.acf.left_link.url}
+              to={`/${props.acf.left_link.url}/`}
               target={props.acf.left_link.target}
             >
               {props.acf.left_link.title}
@@ -132,7 +132,7 @@ const SplitContent = props => {
           {props.acf.right_link && (
             <ButtonLink
               secondary="true"
-              to={props.acf.right_link.url}
+              to={`/${props.acf.right_link.url}/`}
               target={props.acf.right_link.target}
             >
               {props.acf.right_link.title}

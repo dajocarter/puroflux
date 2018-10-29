@@ -220,7 +220,7 @@ export default class Header extends Component {
                             to={
                               item.object_slug === 'home'
                                 ? `/`
-                                : `/${item.object_slug}`
+                                : `/${item.object_slug}/`
                             }
                           >
                             {item.title}
@@ -231,7 +231,7 @@ export default class Header extends Component {
                                 <SubMenuItem key={child.wordpress_id}>
                                   <SubMenuLink
                                     activeClassName={`active`}
-                                    to={child.object_slug}
+                                    to={`/${child.object_slug}/`}
                                   >
                                     {child.title}
                                   </SubMenuLink>
@@ -244,7 +244,7 @@ export default class Header extends Component {
                                           >
                                             <SubMenuLink
                                               activeClassName={`active`}
-                                              to={grandchild.object_slug}
+                                              to={`/${grandchild.object_slug}/`}
                                             >
                                               {grandchild.title}
                                             </SubMenuLink>
@@ -281,7 +281,7 @@ export default class Header extends Component {
                             to={
                               item.object_slug === 'home'
                                 ? `/`
-                                : `/${item.object_slug}`
+                                : `/${item.object_slug}/`
                             }
                           >
                             {item.title}

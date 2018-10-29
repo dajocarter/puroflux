@@ -116,7 +116,7 @@ const Hero = props => (
               {props.links.map((link, i) => (
                 <Button
                   key={i}
-                  to={link.button_link.url}
+                  to={`/${link.button_link.url}/`}
                   target={link.button_link.target}
                   primary={i % 2 === 0 ? `true` : `false`}
                   secondary={i % 2 === 1 ? `true` : `false`}

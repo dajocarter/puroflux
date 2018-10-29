@@ -173,7 +173,7 @@ const IndexPage = () => (
                   __html: data.page.acf.featured_content,
                 }}
               />
-              <Btn secondary="true" to={`/gallery`}>
+              <Btn secondary="true" to={`/gallery/`}>
                 View Gallery
               </Btn>
             </Column>

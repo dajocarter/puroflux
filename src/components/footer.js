@@ -199,7 +199,7 @@ const Footer = props => {
                   (805) 579-0216
                 </PhoneNumber>{' '}
                 or{' '}
-                <CTAlink alt="true" to="/contact">
+                <CTAlink alt="true" to="/contact/">
                   Contact Us
                 </CTAlink>
               </Action>
@@ -214,7 +214,7 @@ const Footer = props => {
             <Menu>
               {props.productsMenu.items.map((item, index) => (
                 <MenuItem key={index}>
-                  <MenuLink to={`/${item.object_slug}`}>{item.title}</MenuLink>
+                  <MenuLink to={`/${item.object_slug}/`}>{item.title}</MenuLink>
                 </MenuItem>
               ))}
             </Menu>
@@ -226,7 +226,7 @@ const Footer = props => {
                 <MenuItem key={index}>
                   <MenuLink
                     className={item.object_slug === 'rep-login' ? `alt` : ``}
-                    to={`/${item.object_slug}`}
+                    to={`/${item.object_slug}/`}
                   >
                     {item.title}
                   </MenuLink>
