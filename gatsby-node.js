@@ -1,6 +1,4 @@
-const Promise = require(`bluebird`)
 const path = require(`path`)
-const slash = require(`slash`)
 
 // Will create pages for WordPress pages (route : /{slug})
 // Will create pages for WordPress products (route : /{slug})
@@ -44,7 +42,6 @@ exports.createPages = ({ graphql, actions }) => {
               case 'page_contact.php':
                 createPage({
                   path: `/${node.slug}/`,
-                  component: slash(contactTemplate),
                   context: {
                     id: node.id,
                   },
@@ -53,7 +50,6 @@ exports.createPages = ({ graphql, actions }) => {
               case 'page_gallery.php':
                 createPage({
                   path: `/${node.slug}/`,
-                  component: slash(galleryTemplate),
                   context: {
                     id: node.id,
                   },
@@ -62,7 +58,6 @@ exports.createPages = ({ graphql, actions }) => {
               case 'page_library.php':
                 createPage({
                   path: `/${node.slug}/`,
-                  component: slash(libraryTemplate),
                   context: {
                     id: node.id,
                   },
@@ -71,7 +66,6 @@ exports.createPages = ({ graphql, actions }) => {
               case 'page_typical-installations.php':
                 createPage({
                   path: `/${node.slug}/`,
-                  component: slash(typInstallTemplate),
                   context: {
                     id: node.id,
                   },
@@ -80,13 +74,17 @@ exports.createPages = ({ graphql, actions }) => {
               default:
                 createPage({
                   path: `/${node.slug}/`,
-                  component: slash(pageTemplate),
                   context: {
                     id: node.id,
                   },
                 })
             }
           })
+                component: contactTemplate,
+                component: galleryTemplate,
+                component: libraryTemplate,
+                component: typInstallTemplate,
+                component: pageTemplate,
       })
       // ==== END PAGES ====
 
@@ -112,7 +110,7 @@ exports.createPages = ({ graphql, actions }) => {
           result.data.allWordpressWpProducts.edges.forEach(({ node }) => {
             createPage({
               path: `/${node.slug}/`,
-              component: slash(productTemplate),
+              component: productTemplate,
               context: {
                 id: node.id,
               },
@@ -144,7 +142,7 @@ exports.createPages = ({ graphql, actions }) => {
           result.data.allWordpressCategory.edges.forEach(({ node }) => {
             createPage({
               path: `/${node.slug}/`,
-              component: slash(categoryTemplate),
+              component: categoryTemplate,
               context: {
                 id: node.id,
               },
