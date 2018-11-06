@@ -26,7 +26,7 @@ const Headline = styled.h2`
   color: black;
   font-size: 1.5rem;
   font-weight: bold;
-  margin: 25px 0;
+  margin: 32px 0;
   text-align: left;
 
   @media (max-width: 767px) {
@@ -34,7 +34,7 @@ const Headline = styled.h2`
   }
 
   @media (min-width: 992px) {
-    margin: 13px 0;
+    margin: 20px 0;
   }
 `
 

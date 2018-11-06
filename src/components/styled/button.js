@@ -13,7 +13,9 @@ const Button = styled(Link)`
   background-color: transparent;
   color: black;
   display: inline-block;
+  font-size: 18px;
   letter-spacing: 1px;
+  line-height: 38px;
   padding: 0.25rem 1.5rem;
   text-align: center;
   text-decoration: none;

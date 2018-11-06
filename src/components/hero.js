@@ -63,7 +63,6 @@ const Links = styled.div`
 `
 
 const Button = styled(Btn)`
-  font-size: 18px;
   color: white;
   margin: 0.5rem;
 `
