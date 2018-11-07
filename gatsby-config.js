@@ -25,8 +25,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-wordpress',
       options: {
-        baseUrl: `${process.env.BASE_URL}`,
-        protocol: `${process.env.PROTOCOL}`,
+        baseUrl: process.env.BASE_URL,
+        protocol: process.env.PROTOCOL,
         hostingWPCOM: false,
         useACF: true,
         acfOptionPageIds: [],
@@ -35,7 +35,7 @@ module.exports = {
         perPage: 100,
         // Search and Replace Urls across WordPress content.
         searchAndReplaceContentUrls: {
-          sourceUrl: `${process.env.SOURCE_URL}`,
+          sourceUrl: process.env.SOURCE_URL,
           replacementUrl: '',
         },
         concurrentRequests: 10,
