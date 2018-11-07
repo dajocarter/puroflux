@@ -8,6 +8,7 @@ import styledNormalize from 'styled-normalize'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Header from './header'
 import Footer from './footer'
+import favicon from '../images/purofluxlogo.png'
 
 const GlobalStyles = createGlobalStyle`
   ${styledNormalize}
@@ -23,7 +24,7 @@ const Main = styled.main`
   font-family: 'Lato', sans-serif;
 `
 
-const Layout = ({ children, data }) => (
+const Layout = ({ children }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -142,7 +143,8 @@ const Layout = ({ children, data }) => (
       <ThemeProvider theme={theme}>
         <>
           <Helmet
-            title={data.site.siteMetadata.title}
+						title={data.site.siteMetadata.title}
+						link={[{rel: 'shortcut icon', type: 'image/png', href: `${favicon}`}]}
             meta={[
               { name: 'description', content: 'Sample' },
               { name: 'keywords', content: 'sample, something' },
