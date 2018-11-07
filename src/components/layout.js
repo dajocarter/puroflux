@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
-import styled, { injectGlobal, ThemeProvider } from 'styled-components'
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
 import styledNormalize from 'styled-normalize'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Header from './header'
 import Footer from './footer'
 
-injectGlobal`
+const GlobalStyles = createGlobalStyle`
   ${styledNormalize}
 `
 
@@ -150,6 +150,7 @@ const Layout = ({ children, data }) => (
           >
             <html lang="en" />
           </Helmet>
+					<GlobalStyles />
           <Header
             logo={data.logo}
             siteTitle={data.site.siteMetadata.title}
