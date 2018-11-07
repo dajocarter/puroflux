@@ -8,7 +8,9 @@ import Layout from '../components/layout'
 import Hero from '../components/hero'
 import Form from '../components/form'
 
-const ColumnTitle = styled.h2``
+const ColumnTitle = styled.h2`
+	border-bottom: 1px solid black;
+`
 
 const Map = styled.div`
   iframe {
@@ -19,13 +21,26 @@ const Map = styled.div`
   }
 `
 
-const Address = styled.p``
+const Address = styled.p`
+margin-top: 1rem;
+`
 
 const ContactInfo = styled.p``
 
-const Title = styled.span``
+const Title = styled.span`
+color: ${props => props.theme.primary};
+`
 
-const Value = styled.a``
+const Value = styled.a`
+color: black;
+margin-left: 5px;
+text-decoration: underline;
+
+&:hover,
+&:focus {
+	color: black;
+}
+`
 
 const Contact = () => (
   <StaticQuery
@@ -73,13 +88,15 @@ const Contact = () => (
                 />
               </Map>
               <Address>
-                Puroflux Corporation 2121 Union Place Simi Valley, CA 93065
+                Puroflux Corporation <br />
+								2121 Union Place <br />
+								Simi Valley, CA 93065
               </Address>
               <ContactInfo>
                 <Title>Tel:</Title>
-                <Value href="tel:805-579-0216">(805) 579-0216</Value>
+                <Value href="tel:805-579-0216">(805) 579-0216</Value> <br />
                 <Title>Fax:</Title>
-                <Value href="tel:805-579-6005">(805) 579-6005</Value>
+                <Value href="tel:805-579-6005">(805) 579-6005</Value> <br />
                 <Title>Email:</Title>
                 <Value href="mailto:sales@puroflux.com">
                   sales@puroflux.com
