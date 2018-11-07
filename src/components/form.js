@@ -1,24 +1,19 @@
 import React, { Component } from 'react'
 import { FormGroup, FormControl, FormLabel, Button } from 'react-bootstrap'
-import styled from 'styled-components'
 
 import 'bootstrap/dist/css/bootstrap.css'
-
-const HoneyPot = styled.p`
-  display: none;
-`
 
 export default class Form extends Component {
   render() {
     return (
-      <form netlify name="contact" method="POST">
+      <form netlify name="contact" method="POST" action="https://formspree.io/dajocarter@gmail.com">
         <FormGroup controlId="name">
           <FormLabel>Name</FormLabel>
-          <FormControl type="text" placeholder="Your name" />
+          <FormControl type="text" name="name" placeholder="Your name" />
         </FormGroup>
         <FormGroup controlId="email">
           <FormLabel>Email</FormLabel>
-          <FormControl type="email" placeholder="Your email" />
+          <FormControl type="email" name="_replyto" placeholder="Your email" />
         </FormGroup>
         <FormGroup controlId="message">
           <FormLabel>Message</FormLabel>
@@ -28,12 +23,8 @@ export default class Form extends Component {
           <FormLabel>Location</FormLabel>
           <FormControl type="text" placeholder="Your location" />
         </FormGroup>
-        <HoneyPot>
-          <label>
-            Don’t fill this out if you're human: <input name="bot-field" />
-          </label>
-        </HoneyPot>
-        <div data-netlify-recaptcha />
+        <input type="hidden" name="_subject" value="New Contact Form Submission" />
+				<input type="text" name="_gotcha" style={{display: 'none'}} />
         <Button type="submit">Submit</Button>
       </form>
     )
