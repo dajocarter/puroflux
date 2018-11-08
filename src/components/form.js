@@ -17,7 +17,7 @@ export default class Form extends Component {
         </FormGroup>
         <FormGroup controlId="message">
           <FormLabel>Message</FormLabel>
-          <FormControl componentClass="textarea" placeholder="Your message" />
+          <FormControl as="textarea" placeholder="Your message" />
         </FormGroup>
         <FormGroup controlId="location">
           <FormLabel>Location</FormLabel>
