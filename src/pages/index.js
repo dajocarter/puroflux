@@ -10,8 +10,8 @@ import FlexibleContent from '../components/flexible-content'
 import Btn from '../components/styled/button'
 
 const FeatureContainer = styled(Container)`
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top: 45px;
+  margin-bottom: 45px;
 
   > .row > .col {
     position: relative;

@@ -8,6 +8,10 @@ import Layout from '../components/layout'
 import Hero from '../components/hero'
 import Form from '../components/form'
 
+const Main = styled(Container)`
+	padding: 45px 15px;
+`
+
 const ColumnTitle = styled.h2`
 	border-bottom: 1px solid black;
 `
@@ -72,7 +76,7 @@ const Contact = () => (
     render={data => (
       <Layout>
         <Hero html={data.page.acf.content} links={data.page.acf.buttons} />
-        <Container fluid>
+        <Main fluid>
           <Row>
             <Col md={6}>
               <ColumnTitle>Contact Information</ColumnTitle>
@@ -108,7 +112,7 @@ const Contact = () => (
               <Form />
             </Col>
           </Row>
-        </Container>
+        </Main>
       </Layout>
     )}
   />
