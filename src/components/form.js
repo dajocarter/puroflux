@@ -25,7 +25,7 @@ export default class Form extends Component {
         </FormGroup>
         <input type="hidden" name="_subject" value="New Contact Form Submission" />
 				<input type="text" name="_gotcha" style={{display: 'none'}} />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" variant="light">Submit</Button>
       </form>
     )
   }
