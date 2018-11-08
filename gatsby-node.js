@@ -17,7 +17,23 @@ exports.createPages = ({ graphql, actions }) => {
               template
             }
           }
-        }
+				}
+				allWordpressWpProducts {
+					edges {
+						node {
+							id
+							slug
+						}
+					}
+				}
+				allWordpressCategory(filter: { slug: { ne: "uncategorized" } }) {
+					edges {
+						node {
+							id
+							slug
+						}
+					}
+				}
       }
     `)
       .then(result => {
@@ -80,30 +96,11 @@ exports.createPages = ({ graphql, actions }) => {
                   id: node.id,
                 },
               })
-          }
-        })
-      })
-      // ==== END PAGES ====
+					}
+					// ==== END PAGES ====
 
-      // ==== PRODUCTS ====
-      .then(() => {
-        graphql(`
-          {
-            allWordpressWpProducts {
-              edges {
-                node {
-                  id
-                  slug
-                }
-              }
-            }
-          }
-        `).then(result => {
-          if (result.errors) {
-            console.log(result.errors)
-            reject(result.errors)
-          }
-          const productTemplate = path.resolve('./src/templates/product.js')
+					// ==== PRODUCTS ====
+					const productTemplate = path.resolve('./src/templates/product.js')
           result.data.allWordpressWpProducts.edges.forEach(({ node }) => {
             createPage({
               path: `/${node.slug}/`,
@@ -114,28 +111,10 @@ exports.createPages = ({ graphql, actions }) => {
             })
           })
         })
-      })
-      // ==== END PRODUCTS ====
+				// ==== END PRODUCTS ====
 
-      // ==== CATEGORIES ====
-      .then(() => {
-        graphql(`
-          {
-            allWordpressCategory(filter: { slug: { ne: "uncategorized" } }) {
-              edges {
-                node {
-                  id
-                  slug
-                }
-              }
-            }
-          }
-        `).then(result => {
-          if (result.errors) {
-            console.log(result.errors)
-            reject(result.errors)
-          }
-          const categoryTemplate = path.resolve('./src/templates/category.js')
+				// ==== CATEGORIES ====
+				const categoryTemplate = path.resolve('./src/templates/category.js')
           result.data.allWordpressCategory.edges.forEach(({ node }) => {
             createPage({
               path: `/${node.slug}/`,
@@ -146,8 +125,7 @@ exports.createPages = ({ graphql, actions }) => {
             })
           })
           resolve()
-        })
+				// ==== END CATEGORIES ====
       })
-    // ==== END CATEGORIES ====
   })
 }
