@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 export default class Form extends Component {
   render() {
     return (
-      <form netlify name="contact" method="POST" action="https://formspree.io/dajocarter@gmail.com">
+      <form name="contact" method="POST" action="https://formspree.io/dajocarter@gmail.com">
         <FormGroup controlId="name">
           <FormLabel>Name</FormLabel>
           <FormControl type="text" name="name" placeholder="Your name" />
