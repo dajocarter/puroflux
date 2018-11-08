@@ -6,9 +6,14 @@ import Layout from '../components/layout'
 import Hero from '../components/hero'
 
 const Content = styled.div`
+	color: ${props => props.theme.body};
   margin: 0 auto;
   max-width: 960px;
   padding: 1.45rem 1.0875rem;
+
+	h1, h2, h3, h4, h5, h6 {
+		color: ${props => props.theme.primary};
+	}
 `
 
 const PageTemplate = ({ data }) => (

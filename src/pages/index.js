@@ -70,6 +70,10 @@ const FeatureTitle = styled.h2`
   }
 `
 
+const WPcontent = styled.div`
+color: ${props => props.theme.body};
+`
+
 const IndexPage = () => (
   <StaticQuery
     query={graphql`
@@ -168,7 +172,7 @@ const IndexPage = () => (
               )}
             </Column>
             <Column xs={12} lg={6}>
-              <div
+              <WPcontent
                 dangerouslySetInnerHTML={{
                   __html: data.page.acf.featured_content,
                 }}
