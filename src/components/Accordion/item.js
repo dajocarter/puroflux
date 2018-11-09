@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Collapse } from 'react-bootstrap'
 import styled from 'styled-components'
 
@@ -60,132 +60,124 @@ const ModelInfo = styled(Collapse)`
   }
 `
 
-export default class AccordionItem extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { open: props.idx ? false : true }
-  }
-  render() {
-    const { open } = this.state
-    const { node } = this.props
-    return (
-      <Model>
-        <ModelTitle
-          role="button"
-          onClick={() =>
-            this.setState(state => ({
-              open: !state.open,
-            }))
-          }
-          aria-expanded={open}
-          aria-controls={`accordion--content-${this.props.idx}`}
-        >
-          {node.title}
-        </ModelTitle>
-        <ModelInfo in={open}>
-          <div
-            id={`accordion--content-${this.props.idx}`}
-            className="accordion-content"
-          >
-            {this.props.slipStream && (
-              <div>
-                <span>Slip Stream: </span>
-                {node.acf.slip_stream_files ? (
-                  <ul>
-                    {node.acf.slip_stream_files.map(({ file }) => (
-                      <li key={file.wordpress_id}>
-                        <a
-                          href={`${process.env.SOURCE_URL}${
-                            file.url.source_url
-                          }`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {file.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <span>N/A</span>
-                )}
-              </div>
-            )}
-            {this.props.sweeperPiping && (
-              <div>
-                <span>Sweeper Piping: </span>
-                {node.acf.sweeper_piping_files ? (
-                  <ul>
-                    {node.acf.sweeper_piping_files.map(({ file }) => (
-                      <li key={file.wordpress_id}>
-                        <a
-                          href={`${process.env.SOURCE_URL}${
-                            file.url.source_url
-                          }`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {file.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <span>N/A</span>
-                )}
-              </div>
-            )}
-            {this.props.fullFlow && (
-              <div>
-                <span>Full Flow: </span>
-                {node.acf.full_flow_files ? (
-                  <ul>
-                    {node.acf.full_flow_files.map(({ file }) => (
-                      <li key={file.wordpress_id}>
-                        <a
-                          href={`${process.env.SOURCE_URL}${
-                            file.url.source_url
-                          }`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {file.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <span>N/A</span>
-                )}
-              </div>
-            )}
-            {this.props.sideStream && (
-              <div>
-                <span>Side Stream: </span>
-                {node.acf.side_stream_files ? (
-                  <ul>
-                    {node.acf.side_stream_files.map(({ file }) => (
-                      <li key={file.wordpress_id}>
-                        <a
-                          href={`${process.env.SOURCE_URL}${
-                            file.url.source_url
-                          }`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {file.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <span>N/A</span>
-                )}
-              </div>
-            )}
-          </div>
-        </ModelInfo>
-      </Model>
-    )
-  }
+const AccordionItem = (props) => {
+	const { node } = props
+
+	return (
+		<Model>
+			<ModelTitle
+				role="button"
+				onClick={() => props.handleOpening(props.idx)}
+				aria-expanded={props.isOpen}
+				aria-controls={`accordion--content-${props.idx}`}
+			>
+				{node.title}
+			</ModelTitle>
+			<ModelInfo in={props.isOpen}>
+				<div
+					id={`accordion--content-${props.idx}`}
+					className="accordion-content"
+				>
+					{props.slipStream && (
+						<div>
+							<span>Slip Stream: </span>
+							{node.acf.slip_stream_files ? (
+								<ul>
+									{node.acf.slip_stream_files.map(({ file }) => (
+										<li key={file.wordpress_id}>
+											<a
+												href={`${process.env.SOURCE_URL}${
+													file.url.source_url
+												}`}
+												target="_blank"
+												rel="noopener noreferrer"
+											>
+												{file.title}
+											</a>
+										</li>
+									))}
+								</ul>
+							) : (
+								<span>N/A</span>
+							)}
+						</div>
+					)}
+					{props.sweeperPiping && (
+						<div>
+							<span>Sweeper Piping: </span>
+							{node.acf.sweeper_piping_files ? (
+								<ul>
+									{node.acf.sweeper_piping_files.map(({ file }) => (
+										<li key={file.wordpress_id}>
+											<a
+												href={`${process.env.SOURCE_URL}${
+													file.url.source_url
+												}`}
+												target="_blank"
+												rel="noopener noreferrer"
+											>
+												{file.title}
+											</a>
+										</li>
+									))}
+								</ul>
+							) : (
+								<span>N/A</span>
+							)}
+						</div>
+					)}
+					{props.fullFlow && (
+						<div>
+							<span>Full Flow: </span>
+							{node.acf.full_flow_files ? (
+								<ul>
+									{node.acf.full_flow_files.map(({ file }) => (
+										<li key={file.wordpress_id}>
+											<a
+												href={`${process.env.SOURCE_URL}${
+													file.url.source_url
+												}`}
+												target="_blank"
+												rel="noopener noreferrer"
+											>
+												{file.title}
+											</a>
+										</li>
+									))}
+								</ul>
+							) : (
+								<span>N/A</span>
+							)}
+						</div>
+					)}
+					{props.sideStream && (
+						<div>
+							<span>Side Stream: </span>
+							{node.acf.side_stream_files ? (
+								<ul>
+									{node.acf.side_stream_files.map(({ file }) => (
+										<li key={file.wordpress_id}>
+											<a
+												href={`${process.env.SOURCE_URL}${
+													file.url.source_url
+												}`}
+												target="_blank"
+												rel="noopener noreferrer"
+											>
+												{file.title}
+											</a>
+										</li>
+									))}
+								</ul>
+							) : (
+								<span>N/A</span>
+							)}
+						</div>
+					)}
+				</div>
+			</ModelInfo>
+		</Model>
+	)
 }
+
+export default AccordionItem
