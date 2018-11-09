@@ -1,10 +1,15 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
+import {Container, Row, Col} from 'react-bootstrap'
 import styled from 'styled-components'
 
 import Layout from '../components/layout'
 import Hero from '../components/hero'
 import Accordion from '../components/Accordion'
+
+const Main = styled(Container)`
+padding: 45px 15px;
+`
 
 const Content = styled.div`
   margin: 0 auto;
@@ -13,6 +18,10 @@ const Content = styled.div`
 `
 
 const Installation = styled.div`
+	&:first-of-type {
+		margin-bottom: 45px;
+	}
+
   .text--center {
     text-align: center;
   }
@@ -121,6 +130,10 @@ const TypInstallTemplate = () => (
     render={data => (
         <Layout>
           <Hero html={data.page.acf.content} links={data.page.acf.buttons} />
+					<Main>
+						<Row>
+							<Col xs={12}>
+
           {data.page.content && (
             <Content dangerouslySetInnerHTML={{ __html: data.page.content }} />
           )}
@@ -148,7 +161,8 @@ const TypInstallTemplate = () => (
                 sideStream
               />
             </Installation>
-          )}
+					)}
+					</Col></Row></Main>
         </Layout>
       )
     }
