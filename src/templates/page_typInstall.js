@@ -45,7 +45,38 @@ const TypInstallTemplate = () => (
             }
           }
         }
-        models: allWordpressWpProducts {
+        filterInstalls: allWordpressWpProducts(filter: {categories: {elemMatch: {slug: {eq: "permanent-media-filters"}}}} sort: {order: ASC, fields: wordpress_id}) {
+          edges {
+            node {
+              id
+              title
+              categories {
+                slug
+              }
+              acf {
+                slip_stream_files {
+                  file {
+                    wordpress_id
+                    title
+                    url {
+                      source_url
+                    }
+                  }
+                }
+                sweeper_piping_files {
+                  file {
+                    wordpress_id
+                    title
+                    url {
+                      source_url
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+				sepInstalls: allWordpressWpProducts(filter: {categories: {elemMatch: {slug: {eq: "separators"}}}} sort: {order: ASC, fields: wordpress_id}) {
           edges {
             node {
               id
@@ -72,15 +103,6 @@ const TypInstallTemplate = () => (
                     }
                   }
                 }
-                slip_stream_files {
-                  file {
-                    wordpress_id
-                    title
-                    url {
-                      source_url
-                    }
-                  }
-                }
                 sweeper_piping_files {
                   file {
                     wordpress_id
@@ -96,34 +118,23 @@ const TypInstallTemplate = () => (
         }
       }
     `}
-    render={data => {
-      const filterInstalls = data.models.edges
-        .filter(({ node }) =>
-          node.categories.some(cat => cat.slug === 'permanent-media-filters')
-        )
-        .reverse()
-      const sepInstalls = data.models.edges
-        .filter(({ node }) =>
-          node.categories.some(cat => cat.slug === 'separators')
-        )
-        .reverse()
-      return (
+    render={data => (
         <Layout>
           <Hero html={data.page.acf.content} links={data.page.acf.buttons} />
           {data.page.content && (
             <Content dangerouslySetInnerHTML={{ __html: data.page.content }} />
           )}
-          {filterInstalls && (
+          {data.filterInstalls && (
             <Installation>
               <div className="text--center">
                 <h2>Filter Installations</h2>
                 <h3>Select a Model</h3>
                 <h4>View product summary</h4>
               </div>
-              <Accordion files={filterInstalls} slipStream sweeperPiping />
+              <Accordion files={data.filterInstalls.edges} slipStream sweeperPiping />
             </Installation>
           )}
-          {sepInstalls && (
+          {data.sepInstalls && (
             <Installation>
               <div className="text--center">
                 <h2>Separator Installations</h2>
@@ -131,7 +142,7 @@ const TypInstallTemplate = () => (
                 <h4>View product summary</h4>
               </div>
               <Accordion
-                files={sepInstalls}
+                files={data.sepInstalls.edges}
                 sweeperPiping
                 fullFlow
                 sideStream
@@ -140,7 +151,7 @@ const TypInstallTemplate = () => (
           )}
         </Layout>
       )
-    }}
+    }
   />
 )
 
