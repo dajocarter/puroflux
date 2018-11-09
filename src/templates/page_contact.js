@@ -76,7 +76,7 @@ const Contact = () => (
     render={data => (
       <Layout>
         <Hero html={data.page.acf.content} links={data.page.acf.buttons} />
-        <Main fluid>
+        <Main>
           <Row>
             <Col md={6}>
               <ColumnTitle>Contact Information</ColumnTitle>
