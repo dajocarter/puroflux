@@ -80,7 +80,7 @@ const Contact = () => (
         <Hero html={data.page.acf.content} links={data.page.acf.buttons} />
         <Main>
           <Row>
-            <Col md={6}>
+            <Col md={5}>
               <ColumnTitle>Contact Information</ColumnTitle>
               <Map>
                 <iframe
@@ -109,7 +109,7 @@ const Contact = () => (
                 </Value>
               </ContactInfo>
             </Col>
-            <Col md={6}>
+            <Col md={{ span: 5, offset: 2 }}>
               <ColumnTitle>Contact Form</ColumnTitle>
               <Form />
             </Col>
