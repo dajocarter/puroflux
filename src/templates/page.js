@@ -16,12 +16,12 @@ const Content = styled.div`
 	}
 `
 
-const PageTemplate = ({ data }) => (
+const PageTemplate = ({ data: {page} }) => (
   <Layout>
-    <Hero html={data.page.acf.content} links={data.page.acf.buttons} />
-    {data.page.content && (
-      <Content dangerouslySetInnerHTML={{ __html: data.page.content }} />
-    )}
+    <Hero html={page.acf.content} links={page.acf.buttons} />
+    {page.content && (
+      <Content dangerouslySetInnerHTML={{ __html: page.content }} />
+		)}
   </Layout>
 )
 
