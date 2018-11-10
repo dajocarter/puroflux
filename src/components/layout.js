@@ -17,8 +17,8 @@ const GlobalStyles = createGlobalStyle`
 const theme = {
   primary: '#05c6c7',
   secondary: '#ffa200',
-	alt: '#000000',
-	body: '#7F7F7F'
+  alt: '#000000',
+  body: '#7F7F7F',
 }
 
 const Main = styled.main`
@@ -144,8 +144,10 @@ const Layout = ({ children }) => (
       <ThemeProvider theme={theme}>
         <>
           <Helmet
-						title={data.site.siteMetadata.title}
-						link={[{rel: 'shortcut icon', type: 'image/png', href: `${favicon}`}]}
+            title={data.site.siteMetadata.title}
+            link={[
+              { rel: 'shortcut icon', type: 'image/png', href: `${favicon}` },
+            ]}
             meta={[
               { name: 'description', content: 'Sample' },
               { name: 'keywords', content: 'sample, something' },
@@ -153,7 +155,7 @@ const Layout = ({ children }) => (
           >
             <html lang="en" />
           </Helmet>
-					<GlobalStyles />
+          <GlobalStyles />
           <Header
             logo={data.logo}
             siteTitle={data.site.siteMetadata.title}

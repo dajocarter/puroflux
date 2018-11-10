@@ -113,24 +113,28 @@ const Hero = props => (
           {props.links && (
             <Links single={props.links.length > 1 ? `false` : `true`}>
               {props.links.map((link, i) => {
-                return link.button_link.target ? (<Button
-									key={i}
-									as="a"
-                  href={link.button_link.url}
-                  target={link.button_link.target}
-                  primary={i % 2 === 0 ? `true` : `false`}
-                  secondary={i % 2 === 1 ? `true` : `false`}
-                >
-                  {link.button_link.title}
-                </Button>) : (<Button
-                  key={i}
-                  to={`/${link.button_link.url}/`}
-                  primary={i % 2 === 0 ? `true` : `false`}
-                  secondary={i % 2 === 1 ? `true` : `false`}
-                >
-                  {link.button_link.title}
-                </Button>)
-							})}
+                return link.button_link.target ? (
+                  <Button
+                    key={i}
+                    as="a"
+                    href={link.button_link.url}
+                    target={link.button_link.target}
+                    primary={i % 2 === 0 ? `true` : `false`}
+                    secondary={i % 2 === 1 ? `true` : `false`}
+                  >
+                    {link.button_link.title}
+                  </Button>
+                ) : (
+                  <Button
+                    key={i}
+                    to={`/${link.button_link.url}/`}
+                    primary={i % 2 === 0 ? `true` : `false`}
+                    secondary={i % 2 === 1 ? `true` : `false`}
+                  >
+                    {link.button_link.title}
+                  </Button>
+                )
+              })}
             </Links>
           )}
         </Content>

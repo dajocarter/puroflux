@@ -6,7 +6,11 @@ import 'bootstrap/dist/css/bootstrap.css'
 export default class Form extends Component {
   render() {
     return (
-      <form name="contact" method="POST" action="https://formspree.io/dajocarter@gmail.com">
+      <form
+        name="contact"
+        method="POST"
+        action="https://formspree.io/dajocarter@gmail.com"
+      >
         <FormGroup controlId="name">
           <FormLabel>Name</FormLabel>
           <FormControl type="text" name="name" placeholder="Your name" />
@@ -23,9 +27,15 @@ export default class Form extends Component {
           <FormLabel>Location</FormLabel>
           <FormControl type="text" placeholder="Your location" />
         </FormGroup>
-        <input type="hidden" name="_subject" value="New Contact Form Submission" />
-				<input type="text" name="_gotcha" style={{display: 'none'}} />
-        <Button type="submit" variant="light">Submit</Button>
+        <input
+          type="hidden"
+          name="_subject"
+          value="New Contact Form Submission"
+        />
+        <input type="text" name="_gotcha" style={{ display: 'none' }} />
+        <Button type="submit" variant="light">
+          Submit
+        </Button>
       </form>
     )
   }

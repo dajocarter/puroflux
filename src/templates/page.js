@@ -1,64 +1,69 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import {Container, Row, Col} from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 
 import Layout from '../components/layout'
 import Hero from '../components/hero'
 
 const Main = styled(Container)`
-	padding: 45px 15px;
+  padding: 45px 15px;
 `
 
 const Content = styled.div`
-	color: ${props => props.theme.body};
+  color: ${props => props.theme.body};
   margin: 0 auto;
   max-width: 960px;
   padding: 45px 15px;
 
-	h1, h2, h3, h4, h5, h6 {
-		color: ${props => props.theme.primary};
-	}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: ${props => props.theme.primary};
+  }
 `
 
 const Embed = styled.div`
-	position: relative;
-	padding-bottom: 56.25%;
-	overflow: hidden;
-	max-width: 100%;
-	height: auto;
-	margin-bottom: 45px;
+  position: relative;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 45px;
 
-	iframe {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-	}
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 `
 
-const PageTemplate = ({ data: {page} }) => (
+const PageTemplate = ({ data: { page } }) => (
   <Layout>
     <Hero html={page.acf.content} links={page.acf.buttons} />
-		<Main>
-			<Row>
-				<Col xs={12}>
-					{page.content && (
-						<Content dangerouslySetInnerHTML={{ __html: page.content }} />
-					)}
-					{page.acf.videos &&
-						<Row>
-							{page.acf.videos.map(({video}, i) => (
-								<Col md={6} key={i}>
-									<Embed dangerouslySetInnerHTML={{__html: video}} />
-								</Col>
-							))}
-						</Row>
-					}
-				</Col>
-			</Row>
-		</Main>
+    <Main>
+      <Row>
+        <Col xs={12}>
+          {page.content && (
+            <Content dangerouslySetInnerHTML={{ __html: page.content }} />
+          )}
+          {page.acf.videos && (
+            <Row>
+              {page.acf.videos.map(({ video }, i) => (
+                <Col md={6} key={i}>
+                  <Embed dangerouslySetInnerHTML={{ __html: video }} />
+                </Col>
+              ))}
+            </Row>
+          )}
+        </Col>
+      </Row>
+    </Main>
   </Layout>
 )
 
@@ -77,9 +82,9 @@ export const query = graphql`
             url
           }
         }
-				videos {
-					video
-				}
+        videos {
+          video
+        }
       }
     }
   }

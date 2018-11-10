@@ -9,11 +9,13 @@ import Hero from '../components/hero'
 import Form from '../components/form'
 
 const Main = styled(Container)`
-	padding: 45px 15px;
+  padding: 45px 15px;
 `
 
 const ColumnTitle = styled.h2`
-	border-bottom: 1px solid black;
+  border-bottom: 1px solid black;
+  margin-bottom: 2rem;
+  padding-bottom: 0.75rem;
 `
 
 const Map = styled.div`
@@ -26,24 +28,24 @@ const Map = styled.div`
 `
 
 const Address = styled.p`
-margin-top: 1rem;
+  margin-top: 1rem;
 `
 
 const ContactInfo = styled.p``
 
 const Title = styled.span`
-color: ${props => props.theme.primary};
+  color: ${props => props.theme.primary};
 `
 
 const Value = styled.a`
-color: black;
-margin-left: 5px;
-text-decoration: underline;
+  color: black;
+  margin-left: 5px;
+  text-decoration: underline;
 
-&:hover,
-&:focus {
-	color: black;
-}
+  &:hover,
+  &:focus {
+    color: black;
+  }
 `
 
 const Contact = () => (
@@ -93,8 +95,8 @@ const Contact = () => (
               </Map>
               <Address>
                 Puroflux Corporation <br />
-								2121 Union Place <br />
-								Simi Valley, CA 93065
+                2121 Union Place <br />
+                Simi Valley, CA 93065
               </Address>
               <ContactInfo>
                 <Title>Tel:</Title>

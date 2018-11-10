@@ -71,7 +71,7 @@ const FeatureTitle = styled.h2`
 `
 
 const WPcontent = styled.div`
-color: ${props => props.theme.body};
+  color: ${props => props.theme.body};
 `
 
 const IndexPage = () => (

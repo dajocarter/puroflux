@@ -1,7 +1,7 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
-import {Container, Row, Col} from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import Carousel from 'react-bootstrap/lib/Carousel'
 import styled from 'styled-components'
 
@@ -9,7 +9,7 @@ import Layout from '../components/layout'
 import Hero from '../components/hero'
 
 const Main = styled(Container)`
-	padding: 45px 15px;
+  padding: 45px 15px;
 `
 
 const Content = styled.div`
@@ -50,28 +50,30 @@ const GalleryTemplate = () => (
     render={data => (
       <Layout>
         <Hero html={data.page.acf.content} links={data.page.acf.buttons} />
-				<Main>
-        	<Row>
-						<Col xs={12}>
-							{data.page.content && (
-          			<Content dangerouslySetInnerHTML={{ __html: data.page.content }} />
-        			)}
-						</Col>
-					</Row>
-					{data.page.acf.gallery &&
-						<Row>
-							<Col xs={12}>
-								<Carousel>
-									{data.page.acf.gallery.map(img => (
-										<Carousel.Item key={img.id}>
-											<Img fluid={img.localFile.childImageSharp.fluid} />
-										</Carousel.Item>
-									))}
-								</Carousel>
-							</Col>
-						</Row>
-					}
-				</Main>
+        <Main>
+          <Row>
+            <Col xs={12}>
+              {data.page.content && (
+                <Content
+                  dangerouslySetInnerHTML={{ __html: data.page.content }}
+                />
+              )}
+            </Col>
+          </Row>
+          {data.page.acf.gallery && (
+            <Row>
+              <Col xs={12}>
+                <Carousel>
+                  {data.page.acf.gallery.map(img => (
+                    <Carousel.Item key={img.id}>
+                      <Img fluid={img.localFile.childImageSharp.fluid} />
+                    </Carousel.Item>
+                  ))}
+                </Carousel>
+              </Col>
+            </Row>
+          )}
+        </Main>
       </Layout>
     )}
   />
