@@ -35,6 +35,9 @@ const GalleryTemplate = () => (
             }
             gallery {
               id
+              title
+              caption
+              alt_text
               localFile {
                 childImageSharp {
                   fluid(maxWidth: 768) {
@@ -66,7 +69,14 @@ const GalleryTemplate = () => (
                 <Carousel>
                   {data.page.acf.gallery.map(img => (
                     <Carousel.Item key={img.id}>
-                      <Img fluid={img.localFile.childImageSharp.fluid} />
+                      <Img
+                        alt={img.alt_text}
+                        fluid={img.localFile.childImageSharp.fluid}
+                      />
+                      <Carousel.Caption>
+                        <h3>{img.title}</h3>
+                        {img.caption && <p>{img.caption}</p>}
+                      </Carousel.Caption>
                     </Carousel.Item>
                   ))}
                 </Carousel>
