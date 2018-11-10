@@ -58,9 +58,9 @@ const GalleryTemplate = () => (
         			)}
 						</Col>
 					</Row>
-					<Row>
-						<Col xs={12}>
-							{data.page.acf.gallery &&
+					{data.page.acf.gallery &&
+						<Row>
+							<Col xs={12}>
 								<Carousel>
 									{data.page.acf.gallery.map(img => (
 										<Carousel.Item key={img.id}>
@@ -68,9 +68,9 @@ const GalleryTemplate = () => (
 										</Carousel.Item>
 									))}
 								</Carousel>
-							}
-						</Col>
-					</Row>
+							</Col>
+						</Row>
+					}
 				</Main>
       </Layout>
     )}
