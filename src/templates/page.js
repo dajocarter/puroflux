@@ -46,15 +46,15 @@ const Embed = styled.div`
 const PageTemplate = ({ data: { page } }) => (
   <Layout>
     <Hero html={page.acf.content} links={page.acf.buttons} />
-    <Main>
-      <Row>
-        <Col xs={12}>
-          {page.content && (
+    {page.content && (
+      <Main>
+        <Row>
+          <Col xs={12}>
             <Content dangerouslySetInnerHTML={{ __html: page.content }} />
-          )}
-        </Col>
-      </Row>
-    </Main>
+          </Col>
+        </Row>
+      </Main>
+    )}
   </Layout>
 )
 
