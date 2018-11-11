@@ -48,7 +48,7 @@ exports.createPages = ({ graphql, actions }) => {
       const typInstallTemplate = path.resolve(
         './src/templates/page_typInstall.js'
       )
-      const libraryTemplate = path.resolve('./src/templates/page_library.js')
+      const videosTemplate = path.resolve('./src/templates/page_videos.js')
 
       result.data.allWordpressPage.edges.forEach(({ node }) => {
         switch (node.template) {
@@ -83,6 +83,15 @@ exports.createPages = ({ graphql, actions }) => {
             createPage({
               path: `/${node.slug}/`,
               component: typInstallTemplate,
+              context: {
+                id: node.id,
+              },
+            })
+            break
+          case 'page_videos.php':
+            createPage({
+              path: `/${node.slug}/`,
+              component: videosTemplate,
               context: {
                 id: node.id,
               },

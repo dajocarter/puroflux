@@ -52,6 +52,15 @@ const PageTemplate = ({ data: { page } }) => (
           {page.content && (
             <Content dangerouslySetInnerHTML={{ __html: page.content }} />
           )}
+          {page.acf.videos && (
+            <Row>
+              {page.acf.videos.map(({ video }, i) => (
+                <Col md={6} key={i}>
+                  <Embed dangerouslySetInnerHTML={{ __html: video }} />
+                </Col>
+              ))}
+            </Row>
+          )}
         </Col>
       </Row>
     </Main>
@@ -72,6 +81,9 @@ export const query = graphql`
             target
             url
           }
+        }
+        videos {
+          video
         }
       }
     }
