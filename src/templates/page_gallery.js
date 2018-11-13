@@ -1,5 +1,5 @@
 import React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import { Container, Row, Col } from 'react-bootstrap'
 import Carousel from 'react-bootstrap/lib/Carousel'
@@ -18,75 +18,70 @@ const Content = styled.div`
   padding: 1.45rem 1.0875rem;
 `
 
-const GalleryTemplate = () => (
-  <StaticQuery
-    query={graphql`
-      query GalleryQuery {
-        page: wordpressPage(template: { eq: "page_gallery.php" }) {
-          content
-          acf {
-            content
-            buttons {
-              button_link {
-                title
-                target
-                url
-              }
-            }
-            gallery {
-              id
-              title
-              caption
-              alt_text
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 768) {
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
-                }
+const GalleryTemplate = ({ data: { page } }) => (
+  <Layout>
+    <Hero html={page.acf.content} links={page.acf.buttons} />
+    <Main>
+      <Row>
+        <Col xs={12}>
+          {page.content && (
+            <Content dangerouslySetInnerHTML={{ __html: page.content }} />
+          )}
+        </Col>
+      </Row>
+      {page.acf.gallery && (
+        <Row>
+          <Col xs={12}>
+            <Carousel>
+              {page.acf.gallery.map(img => (
+                <Carousel.Item key={img.id}>
+                  <Img
+                    alt={img.alt_text}
+                    fluid={img.localFile.childImageSharp.fluid}
+                  />
+                  <Carousel.Caption>
+                    <h3>{img.title}</h3>
+                    {img.caption && <p>{img.caption}</p>}
+                  </Carousel.Caption>
+                </Carousel.Item>
+              ))}
+            </Carousel>
+          </Col>
+        </Row>
+      )}
+    </Main>
+  </Layout>
+)
+
+export default GalleryTemplate
+
+export const query = graphql`
+  query GalleryQuery($id: String!) {
+    page: wordpressPage(id: { eq: $id }) {
+      content
+      acf {
+        content
+        buttons {
+          button_link {
+            title
+            target
+            url
+          }
+        }
+        gallery {
+          id
+          title
+          caption
+          alt_text
+          localFile {
+            childImageSharp {
+              fluid(maxWidth: 768) {
+                ...GatsbyImageSharpFluid_withWebp
               }
             }
           }
         }
       }
-    `}
-    render={data => (
-      <Layout>
-        <Hero html={data.page.acf.content} links={data.page.acf.buttons} />
-        <Main>
-          <Row>
-            <Col xs={12}>
-              {data.page.content && (
-                <Content
-                  dangerouslySetInnerHTML={{ __html: data.page.content }}
-                />
-              )}
-            </Col>
-          </Row>
-          {data.page.acf.gallery && (
-            <Row>
-              <Col xs={12}>
-                <Carousel>
-                  {data.page.acf.gallery.map(img => (
-                    <Carousel.Item key={img.id}>
-                      <Img
-                        alt={img.alt_text}
-                        fluid={img.localFile.childImageSharp.fluid}
-                      />
-                      <Carousel.Caption>
-                        <h3>{img.title}</h3>
-                        {img.caption && <p>{img.caption}</p>}
-                      </Carousel.Caption>
-                    </Carousel.Item>
-                  ))}
-                </Carousel>
-              </Col>
-            </Row>
-          )}
-        </Main>
-      </Layout>
-    )}
-  />
-)
-
-export default GalleryTemplate
+    }
+  }
+`

@@ -43,7 +43,7 @@ const Embed = styled.div`
   }
 `
 
-const PageTemplate = ({ data: { page } }) => (
+const VideosTemplate = ({ data: { page } }) => (
   <Layout>
     <Hero html={page.acf.content} links={page.acf.buttons} />
     <Main>
@@ -67,10 +67,10 @@ const PageTemplate = ({ data: { page } }) => (
   </Layout>
 )
 
-export default PageTemplate
+export default VideosTemplate
 
 export const query = graphql`
-  query PageQuery($id: String!) {
+  query VideosQuery($id: String!) {
     page: wordpressPage(id: { eq: $id }) {
       content
       acf {
