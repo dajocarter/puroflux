@@ -46,7 +46,7 @@ exports.createPages = ({ graphql, actions }) => {
       const galleryTemplate = path.resolve('./src/templates/page_gallery.js')
       const libraryTemplate = path.resolve('./src/templates/page_library.js')
       const typInstallTemplate = path.resolve(
-        './src/templates/page_typInstall.js'
+        './src/templates/page_typical-installations.js'
       )
       const videosTemplate = path.resolve('./src/templates/page_videos.js')
 
