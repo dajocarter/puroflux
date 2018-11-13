@@ -2,11 +2,10 @@ const path = require(`path`)
 
 // Will create pages for WordPress pages (route : /{slug})
 // Will create pages for WordPress products (route : /{slug})
-// Will create pages for WordPress categories (route : /{slug})
+// Will create pages for WordPress series (route : /{slug})
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
   return new Promise((resolve, reject) => {
-    // ==== PAGES ====
     graphql(`
       {
         allWordpressPage(filter: { slug: { ne: "home" } }) {
@@ -41,100 +40,47 @@ exports.createPages = ({ graphql, actions }) => {
         reject(result.errors)
       }
 
-      const pageTemplate = path.resolve('./src/templates/page.js')
-      const contactTemplate = path.resolve('./src/templates/page_contact.js')
-      const galleryTemplate = path.resolve('./src/templates/page_gallery.js')
-      const libraryTemplate = path.resolve('./src/templates/page_library.js')
-      const typInstallTemplate = path.resolve(
-        './src/templates/page_typical-installations.js'
-      )
-      const videosTemplate = path.resolve('./src/templates/page_videos.js')
-
+      // ==== PAGES ====
       result.data.allWordpressPage.edges.forEach(({ node }) => {
-        switch (node.template) {
-          case 'page_contact.php':
-            createPage({
-              path: `/${node.slug}/`,
-              component: contactTemplate,
-              context: {
-                id: node.id,
-              },
-            })
-            break
-          case 'page_gallery.php':
-            createPage({
-              path: `/${node.slug}/`,
-              component: galleryTemplate,
-              context: {
-                id: node.id,
-              },
-            })
-            break
-          case 'page_library.php':
-            createPage({
-              path: `/${node.slug}/`,
-              component: libraryTemplate,
-              context: {
-                id: node.id,
-              },
-            })
-            break
-          case 'page_typical-installations.php':
-            createPage({
-              path: `/${node.slug}/`,
-              component: typInstallTemplate,
-              context: {
-                id: node.id,
-              },
-            })
-            break
-          case 'page_videos.php':
-            createPage({
-              path: `/${node.slug}/`,
-              component: videosTemplate,
-              context: {
-                id: node.id,
-              },
-            })
-            break
-          default:
-            createPage({
-              path: `/${node.slug}/`,
-              component: pageTemplate,
-              context: {
-                id: node.id,
-              },
-            })
-        }
-        // ==== END PAGES ====
-
-        // ==== PRODUCTS ====
-        const productTemplate = path.resolve('./src/templates/product.js')
-        result.data.allWordpressWpProducts.edges.forEach(({ node }) => {
-          createPage({
-            path: `/${node.slug}/`,
-            component: productTemplate,
-            context: {
-              id: node.id,
-            },
-          })
-        })
-      })
-      // ==== END PRODUCTS ====
-
-      // ==== CATEGORIES ====
-      const categoryTemplate = path.resolve('./src/templates/category.js')
-      result.data.allWordpressCategory.edges.forEach(({ node }) => {
+        let template = node.template
+          ? node.template.replace('php', 'js')
+          : `page.js`
         createPage({
           path: `/${node.slug}/`,
-          component: categoryTemplate,
+          component: path.resolve(`./src/templates/${template}`),
           context: {
             id: node.id,
           },
         })
       })
+      // ==== END PAGES ====
+
+      // ==== PRODUCTS ====
+      const productTemplate = path.resolve('./src/templates/product.js')
+      result.data.allWordpressWpProducts.edges.forEach(({ node }) => {
+        createPage({
+          path: `/${node.slug}/`,
+          component: productTemplate,
+          context: {
+            id: node.id,
+          },
+        })
+      })
+      // ==== END PRODUCTS ====
+
+      // ==== SERIES ====
+      const seriesTemplate = path.resolve('./src/templates/series.js')
+      result.data.allWordpressWpSeries.edges.forEach(({ node }) => {
+        createPage({
+          path: `/${node.slug}/`,
+          component: seriesTemplate,
+          context: {
+            id: node.id,
+          },
+        })
+      })
+      // ==== END SERIES ====
       resolve()
-      // ==== END CATEGORIES ====
     })
   })
 }
