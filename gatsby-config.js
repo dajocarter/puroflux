@@ -40,6 +40,43 @@ module.exports = {
         },
         concurrentRequests: 10,
         excludedRoutes: ['/*/*/comments', '/yoast/**'],
+        normalizer: function({ entities }) {
+          const series = entities.filter(
+            e => e.__type === 'wordpress__wp_series'
+          )
+          const models = entities.filter(
+            e => e.__type === 'wordpress__wp_models'
+          )
+
+          return entities.map(e => {
+            if (e.__type === 'wordpress__wp_products') {
+              let hasSeries =
+                e.acf &&
+                e.acf.product_series &&
+                Array.isArray(e.acf.product_series) &&
+                e.acf.product_series.length
+              if (hasSeries) {
+                e.acf.series___NODE = e.acf.product_series.map(
+                  ps => series.find(s => ps.wordpress_id === s.wordpress_id).id
+                )
+                delete e.acf.product_series
+              }
+            } else if (e.__type === 'wordpress__wp_series') {
+              let hasModels =
+                e.acf &&
+                e.acf.series_models &&
+                Array.isArray(e.acf.series_models) &&
+                e.acf.series_models.length
+              if (hasModels) {
+                e.acf.models___NODE = e.acf.series_models.map(
+                  sm => models.find(m => sm.wordpress_id === m.wordpress_id).id
+                )
+                delete e.acf.series_models
+              }
+            }
+            return e
+          })
+        },
       },
     },
     'gatsby-transformer-sharp',
