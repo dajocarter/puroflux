@@ -15,7 +15,7 @@ export default ProductTemplate
 
 export const query = graphql`
   query ProductQuery($id: String!) {
-    product: wordpressWpProduct(id: { eq: $id }) {
+    product: wordpressWpProducts(id: { eq: $id }) {
       title
       content
     }
