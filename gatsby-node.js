@@ -25,7 +25,7 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         }
-        allWordpressCategory(filter: { slug: { ne: "uncategorized" } }) {
+        allWordpressWpSeries {
           edges {
             node {
               id
