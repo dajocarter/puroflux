@@ -95,30 +95,6 @@ export const query = graphql`
             url
           }
         }
-        file_groups {
-          group_name
-          files {
-            file {
-              wordpress_id
-              title
-              url {
-                source_url
-              }
-            }
-          }
-          sub_groups {
-            group_name
-            files {
-              file {
-                wordpress_id
-                title
-                url {
-                  source_url
-                }
-              }
-            }
-          }
-        }
       }
     }
   }
