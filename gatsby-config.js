@@ -47,6 +47,9 @@ module.exports = {
           const models = entities.filter(
             e => e.__type === 'wordpress__wp_models'
           )
+          const states = entities.filter(
+            e => e.__type === 'wordpress__wp_states'
+          )
 
           return entities.map(e => {
             if (e.__type === 'wordpress__wp_products') {
@@ -72,6 +75,15 @@ module.exports = {
                   sm => models.find(m => sm.wordpress_id === m.wordpress_id).id
                 )
                 delete e.acf.series_models
+              }
+            } else if (e.__type === 'wordpress__wp_reps') {
+              let hasState =
+                e.states && Array.isArray(e.states) && e.states.length
+              if (hasState) {
+                e.states___NODE = e.states.map(
+                  s => states.find(state => s === state.wordpress_id).id
+                )
+                delete e.states
               }
             }
             return e
