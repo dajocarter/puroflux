@@ -68,15 +68,9 @@ const LibraryTemplate = ({ data: { page } }) => (
                           <ul>
                             {group.files.map(({ title, file }, k) => (
                               <li key={k}>
-                                {file &&
-                                file.url &&
-                                file.url.localFile &&
-                                file.url.localFile.childImageSharp ? (
+                                {file && file.url && file.url.source_url ? (
                                   <a
-                                    href={
-                                      file.url.localFile.childImageSharp.resize
-                                        .src
-                                    }
+                                    href={file.url.source_url}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                   >
@@ -124,9 +118,11 @@ export const query = graphql`
               title
               file {
                 url {
+                  source_url
                   localFile {
+                    absolutePath
                     childImageSharp {
-                      resize {
+                      original {
                         src
                       }
                     }
