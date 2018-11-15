@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { graphql } from 'gatsby'
 import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
@@ -26,11 +26,17 @@ const Library = styled.div`
 
 const LibraryGroup = styled.div`
   flex: 0 0 auto;
-  h2 {
-    color: white;
+  h2,
+  h3 {
     font-size: 18px;
     font-weight: bold;
+  }
+  h2 {
+    color: white;
     text-transform: uppercase;
+  }
+  h3 {
+    color: ${props => props.theme.primary};
   }
   ul,
   a {
@@ -52,24 +58,39 @@ const LibraryTemplate = ({ data: { page } }) => (
             <Library>
               {page.acf &&
                 page.acf.file_groups &&
-                page.acf.file_groups.map((group, i) => (
+                page.acf.file_groups.map((groups, i) => (
                   <LibraryGroup key={i}>
-                    <h2>{group.group_name}</h2>
-                    <ul>
-                      {group.files.map(({ file }) => (
-                        <li key={file.wordpress_id}>
-                          <a
-                            href={`${process.env.SOURCE_URL}${
-                              file.url.source_url
-                            }`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {file.title}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
+                    <h2>{groups.group_name}</h2>
+                    {groups.file_group.map((group, j) => (
+                      <Fragment key={j}>
+                        {group.list_name && <h3>{group.list_name}</h3>}
+                        {group.files && (
+                          <ul>
+                            {group.files.map(({ title, file }, k) => (
+                              <li key={k}>
+                                {file &&
+                                file.url &&
+                                file.url.localFile &&
+                                file.url.localFile.childImageSharp ? (
+                                  <a
+                                    href={
+                                      file.url.localFile.childImageSharp.resize
+                                        .src
+                                    }
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {title}
+                                  </a>
+                                ) : (
+                                  title
+                                )}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </Fragment>
+                    ))}
                   </LibraryGroup>
                 ))}
             </Library>
@@ -93,6 +114,26 @@ export const query = graphql`
             title
             target
             url
+          }
+        }
+        file_groups {
+          group_name
+          file_group {
+            list_name
+            files {
+              title
+              file {
+                url {
+                  localFile {
+                    childImageSharp {
+                      resize {
+                        src
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
