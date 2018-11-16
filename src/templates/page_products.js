@@ -30,16 +30,20 @@ const Content = styled.div`
 const ProductsPageTemplate = ({ data: { page } }) => (
   <Layout>
     <Hero html={page.acf.content} links={page.acf.buttons} />
-    <ProductNav />
-    {page.content && (
-      <Main>
+    <Main>
+      <Row>
+        <Col xs={12}>
+          <ProductNav />
+        </Col>
+      </Row>
+      {page.content && (
         <Row>
           <Col xs={12}>
             <Content dangerouslySetInnerHTML={{ __html: page.content }} />
           </Col>
         </Row>
-      </Main>
-    )}
+      )}
+    </Main>
   </Layout>
 )
 
