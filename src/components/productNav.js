@@ -13,19 +13,27 @@ const NavMenu = styled.ul`
   margin: 0;
   padding: 0;
   display: flex;
+  flex-flow: row wrap;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
 `
-const NavItem = styled.li``
+
+const NavItem = styled.li`
+  margin-bottom: 0.5rem;
+`
+
 const NavLink = styled(Link)`
   background-color: white;
-  color: ${props => props.theme.primary};
+  border: ${props => `2px solid ${props.theme.primary}`};
+  color: ${props => props.theme.body};
   display: block;
+  height: 100%;
   padding: 0.5rem 0.75rem;
 
   &:hover {
     background-color: ${props => props.theme.primary};
     color: white;
+    text-decoration: none;
   }
 `
 
