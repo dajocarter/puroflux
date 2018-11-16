@@ -64,5 +64,25 @@ export const query = graphql`
         }
       }
     }
+    products: allWordpressWpProducts {
+      edges {
+        node {
+          title
+          slug
+          featured_media {
+            localFile {
+              childImageSharp {
+                fluid {
+                  src
+                }
+              }
+            }
+          }
+          acf {
+            excerpt
+          }
+        }
+      }
+    }
   }
 `
