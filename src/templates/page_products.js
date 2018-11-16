@@ -6,28 +6,13 @@ import styled from 'styled-components'
 import Layout from '../components/layout'
 import Hero from '../components/hero'
 import ProductNav from '../components/productNav'
+import ExcerptExpander from '../components/excerptExpander'
 
 const Main = styled(Container)`
   padding: 45px 15px;
 `
 
-const Content = styled.div`
-  color: ${props => props.theme.body};
-  margin: 0 auto;
-  max-width: 960px;
-  padding: 45px 15px;
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: ${props => props.theme.primary};
-  }
-`
-
-const ProductsPageTemplate = ({ data: { page } }) => (
+const ProductsPageTemplate = ({ data: { page, products } }) => (
   <Layout>
     <Hero html={page.acf.content} links={page.acf.buttons} />
     <Main>
@@ -36,10 +21,10 @@ const ProductsPageTemplate = ({ data: { page } }) => (
           <ProductNav />
         </Col>
       </Row>
-      {page.content && (
+      {products.edges && (
         <Row>
           <Col xs={12}>
-            <Content dangerouslySetInnerHTML={{ __html: page.content }} />
+            <ExcerptExpander items={products.edges} />
           </Col>
         </Row>
       )}
@@ -52,7 +37,6 @@ export default ProductsPageTemplate
 export const query = graphql`
   query ProductsPageQuery($id: String!) {
     page: wordpressPage(id: { eq: $id }) {
-      content
       acf {
         content
         buttons {
@@ -73,7 +57,7 @@ export const query = graphql`
             localFile {
               childImageSharp {
                 fluid {
-                  src
+                  ...GatsbyImageSharpFluid_withWebp
                 }
               }
             }
