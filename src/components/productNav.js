@@ -44,6 +44,7 @@ const ProductNav = () => (
         products: allWordpressWpProducts {
           edges {
             node {
+              id
               title
               slug
             }
@@ -56,7 +57,7 @@ const ProductNav = () => (
         <NavTitle>Products</NavTitle>
         <NavMenu>
           {products.edges.map(({ node }) => (
-            <NavItem>
+            <NavItem key={node.id}>
               <NavLink to={node.slug}>{node.title}</NavLink>
             </NavItem>
           ))}
