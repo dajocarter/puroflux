@@ -6,31 +6,37 @@ import styled from 'styled-components'
 import Layout from '../components/layout'
 import Hero from '../components/hero'
 import ProductNav from '../components/productNav'
-import ExcerptExpander from '../components/excerptExpander'
+import ExcerptExpander from '../components/Expander'
 
 const Main = styled(Container)`
   padding: 45px 15px;
 `
 
-const ProductsPageTemplate = ({ data: { page, products } }) => (
-  <Layout>
-    <Hero html={page.acf.content} links={page.acf.buttons} />
-    <Main>
-      <Row>
-        <Col xs={12}>
-          <ProductNav />
-        </Col>
-      </Row>
-      {products.edges && (
+const ProductsPageTemplate = ({ data }) => {
+  return (
+    <Layout>
+      <Hero html={data.page.acf.content} links={data.page.acf.buttons} />
+      <Main>
         <Row>
           <Col xs={12}>
-            <ExcerptExpander items={products.edges} />
+            <ProductNav />
           </Col>
         </Row>
-      )}
-    </Main>
-  </Layout>
-)
+        {data.products &&
+          data.addlItem && (
+            <Row>
+              <Col xs={12}>
+                <ExcerptExpander
+                  products={data.products.edges}
+                  addlItem={data.addlItem}
+                />
+              </Col>
+            </Row>
+          )}
+      </Main>
+    </Layout>
+  )
+}
 
 export default ProductsPageTemplate
 
@@ -48,9 +54,25 @@ export const query = graphql`
         }
       }
     }
+    addlItem: wordpressPage(slug: { eq: "installations" }) {
+      id
+      title
+      slug
+      excerpt
+      featured_media {
+        localFile {
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid_withWebp
+            }
+          }
+        }
+      }
+    }
     products: allWordpressWpProducts {
       edges {
         node {
+          id
           title
           slug
           featured_media {
