@@ -119,6 +119,7 @@ const Hero = props => (
                     as="a"
                     href={link.button_link.url}
                     target={link.button_link.target}
+                    rel="noopener noreferrer"
                     primary={i % 2 === 0 ? `true` : `false`}
                     secondary={i % 2 === 1 ? `true` : `false`}
                   >
