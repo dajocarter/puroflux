@@ -12,23 +12,10 @@ const Main = styled(Container)`
   padding: 45px 15px;
 `
 
-const Content = styled.div`
-  margin: 0 auto;
-  max-width: 960px;
-  padding: 1.45rem 1.0875rem;
-`
-
 const GalleryTemplate = ({ data: { page } }) => (
   <Layout>
     <Hero html={page.acf.content} links={page.acf.buttons} />
     <Main>
-      <Row>
-        <Col xs={12}>
-          {page.content && (
-            <Content dangerouslySetInnerHTML={{ __html: page.content }} />
-          )}
-        </Col>
-      </Row>
       {page.acf.gallery && (
         <Row>
           <Col xs={12}>
@@ -58,7 +45,6 @@ export default GalleryTemplate
 export const query = graphql`
   query GalleryQuery($id: String!) {
     page: wordpressPage(id: { eq: $id }) {
-      content
       acf {
         content
         buttons {
