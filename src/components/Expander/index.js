@@ -28,12 +28,10 @@ export default class ExcerptExpander extends Component {
     if (this.props.addlItem) {
       addlItem = { node: this.props.addlItem }
     }
-    console.log('products', this.props.products)
     if (this.props.products) {
       items = Array.from(this.props.products)
       if (addlItem) items.push(addlItem)
     }
-    console.log('items', items)
     return (
       <Items>
         {items.map(({ node }, i) => (
