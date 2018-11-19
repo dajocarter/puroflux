@@ -96,5 +96,82 @@ export const query = graphql`
         }
       }
     }
+    filterInstalls: allWordpressWpSeries(
+      filter: {
+        acf: {
+          products: { elemMatch: { title: { eq: "Permanent Media Filters" } } }
+        }
+      }
+      sort: { fields: wordpress_id, order: ASC }
+    ) {
+      edges {
+        node {
+          id
+          title
+          acf {
+            slip_stream_files {
+              file {
+                wordpress_id
+                title
+                url {
+                  source_url
+                }
+              }
+            }
+            sweeper_piping_files {
+              file {
+                wordpress_id
+                title
+                url {
+                  source_url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    sepInstalls: allWordpressWpSeries(
+      filter: {
+        acf: { products: { elemMatch: { title: { eq: "Separators" } } } }
+      }
+      sort: { fields: wordpress_id, order: ASC }
+    ) {
+      edges {
+        node {
+          id
+          title
+          acf {
+            sweeper_piping_files {
+              file {
+                wordpress_id
+                title
+                url {
+                  source_url
+                }
+              }
+            }
+            full_flow_files {
+              file {
+                wordpress_id
+                title
+                url {
+                  source_url
+                }
+              }
+            }
+            side_stream_files {
+              file {
+                wordpress_id
+                title
+                url {
+                  source_url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 `
