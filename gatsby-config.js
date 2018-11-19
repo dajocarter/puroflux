@@ -41,6 +41,9 @@ module.exports = {
         concurrentRequests: 10,
         excludedRoutes: ['/*/*/comments', '/yoast/**'],
         normalizer: function({ entities }) {
+          const products = entities.filter(
+            e => e.__type === 'wordpress__wp_products'
+          )
           const series = entities.filter(
             e => e.__type === 'wordpress__wp_series'
           )
@@ -73,6 +76,30 @@ module.exports = {
               if (hasModels) {
                 e.acf.models___NODE = e.acf.series_models.map(
                   sm => models.find(m => sm.wordpress_id === m.wordpress_id).id
+                )
+                delete e.acf.series_models
+              }
+              let hasProducts =
+                e.acf &&
+                e.acf.product_series &&
+                Array.isArray(e.acf.product_series) &&
+                e.acf.product_series.length
+              if (hasProducts) {
+                e.acf.products___NODE = e.acf.product_series.map(
+                  ps =>
+                    products.find(p => ps.wordpress_id === p.wordpress_id).id
+                )
+                delete e.acf.product_series
+              }
+            } else if (e.__type === 'wordpress__wp_models') {
+              let hasSeries =
+                e.acf &&
+                e.acf.series_models &&
+                Array.isArray(e.acf.series_models) &&
+                e.acf.series_models.length
+              if (hasSeries) {
+                e.acf.series___NODE = e.acf.series_models.map(
+                  sm => series.find(s => sm.wordpress_id === s.wordpress_id).id
                 )
                 delete e.acf.series_models
               }
