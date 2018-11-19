@@ -25,7 +25,7 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         }
-        allWordpressWpSeries {
+        allWordpressWpSeries(filter: { slug: { ne: "pf-10" } }) {
           edges {
             node {
               id
