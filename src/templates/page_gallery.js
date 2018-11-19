@@ -15,8 +15,8 @@ const Main = styled(Container)`
 const GalleryTemplate = ({ data: { page } }) => (
   <Layout>
     <Hero html={page.acf.content} links={page.acf.buttons} />
-    <Main>
-      {page.acf.gallery && (
+    {page.acf.gallery && (
+      <Main>
         <Row>
           <Col xs={12}>
             <Carousel>
@@ -35,8 +35,8 @@ const GalleryTemplate = ({ data: { page } }) => (
             </Carousel>
           </Col>
         </Row>
-      )}
-    </Main>
+      </Main>
+    )}
   </Layout>
 )
 
