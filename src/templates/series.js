@@ -48,11 +48,13 @@ const SeriesTemplate = ({ data: { series } }) => (
         </Col>
       </Row>
       <Row>
-        <Col>
-          <FeaturedImg
-            fixed={series.featured_media.localFile.childImageSharp.fixed}
-          />
-        </Col>
+        {series.featured_media && (
+          <Col>
+            <FeaturedImg
+              fixed={series.featured_media.localFile.childImageSharp.fixed}
+            />
+          </Col>
+        )}
         <Col>
           <FeaturedTitle>Details</FeaturedTitle>
           <FeaturedContent
