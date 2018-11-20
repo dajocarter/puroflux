@@ -45,7 +45,7 @@ const SeriesTemplate = ({ data: { series } }) => (
     <HeroUnit>
       <Row>
         <Col>
-          <ProductNav light />
+          <ProductNav light="true" />
         </Col>
       </Row>
       <Row>
