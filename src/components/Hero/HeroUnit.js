@@ -3,8 +3,6 @@ import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
-import Btn from './styled/button'
-
 const Background = styled.div`
   height: 450px;
   width: 100%;
@@ -55,22 +53,10 @@ const Content = styled.div`
   }
 `
 
-const Links = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: ${props => (props.single ? `center` : `space-between`)};
-  align-items: center;
-`
-
-const Button = styled(Btn)`
-  color: white;
-  margin: 0.5rem;
-`
-
-const Hero = props => (
+const HeroUnit = props => (
   <StaticQuery
     query={graphql`
-      query HeroQuery {
+      query HeroUnitQuery {
         defaultHero: wordpressWpMedia(
           slug: { eq: "puroflux_home_hero_sample" }
         ) {
@@ -105,43 +91,10 @@ const Hero = props => (
               }
             />
           )}
-        <Content>
-          <div
-            className="content"
-            dangerouslySetInnerHTML={{ __html: props.html }}
-          />
-          {props.links && (
-            <Links single={props.links.length > 1 ? `false` : `true`}>
-              {props.links.map((link, i) => {
-                return link.button_link.target ? (
-                  <Button
-                    key={i}
-                    as="a"
-                    href={link.button_link.url}
-                    target={link.button_link.target}
-                    rel="noopener noreferrer"
-                    primary={i % 2 === 0 ? `true` : `false`}
-                    secondary={i % 2 === 1 ? `true` : `false`}
-                  >
-                    {link.button_link.title}
-                  </Button>
-                ) : (
-                  <Button
-                    key={i}
-                    to={`/${link.button_link.url}/`}
-                    primary={i % 2 === 0 ? `true` : `false`}
-                    secondary={i % 2 === 1 ? `true` : `false`}
-                  >
-                    {link.button_link.title}
-                  </Button>
-                )
-              })}
-            </Links>
-          )}
-        </Content>
+        <Content>{props.children}</Content>
       </Background>
     )}
   />
 )
 
-export default Hero
+export default HeroUnit
