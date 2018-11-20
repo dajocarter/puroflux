@@ -23,21 +23,25 @@ const NavItem = styled.li`
 `
 
 const NavLink = styled(Link)`
-  background-color: white;
-  border: ${props => `2px solid ${props.theme.primary}`};
-  color: ${props => props.theme.body};
+  background-color: transparent;
+  border: ${props =>
+    props.light ? `2px solid white` : `2px solid ${props.theme.primary}`};
+  color: ${props => (props.light ? `white` : props.theme.body)};
   display: block;
   height: 100%;
+  line-height: 1;
+  font-size: ${props => (props.light ? `11px` : `1rem`)};
   padding: 0.5rem 0.75rem;
+  transition: all 0.15s ease-in-out;
 
   &:hover {
-    background-color: ${props => props.theme.primary};
-    color: white;
+    background-color: ${props => (props.light ? `white` : props.theme.primary)};
+    color: ${props => (props.light ? props.theme.primary : `white`)};
     text-decoration: none;
   }
 `
 
-const ProductNav = () => (
+const ProductNav = ({ light }) => (
   <StaticQuery
     query={graphql`
       query {
@@ -58,7 +62,9 @@ const ProductNav = () => (
         <NavMenu>
           {products.edges.map(({ node }) => (
             <NavItem key={node.id}>
-              <NavLink to={node.slug}>{node.title}</NavLink>
+              <NavLink light={light} to={node.slug}>
+                {node.title}
+              </NavLink>
             </NavItem>
           ))}
         </NavMenu>
