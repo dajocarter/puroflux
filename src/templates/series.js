@@ -24,21 +24,73 @@ const SeriesDescription = styled.p`
 `
 
 const FeaturedImg = styled(Img)``
-const FeaturedTitle = styled.h2``
-const FeaturedContent = styled.div``
-
-const PDFicon = styled(FaFilePdf)`
+const FeaturedTitle = styled.h2`
   color: ${props => props.theme.primary};
+  font-size: 36px;
+`
+const FeaturedContent = styled.div`
+  color: ${props => props.theme.body};
+  font-size: 18px;
 `
 
-const ModelTitle = styled.h2``
-const ModelDescription = styled.p``
-const ModelNotes = styled.p``
+const Download = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 383px) {
+    justify-content: flex-start;
+  }
+
+  p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    margin-left: 10px;
+    color: ${props => props.theme.body};
+  }
+
+  a {
+    text-transform: uppercase;
+    &,
+    &:hover {
+      color: ${props => props.theme.secondary};
+    }
+  }
+`
+const PDFicon = styled(FaFilePdf)`
+  color: ${props => props.theme.primary};
+  font-size: 3rem;
+`
+
+const ModelTitle = styled.h2`
+  text-align: center;
+`
+const ModelDescription = styled.p`
+  text-align: center;
+`
+const ModelNotes = styled.p`
+  text-align: center;
+`
 
 const ProductTitle = styled.h2``
 const RelatedTitle = styled.h4``
 const RelatedExcerpt = styled.p``
 const RelatedBtn = styled(Btn)``
+
+const DownloadCol = ({ title, file }) => (
+  <Col>
+    <Download>
+      <PDFicon />
+      <p>
+        <span>{title}</span>
+        <a href={file.url.source_url} target="_blank" rel="noopener noreferrer">
+          DOWNLOAD
+        </a>
+      </p>
+    </Download>
+  </Col>
+)
 
 const SeriesTemplate = ({ data: { series } }) => (
   <Layout>
@@ -75,40 +127,22 @@ const SeriesTemplate = ({ data: { series } }) => (
       </Row>
       <Row>
         {series.acf.datasheet && (
-          <Col>
-            <PDFicon /> {series.title} Series Datasheet{' '}
-            <a
-              href={series.acf.datasheet.url.source_url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              DOWNLOAD
-            </a>
-          </Col>
+          <DownloadCol
+            title={`${series.title} Series Datasheet`}
+            file={series.acf.datasheet}
+          />
         )}
         {series.acf.operation___maint_manual && (
-          <Col>
-            <PDFicon /> Operation & Maint. Manual
-            <a
-              href={series.acf.operation___maint_manual.url.source_url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              DOWNLOAD
-            </a>
-          </Col>
+          <DownloadCol
+            title={`Operation & Maint. Manual`}
+            file={series.acf.operation___maint_manual}
+          />
         )}
         {series.acf.sample_spec_sheet && (
-          <Col>
-            <PDFicon /> Sample Spec. Sheet
-            <a
-              href={series.acf.sample_spec_sheet.url.source_url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              DOWNLOAD
-            </a>
-          </Col>
+          <DownloadCol
+            title={`Sample Spec. Sheet`}
+            file={series.acf.sample_spec_sheet}
+          />
         )}
       </Row>
       <Row>
