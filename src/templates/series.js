@@ -62,7 +62,7 @@ const SeriesTemplate = ({ data: { series } }) => (
         {series.featured_media && (
           <Col>
             <FeaturedImg
-              fixed={series.featured_media.localFile.childImageSharp.fixed}
+              fluid={series.featured_media.localFile.childImageSharp.fluid}
             />
           </Col>
         )}
@@ -152,8 +152,8 @@ export const query = graphql`
       featured_media {
         localFile {
           childImageSharp {
-            fixed {
-              ...GatsbyImageSharpFixed_withWebp
+            fluid {
+              ...GatsbyImageSharpFluid_withWebp
             }
           }
         }
