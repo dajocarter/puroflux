@@ -37,6 +37,7 @@ const Content = styled.div`
 
   .content {
     margin-bottom: 2rem;
+    text-align: center;
 
     h1 {
       font-size: 2rem;

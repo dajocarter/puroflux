@@ -6,6 +6,9 @@ const Nav = styled.nav`
   text-align: center;
 `
 const NavTitle = styled.h4`
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 1rem;
   text-transform: uppercase;
 `
 const NavMenu = styled.ul`

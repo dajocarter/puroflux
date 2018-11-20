@@ -14,8 +14,14 @@ const Main = styled(Container)`
   padding: 45px 15px;
 `
 
-const SeriesTitle = styled.h1``
-const SeriesDescription = styled.p``
+const SeriesTitle = styled.h1`
+  margin-top: 3rem;
+  text-transform: uppercase;
+`
+const SeriesDescription = styled.p`
+  font-size: 18px;
+  text-transform: uppercase;
+`
 
 const FeaturedImg = styled(Img)``
 const FeaturedTitle = styled.h2``
@@ -44,8 +50,10 @@ const SeriesTemplate = ({ data: { series } }) => (
       </Row>
       <Row>
         <Col>
-          <SeriesTitle>{series.title}</SeriesTitle>
-          <SeriesDescription>{series.acf.description}</SeriesDescription>
+          <div className="content">
+            <SeriesTitle>{series.title} Series</SeriesTitle>
+            <SeriesDescription>{series.acf.description}</SeriesDescription>
+          </div>
         </Col>
       </Row>
     </HeroUnit>
