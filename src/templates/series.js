@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { FaFilePdf } from 'react-icons/fa'
 
 import Layout from '../components/layout'
+import HeroUnit from '../components/Hero/HeroUnit'
 import ProductNav from '../components/productNav'
 import Btn from '../components/styled/button'
 
@@ -35,10 +36,10 @@ const RelatedBtn = styled(Btn)``
 
 const SeriesTemplate = ({ data: { series } }) => (
   <Layout>
-    <Main>
+    <HeroUnit>
       <Row>
         <Col>
-          <ProductNav />
+          <ProductNav light />
         </Col>
       </Row>
       <Row>
@@ -47,6 +48,8 @@ const SeriesTemplate = ({ data: { series } }) => (
           <SeriesDescription>{series.acf.description}</SeriesDescription>
         </Col>
       </Row>
+    </HeroUnit>
+    <Main>
       <Row>
         {series.featured_media && (
           <Col>
