@@ -32,7 +32,7 @@ const Content = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 80%;
+  width: 90%;
   max-width: 666px;
 
   .content {
