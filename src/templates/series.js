@@ -59,14 +59,14 @@ const SeriesTemplate = ({ data: { series } }) => (
     </HeroUnit>
     <Main>
       <Row>
-        {series.featured_media && (
-          <Col>
+        <Col sm={12} md={6}>
+          {series.featured_media && (
             <FeaturedImg
               fluid={series.featured_media.localFile.childImageSharp.fluid}
             />
-          </Col>
-        )}
-        <Col>
+          )}
+        </Col>
+        <Col sm={12} md={6}>
           <FeaturedTitle>Details</FeaturedTitle>
           <FeaturedContent
             dangerouslySetInnerHTML={{ __html: series.content }}
