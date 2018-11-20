@@ -4,7 +4,8 @@ import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 
 import Layout from '../components/layout'
-import Hero from '../components/hero'
+import HeroUnit from '../components/Hero/HeroUnit'
+import HeroContent from '../components/Hero/HeroContent-Page'
 import Accordion from '../components/Accordion'
 
 const Main = styled(Container)`
@@ -37,7 +38,12 @@ const Installation = styled.div`
 
 const TypicalInstallTemplate = ({ data }) => (
   <Layout>
-    <Hero html={data.page.acf.content} links={data.page.acf.buttons} />
+    <HeroUnit>
+      <HeroContent
+        html={data.page.acf.content}
+        buttons={data.page.acf.buttons}
+      />
+    </HeroUnit>
     <Main>
       <Row>
         <Col xs={12}>

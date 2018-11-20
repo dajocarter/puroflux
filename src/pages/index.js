@@ -5,7 +5,8 @@ import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 
 import Layout from '../components/layout'
-import Hero from '../components/hero'
+import HeroUnit from '../components/Hero/HeroUnit'
+import HeroContent from '../components/Hero/HeroContent-Page'
 import FlexibleContent from '../components/flexible-content'
 import Btn from '../components/styled/button'
 
@@ -150,11 +151,12 @@ const IndexPage = () => (
     `}
     render={data => (
       <Layout>
-        <Hero
-          isHome
-          html={data.page.acf.content}
-          links={data.page.acf.buttons}
-        />
+        <HeroUnit isHome>
+          <HeroContent
+            html={data.page.acf.content}
+            buttons={data.page.acf.buttons}
+          />
+        </HeroUnit>
         <FeatureContainer>
           <Row>
             <Col>

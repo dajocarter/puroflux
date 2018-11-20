@@ -4,7 +4,8 @@ import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 
 import Layout from '../components/layout'
-import Hero from '../components/hero'
+import HeroUnit from '../components/Hero/HeroUnit'
+import HeroContent from '../components/Hero/HeroContent-Page'
 
 const Main = styled(Container)`
   padding: 45px 15px;
@@ -45,7 +46,9 @@ const Embed = styled.div`
 
 const VideosTemplate = ({ data: { page } }) => (
   <Layout>
-    <Hero html={page.acf.content} links={page.acf.buttons} />
+    <HeroUnit>
+      <HeroContent html={page.acf.content} buttons={page.acf.buttons} />
+    </HeroUnit>
     <Main>
       <Row>
         <Col xs={12}>

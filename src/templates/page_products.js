@@ -4,7 +4,8 @@ import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 
 import Layout from '../components/layout'
-import Hero from '../components/hero'
+import HeroUnit from '../components/Hero/HeroUnit'
+import HeroContent from '../components/Hero/HeroContent-Page'
 import ProductNav from '../components/productNav'
 import ExcerptExpander from '../components/Expander'
 
@@ -15,7 +16,12 @@ const Main = styled(Container)`
 const ProductsPageTemplate = ({ data }) => {
   return (
     <Layout>
-      <Hero html={data.page.acf.content} links={data.page.acf.buttons} />
+      <HeroUnit>
+        <HeroContent
+          html={data.page.acf.content}
+          buttons={data.page.acf.buttons}
+        />
+      </HeroUnit>
       <Main>
         <Row>
           <Col xs={12}>

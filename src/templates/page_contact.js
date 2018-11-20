@@ -5,7 +5,8 @@ import styled from 'styled-components'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import Layout from '../components/layout'
-import Hero from '../components/hero'
+import HeroUnit from '../components/Hero/HeroUnit'
+import HeroContent from '../components/Hero/HeroContent-Page'
 import Form from '../components/form'
 
 const Main = styled(Container)`
@@ -50,7 +51,9 @@ const Value = styled.a`
 
 const Contact = ({ data: { page } }) => (
   <Layout>
-    <Hero html={page.acf.content} links={page.acf.buttons} />
+    <HeroUnit>
+      <HeroContent html={page.acf.content} buttons={page.acf.buttons} />
+    </HeroUnit>
     <Main>
       <Row>
         <Col md={5}>
