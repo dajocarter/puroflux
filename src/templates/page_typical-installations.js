@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import Layout from '../components/layout'
 import HeroUnit from '../components/Hero/HeroUnit'
 import HeroContent from '../components/Hero/HeroContent-Page'
-import Accordion from '../components/Accordion'
+import ModelInstallationFiles from '../components/Accordion/model-installation-files'
 
 const Main = styled(Container)`
   padding: 45px 15px;
@@ -57,7 +57,7 @@ const TypicalInstallTemplate = ({ data }) => (
                 <h3>Select a Model</h3>
                 <h4>View product summary</h4>
               </div>
-              <Accordion
+              <ModelInstallationFiles
                 files={data.filterInstalls.edges}
                 slipStream
                 sweeperPiping
@@ -71,7 +71,7 @@ const TypicalInstallTemplate = ({ data }) => (
                 <h3>Select a Model</h3>
                 <h4>View product summary</h4>
               </div>
-              <Accordion
+              <ModelInstallationFiles
                 files={data.sepInstalls.edges}
                 sweeperPiping
                 fullFlow
