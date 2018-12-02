@@ -14,8 +14,8 @@ const StoreLocatorTemplate = ({ data: { page } }) => (
 export default StoreLocatorTemplate
 
 export const query = graphql`
-  query StoreLocatorQuery($id: String!) {
-    page: wordpressPage(id: { eq: $id }) {
+  query StoreLocatorQuery($slug: String!) {
+    page: wordpressPage(slug: { eq: $slug }) {
       title
       content
     }

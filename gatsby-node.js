@@ -42,14 +42,14 @@ exports.createPages = ({ graphql, actions }) => {
 
       // ==== PAGES ====
       result.data.allWordpressPage.edges.forEach(({ node }) => {
-        let template = node.template
+        const template = node.template
           ? node.template.replace('php', 'js')
           : `page.js`
         createPage({
           path: `/${node.slug}/`,
           component: path.resolve(`./src/templates/${template}`),
           context: {
-            id: node.id,
+            slug: node.slug,
           },
         })
       })
@@ -62,7 +62,7 @@ exports.createPages = ({ graphql, actions }) => {
           path: `/${node.slug}/`,
           component: productTemplate,
           context: {
-            id: node.id,
+            slug: node.slug,
           },
         })
       })
@@ -75,7 +75,7 @@ exports.createPages = ({ graphql, actions }) => {
           path: `/${node.slug}/`,
           component: seriesTemplate,
           context: {
-            id: node.id,
+            slug: node.slug,
           },
         })
       })

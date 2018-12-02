@@ -95,8 +95,8 @@ const Contact = ({ data: { page } }) => (
 export default Contact
 
 export const query = graphql`
-  query ContactQuery($id: String!) {
-    page: wordpressPage(id: { eq: $id }) {
+  query ContactQuery($slug: String!) {
+    page: wordpressPage(slug: { eq: $slug }) {
       acf {
         content
         buttons {

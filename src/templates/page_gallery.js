@@ -46,8 +46,8 @@ const GalleryTemplate = ({ data: { page } }) => (
 export default GalleryTemplate
 
 export const query = graphql`
-  query GalleryQuery($id: String!) {
-    page: wordpressPage(id: { eq: $id }) {
+  query GalleryQuery($slug: String!) {
+    page: wordpressPage(slug: { eq: $slug }) {
       acf {
         content
         buttons {

@@ -179,8 +179,8 @@ const SeriesTemplate = ({ data: { series } }) => (
 export default SeriesTemplate
 
 export const query = graphql`
-  query SeriesQuery($id: String!) {
-    series: wordpressWpSeries(id: { eq: $id }) {
+  query SeriesQuery($slug: String!) {
+    series: wordpressWpSeries(slug: { eq: $slug }) {
       title
       content
       featured_media {

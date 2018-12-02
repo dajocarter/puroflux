@@ -101,8 +101,8 @@ const LibraryTemplate = ({ data: { page } }) => (
 export default LibraryTemplate
 
 export const query = graphql`
-  query LibraryQuery($id: String!) {
-    page: wordpressPage(id: { eq: $id }) {
+  query LibraryQuery($slug: String!) {
+    page: wordpressPage(slug: { eq: $slug }) {
       content
       acf {
         content

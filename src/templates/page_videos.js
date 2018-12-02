@@ -73,8 +73,8 @@ const VideosTemplate = ({ data: { page } }) => (
 export default VideosTemplate
 
 export const query = graphql`
-  query VideosQuery($id: String!) {
-    page: wordpressPage(id: { eq: $id }) {
+  query VideosQuery($slug: String!) {
+    page: wordpressPage(slug: { eq: $slug }) {
       content
       acf {
         content

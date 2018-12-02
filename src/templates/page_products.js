@@ -47,8 +47,8 @@ const ProductsPageTemplate = ({ data }) => {
 export default ProductsPageTemplate
 
 export const query = graphql`
-  query ProductsPageQuery($id: String!) {
-    page: wordpressPage(id: { eq: $id }) {
+  query ProductsPageQuery($slug: String!) {
+    page: wordpressPage(slug: { eq: $slug }) {
       acf {
         content
         buttons {

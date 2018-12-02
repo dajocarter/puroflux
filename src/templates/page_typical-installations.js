@@ -88,8 +88,8 @@ const TypicalInstallTemplate = ({ data }) => (
 export default TypicalInstallTemplate
 
 export const query = graphql`
-  query TypicalInstallQuery($id: String!) {
-    page: wordpressPage(id: { eq: $id }) {
+  query TypicalInstallQuery($slug: String!) {
+    page: wordpressPage(slug: { eq: $slug }) {
       content
       acf {
         content

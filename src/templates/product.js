@@ -117,8 +117,8 @@ const ProductTemplate = ({ data: { product } }) => (
 export default ProductTemplate
 
 export const query = graphql`
-  query ProductQuery($id: String!) {
-    product: wordpressWpProducts(id: { eq: $id }) {
+  query ProductQuery($slug: String!) {
+    product: wordpressWpProducts(slug: { eq: $slug }) {
       title
       content
       acf {

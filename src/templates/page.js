@@ -47,8 +47,8 @@ const PageTemplate = ({ data: { page } }) => (
 export default PageTemplate
 
 export const query = graphql`
-  query PageQuery($id: String!) {
-    page: wordpressPage(id: { eq: $id }) {
+  query PageQuery($slug: String!) {
+    page: wordpressPage(slug: { eq: $slug }) {
       content
       acf {
         content
