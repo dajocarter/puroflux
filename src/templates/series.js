@@ -8,6 +8,7 @@ import { FaFilePdf } from 'react-icons/fa'
 import Layout from '../components/layout'
 import HeroUnit from '../components/Hero/HeroUnit'
 import ProductNav from '../components/productNav'
+import ModelDetails from '../components/Accordion/model-details'
 import Btn from '../components/styled/button'
 
 const Main = styled(Container)`
@@ -153,6 +154,11 @@ const SeriesTemplate = ({ data: { series } }) => (
       </Row>
       <Row>
         <Col>
+          <ModelDetails models={series.acf.models} />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
           <ModelNotes
             dangerouslySetInnerHTML={{ __html: series.acf.model_notes }}
           />
@@ -219,6 +225,7 @@ export const query = graphql`
         }
         model_notes
         models {
+          slug
           title
           acf {
             model_stats {
@@ -227,6 +234,7 @@ export const query = graphql`
             }
             file_names
             model_files {
+              title
               file {
                 url {
                   source_url
