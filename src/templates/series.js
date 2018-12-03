@@ -159,18 +159,26 @@ const SeriesTemplate = ({ data: { series } }) => (
         </Col>
       </Row>
       {series.acf.products && (
-        <Row>
-          <ProductTitle>{series.acf.products.title}</ProductTitle>
-          {series.acf.products.acf &&
-            series.acf.products.acf.series &&
-            series.acf.products.acf.series.map(relatedSeries => (
-              <Col key={relatedSeries.id}>
-                <RelatedTitle>{relatedSeries.title}</RelatedTitle>
-                <RelatedExcerpt>{relatedSeries.acf.description}</RelatedExcerpt>
-                <RelatedBtn to={relatedSeries.slug}>View Product</RelatedBtn>
-              </Col>
-            ))}
-        </Row>
+        <>
+          <Row>
+            <Col>
+              <ProductTitle>{series.acf.products[0].title}</ProductTitle>
+            </Col>
+          </Row>
+          <Row>
+            {series.acf.products[0].acf &&
+              series.acf.products[0].acf.series &&
+              series.acf.products[0].acf.series.map(relatedSeries => (
+                <Col key={relatedSeries.id}>
+                  <RelatedTitle>{relatedSeries.title}</RelatedTitle>
+                  <RelatedExcerpt>
+                    {relatedSeries.acf.description}
+                  </RelatedExcerpt>
+                  <RelatedBtn to={relatedSeries.slug}>View Product</RelatedBtn>
+                </Col>
+              ))}
+          </Row>
+        </>
       )}
     </Main>
   </Layout>
