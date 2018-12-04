@@ -8,7 +8,10 @@ import { FaFilePdf } from 'react-icons/fa'
 import Layout from '../components/layout'
 import HeroUnit from '../components/Hero/HeroUnit'
 import ProductNav from '../components/productNav'
-import ModelDetails from '../components/Accordion/model-details'
+import Accordion, {
+  AccordionTitle,
+  AccordionContent,
+} from '../components/Accordion'
 import Btn from '../components/styled/button'
 
 const Main = styled(Container)`
@@ -154,7 +157,49 @@ const SeriesTemplate = ({ data: { series } }) => (
       </Row>
       <Row>
         <Col>
-          <ModelDetails models={series.acf.models} />
+          <Accordion>
+            {series.acf.models.map((model, i) => (
+              <div key={model.slug}>
+                <AccordionTitle accordionIndex={i}>
+                  {model.title}
+                </AccordionTitle>
+                <AccordionContent accordionIndex={i}>
+                  <>
+                    {model.acf.model_stats && (
+                      <ul>
+                        {model.acf.model_stats.map((stat, s) => (
+                          <li key={s}>
+                            <span>{stat.title}:</span> <span>{stat.value}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {model.acf.model_files && (
+                      <>
+                        <strong>{model.acf.file_names}</strong>
+                        <ul>
+                          {model.acf.model_files.map((mf, f) => (
+                            <li key={f}>
+                              {mf.title}:
+                              <a
+                                href={`${process.env.SOURCE_URL}${
+                                  mf.file.url.source_url
+                                }`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                DOWNLOAD
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
+                  </>
+                </AccordionContent>
+              </div>
+            ))}
+          </Accordion>
         </Col>
       </Row>
       <Row>

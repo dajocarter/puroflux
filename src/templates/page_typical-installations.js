@@ -6,7 +6,11 @@ import styled from 'styled-components'
 import Layout from '../components/layout'
 import HeroUnit from '../components/Hero/HeroUnit'
 import HeroContent from '../components/Hero/HeroContent-Page'
-import ModelInstallationFiles from '../components/Accordion/model-installation-files'
+import ModelInstallationFiles from '../components/ModelInstallationFiles'
+import Accordion, {
+  AccordionTitle,
+  AccordionContent,
+} from '../components/Accordion'
 
 const Main = styled(Container)`
   padding: 45px 15px;
@@ -57,11 +61,21 @@ const TypicalInstallTemplate = ({ data }) => (
                 <h3>Select a Model</h3>
                 <h4>View product summary</h4>
               </div>
-              <ModelInstallationFiles
-                files={data.filterInstalls.edges}
-                slipStream
-                sweeperPiping
-              />
+              <Accordion>
+                {data.filterInstalls.edges.map(({ node }, i) => (
+                  <div key={node.id}>
+                    <AccordionTitle accordionIndex={i}>
+                      {node.title}
+                    </AccordionTitle>
+                    <AccordionContent accordionIndex={i}>
+                      <ModelInstallationFiles
+                        slipStream={node.acf.slip_stream_files}
+                        sweeperPiping={node.acf.sweeper_piping_files}
+                      />
+                    </AccordionContent>
+                  </div>
+                ))}
+              </Accordion>
             </Installation>
           )}
           {data.sepInstalls && (
@@ -71,12 +85,22 @@ const TypicalInstallTemplate = ({ data }) => (
                 <h3>Select a Model</h3>
                 <h4>View product summary</h4>
               </div>
-              <ModelInstallationFiles
-                files={data.sepInstalls.edges}
-                sweeperPiping
-                fullFlow
-                sideStream
-              />
+              <Accordion>
+                {data.sepInstalls.edges.map(({ node }, i) => (
+                  <div key={node.id}>
+                    <AccordionTitle accordionIndex={i}>
+                      {node.title}
+                    </AccordionTitle>
+                    <AccordionContent accordionIndex={i}>
+                      <ModelInstallationFiles
+                        sweeperPiping={node.acf.sweeper_piping_files}
+                        fullFlow={node.acf.full_flow_files}
+                        sideStream={node.acf.side_stream_files}
+                      />
+                    </AccordionContent>
+                  </div>
+                ))}
+              </Accordion>
             </Installation>
           )}
         </Col>
