@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { graphql } from 'gatsby'
 import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
@@ -14,6 +14,29 @@ import Accordion, {
 const Main = styled(Container)`
   padding: 45px 15px;
 `
+
+const Firms = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+
+  ul {
+    padding: 1rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    &:nth-child(even) {
+      background: #f2f2f2;
+      margin: 0 -1rem;
+      padding: 1rem;
+    }
+  }
+`
+
+const formatPhoneNumber = number => {
+  const parts = number.split('-')
+  return `(${parts[0]}) ${parts[1]}-${parts[2]}`
+}
 
 const groupRepsByState = reps => {
   const statesExtracted = reps.reduce((acc, { node }) => {
@@ -41,15 +64,57 @@ const groupRepsByState = reps => {
     acc[key].push(node)
     return acc
   }, [])
-  let html = []
-  Object.keys(repsByState).forEach((rep, i) => {
-    html.push(
-      <>
-        <AccordionTitle accordionIndex={i}>{rep}</AccordionTitle>
-        <AccordionContent accordionIndex={i}>Hi!</AccordionContent>
-      </>
-    )
-  })
+  const html = Object.entries(repsByState).map(([state, firms], i) => (
+    <Fragment key={i}>
+      <AccordionTitle accordionIndex={i}>{state}</AccordionTitle>
+      <AccordionContent accordionIndex={i}>
+        <Firms>
+          {firms.map((firm, j) => (
+            <ul key={j}>
+              <li>
+                <span>Territory:</span>{' '}
+                <span>{firm.acf.territory || state}</span>
+              </li>
+              <li>
+                <span>Phone:</span>{' '}
+                {firm.acf.phone_number && (
+                  <a href={`tel:${firm.acf.phone_number}`}>
+                    {formatPhoneNumber(firm.acf.phone_number)}
+                  </a>
+                )}
+              </li>
+              <li>
+                <span>Firm:</span>{' '}
+                <span dangerouslySetInnerHTML={{ __html: firm.title }} />
+              </li>
+              <li>
+                <span>Fax:</span>{' '}
+                {firm.acf.fax_number && (
+                  <a href={`fax:${firm.acf.fax_number}`}>
+                    {formatPhoneNumber(firm.acf.fax_number)}
+                  </a>
+                )}
+              </li>
+              <li>
+                <span>Address:</span>{' '}
+                <span dangerouslySetInnerHTML={{ __html: firm.acf.address }} />
+              </li>
+              <li>
+                <span>Website:</span>{' '}
+                <a
+                  href={firm.acf.website}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                >
+                  {firm.acf.website}
+                </a>
+              </li>
+            </ul>
+          ))}
+        </Firms>
+      </AccordionContent>
+    </Fragment>
+  ))
   return html
 }
 
