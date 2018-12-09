@@ -36,6 +36,7 @@ const NavLink = styled(Link)`
   font-size: ${props => (props.light ? `11px` : `1rem`)};
   padding: 0.5rem 0.75rem;
   transition: all 0.15s ease-in-out;
+  text-transform: uppercase;
 
   &:hover {
     background-color: ${props => (props.light ? `white` : props.theme.primary)};
