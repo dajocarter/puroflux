@@ -69,8 +69,8 @@ const TypicalInstallTemplate = ({ data }) => (
                     </AccordionTitle>
                     <AccordionContent accordionIndex={i}>
                       <ModelInstallationFiles
-                        slipStream={node.acf.slip_stream_files}
-                        sweeperPiping={node.acf.sweeper_piping_files}
+                        slipStream={node.acf.slip_stream_files || true}
+                        sweeperPiping={node.acf.sweeper_piping_files || true}
                       />
                     </AccordionContent>
                   </div>
@@ -93,9 +93,9 @@ const TypicalInstallTemplate = ({ data }) => (
                     </AccordionTitle>
                     <AccordionContent accordionIndex={i}>
                       <ModelInstallationFiles
-                        sweeperPiping={node.acf.sweeper_piping_files}
-                        fullFlow={node.acf.full_flow_files}
-                        sideStream={node.acf.side_stream_files}
+                        sweeperPiping={node.acf.sweeper_piping_files || true}
+                        fullFlow={node.acf.full_flow_files || true}
+                        sideStream={node.acf.side_stream_files || true}
                       />
                     </AccordionContent>
                   </div>

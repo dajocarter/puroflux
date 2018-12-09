@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react'
 
-const FileOutput = props => (
+const FileOutput = ({ title, files }) => (
   <div>
-    <span>{props.title}: </span>
-    {props.files.length ? (
+    <span>{title}: </span>
+    {files && files.length ? (
       <ul>
-        {props.files.map(({ file }) => (
+        {files.map(({ file }) => (
           <li key={file.wordpress_id}>
             <a
               href={`${process.env.SOURCE_URL}${file.url.source_url}`}
@@ -23,20 +23,20 @@ const FileOutput = props => (
   </div>
 )
 
-const ModelInstallationFiles = props => {
+const ModelInstallationFiles = ({ slipStream, sweeperPiping, fullFlow, sideStream }) => {
   return (
     <Fragment>
-      {props.slipStream && (
-        <FileOutput title='Slip Stream' files={props.slipStream} />
+      {slipStream && (
+        <FileOutput title='Slip Stream' files={slipStream} />
       )}
-      {props.sweeperPiping && (
-        <FileOutput title='Sweeper Piping' files={props.sweeperPiping} />
+      {sweeperPiping && (
+        <FileOutput title='Sweeper Piping' files={sweeperPiping} />
       )}
-      {props.fullFlow && (
-        <FileOutput title='Full Flow' files={props.fullFlow} />
+      {fullFlow && (
+        <FileOutput title='Full Flow' files={fullFlow} />
       )}
-      {props.sideStream && (
-        <FileOutput title='Side Stream' files={props.sideStream} />
+      {sideStream && (
+        <FileOutput title='Side Stream' files={sideStream} />
       )}
     </Fragment>
   )
