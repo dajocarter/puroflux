@@ -33,7 +33,7 @@ const Content = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
-  max-width: 666px;
+  max-width: 700px;
 
   .content {
     margin-bottom: 2rem;
