@@ -10,7 +10,7 @@ import HeroUnit from '../components/Hero/HeroUnit'
 import ProductNav from '../components/productNav'
 import Accordion, {
   AccordionTitle,
-  AccordionContent,
+  AccordionContent
 } from '../components/Accordion'
 import Btn from '../components/styled/button'
 
@@ -88,7 +88,7 @@ const DownloadCol = ({ title, file }) => (
       <PDFicon />
       <p>
         <span>{title}</span>
-        <a href={file.url.source_url} target="_blank" rel="noopener noreferrer">
+        <a href={file.url.source_url} target='_blank' rel='noopener noreferrer'>
           DOWNLOAD
         </a>
       </p>
@@ -101,12 +101,12 @@ const SeriesTemplate = ({ data: { series } }) => (
     <HeroUnit>
       <Row>
         <Col>
-          <ProductNav light="true" />
+          <ProductNav light='true' />
         </Col>
       </Row>
       <Row>
         <Col>
-          <div className="content">
+          <div className='content'>
             <SeriesTitle>{series.title} Series</SeriesTitle>
             <SeriesDescription>{series.acf.description}</SeriesDescription>
           </div>
@@ -185,8 +185,8 @@ const SeriesTemplate = ({ data: { series } }) => (
                                 href={`${process.env.SOURCE_URL}${
                                   mf.file.url.source_url
                                 }`}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                target='_blank'
+                                rel='noopener noreferrer'
                               >
                                 DOWNLOAD
                               </a>

@@ -74,8 +74,8 @@ const LibraryTemplate = ({ data: { page } }) => (
                                 {file && file.url && file.url.source_url ? (
                                   <a
                                     href={file.url.source_url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                    target='_blank'
+                                    rel='noopener noreferrer'
                                   >
                                     {title}
                                   </a>

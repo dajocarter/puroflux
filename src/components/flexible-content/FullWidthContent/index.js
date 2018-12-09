@@ -48,7 +48,7 @@ const FullWidthContent = props => {
         <Content dangerouslySetInnerHTML={{ __html: props.acf.content }} />
         {props.acf.link && (
           <ButtonLink
-            secondary="true"
+            secondary='true'
             to={`/${props.acf.link.url}/`}
             target={props.acf.link.target}
           >

@@ -193,13 +193,13 @@ const Footer = props => {
               <Action>
                 Call us at{' '}
                 <PhoneNumber
-                  href="tel:805-579-0216"
-                  title="Dial (805) 579-0216"
+                  href='tel:805-579-0216'
+                  title='Dial (805) 579-0216'
                 >
                   (805) 579-0216
                 </PhoneNumber>{' '}
                 or{' '}
-                <CTAlink alt="true" to="/contact/">
+                <CTAlink alt='true' to='/contact/'>
                   Contact Us
                 </CTAlink>
               </Action>
@@ -240,7 +240,7 @@ const Footer = props => {
                 <ColumnTitle>Sign up for our newsletter</ColumnTitle>
               </Col>
               <Col sm={12} md={6} lg={5} xl={4}>
-                <SignUpLink secondary="true" to={`#`}>
+                <SignUpLink secondary='true' to={`#`}>
                   Sign Up
                 </SignUpLink>
               </Col>
@@ -250,10 +250,10 @@ const Footer = props => {
       </Container>
       <Copyright>
         <p>&copy; Copyright 2018 - PUROFLUX. All rights reserved.</p>
-        <a href="https://www.netlify.com">
+        <a href='https://www.netlify.com'>
           <img
-            alt="Deployed by Netlify"
-            src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"
+            alt='Deployed by Netlify'
+            src='https://www.netlify.com/img/global/badges/netlify-color-bg.svg'
           />
         </a>
       </Copyright>

@@ -58,7 +58,7 @@ const ProductTemplate = ({ data: { product } }) => (
         (product.acf.file &&
           product.acf.file.url &&
           product.acf.file.title)) && (
-        <Row>
+          <Row>
           <Col>
             {product.acf.title && (
               <FeaturedTitle>{product.acf.title}</FeaturedTitle>
@@ -67,24 +67,24 @@ const ProductTemplate = ({ data: { product } }) => (
               product.acf.image.localFile &&
               product.acf.image.localFile.childImageSharp &&
               product.acf.image.localFile.childImageSharp.fixed && (
-                <FeaturedImg
-                  fixed={product.acf.image.localFile.childImageSharp.fixed}
-                />
-              )}
+              <FeaturedImg
+                fixed={product.acf.image.localFile.childImageSharp.fixed}
+              />
+            )}
             {product.acf.file &&
               product.acf.file.url &&
               product.acf.file.title && (
-                <FeaturedBtn
-                  as="a"
-                  href={`${process.env.SOURCE_URL}${
-                    product.acf.file.url.source_url
-                  }`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {product.acf.file.title}
-                </FeaturedBtn>
-              )}
+              <FeaturedBtn
+                as='a'
+                href={`${process.env.SOURCE_URL}${
+                  product.acf.file.url.source_url
+                }`}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                {product.acf.file.title}
+              </FeaturedBtn>
+            )}
           </Col>
         </Row>
       )}

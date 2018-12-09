@@ -8,7 +8,7 @@ import HeroUnit from '../components/Hero/HeroUnit'
 import HeroContent from '../components/Hero/HeroContent-Page'
 import Accordion, {
   AccordionTitle,
-  AccordionContent,
+  AccordionContent
 } from '../components/Accordion'
 
 const Main = styled(Container)`
@@ -103,8 +103,8 @@ const groupRepsByState = reps => {
                 <span>Website:</span>{' '}
                 <a
                   href={firm.acf.website}
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
+                  target='_blank'
+                  rel='noopener noreferrer nofollow'
                 >
                   {firm.acf.website}
                 </a>

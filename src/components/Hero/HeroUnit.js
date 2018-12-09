@@ -84,14 +84,14 @@ const HeroUnit = props => (
       <Background isHome={props.isHome}>
         {data.homeHero &&
           data.defaultHero && (
-            <HeroImg
-              fluid={
-                props.isHome
-                  ? data.homeHero.localFile.childImageSharp.fluid
-                  : data.defaultHero.localFile.childImageSharp.fluid
-              }
-            />
-          )}
+          <HeroImg
+            fluid={
+              props.isHome
+                ? data.homeHero.localFile.childImageSharp.fluid
+                : data.defaultHero.localFile.childImageSharp.fluid
+            }
+          />
+        )}
         <Content>{props.children}</Content>
       </Background>
     )}

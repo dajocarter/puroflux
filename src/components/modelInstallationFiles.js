@@ -9,8 +9,8 @@ const FileOutput = props => (
           <li key={file.wordpress_id}>
             <a
               href={`${process.env.SOURCE_URL}${file.url.source_url}`}
-              target="_blank"
-              rel="noopener noreferrer"
+              target='_blank'
+              rel='noopener noreferrer'
             >
               {file.title}
             </a>
@@ -27,16 +27,16 @@ const ModelInstallationFiles = props => {
   return (
     <Fragment>
       {props.slipStream && (
-        <FileOutput title="Slip Stream" files={props.slipStream} />
+        <FileOutput title='Slip Stream' files={props.slipStream} />
       )}
       {props.sweeperPiping && (
-        <FileOutput title="Sweeper Piping" files={props.sweeperPiping} />
+        <FileOutput title='Sweeper Piping' files={props.sweeperPiping} />
       )}
       {props.fullFlow && (
-        <FileOutput title="Full Flow" files={props.fullFlow} />
+        <FileOutput title='Full Flow' files={props.fullFlow} />
       )}
       {props.sideStream && (
-        <FileOutput title="Side Stream" files={props.sideStream} />
+        <FileOutput title='Side Stream' files={props.sideStream} />
       )}
     </Fragment>
   )

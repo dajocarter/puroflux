@@ -30,15 +30,15 @@ const ProductsPageTemplate = ({ data }) => {
         </Row>
         {data.products &&
           data.addlItem && (
-            <Row>
-              <Col xs={12}>
-                <ExcerptExpander
-                  products={data.products.edges}
-                  addlItem={data.addlItem}
-                />
-              </Col>
-            </Row>
-          )}
+          <Row>
+            <Col xs={12}>
+              <ExcerptExpander
+                products={data.products.edges}
+                addlItem={data.addlItem}
+              />
+            </Col>
+          </Row>
+        )}
       </Main>
     </Layout>
   )

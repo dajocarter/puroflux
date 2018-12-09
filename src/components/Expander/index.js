@@ -10,7 +10,7 @@ const Items = styled.div`
   align-items: center;
 `
 export default class ExcerptExpander extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = { openItem: null }
@@ -18,13 +18,14 @@ export default class ExcerptExpander extends Component {
     this.handleOpening = this.handleOpening.bind(this)
   }
 
-  handleOpening(index) {
+  handleOpening (index) {
     this.setState({ openItem: index })
   }
 
-  render() {
-    let items = [],
-      addlItem = {}
+  render () {
+    let items = []
+    let addlItem = {}
+
     if (this.props.addlItem) {
       addlItem = { node: this.props.addlItem }
     }

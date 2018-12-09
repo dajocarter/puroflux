@@ -27,7 +27,7 @@ const ItemContent = styled.div``
 const ExpanderItem = props => (
   <Item>
     <div
-      role="button"
+      role='button'
       onClick={() => props.handleOpening(props.idx)}
       aria-expanded={props.isOpen}
       aria-controls={`expander--content-${props.idx}`}
@@ -44,7 +44,7 @@ const ExpanderItem = props => (
         <ItemTitle>{props.node.title}</ItemTitle>
         <ItemContent
           dangerouslySetInnerHTML={{
-            __html: props.node.excerpt || props.node.acf.excerpt,
+            __html: props.node.excerpt || props.node.acf.excerpt
           }}
         />
         <Btn to={props.node.slug}>Learn More</Btn>

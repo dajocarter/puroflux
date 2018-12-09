@@ -19,7 +19,7 @@ const HeroContentPage = props => (
   <Fragment>
     {props.html && (
       <div
-        className="content"
+        className='content'
         dangerouslySetInnerHTML={{ __html: props.html }}
       />
     )}
@@ -29,10 +29,10 @@ const HeroContentPage = props => (
           return link.button_link.target ? (
             <Button
               key={i}
-              as="a"
+              as='a'
               href={link.button_link.url}
               target={link.button_link.target}
-              rel="noopener noreferrer"
+              rel='noopener noreferrer'
               primary={i % 2 === 0 ? `true` : `false`}
               secondary={i % 2 === 1 ? `true` : `false`}
             >

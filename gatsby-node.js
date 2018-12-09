@@ -49,8 +49,8 @@ exports.createPages = ({ graphql, actions }) => {
           path: `/${node.slug}/`,
           component: path.resolve(`./src/templates/${template}`),
           context: {
-            slug: node.slug,
-          },
+            slug: node.slug
+          }
         })
       })
       // ==== END PAGES ====
@@ -62,8 +62,8 @@ exports.createPages = ({ graphql, actions }) => {
           path: `/${node.slug}/`,
           component: productTemplate,
           context: {
-            slug: node.slug,
-          },
+            slug: node.slug
+          }
         })
       })
       // ==== END PRODUCTS ====
@@ -75,8 +75,8 @@ exports.createPages = ({ graphql, actions }) => {
           path: `/${node.slug}/`,
           component: seriesTemplate,
           context: {
-            slug: node.slug,
-          },
+            slug: node.slug
+          }
         })
       })
       // ==== END SERIES ====

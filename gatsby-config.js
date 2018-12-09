@@ -1,10 +1,10 @@
 require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`,
+  path: `.env.${process.env.NODE_ENV}`
 })
 
 module.exports = {
   siteMetadata: {
-    title: 'Puroflux',
+    title: 'Puroflux'
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -17,8 +17,8 @@ module.exports = {
         background_color: '#000',
         theme_color: '#05C6C7',
         display: 'minimal-ui',
-        icon: 'src/images/purofluxlogo.png', // This path is relative to the root of the site.
-      },
+        icon: 'src/images/purofluxlogo.png' // This path is relative to the root of the site.
+      }
     },
     'gatsby-plugin-offline',
     'gatsby-plugin-styled-components',
@@ -36,11 +36,11 @@ module.exports = {
         // Search and Replace Urls across WordPress content.
         searchAndReplaceContentUrls: {
           sourceUrl: process.env.SOURCE_URL,
-          replacementUrl: '',
+          replacementUrl: ''
         },
         concurrentRequests: 10,
         excludedRoutes: ['/*/*/comments', '/yoast/**'],
-        normalizer: function({ entities }) {
+        normalizer: function ({ entities }) {
           const products = entities.filter(
             e => e.__type === 'wordpress__wp_products'
           )
@@ -115,16 +115,16 @@ module.exports = {
             }
             return e
           })
-        },
-      },
+        }
+      }
     },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
-        fonts: ['Lato', 'Josefin Sans'],
-      },
-    },
-  ],
+        fonts: ['Lato', 'Josefin Sans']
+      }
+    }
+  ]
 }
