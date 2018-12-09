@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
 
 const FileOutput = ({ title, files }) => (
   <div>
@@ -23,6 +24,21 @@ const FileOutput = ({ title, files }) => (
   </div>
 )
 
+FileOutput.propTypes = {
+  title: PropTypes.string.isRequired,
+  files: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.arrayOf(PropTypes.shape({
+      file: PropTypes.shape({
+        wordpress_id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        url: PropTypes.shape({
+          source_url: PropTypes.string.isRequired
+        }).isRequired
+      })
+    }))])
+}
+
 const ModelInstallationFiles = ({ slipStream, sweeperPiping, fullFlow, sideStream }) => {
   return (
     <Fragment>
@@ -40,6 +56,25 @@ const ModelInstallationFiles = ({ slipStream, sweeperPiping, fullFlow, sideStrea
       )}
     </Fragment>
   )
+}
+
+ModelInstallationFiles.propTypes = {
+  slipStream: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.array
+  ]),
+  sweeperPiping: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.array
+  ]),
+  fullFlow: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.array
+  ]),
+  sideStream: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.array
+  ])
 }
 
 export default ModelInstallationFiles
