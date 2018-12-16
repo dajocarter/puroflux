@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import Layout from '../components/layout'
 import HeroUnit from '../components/Hero/HeroUnit'
 import HeroContent from '../components/Hero/HeroContent-Page'
-import ModelInstallationFiles from '../components/ModelInstallationFiles'
+import ModelInstallationFiles from '../components/modelInstallationFiles'
 import Accordion, {
   AccordionTitle,
   AccordionContent
