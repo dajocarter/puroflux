@@ -96,7 +96,7 @@ const DownloadCol = ({ title, file }) => (
   </Col>
 )
 
-const SeriesTemplate = ({ data: { series }, pathContext }) => (
+const SeriesTemplate = ({ data: { series }, pageContext }) => (
   <Layout>
     <HeroUnit>
       <Row>
@@ -219,7 +219,7 @@ const SeriesTemplate = ({ data: { series }, pathContext }) => (
           <Row>
             {series.acf.products[0].acf &&
               series.acf.products[0].acf.series &&
-              series.acf.products[0].acf.series.filter(rs => rs.slug !== pathContext.slug).map(relatedSeries => (
+              series.acf.products[0].acf.series.filter(rs => rs.slug !== pageContext.slug).map(relatedSeries => (
                 <Col key={relatedSeries.id}>
                   <RelatedTitle>{relatedSeries.title}</RelatedTitle>
                   <RelatedExcerpt>
