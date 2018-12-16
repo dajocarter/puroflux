@@ -69,6 +69,8 @@ const PDFicon = styled(FaFilePdf)`
 
 const ModelTitle = styled.h2`
   text-align: center;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
 `
 const ModelDescription = styled.p`
   text-align: center;
@@ -77,13 +79,30 @@ const ModelNotes = styled.p`
   text-align: center;
 `
 
-const ProductTitle = styled.h2``
-const RelatedTitle = styled.h4``
-const RelatedExcerpt = styled.p``
+const ProductTitle = styled.h2`
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+  text-align: center;
+`
+
+const RelatedModel = styled(Col)`
+  text-align: center;
+`
+
+const RelatedTitle = styled.h4`
+  color: ${props => props.theme.primary};
+  font-size: 1rem;
+`
+
+const RelatedExcerpt = styled.p`
+  color: ${props => props.theme.body};
+  font-size: 0.75rem;
+`
+
 const RelatedBtn = styled(Btn)``
 
 const DownloadCol = ({ title, file }) => (
-  <Col>
+  <Col xs={12} sm={4}>
     <Download>
       <PDFicon />
       <p>
@@ -164,18 +183,20 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
                   {model.title}
                 </AccordionTitle>
                 <AccordionContent accordionIndex={i}>
-                  <>
+                  <Row>
                     {model.acf.model_stats && (
-                      <ul>
-                        {model.acf.model_stats.map((stat, s) => (
-                          <li key={s}>
-                            <span>{stat.title}:</span> <span>{stat.value}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      <Col xs={12} sm={8}>
+                        <ul>
+                          {model.acf.model_stats.map((stat, s) => (
+                            <li key={s}>
+                              <span>{stat.title}:</span> <span>{stat.value}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </Col>
                     )}
                     {model.acf.model_files && (
-                      <>
+                      <Col xs={12} sm={4}>
                         <strong>{model.acf.file_names}</strong>
                         <ul>
                           {model.acf.model_files.map((mf, f) => (
@@ -193,9 +214,9 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
                             </li>
                           ))}
                         </ul>
-                      </>
+                      </Col>
                     )}
-                  </>
+                  </Row>
                 </AccordionContent>
               </div>
             ))}
@@ -220,13 +241,13 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
             {series.acf.products[0].acf &&
               series.acf.products[0].acf.series &&
               series.acf.products[0].acf.series.filter(rs => rs.slug !== pageContext.slug).map(relatedSeries => (
-                <Col key={relatedSeries.id}>
+                <RelatedModel key={relatedSeries.id}>
                   <RelatedTitle>{relatedSeries.title}</RelatedTitle>
                   <RelatedExcerpt>
                     {relatedSeries.acf.description}
                   </RelatedExcerpt>
-                  <RelatedBtn to={relatedSeries.slug}>View Product</RelatedBtn>
-                </Col>
+                  <RelatedBtn primary='true' to={relatedSeries.slug}>View Product</RelatedBtn>
+                </RelatedModel>
               ))}
           </Row>
         </>
