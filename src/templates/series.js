@@ -88,7 +88,7 @@ const DownloadCol = ({ title, file }) => (
       <PDFicon />
       <p>
         <span>{title}</span>
-        <a href={file.url.source_url} target='_blank' rel='noopener noreferrer'>
+        <a href={`${process.env.SOURCE_URL}${file.url.source_url}`} target='_blank' rel='noopener noreferrer'>
           DOWNLOAD
         </a>
       </p>
