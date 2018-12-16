@@ -181,7 +181,7 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
                           {model.acf.model_files.map((mf, f) => (
                             <li key={f}>
                               {mf.title}:
-                              <a
+                              {mf.file ? <a
                                 href={`${process.env.SOURCE_URL}${
                                   mf.file.url.source_url
                                 }`}
@@ -189,7 +189,7 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
                                 rel='noopener noreferrer'
                               >
                                 DOWNLOAD
-                              </a>
+                              </a> : <span><sup>*</sup> Consult Factory</span>}
                             </li>
                           ))}
                         </ul>
