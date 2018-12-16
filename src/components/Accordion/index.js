@@ -74,9 +74,6 @@ export class AccordionContent extends Component {
 }
 
 const Wrapper = styled.div`
-  max-width: 768px;
-  margin-left: auto;
-  margin-right: auto;
   border: 1px solid black;
 `
 
