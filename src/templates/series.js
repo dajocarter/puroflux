@@ -37,6 +37,10 @@ const FeaturedContent = styled.div`
   font-size: 18px;
 `
 
+const DownloadRow = styled(Row)`
+  margin-top: 3rem;
+`
+
 const Download = styled.div`
   display: flex;
   justify-content: center;
@@ -87,16 +91,21 @@ const ProductTitle = styled.h2`
 
 const RelatedModel = styled(Col)`
   text-align: center;
+
+  @media (max-width: 767px) {
+    &:not(:last-of-type) {
+      margin-bottom: 2rem;
+    }
+  }
 `
 
 const RelatedTitle = styled.h4`
   color: ${props => props.theme.primary};
-  font-size: 1rem;
+  font-size: 1.5rem;
 `
 
 const RelatedExcerpt = styled.p`
   color: ${props => props.theme.body};
-  font-size: 0.75rem;
 `
 
 const RelatedBtn = styled(Btn)``
@@ -148,7 +157,7 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
           />
         </Col>
       </Row>
-      <Row>
+      <DownloadRow>
         {series.acf.datasheet && (
           <DownloadCol
             title={`${series.title} Series Datasheet`}
@@ -167,7 +176,7 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
             file={series.acf.sample_spec_sheet}
           />
         )}
-      </Row>
+      </DownloadRow>
       <Row>
         <Col>
           <ModelTitle>Select a Model</ModelTitle>
@@ -241,7 +250,7 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
             {series.acf.products[0].acf &&
               series.acf.products[0].acf.series &&
               series.acf.products[0].acf.series.filter(rs => rs.slug !== pageContext.slug).map(relatedSeries => (
-                <RelatedModel key={relatedSeries.id}>
+                <RelatedModel key={relatedSeries.id} xs={12} md={4}>
                   <RelatedTitle>{relatedSeries.title}</RelatedTitle>
                   <RelatedExcerpt>
                     {relatedSeries.acf.description}
