@@ -72,22 +72,22 @@ const PDFicon = styled(FaFilePdf)`
 `
 
 const AccordionRow = styled(Row)`
-  ul:first-child {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  ul {
+    &:first-child {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
 
-    @media (max-width: 575px) {
-      grid-template-columns: 1fr;
+      @media (max-width: 575px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &:not(:first-child) {
+      span { 
+        margin-left: 5px;
+      }
     }
   }
-
-  li {  
-    a,
-    span {
-      margin-left: 5px;
-    }
-  }
-
 `
 
 const ModelTitle = styled.h2`

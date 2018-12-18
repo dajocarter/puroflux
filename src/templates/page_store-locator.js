@@ -31,6 +31,22 @@ const Firms = styled.div`
       padding: 1rem;
     }
   }
+
+  @media (max-width: 575px) {
+    ul {
+      grid-template-columns: 1fr;
+    }
+    
+    li {
+      &:nth-child(odd) {
+        order: 1;
+      }
+
+      &:nth-child(even) {
+        order: 2;
+      }
+    }
+  }
 `
 
 const formatPhoneNumber = number => {
@@ -96,7 +112,7 @@ const groupRepsByState = reps => {
                 )}
               </li>
               <li>
-                <span>Address:</span>{' '}
+                <span>Address:</span><br />
                 <span dangerouslySetInnerHTML={{ __html: firm.acf.address }} />
               </li>
               <li>

@@ -20,8 +20,10 @@ export default class Accordion extends Component {
   }
 
   render() {
-    const openItem = this.state.openItem
+    const { openItem } = this.state
+    const { children } = this.props
     const { handleOpening } = this
+
     return (
       <AccordionContext.Provider
         value={{
@@ -29,7 +31,7 @@ export default class Accordion extends Component {
           handleOpening,
         }}
       >
-        <Wrapper>{this.props.children}</Wrapper>
+        <Wrapper>{children}</Wrapper>
       </AccordionContext.Provider>
     )
   }
@@ -41,6 +43,7 @@ export class AccordionTitle extends Component {
   render() {
     const { accordionIndex, children } = this.props
     const { openItem, handleOpening } = this.context
+
     return (
       <Title
         role="button"
@@ -108,11 +111,13 @@ const Content = styled(Collapse)`
 
   span {
     &:first-of-type {
-      color: #09a198;
+      color: ${props => props.theme.primary};
       text-transform: uppercase;
     }
+
+    + br + span,
     + span {
-      color: #999999;
+      color: ${props => props.theme.body};
     }
   }
 
@@ -122,12 +127,18 @@ const Content = styled(Collapse)`
     padding: 0;
 
     a {
-      color: #ffa200;
+      color: ${props => props.theme.secondary};
       text-decoration: none;
 
       &:hover {
         text-decoration: underline;
       }
+    }
+  }
+
+  li {  
+    a {
+      margin-left: 5px;
     }
   }
 `
