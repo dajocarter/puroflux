@@ -103,6 +103,7 @@ const Content = styled(Collapse)`
 
   > div {
     padding: 0.5rem;
+    width: 100%;
   }
 
   span {

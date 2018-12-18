@@ -71,6 +71,25 @@ const PDFicon = styled(FaFilePdf)`
   font-size: 3rem;
 `
 
+const AccordionRow = styled(Row)`
+  ul:first-child {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    @media (max-width: 575px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  li {  
+    a,
+    span {
+      margin-left: 5px;
+    }
+  }
+
+`
+
 const ModelTitle = styled.h2`
   text-align: center;
   margin-top: 4rem;
@@ -92,11 +111,9 @@ const ProductTitle = styled.h2`
 const RelatedModel = styled(Col)`
   text-align: center;
 
-  @media (max-width: 767px) {
     &:not(:last-of-type) {
       margin-bottom: 2rem;
     }
-  }
 `
 
 const RelatedTitle = styled.h4`
@@ -183,7 +200,7 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
           <ModelDescription>View product summary</ModelDescription>
         </Col>
       </Row>
-      <Row>
+      <AccordionRow>
         <Col>
           <Accordion>
             {series.acf.models.map((model, i) => (
@@ -194,7 +211,7 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
                 <AccordionContent accordionIndex={i}>
                   <Row>
                     {model.acf.model_stats && (
-                      <Col xs={12} sm={8}>
+                      <Col xs={12} md={8}>
                         <ul>
                           {model.acf.model_stats.map((stat, s) => (
                             <li key={s}>
@@ -205,7 +222,7 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
                       </Col>
                     )}
                     {model.acf.model_files && (
-                      <Col xs={12} sm={4}>
+                      <Col xs={12} md={4}>
                         <strong>{model.acf.file_names}</strong>
                         <ul>
                           {model.acf.model_files.map((mf, f) => (
@@ -219,7 +236,7 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
                                 rel='noopener noreferrer'
                               >
                                 DOWNLOAD
-                              </a> : <span><sup>*</sup> Consult Factory</span>}
+                              </a> : <span>* Consult Factory</span>}
                             </li>
                           ))}
                         </ul>
@@ -231,7 +248,7 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
             ))}
           </Accordion>
         </Col>
-      </Row>
+      </AccordionRow>
       <Row>
         <Col>
           <ModelNotes
