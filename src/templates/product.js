@@ -12,29 +12,81 @@ const Main = styled(Container)`
   padding: 45px 15px;
 `
 
-const ProductTitle = styled.h1``
+const ProductTitle = styled.h1`
+  margin-top: 3rem;
+  text-align: center;
+`
 
-const ProductDescription = styled.p``
+const ProductDescription = styled.p`
+  text-align: center;
+  color: ${({ theme }) => theme.body};
+  margin-bottom: 3rem;
+`
 
-const FeaturedTitle = styled.p``
+const FeaturedProduct = styled(Col)`
+  text-align: center;
+`
+
+const FeaturedTitle = styled.p`
+  color: ${({ theme }) => theme.primary};
+  font-weight: bold;
+  text-transform: uppercase;
+`
 
 const FeaturedImg = styled(Img)``
 
-const FeaturedBtn = styled(Btn)``
+const FeaturedBtn = styled(Btn)`
+  margin-top: 2rem;
+`
 
-const Series = styled(Col)``
+const Series = styled(Col)`
+  margin-bottom: 2rem;
+  text-align: center;
+`
 
-const SeriesTitle = styled.p``
+const SeriesTitle = styled.p`
+  color: ${({ theme }) => theme.primary};
+  font-weight: bold;
+  text-transform: uppercase;
+`
 
 const SeriesImg = styled(Img)``
 
-const SeriesDescrip = styled.p``
+const SeriesDescrip = styled.p`
+  color: ${({ theme }) => theme.body};
+  font-size: 0.85rem;
+`
 
 const SeriesBtn = styled(Btn)``
 
-const OverviewTitle = styled.h2``
+const OverviewTitle = styled.h2`
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+`
 
-const OverviewContent = styled.div``
+const OverviewContent = styled.div`
+  color: ${({ theme }) => theme.body};
+
+  h1, h2, h3, h4, h5, h6 {
+    color: ${({ theme }) => theme.primary};
+  }
+
+  a {
+    color: ${({ theme }) => theme.secondary};
+
+    &:hover,
+    &:focus {
+      color: ${({ theme }) => theme.secondary};
+      text-decoration-color: ${({ theme }) => theme.primary};
+    }
+  }
+
+  iframe {
+    display: block;
+    margin: 1rem auto;
+    max-width: 100%;
+  }
+`
 
 const ProductTemplate = ({ data: { product } }) => (
   <Layout>
@@ -58,46 +110,49 @@ const ProductTemplate = ({ data: { product } }) => (
         (product.acf.file &&
           product.acf.file.url &&
           product.acf.file.title)) && (
-          <Row>
-          <Col>
+        <Row>
+            <FeaturedProduct>
             {product.acf.title && (
               <FeaturedTitle>{product.acf.title}</FeaturedTitle>
             )}
             {product.acf.image &&
-              product.acf.image.localFile &&
-              product.acf.image.localFile.childImageSharp &&
-              product.acf.image.localFile.childImageSharp.fixed && (
-              <FeaturedImg
-                fixed={product.acf.image.localFile.childImageSharp.fixed}
-              />
+                product.acf.image.localFile &&
+                product.acf.image.localFile.childImageSharp &&
+                product.acf.image.localFile.childImageSharp.fixed && (
+              <div>
+                  <FeaturedImg
+                  fixed={product.acf.image.localFile.childImageSharp.fixed}
+                />
+                </div>
             )}
             {product.acf.file &&
-              product.acf.file.url &&
-              product.acf.file.title && (
+                product.acf.file.url &&
+                product.acf.file.title && (
               <FeaturedBtn
-                as='a'
-                href={`${process.env.SOURCE_URL}${
+                  as='a'
+                  primary='true'
+                  href={`${process.env.SOURCE_URL}${
                   product.acf.file.url.source_url
                 }`}
-                target='_blank'
-                rel='noopener noreferrer'
+                  target='_blank'
+                  rel='noopener noreferrer'
               >
-                {product.acf.file.title}
-              </FeaturedBtn>
+                  {product.acf.file.title}
+                </FeaturedBtn>
             )}
-          </Col>
-        </Row>
+          </FeaturedProduct>
+          </Row>
       )}
       {product.acf.series && (
         <Row>
           {product.acf.series.map(series => (
-            <Series key={series.id}>
-              <SeriesTitle>{series.title}</SeriesTitle>
+            <Series key={series.id} xs={12} sm={6} md={3}>
+              <SeriesTitle>{series.title} Series</SeriesTitle>
               <SeriesImg
                 fixed={series.featured_media.localFile.childImageSharp.fixed}
               />
               <SeriesDescrip>{series.acf.description}</SeriesDescrip>
-              <SeriesBtn to={series.slug}>View Product</SeriesBtn>
+              <SeriesBtn primary='true' to={series.slug}>View Product</SeriesBtn>
             </Series>
           ))}
         </Row>
