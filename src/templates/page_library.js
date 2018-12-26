@@ -19,14 +19,19 @@ const Content = styled.div`
 `
 
 const Library = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 991px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `
 
 const LibraryGroup = styled.div`
-  flex: 0 0 auto;
   h2,
   h3 {
     font-size: 18px;
