@@ -106,39 +106,9 @@ export default class ProductsPageTemplate extends Component {
                 <Col xs={12}>
                   <TabContent animation='true'>
                     {data.products.edges.map(({ node }) =>
-                      <TabPane key={node.id} eventKey={node.id}>
-                        <Pane>
-                          <Img
-                            fluid={node.featured_media.localFile.childImageSharp.fluid}
-                          />
-                          <Content>
-                            <ItemTitle>{node.title}</ItemTitle>
-                            <ItemContent
-                              dangerouslySetInnerHTML={{
-                                __html: node.excerpt || node.acf.excerpt
-                              }}
-                            />
-                            <Btn to={node.slug}>Learn More</Btn>
-                          </Content>
-                        </Pane>
-                      </TabPane>
+                      <SelectablePane key={node.id} node={node} />
                     )}
-                    <TabPane eventKey={data.addlItem.id}>
-                      <Pane>
-                        <Img
-                          fluid={data.addlItem.featured_media.localFile.childImageSharp.fluid}
-                        />
-                        <Content>
-                          <ItemTitle>{data.addlItem.title}</ItemTitle>
-                          <ItemContent
-                            dangerouslySetInnerHTML={{
-                              __html: data.addlItem.excerpt || data.addlItem.acf.excerpt
-                            }}
-                          />
-                          <Btn to={data.addlItem.slug}>Learn More</Btn>
-                        </Content>
-                      </Pane>
-                    </TabPane>
+                    <SelectablePane node={data.addlItem} />
                   </TabContent>
                 </Col>
               </Row>
@@ -149,6 +119,26 @@ export default class ProductsPageTemplate extends Component {
     )
   }
 }
+
+const SelectablePane = ({ node }) => (
+  <TabPane eventKey={node.id}>
+    <Pane>
+      <Img
+        fluid={node.featured_media.localFile.childImageSharp.fluid}
+      />
+      <Content>
+        <ItemTitle>{node.title}</ItemTitle>
+        <ItemContent
+          dangerouslySetInnerHTML={{
+            __html: node.excerpt || node.acf.excerpt
+          }}
+        />
+        <Btn to={node.slug}>Learn More</Btn>
+        <CloseIcon />
+      </Content>
+    </Pane>
+  </TabPane>
+)
 
 export const query = graphql`
   query ProductsPageQuery($slug: String!) {
