@@ -86,6 +86,8 @@ export default class ProductsPageTemplate extends Component {
   constructor (props, context) {
     super(props, context)
 
+    this.prevPane = this.prevPane.bind(this)
+    this.nextPane = this.nextPane.bind(this)
     this.closePane = this.closePane.bind(this)
 
     this.state = {
@@ -93,13 +95,23 @@ export default class ProductsPageTemplate extends Component {
     }
   }
 
-  handleKeyChange (key) {
-    document.getElementById(`panes`).scrollIntoView({ behavior: 'smooth' })
+  prevPane () {
+    document.getElementById(`panes`) && document.getElementById(`panes`).scrollIntoView({ behavior: 'smooth' })
+    this.setState(prevState => ({key: parseInt(prevState.key) - 1}))
+  }
+
+  nextPane () {
+    document.getElementById(`panes`) && document.getElementById(`panes`).scrollIntoView({ behavior: 'smooth' })
+    this.setState(prevState => ({key: parseInt(prevState.key) + 1}))
+  }
+
+  setPane (key) {
+    document.getElementById(`panes`) && document.getElementById(`panes`).scrollIntoView({ behavior: 'smooth' })
     this.setState({ key })
   }
 
   closePane () {
-    document.getElementById(`tabs`).scrollIntoView({ behavior: 'smooth' })
+    document.getElementById(`tabs`) && document.getElementById(`tabs`).scrollIntoView({ behavior: 'smooth' })
     this.setState({ key: `` })
   }
 
@@ -123,13 +135,13 @@ export default class ProductsPageTemplate extends Component {
           </Row>
           {data.products &&
           data.addlItem && (
-            <TabContainer id='product-selector' activeKey={key} onSelect={key => this.handleKeyChange(key)}>
+            <TabContainer id='product-selector' activeKey={key} onSelect={key => this.setPane(key)}>
               <Row id='tabs'>
                 <Col xs={12}>
                   <Tabs>
-                    {data.products.edges.map(({ node }) =>
+                    {data.products.edges.map(({ node }, index) =>
                       <Nav.Item key={node.id}>
-                        <Nav.Link eventKey={node.id}>
+                        <Nav.Link eventKey={index}>
                           <Img
                             fluid={node.featured_media.localFile.childImageSharp.fluid}
                           />
@@ -137,7 +149,7 @@ export default class ProductsPageTemplate extends Component {
                       </Nav.Item>
                     )}
                     <Nav.Item>
-                      <Nav.Link eventKey={data.addlItem.id}>
+                      <Nav.Link eventKey={data.products.edges.length}>
                         <Img
                           fluid={data.addlItem.featured_media.localFile.childImageSharp.fluid}
                         />
@@ -149,10 +161,10 @@ export default class ProductsPageTemplate extends Component {
               <Row id='panes'>
                 <Col xs={12}>
                   <TabContent animation='true'>
-                    {data.products.edges.map(({ node }) =>
-                      <SelectablePane key={node.id} node={node} closePane={this.closePane} />
+                    {data.products.edges.map(({ node }, index) =>
+                      <SelectablePane key={node.id} node={node} eventKey={index} closePane={this.closePane} next={true} nextPane={this.nextPane} prev={index > 0} prevPane={this.prevPane} />
                     )}
-                    <SelectablePane node={data.addlItem} closePane={this.closePane} />
+                    <SelectablePane node={data.addlItem} eventKey={data.products.edges.length} closePane={this.closePane} next={false} nextPane={this.nextPane} prev={data.products.edges.length - 1} prevPane={this.prevPane} />
                   </TabContent>
                 </Col>
               </Row>
@@ -164,8 +176,8 @@ export default class ProductsPageTemplate extends Component {
   }
 }
 
-const SelectablePane = ({ node, closePane }) => (
-  <TabPane eventKey={node.id}>
+const SelectablePane = ({ node, eventKey, closePane, next, nextPane, prev, prevPane }) => (
+  <TabPane eventKey={eventKey}>
     <Pane>
       <Img
         fluid={node.featured_media.localFile.childImageSharp.fluid}
@@ -180,8 +192,8 @@ const SelectablePane = ({ node, closePane }) => (
         <Btn to={node.slug}>Learn More</Btn>
         <CloseIcon onClick={closePane} />
         <Arrows>
-          <LeftArrow />
-          <RightArrow />
+          {prev && <LeftArrow onClick={prevPane} />}
+          {next && <RightArrow onClick={nextPane} />}
         </Arrows>
       </div>
     </Pane>
