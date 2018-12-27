@@ -72,6 +72,11 @@ export default class ProductsPageTemplate extends Component {
     }
   }
 
+  handleKeyChange (key) {
+    document.getElementById(`tab-content`).scrollIntoView({ behavior: 'smooth' })
+    this.setState({ key })
+  }
+
   render () {
     const { key } = this.state
     const { data } = this.props
@@ -92,7 +97,7 @@ export default class ProductsPageTemplate extends Component {
           </Row>
           {data.products &&
           data.addlItem && (
-            <TabContainer id='product-selector' activeKey={key} onSelect={key => this.setState({ key })}>
+            <TabContainer id='product-selector' activeKey={key} onSelect={key => this.handleKeyChange(key)}>
               <Row>
                 <Col xs={12}>
                   <Tabs>
@@ -117,7 +122,7 @@ export default class ProductsPageTemplate extends Component {
               </Row>
               <Row>
                 <Col xs={12}>
-                  <TabContent animation='true'>
+                  <TabContent id='tab-content' animation='true'>
                     {data.products.edges.map(({ node }) =>
                       <SelectablePane key={node.id} node={node} />
                     )}
