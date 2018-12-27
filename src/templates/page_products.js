@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import { Container, Row, Col, TabContainer, TabContent, TabPane, Nav } from 'react-bootstrap'
+import { FaTimes } from 'react-icons/fa'
 import styled from 'styled-components'
 
 import Layout from '../components/layout'
@@ -42,13 +43,25 @@ const Pane = styled.div`
   align-items: center;
   grid-template-columns: 1fr;
 
+  @media (max-width: 990px) {
+    margin-top: 2rem;
+  }
+
   @media (min-width: 991px) {
-    grid-template-columns: 600px auto;
+    grid-template-columns: minmax(600px,2fr) 1fr;
   }
 `
 const Content = styled.div``
 const ItemTitle = styled.h2``
 const ItemContent = styled.p``
+const CloseIcon = styled(FaTimes)`
+  color: ${({ theme }) => theme.secondary};
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  font-size: 1.15rem;
+  cursor: pointer;
+`
 
 export default class ProductsPageTemplate extends Component {
   constructor (props, context) {
