@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import { Container, Row, Col, TabContainer, TabContent, TabPane, Nav } from 'react-bootstrap'
-import { FaTimes } from 'react-icons/fa'
-import styled from 'styled-components'
+import { FaTimes, FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import styled, { css } from 'styled-components'
 
 import Layout from '../components/layout'
 import HeroUnit from '../components/Hero/HeroUnit'
@@ -52,13 +52,34 @@ const Pane = styled.div`
   }
 `
 
-const CloseIcon = styled(FaTimes)`
+const Icon = css`
   color: ${({ theme }) => theme.secondary};
+  font-size: 1.25rem;
+  cursor: pointer;
+`
+
+const CloseIcon = styled(FaTimes)`
   position: absolute;
   top: 0;
   right: 1rem;
-  font-size: 1.15rem;
-  cursor: pointer;
+  ${Icon}
+`
+
+const Arrows = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 1rem;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+`
+
+const LeftArrow = styled(FaArrowLeft)`
+  ${Icon}
+`
+
+const RightArrow = styled(FaArrowRight)`
+  ${Icon}
 `
 
 export default class ProductsPageTemplate extends Component {
@@ -158,6 +179,10 @@ const SelectablePane = ({ node, closePane }) => (
         />
         <Btn to={node.slug}>Learn More</Btn>
         <CloseIcon onClick={closePane} />
+        <Arrows>
+          <LeftArrow />
+          <RightArrow />
+        </Arrows>
       </div>
     </Pane>
   </TabPane>
