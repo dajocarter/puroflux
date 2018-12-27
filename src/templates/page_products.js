@@ -16,6 +16,8 @@ const Main = styled(Container)`
 
 const Tabs = styled(Nav)`
   &.nav {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: repeat(1, 1fr);
@@ -28,10 +30,25 @@ const Tabs = styled(Nav)`
       grid-template-columns: repeat(3, 1fr);
     }
   }
+
+  .nav-link {
+    padding: 0;
+  }
 `
 
+const Pane = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+  align-items: center;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 991px) {
+    grid-template-columns: 600px auto;
+  }
+`
+const Content = styled.div``
 const ItemTitle = styled.h2``
-const ItemContent = styled.div``
+const ItemContent = styled.p``
 
 const ProductsPageTemplate = ({ data }) => {
   return (
@@ -50,7 +67,7 @@ const ProductsPageTemplate = ({ data }) => {
         </Row>
         {data.products &&
           data.addlItem && (
-          <TabContainer id='product-selector' defaultActiveKey={data.addlItem.id}>
+          <TabContainer id='product-selector'>
             <Row>
               <Col xs={12}>
                 <Tabs>
@@ -78,29 +95,37 @@ const ProductsPageTemplate = ({ data }) => {
                 <TabContent animation='true'>
                   {data.products.edges.map(({ node }) =>
                     <TabPane key={node.id} eventKey={node.id}>
-                      <Img
-                        fluid={node.featured_media.localFile.childImageSharp.fluid}
-                      />
-                      <ItemTitle>{node.title}</ItemTitle>
-                      <ItemContent
-                        dangerouslySetInnerHTML={{
-                          __html: node.excerpt || node.acf.excerpt
-                        }}
-                      />
-                      <Btn to={node.slug}>Learn More</Btn>
+                      <Pane>
+                        <Img
+                          fluid={node.featured_media.localFile.childImageSharp.fluid}
+                        />
+                        <Content>
+                          <ItemTitle>{node.title}</ItemTitle>
+                          <ItemContent
+                            dangerouslySetInnerHTML={{
+                              __html: node.excerpt || node.acf.excerpt
+                            }}
+                          />
+                          <Btn to={node.slug}>Learn More</Btn>
+                        </Content>
+                      </Pane>
                     </TabPane>
                   )}
                   <TabPane eventKey={data.addlItem.id}>
-                    <Img
-                      fluid={data.addlItem.featured_media.localFile.childImageSharp.fluid}
-                    />
-                    <ItemTitle>{data.addlItem.title}</ItemTitle>
-                    <ItemContent
-                      dangerouslySetInnerHTML={{
-                        __html: data.addlItem.excerpt || data.addlItem.acf.excerpt
-                      }}
-                    />
-                    <Btn to={data.addlItem.slug}>Learn More</Btn>
+                    <Pane>
+                      <Img
+                        fluid={data.addlItem.featured_media.localFile.childImageSharp.fluid}
+                      />
+                      <Content>
+                        <ItemTitle>{data.addlItem.title}</ItemTitle>
+                        <ItemContent
+                          dangerouslySetInnerHTML={{
+                            __html: data.addlItem.excerpt || data.addlItem.acf.excerpt
+                          }}
+                        />
+                        <Btn to={data.addlItem.slug}>Learn More</Btn>
+                      </Content>
+                    </Pane>
                   </TabPane>
                 </TabContent>
               </Col>
