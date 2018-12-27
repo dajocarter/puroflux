@@ -51,8 +51,18 @@ const ItemTitle = styled.h2``
 const ItemContent = styled.p``
 
 export default class ProductsPageTemplate extends Component {
+  constructor (props, context) {
+    super(props, context)
+
+    this.state = {
+      key: ``
+    }
+  }
+
   render () {
+    const { key } = this.state
     const { data } = this.props
+
     return (
       <Layout>
         <HeroUnit>
@@ -69,7 +79,7 @@ export default class ProductsPageTemplate extends Component {
           </Row>
           {data.products &&
           data.addlItem && (
-            <TabContainer id='product-selector'>
+            <TabContainer id='product-selector' activeKey={key} onSelect={key => this.setState({ key })}>
               <Row>
                 <Col xs={12}>
                   <Tabs>
