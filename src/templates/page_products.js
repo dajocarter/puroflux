@@ -67,14 +67,21 @@ export default class ProductsPageTemplate extends Component {
   constructor (props, context) {
     super(props, context)
 
+    this.closePane = this.closePane.bind(this)
+
     this.state = {
       key: ``
     }
   }
 
   handleKeyChange (key) {
-    document.getElementById(`tab-content`).scrollIntoView({ behavior: 'smooth' })
+    document.getElementById(`panes`).scrollIntoView({ behavior: 'smooth' })
     this.setState({ key })
+  }
+
+  closePane () {
+    document.getElementById(`tabs`).scrollIntoView({ behavior: 'smooth' })
+    this.setState({ key: `` })
   }
 
   render () {
@@ -98,7 +105,7 @@ export default class ProductsPageTemplate extends Component {
           {data.products &&
           data.addlItem && (
             <TabContainer id='product-selector' activeKey={key} onSelect={key => this.handleKeyChange(key)}>
-              <Row>
+              <Row id='tabs'>
                 <Col xs={12}>
                   <Tabs>
                     {data.products.edges.map(({ node }) =>
@@ -120,13 +127,13 @@ export default class ProductsPageTemplate extends Component {
                   </Tabs>
                 </Col>
               </Row>
-              <Row>
+              <Row id='panes'>
                 <Col xs={12}>
-                  <TabContent id='tab-content' animation='true'>
+                  <TabContent animation='true'>
                     {data.products.edges.map(({ node }) =>
-                      <SelectablePane key={node.id} node={node} />
+                      <SelectablePane key={node.id} node={node} closePane={this.closePane} />
                     )}
-                    <SelectablePane node={data.addlItem} />
+                    <SelectablePane node={data.addlItem} closePane={this.closePane} />
                   </TabContent>
                 </Col>
               </Row>
@@ -138,7 +145,7 @@ export default class ProductsPageTemplate extends Component {
   }
 }
 
-const SelectablePane = ({ node }) => (
+const SelectablePane = ({ node, closePane }) => (
   <TabPane eventKey={node.id}>
     <Pane>
       <Img
@@ -152,7 +159,7 @@ const SelectablePane = ({ node }) => (
           }}
         />
         <Btn to={node.slug}>Learn More</Btn>
-        <CloseIcon />
+        <CloseIcon onClick={closePane} />
       </Content>
     </Pane>
   </TabPane>
