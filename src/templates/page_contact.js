@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import Layout from '../components/layout'
 import HeroUnit from '../components/Hero/HeroUnit'
 import HeroContent from '../components/Hero/HeroContent-Page'
-import Form from '../components/form'
+import Form from '../components/forms/ContactForm'
 
 const Main = styled(Container)`
   padding: 45px 15px;
