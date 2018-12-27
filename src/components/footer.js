@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Fragment, Component } from 'react'
 import { Link } from 'gatsby'
 import { Container, Row, Col, Modal } from 'react-bootstrap'
 import styled from 'styled-components'
@@ -280,7 +280,7 @@ class SignUpLink extends Component {
   render() {
     const { showForm } = this.state
     return (
-      <>
+      <Fragment>
         <SignUpBtn as="button" secondary="true" onClick={this.toggleForm}>
           Sign Up
         </SignUpBtn>
@@ -292,7 +292,7 @@ class SignUpLink extends Component {
             <NewsletterForm />
           </Modal.Body>
         </Modal>
-      </>
+      </Fragment>
     )
   }
 }
