@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'gatsby'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Modal } from 'react-bootstrap'
 import styled from 'styled-components'
 
 import Button from './styled/button'
+import NewsletterForm from './forms/NewsletterForm'
 
 const FooterWrapper = styled.footer`
   background: black;
@@ -145,7 +146,7 @@ const MenuLink = styled(Link)`
   }
 `
 
-const SignUpLink = styled(Button)`
+const SignUpBtn = styled(Button)`
   background-color: ${props => props.theme.secondary};
   color: white;
   max-width: 100%;
@@ -193,13 +194,13 @@ const Footer = props => {
               <Action>
                 Call us at{' '}
                 <PhoneNumber
-                  href='tel:805-579-0216'
-                  title='Dial (805) 579-0216'
+                  href="tel:805-579-0216"
+                  title="Dial (805) 579-0216"
                 >
                   (805) 579-0216
                 </PhoneNumber>{' '}
                 or{' '}
-                <CTAlink alt='true' to='/contact/'>
+                <CTAlink alt="true" to="/contact/">
                   Contact Us
                 </CTAlink>
               </Action>
@@ -240,9 +241,7 @@ const Footer = props => {
                 <ColumnTitle>Sign up for our newsletter</ColumnTitle>
               </Col>
               <Col sm={12} md={6} lg={5} xl={4}>
-                <SignUpLink secondary='true' to={`#`}>
-                  Sign Up
-                </SignUpLink>
+                <SignUpLink />
               </Col>
             </Row>
           </SignUpColumn>
@@ -250,10 +249,10 @@ const Footer = props => {
       </Container>
       <Copyright>
         <p>&copy; Copyright 2018 - PUROFLUX. All rights reserved.</p>
-        <a href='https://www.netlify.com'>
+        <a href="https://www.netlify.com">
           <img
-            alt='Deployed by Netlify'
-            src='https://www.netlify.com/img/global/badges/netlify-color-bg.svg'
+            alt="Deployed by Netlify"
+            src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"
           />
         </a>
       </Copyright>
@@ -262,3 +261,38 @@ const Footer = props => {
 }
 
 export default Footer
+
+class SignUpLink extends Component {
+  constructor(props, context) {
+    super(props, context)
+
+    this.toggleForm = this.toggleForm.bind(this)
+
+    this.state = {
+      showForm: false,
+    }
+  }
+
+  toggleForm() {
+    this.setState(prevState => ({ showForm: !prevState.showForm }))
+  }
+
+  render() {
+    const { showForm } = this.state
+    return (
+      <>
+        <SignUpBtn as="button" secondary="true" onClick={this.toggleForm}>
+          Sign Up
+        </SignUpBtn>
+        <Modal centered show={showForm} onHide={this.toggleForm}>
+          <Modal.Header closeButton>
+            <Modal.Title>JOIN OUR NEWSLETTER</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <NewsletterForm />
+          </Modal.Body>
+        </Modal>
+      </>
+    )
+  }
+}
