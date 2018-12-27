@@ -33,6 +33,7 @@ const Button = styled(Link)`
         ? props.theme.secondary
         : props.theme.alt};
     color: white;
+    cursor: pointer;
     text-decoration: none;
   }
 `
