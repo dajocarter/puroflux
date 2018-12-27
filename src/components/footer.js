@@ -284,15 +284,58 @@ class SignUpLink extends Component {
         <SignUpBtn as="button" secondary="true" onClick={this.toggleForm}>
           Sign Up
         </SignUpBtn>
-        <Modal centered show={showForm} onHide={this.toggleForm}>
+        <FormModal centered show={showForm} onHide={this.toggleForm}>
           <Modal.Header closeButton>
             <Modal.Title>JOIN OUR NEWSLETTER</Modal.Title>
+            <h6 className="text-center text-uppercase">
+              Enter your name and email to get news & more!
+            </h6>
           </Modal.Header>
           <Modal.Body>
             <NewsletterForm />
           </Modal.Body>
-        </Modal>
+        </FormModal>
       </Fragment>
     )
   }
 }
+
+const FormModal = styled(Modal)`
+  .modal-content {
+    background: transparent;
+    border: 0;
+    color: #fff;
+  }
+
+  .modal-header {
+    border-bottom: 0;
+    text-transform: uppercase;
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: center;
+
+    .h4 {
+      margin-bottom: 1rem;
+    }
+
+    .close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: ${({ theme }) => theme.secondary};
+      font-size: 2rem;
+      opacity: 1;
+      text-shadow: none;
+
+      &:not(:disabled) {
+        &:not(.disabled) {
+          &:hover,
+          &:focus {
+            color: ${({ theme }) => theme.primary};
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+`

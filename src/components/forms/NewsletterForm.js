@@ -11,7 +11,6 @@ export default class NewsletterForm extends Component {
         method="POST"
         action="https://formspree.io/dajocarter@gmail.com"
       >
-        <p>ENTER YOUR NAME AND EMAIL TO GET NEWS & MORE!</p>
         <FormGroup controlId="name">
           <FormLabel>Name</FormLabel>
           <FormControl type="text" name="name" placeholder="Your name" />
@@ -25,10 +24,11 @@ export default class NewsletterForm extends Component {
           name="_subject"
           value="New Newsletter Signup Form Submission"
         />
-        <input type="text" name="_gotcha" style={{ display: 'none' }} />
-        <Button type="submit" variant="light">
-          Submit
-        </Button>
+        <div className="text-center">
+          <Button type="submit" variant="light">
+            Submit
+          </Button>
+        </div>
       </form>
     )
   }

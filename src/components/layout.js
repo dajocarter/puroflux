@@ -12,13 +12,17 @@ import favicon from '../images/purofluxlogo.png'
 
 const GlobalStyles = createGlobalStyle`
   ${styledNormalize}
+  
+  .modal-backdrop.show {
+    opacity: 0.9 !important;
+  }
 `
 
 const theme = {
   primary: '#09A198',
   secondary: '#ffa200',
   alt: '#000000',
-  body: '#7F7F7F'
+  body: '#7F7F7F',
 }
 
 const Main = styled.main`
@@ -146,14 +150,14 @@ const Layout = ({ children }) => (
           <Helmet
             title={data.site.siteMetadata.title}
             link={[
-              { rel: 'shortcut icon', type: 'image/png', href: `${favicon}` }
+              { rel: 'shortcut icon', type: 'image/png', href: `${favicon}` },
             ]}
             meta={[
               { name: 'description', content: 'Sample' },
-              { name: 'keywords', content: 'sample, something' }
+              { name: 'keywords', content: 'sample, something' },
             ]}
           >
-            <html lang='en' />
+            <html lang="en" />
           </Helmet>
           <GlobalStyles />
           <Header
@@ -170,7 +174,7 @@ const Layout = ({ children }) => (
 )
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 }
 
 export default Layout
