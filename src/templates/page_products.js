@@ -51,9 +51,7 @@ const Pane = styled.div`
     grid-template-columns: minmax(600px,1fr) 1fr;
   }
 `
-const Content = styled.div``
-const ItemTitle = styled.h2``
-const ItemContent = styled.p``
+
 const CloseIcon = styled(FaTimes)`
   color: ${({ theme }) => theme.secondary};
   position: absolute;
@@ -151,16 +149,16 @@ const SelectablePane = ({ node, closePane }) => (
       <Img
         fluid={node.featured_media.localFile.childImageSharp.fluid}
       />
-      <Content>
-        <ItemTitle>{node.title}</ItemTitle>
-        <ItemContent
+      <div>
+        <h2>{node.title}</h2>
+        <p
           dangerouslySetInnerHTML={{
             __html: node.excerpt || node.acf.excerpt
           }}
         />
         <Btn to={node.slug}>Learn More</Btn>
         <CloseIcon onClick={closePane} />
-      </Content>
+      </div>
     </Pane>
   </TabPane>
 )
