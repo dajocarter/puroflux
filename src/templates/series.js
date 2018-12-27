@@ -10,7 +10,7 @@ import HeroUnit from '../components/Hero/HeroUnit'
 import ProductNav from '../components/productNav'
 import Accordion, {
   AccordionTitle,
-  AccordionContent
+  AccordionContent,
 } from '../components/Accordion'
 import Btn from '../components/styled/button'
 
@@ -83,7 +83,7 @@ const AccordionRow = styled(Row)`
     }
 
     &:not(:first-child) {
-      span { 
+      span {
         margin-left: 5px;
       }
     }
@@ -111,9 +111,9 @@ const ProductTitle = styled.h2`
 const RelatedModel = styled(Col)`
   text-align: center;
 
-    &:not(:last-of-type) {
-      margin-bottom: 2rem;
-    }
+  &:not(:last-of-type) {
+    margin-bottom: 2rem;
+  }
 `
 
 const RelatedTitle = styled.h4`
@@ -133,7 +133,11 @@ const DownloadCol = ({ title, file }) => (
       <PDFicon />
       <p>
         <span>{title}</span>
-        <a href={`${process.env.SOURCE_URL}${file.url.source_url}`} target='_blank' rel='noopener noreferrer'>
+        <a
+          href={`${process.env.SOURCE_URL}${file.url.source_url}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           DOWNLOAD
         </a>
       </p>
@@ -146,12 +150,12 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
     <HeroUnit>
       <Row>
         <Col>
-          <ProductNav light='true' />
+          <ProductNav light="true" />
         </Col>
       </Row>
       <Row>
         <Col>
-          <div className='content'>
+          <div className="content">
             <SeriesTitle>{series.title} Series</SeriesTitle>
             <SeriesDescription>{series.acf.description}</SeriesDescription>
           </div>
@@ -215,7 +219,8 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
                         <ul>
                           {model.acf.model_stats.map((stat, s) => (
                             <li key={s}>
-                              <span>{stat.title}:</span> <span>{stat.value}</span>
+                              <span>{stat.title}:</span>{' '}
+                              <span>{stat.value}</span>
                             </li>
                           ))}
                         </ul>
@@ -228,15 +233,19 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
                           {model.acf.model_files.map((mf, f) => (
                             <li key={f}>
                               {mf.title}:
-                              {mf.file ? <a
-                                href={`${process.env.SOURCE_URL}${
-                                  mf.file.url.source_url
-                                }`}
-                                target='_blank'
-                                rel='noopener noreferrer'
-                              >
-                                DOWNLOAD
-                              </a> : <span>* Consult Factory</span>}
+                              {mf.file ? (
+                                <a
+                                  href={`${process.env.SOURCE_URL}${
+                                    mf.file.url.source_url
+                                  }`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  DOWNLOAD
+                                </a>
+                              ) : (
+                                <span>* Consult Factory</span>
+                              )}
                             </li>
                           ))}
                         </ul>
@@ -266,15 +275,19 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
           <Row>
             {series.acf.products[0].acf &&
               series.acf.products[0].acf.series &&
-              series.acf.products[0].acf.series.filter(rs => rs.slug !== pageContext.slug).map(relatedSeries => (
-                <RelatedModel key={relatedSeries.id} xs={12} md={4}>
-                  <RelatedTitle>{relatedSeries.title}</RelatedTitle>
-                  <RelatedExcerpt>
-                    {relatedSeries.acf.description}
-                  </RelatedExcerpt>
-                  <RelatedBtn primary='true' to={relatedSeries.slug}>View Product</RelatedBtn>
-                </RelatedModel>
-              ))}
+              series.acf.products[0].acf.series
+                .filter(rs => rs.slug !== pageContext.slug)
+                .map(relatedSeries => (
+                  <RelatedModel key={relatedSeries.id} xs={12} md={4}>
+                    <RelatedTitle>{relatedSeries.title}</RelatedTitle>
+                    <RelatedExcerpt>
+                      {relatedSeries.acf.description}
+                    </RelatedExcerpt>
+                    <RelatedBtn primary="true" to={relatedSeries.slug}>
+                      View Product
+                    </RelatedBtn>
+                  </RelatedModel>
+                ))}
           </Row>
         </>
       )}

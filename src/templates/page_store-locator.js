@@ -8,7 +8,7 @@ import HeroUnit from '../components/Hero/HeroUnit'
 import HeroContent from '../components/Hero/HeroContent-Page'
 import Accordion, {
   AccordionTitle,
-  AccordionContent
+  AccordionContent,
 } from '../components/Accordion'
 
 const Main = styled(Container)`
@@ -36,7 +36,7 @@ const Firms = styled.div`
     ul {
       grid-template-columns: 1fr;
     }
-    
+
     li {
       &:nth-child(odd) {
         order: 1;
@@ -112,15 +112,16 @@ const groupRepsByState = reps => {
                 )}
               </li>
               <li>
-                <span>Address:</span><br />
+                <span>Address:</span>
+                <br />
                 <span dangerouslySetInnerHTML={{ __html: firm.acf.address }} />
               </li>
               <li>
                 <span>Website:</span>{' '}
                 <a
                   href={firm.acf.website}
-                  target='_blank'
-                  rel='noopener noreferrer nofollow'
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
                 >
                   {firm.acf.website}
                 </a>

@@ -67,7 +67,12 @@ const OverviewTitle = styled.h2`
 const OverviewContent = styled.div`
   color: ${({ theme }) => theme.body};
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     color: ${({ theme }) => theme.primary};
   }
 
@@ -111,37 +116,37 @@ const ProductTemplate = ({ data: { product } }) => (
           product.acf.file.url &&
           product.acf.file.title)) && (
         <Row>
-            <FeaturedProduct>
+          <FeaturedProduct>
             {product.acf.title && (
               <FeaturedTitle>{product.acf.title}</FeaturedTitle>
             )}
             {product.acf.image &&
-                product.acf.image.localFile &&
-                product.acf.image.localFile.childImageSharp &&
-                product.acf.image.localFile.childImageSharp.fixed && (
-              <div>
+              product.acf.image.localFile &&
+              product.acf.image.localFile.childImageSharp &&
+              product.acf.image.localFile.childImageSharp.fixed && (
+                <div>
                   <FeaturedImg
-                  fixed={product.acf.image.localFile.childImageSharp.fixed}
-                />
+                    fixed={product.acf.image.localFile.childImageSharp.fixed}
+                  />
                 </div>
-            )}
+              )}
             {product.acf.file &&
-                product.acf.file.url &&
-                product.acf.file.title && (
-              <FeaturedBtn
-                  as='a'
-                  primary='true'
+              product.acf.file.url &&
+              product.acf.file.title && (
+                <FeaturedBtn
+                  as="a"
+                  primary="true"
                   href={`${process.env.SOURCE_URL}${
-                  product.acf.file.url.source_url
-                }`}
-                  target='_blank'
-                  rel='noopener noreferrer'
-              >
+                    product.acf.file.url.source_url
+                  }`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {product.acf.file.title}
                 </FeaturedBtn>
-            )}
+              )}
           </FeaturedProduct>
-          </Row>
+        </Row>
       )}
       {product.acf.series && (
         <Row>
@@ -152,7 +157,9 @@ const ProductTemplate = ({ data: { product } }) => (
                 fixed={series.featured_media.localFile.childImageSharp.fixed}
               />
               <SeriesDescrip>{series.acf.description}</SeriesDescrip>
-              <SeriesBtn primary='true' to={series.slug}>View Product</SeriesBtn>
+              <SeriesBtn primary="true" to={series.slug}>
+                View Product
+              </SeriesBtn>
             </Series>
           ))}
         </Row>

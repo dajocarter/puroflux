@@ -136,7 +136,7 @@ const Content = styled(Collapse)`
     }
   }
 
-  li {  
+  li {
     a {
       margin-left: 5px;
     }
