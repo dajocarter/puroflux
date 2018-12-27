@@ -3,37 +3,42 @@ import { FormGroup, FormControl, FormLabel, Button } from 'react-bootstrap'
 
 import 'bootstrap/dist/css/bootstrap.css'
 
-export default class Form extends Component {
-  render () {
+export default class Request3dForm extends Component {
+  render() {
     return (
       <form
-        name='contact'
-        method='POST'
-        action='https://formspree.io/dajocarter@gmail.com'
+        name="request3D"
+        method="POST"
+        action="https://formspree.io/dajocarter@gmail.com"
       >
-        <FormGroup controlId='name'>
+        <p>ENTER YOUR NAME AND EMAIL TO REQUEST A 3D DRAWING</p>
+        <FormGroup controlId="name">
           <FormLabel>Name</FormLabel>
-          <FormControl type='text' name='name' placeholder='Your name' />
+          <FormControl type="text" name="name" placeholder="Your name" />
         </FormGroup>
-        <FormGroup controlId='email'>
+        <FormGroup controlId="email">
           <FormLabel>Email</FormLabel>
-          <FormControl type='email' name='_replyto' placeholder='Your email' />
+          <FormControl type="email" name="_replyto" placeholder="Your email" />
         </FormGroup>
-        <FormGroup controlId='message'>
-          <FormLabel>Message</FormLabel>
-          <FormControl as='textarea' placeholder='Your message' />
+        <FormGroup controlId="company">
+          <FormLabel>Company</FormLabel>
+          <FormControl type="text" name="company" placeholder="Your company" />
         </FormGroup>
-        <FormGroup controlId='location'>
-          <FormLabel>Location</FormLabel>
-          <FormControl type='text' placeholder='Your location' />
+        <FormGroup controlId="model">
+          <FormLabel>Model</FormLabel>
+          <FormControl
+            type="text"
+            name="model"
+            placeholder="Requested model name"
+          />
         </FormGroup>
         <input
-          type='hidden'
-          name='_subject'
-          value='New Contact Form Submission'
+          type="hidden"
+          name="_subject"
+          value="New 3D Request Form Submission"
         />
-        <input type='text' name='_gotcha' style={{ display: 'none' }} />
-        <Button type='submit' variant='light'>
+        <input type="text" name="_gotcha" style={{ display: 'none' }} />
+        <Button type="submit" variant="light">
           Submit
         </Button>
       </form>
