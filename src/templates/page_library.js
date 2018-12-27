@@ -21,7 +21,7 @@ const Content = styled.div`
 const Library = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  
+
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -42,12 +42,19 @@ const LibraryGroup = styled.div`
     text-transform: uppercase;
   }
   h3 {
-    color: ${props => props.theme.primary};
+    color: ${({ theme }) => theme.primary};
   }
   ul,
   a {
-    color: #ffa200;
+    color: ${({ theme }) => theme.secondary};
     text-decoration: none;
+  }
+
+  a {
+    &:hover,
+    &:focus {
+      color: ${({ theme }) => theme.primary};
+    }
   }
 `
 
@@ -79,8 +86,8 @@ const LibraryTemplate = ({ data: { page } }) => (
                                 {file && file.url && file.url.source_url ? (
                                   <a
                                     href={file.url.source_url}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                   >
                                     {title}
                                   </a>
