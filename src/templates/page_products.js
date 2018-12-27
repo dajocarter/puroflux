@@ -48,7 +48,7 @@ const Pane = styled.div`
   }
 
   @media (min-width: 991px) {
-    grid-template-columns: minmax(600px,2fr) 1fr;
+    grid-template-columns: minmax(600px,1fr) 1fr;
   }
 `
 const Content = styled.div``
