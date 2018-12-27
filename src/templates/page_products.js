@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import { Container, Row, Col, TabContainer, TabContent, TabPane, Nav } from 'react-bootstrap'
@@ -50,94 +50,95 @@ const Content = styled.div``
 const ItemTitle = styled.h2``
 const ItemContent = styled.p``
 
-const ProductsPageTemplate = ({ data }) => {
-  return (
-    <Layout>
-      <HeroUnit>
-        <HeroContent
-          html={data.page.acf.content}
-          buttons={data.page.acf.buttons}
-        />
-      </HeroUnit>
-      <Main>
-        <Row>
-          <Col xs={12}>
-            <ProductNav />
-          </Col>
-        </Row>
-        {data.products &&
+export default class ProductsPageTemplate extends Component {
+  render () {
+    const { data } = this.props
+    return (
+      <Layout>
+        <HeroUnit>
+          <HeroContent
+            html={data.page.acf.content}
+            buttons={data.page.acf.buttons}
+          />
+        </HeroUnit>
+        <Main>
+          <Row>
+            <Col xs={12}>
+              <ProductNav />
+            </Col>
+          </Row>
+          {data.products &&
           data.addlItem && (
-          <TabContainer id='product-selector'>
-            <Row>
-              <Col xs={12}>
-                <Tabs>
-                  {data.products.edges.map(({ node }) =>
-                    <Nav.Item key={node.id}>
-                      <Nav.Link eventKey={node.id}>
+            <TabContainer id='product-selector'>
+              <Row>
+                <Col xs={12}>
+                  <Tabs>
+                    {data.products.edges.map(({ node }) =>
+                      <Nav.Item key={node.id}>
+                        <Nav.Link eventKey={node.id}>
+                          <Img
+                            fluid={node.featured_media.localFile.childImageSharp.fluid}
+                          />
+                        </Nav.Link>
+                      </Nav.Item>
+                    )}
+                    <Nav.Item>
+                      <Nav.Link eventKey={data.addlItem.id}>
                         <Img
-                          fluid={node.featured_media.localFile.childImageSharp.fluid}
+                          fluid={data.addlItem.featured_media.localFile.childImageSharp.fluid}
                         />
                       </Nav.Link>
                     </Nav.Item>
-                  )}
-                  <Nav.Item>
-                    <Nav.Link eventKey={data.addlItem.id}>
-                      <Img
-                        fluid={data.addlItem.featured_media.localFile.childImageSharp.fluid}
-                      />
-                    </Nav.Link>
-                  </Nav.Item>
-                </Tabs>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12}>
-                <TabContent animation='true'>
-                  {data.products.edges.map(({ node }) =>
-                    <TabPane key={node.id} eventKey={node.id}>
+                  </Tabs>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12}>
+                  <TabContent animation='true'>
+                    {data.products.edges.map(({ node }) =>
+                      <TabPane key={node.id} eventKey={node.id}>
+                        <Pane>
+                          <Img
+                            fluid={node.featured_media.localFile.childImageSharp.fluid}
+                          />
+                          <Content>
+                            <ItemTitle>{node.title}</ItemTitle>
+                            <ItemContent
+                              dangerouslySetInnerHTML={{
+                                __html: node.excerpt || node.acf.excerpt
+                              }}
+                            />
+                            <Btn to={node.slug}>Learn More</Btn>
+                          </Content>
+                        </Pane>
+                      </TabPane>
+                    )}
+                    <TabPane eventKey={data.addlItem.id}>
                       <Pane>
                         <Img
-                          fluid={node.featured_media.localFile.childImageSharp.fluid}
+                          fluid={data.addlItem.featured_media.localFile.childImageSharp.fluid}
                         />
                         <Content>
-                          <ItemTitle>{node.title}</ItemTitle>
+                          <ItemTitle>{data.addlItem.title}</ItemTitle>
                           <ItemContent
                             dangerouslySetInnerHTML={{
-                              __html: node.excerpt || node.acf.excerpt
+                              __html: data.addlItem.excerpt || data.addlItem.acf.excerpt
                             }}
                           />
-                          <Btn to={node.slug}>Learn More</Btn>
+                          <Btn to={data.addlItem.slug}>Learn More</Btn>
                         </Content>
                       </Pane>
                     </TabPane>
-                  )}
-                  <TabPane eventKey={data.addlItem.id}>
-                    <Pane>
-                      <Img
-                        fluid={data.addlItem.featured_media.localFile.childImageSharp.fluid}
-                      />
-                      <Content>
-                        <ItemTitle>{data.addlItem.title}</ItemTitle>
-                        <ItemContent
-                          dangerouslySetInnerHTML={{
-                            __html: data.addlItem.excerpt || data.addlItem.acf.excerpt
-                          }}
-                        />
-                        <Btn to={data.addlItem.slug}>Learn More</Btn>
-                      </Content>
-                    </Pane>
-                  </TabPane>
-                </TabContent>
-              </Col>
-            </Row>
-          </TabContainer>
-        )}
-      </Main>
-    </Layout>
-  )
+                  </TabContent>
+                </Col>
+              </Row>
+            </TabContainer>
+          )}
+        </Main>
+      </Layout>
+    )
+  }
 }
-
-export default ProductsPageTemplate
 
 export const query = graphql`
   query ProductsPageQuery($slug: String!) {
