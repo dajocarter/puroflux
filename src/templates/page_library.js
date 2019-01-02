@@ -7,57 +7,6 @@ import Layout from '../components/layout'
 import HeroUnit from '../components/Hero/HeroUnit'
 import HeroContent from '../components/Hero/HeroContent-Page'
 
-const Main = styled.div`
-  padding: 45px 15px;
-  background-color: black;
-`
-
-const Content = styled.div`
-  margin: 0 auto;
-  max-width: 960px;
-  padding: 1.45rem 1.0875rem;
-`
-
-const Library = styled.div`
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: 991px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-`
-
-const LibraryGroup = styled.div`
-  h2,
-  h3 {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  h2 {
-    color: white;
-    text-transform: uppercase;
-  }
-  h3 {
-    color: ${({ theme }) => theme.primary};
-  }
-  ul,
-  a {
-    color: ${({ theme }) => theme.secondary};
-    text-decoration: none;
-  }
-
-  a {
-    &:hover,
-    &:focus {
-      color: ${({ theme }) => theme.primary};
-    }
-  }
-`
-
 const LibraryTemplate = ({ data: { page } }) => (
   <Layout>
     <HeroUnit>
@@ -148,6 +97,57 @@ export const query = graphql`
           }
         }
       }
+    }
+  }
+`
+
+const Main = styled.div`
+  padding: 45px 15px;
+  background-color: black;
+`
+
+const Content = styled.div`
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 1.45rem 1.0875rem;
+`
+
+const Library = styled.div`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 991px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`
+
+const LibraryGroup = styled.div`
+  h2,
+  h3 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  h2 {
+    color: white;
+    text-transform: uppercase;
+  }
+  h3 {
+    color: ${({ theme }) => theme.primary};
+  }
+  ul,
+  a {
+    color: ${({ theme }) => theme.secondary};
+    text-decoration: none;
+  }
+
+  a {
+    &:hover,
+    &:focus {
+      color: ${({ theme }) => theme.primary};
     }
   }
 `

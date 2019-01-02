@@ -3,6 +3,52 @@ import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
+const HeroUnit = props => (
+  <StaticQuery
+    query={graphql`
+      query HeroUnitQuery {
+        defaultHero: wordpressWpMedia(
+          slug: { eq: "puroflux_home_hero_sample" }
+        ) {
+          localFile {
+            childImageSharp {
+              fluid(maxHeight: 450) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+        }
+        homeHero: wordpressWpMedia(slug: { eq: "puroflux_home_hero_pf_4060" }) {
+          localFile {
+            childImageSharp {
+              fluid(maxHeight: 450) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+        }
+      }
+    `}
+    render={data => (
+      <Background isHome={props.isHome}>
+        {data.homeHero &&
+          data.defaultHero && (
+            <HeroImg
+              fluid={
+                props.isHome
+                  ? data.homeHero.localFile.childImageSharp.fluid
+                  : data.defaultHero.localFile.childImageSharp.fluid
+              }
+            />
+          )}
+        <Content>{props.children}</Content>
+      </Background>
+    )}
+  />
+)
+
+export default HeroUnit
+
 const Background = styled.div`
   height: 450px;
   width: 100%;
@@ -53,49 +99,3 @@ const Content = styled.div`
     }
   }
 `
-
-const HeroUnit = props => (
-  <StaticQuery
-    query={graphql`
-      query HeroUnitQuery {
-        defaultHero: wordpressWpMedia(
-          slug: { eq: "puroflux_home_hero_sample" }
-        ) {
-          localFile {
-            childImageSharp {
-              fluid(maxHeight: 450) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
-        homeHero: wordpressWpMedia(slug: { eq: "puroflux_home_hero_pf_4060" }) {
-          localFile {
-            childImageSharp {
-              fluid(maxHeight: 450) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
-      }
-    `}
-    render={data => (
-      <Background isHome={props.isHome}>
-        {data.homeHero &&
-          data.defaultHero && (
-            <HeroImg
-              fluid={
-                props.isHome
-                  ? data.homeHero.localFile.childImageSharp.fluid
-                  : data.defaultHero.localFile.childImageSharp.fluid
-              }
-            />
-          )}
-        <Content>{props.children}</Content>
-      </Background>
-    )}
-  />
-)
-
-export default HeroUnit

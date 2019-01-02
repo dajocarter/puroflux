@@ -19,77 +19,6 @@ import HeroContent from '../components/Hero/HeroContent-Page'
 import ProductNav from '../components/productNav'
 import Btn from '../components/styled/button'
 
-const Main = styled(Container)`
-  padding: 45px 15px;
-`
-
-const Tabs = styled(Nav)`
-  &.nav {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(1, 1fr);
-
-    @media (min-width: 768px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (min-width: 991px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .nav-link {
-    padding: 0;
-  }
-`
-
-const Pane = styled.div`
-  display: grid;
-  grid-gap: 1rem;
-  align-items: center;
-  grid-template-columns: 1fr;
-
-  @media (max-width: 990px) {
-    margin-top: 2rem;
-  }
-
-  @media (min-width: 991px) {
-    grid-template-columns: minmax(600px, 1fr) 1fr;
-  }
-`
-
-const Icon = css`
-  color: ${({ theme }) => theme.secondary};
-  font-size: 1.25rem;
-  cursor: pointer;
-`
-
-const CloseIcon = styled(FaTimes)`
-  position: absolute;
-  top: 0;
-  right: 1rem;
-  ${Icon};
-`
-
-const Arrows = styled.div`
-  position: absolute;
-  bottom: 0;
-  right: 1rem;
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: 1fr 1fr;
-`
-
-const LeftArrow = styled(FaArrowLeft)`
-  ${Icon};
-`
-
-const RightArrow = styled(FaArrowRight)`
-  ${Icon};
-`
-
 export default class ProductsPageTemplate extends Component {
   constructor(props, context) {
     super(props, context)
@@ -296,4 +225,75 @@ export const query = graphql`
       }
     }
   }
+`
+
+const Main = styled(Container)`
+  padding: 45px 15px;
+`
+
+const Tabs = styled(Nav)`
+  &.nav {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(1, 1fr);
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 991px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .nav-link {
+    padding: 0;
+  }
+`
+
+const Pane = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+  align-items: center;
+  grid-template-columns: 1fr;
+
+  @media (max-width: 990px) {
+    margin-top: 2rem;
+  }
+
+  @media (min-width: 991px) {
+    grid-template-columns: minmax(600px, 1fr) 1fr;
+  }
+`
+
+const Icon = css`
+  color: ${({ theme }) => theme.secondary};
+  font-size: 1.25rem;
+  cursor: pointer;
+`
+
+const CloseIcon = styled(FaTimes)`
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  ${Icon};
+`
+
+const Arrows = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 1rem;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+`
+
+const LeftArrow = styled(FaArrowLeft)`
+  ${Icon};
+`
+
+const RightArrow = styled(FaArrowRight)`
+  ${Icon};
 `

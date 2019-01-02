@@ -10,71 +10,6 @@ import HeroContent from '../components/Hero/HeroContent-Page'
 import FlexibleContent from '../components/flexible-content'
 import Btn from '../components/styled/button'
 
-const FeatureContainer = styled(Container)`
-  margin-top: 45px;
-  margin-bottom: 45px;
-
-  > .row > .col {
-    position: relative;
-    height: 73px;
-  }
-`
-
-const Column = styled(Col)`
-  > .gatsby-image-outer-wrapper {
-    width: 100%;
-  }
-
-  blockquote {
-    border-left: ${props => `0.5rem solid ${props.theme.primary}`};
-    padding: 1rem;
-    background: #f7f7f7;
-    font-style: italic;
-
-    > p:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  &:first-of-type {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  @media (max-width: 991px) {
-    &:last-of-type {
-      margin-top: 2rem;
-    }
-  }
-`
-
-const FeatureImage = styled(Img)`
-  height: auto;
-  width: 100%;
-`
-
-const FeatureTitle = styled.h2`
-  border-bottom: ${props => `3px solid ${props.theme.primary}`};
-  color: #7f7f7f;
-  padding: 0 0.5rem 0.5rem;
-  font-family: 'Josefin Sans', sans-serif;
-  text-transform: uppercase;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-
-  @media (min-width: 992px) {
-    left: 75%;
-    transform: translateX(-75%);
-  }
-`
-
-const WPcontent = styled.div`
-  color: ${props => props.theme.body};
-`
-
 const IndexPage = () => (
   <StaticQuery
     query={graphql`
@@ -194,3 +129,68 @@ const IndexPage = () => (
 )
 
 export default IndexPage
+
+const FeatureContainer = styled(Container)`
+  margin-top: 45px;
+  margin-bottom: 45px;
+
+  > .row > .col {
+    position: relative;
+    height: 73px;
+  }
+`
+
+const Column = styled(Col)`
+  > .gatsby-image-outer-wrapper {
+    width: 100%;
+  }
+
+  blockquote {
+    border-left: ${props => `0.5rem solid ${props.theme.primary}`};
+    padding: 1rem;
+    background: #f7f7f7;
+    font-style: italic;
+
+    > p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &:first-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: 991px) {
+    &:last-of-type {
+      margin-top: 2rem;
+    }
+  }
+`
+
+const FeatureImage = styled(Img)`
+  height: auto;
+  width: 100%;
+`
+
+const FeatureTitle = styled.h2`
+  border-bottom: ${props => `3px solid ${props.theme.primary}`};
+  color: #7f7f7f;
+  padding: 0 0.5rem 0.5rem;
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform: uppercase;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  @media (min-width: 992px) {
+    left: 75%;
+    transform: translateX(-75%);
+  }
+`
+
+const WPcontent = styled.div`
+  color: ${props => props.theme.body};
+`

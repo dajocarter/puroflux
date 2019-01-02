@@ -14,119 +14,6 @@ import Accordion, {
 } from '../components/Accordion'
 import Btn from '../components/styled/button'
 
-const Main = styled(Container)`
-  padding: 45px 15px;
-`
-
-const SeriesTitle = styled.h1`
-  margin-top: 3rem;
-  text-transform: uppercase;
-`
-const SeriesDescription = styled.p`
-  font-size: 18px;
-  text-transform: uppercase;
-`
-
-const FeaturedImg = styled(Img)``
-const FeaturedTitle = styled.h2`
-  color: ${props => props.theme.primary};
-  font-size: 36px;
-`
-const FeaturedContent = styled.div`
-  color: ${props => props.theme.body};
-  font-size: 18px;
-`
-
-const DownloadRow = styled(Row)`
-  margin-top: 3rem;
-`
-
-const Download = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  @media (max-width: 383px) {
-    justify-content: flex-start;
-  }
-
-  p {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0;
-    margin-left: 10px;
-    color: ${props => props.theme.body};
-  }
-
-  a {
-    text-transform: uppercase;
-    &,
-    &:hover {
-      color: ${props => props.theme.secondary};
-    }
-  }
-`
-const PDFicon = styled(FaFilePdf)`
-  color: ${props => props.theme.primary};
-  font-size: 3rem;
-`
-
-const AccordionRow = styled(Row)`
-  ul {
-    &:first-child {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-
-      @media (max-width: 575px) {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    &:not(:first-child) {
-      span {
-        margin-left: 5px;
-      }
-    }
-  }
-`
-
-const ModelTitle = styled.h2`
-  text-align: center;
-  margin-top: 4rem;
-  margin-bottom: 1rem;
-`
-const ModelDescription = styled.p`
-  text-align: center;
-`
-const ModelNotes = styled.p`
-  text-align: center;
-`
-
-const ProductTitle = styled.h2`
-  margin-top: 4rem;
-  margin-bottom: 3rem;
-  text-align: center;
-`
-
-const RelatedModel = styled(Col)`
-  text-align: center;
-
-  &:not(:last-of-type) {
-    margin-bottom: 2rem;
-  }
-`
-
-const RelatedTitle = styled.h4`
-  color: ${props => props.theme.primary};
-  font-size: 1.5rem;
-`
-
-const RelatedExcerpt = styled.p`
-  color: ${props => props.theme.body};
-`
-
-const RelatedBtn = styled(Btn)``
-
 const DownloadCol = ({ title, file }) => (
   <Col xs={12} sm={4}>
     <Download>
@@ -365,3 +252,116 @@ export const query = graphql`
     }
   }
 `
+
+const Main = styled(Container)`
+  padding: 45px 15px;
+`
+
+const SeriesTitle = styled.h1`
+  margin-top: 3rem;
+  text-transform: uppercase;
+`
+const SeriesDescription = styled.p`
+  font-size: 18px;
+  text-transform: uppercase;
+`
+
+const FeaturedImg = styled(Img)``
+const FeaturedTitle = styled.h2`
+  color: ${props => props.theme.primary};
+  font-size: 36px;
+`
+const FeaturedContent = styled.div`
+  color: ${props => props.theme.body};
+  font-size: 18px;
+`
+
+const DownloadRow = styled(Row)`
+  margin-top: 3rem;
+`
+
+const Download = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 383px) {
+    justify-content: flex-start;
+  }
+
+  p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    margin-left: 10px;
+    color: ${props => props.theme.body};
+  }
+
+  a {
+    text-transform: uppercase;
+    &,
+    &:hover {
+      color: ${props => props.theme.secondary};
+    }
+  }
+`
+const PDFicon = styled(FaFilePdf)`
+  color: ${props => props.theme.primary};
+  font-size: 3rem;
+`
+
+const AccordionRow = styled(Row)`
+  ul {
+    &:first-child {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      @media (max-width: 575px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &:not(:first-child) {
+      span {
+        margin-left: 5px;
+      }
+    }
+  }
+`
+
+const ModelTitle = styled.h2`
+  text-align: center;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+`
+const ModelDescription = styled.p`
+  text-align: center;
+`
+const ModelNotes = styled.p`
+  text-align: center;
+`
+
+const ProductTitle = styled.h2`
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+  text-align: center;
+`
+
+const RelatedModel = styled(Col)`
+  text-align: center;
+
+  &:not(:last-of-type) {
+    margin-bottom: 2rem;
+  }
+`
+
+const RelatedTitle = styled.h4`
+  color: ${props => props.theme.primary};
+  font-size: 1.5rem;
+`
+
+const RelatedExcerpt = styled.p`
+  color: ${props => props.theme.body};
+`
+
+const RelatedBtn = styled(Btn)``

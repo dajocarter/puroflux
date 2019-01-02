@@ -8,91 +8,6 @@ import Layout from '../components/layout'
 import ProductNav from '../components/productNav'
 import Btn from '../components/styled/button'
 
-const Main = styled(Container)`
-  padding: 45px 15px;
-`
-
-const ProductTitle = styled.h1`
-  margin-top: 3rem;
-  text-align: center;
-`
-
-const ProductDescription = styled.p`
-  text-align: center;
-  color: ${({ theme }) => theme.body};
-  margin-bottom: 3rem;
-`
-
-const FeaturedProduct = styled(Col)`
-  text-align: center;
-`
-
-const FeaturedTitle = styled.p`
-  color: ${({ theme }) => theme.primary};
-  font-weight: bold;
-  text-transform: uppercase;
-`
-
-const FeaturedImg = styled(Img)``
-
-const FeaturedBtn = styled(Btn)`
-  margin-top: 2rem;
-`
-
-const Series = styled(Col)`
-  margin-bottom: 2rem;
-  text-align: center;
-`
-
-const SeriesTitle = styled.p`
-  color: ${({ theme }) => theme.primary};
-  font-weight: bold;
-  text-transform: uppercase;
-`
-
-const SeriesImg = styled(Img)``
-
-const SeriesDescrip = styled.p`
-  color: ${({ theme }) => theme.body};
-  font-size: 0.85rem;
-`
-
-const SeriesBtn = styled(Btn)``
-
-const OverviewTitle = styled.h2`
-  margin-top: 3rem;
-  margin-bottom: 2rem;
-`
-
-const OverviewContent = styled.div`
-  color: ${({ theme }) => theme.body};
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: ${({ theme }) => theme.primary};
-  }
-
-  a {
-    color: ${({ theme }) => theme.secondary};
-
-    &:hover,
-    &:focus {
-      color: ${({ theme }) => theme.secondary};
-      text-decoration-color: ${({ theme }) => theme.primary};
-    }
-  }
-
-  iframe {
-    display: block;
-    margin: 1rem auto;
-    max-width: 100%;
-  }
-`
-
 const ProductTemplate = ({ data: { product } }) => (
   <Layout>
     <Main>
@@ -220,5 +135,90 @@ export const query = graphql`
         }
       }
     }
+  }
+`
+
+const Main = styled(Container)`
+  padding: 45px 15px;
+`
+
+const ProductTitle = styled.h1`
+  margin-top: 3rem;
+  text-align: center;
+`
+
+const ProductDescription = styled.p`
+  text-align: center;
+  color: ${({ theme }) => theme.body};
+  margin-bottom: 3rem;
+`
+
+const FeaturedProduct = styled(Col)`
+  text-align: center;
+`
+
+const FeaturedTitle = styled.p`
+  color: ${({ theme }) => theme.primary};
+  font-weight: bold;
+  text-transform: uppercase;
+`
+
+const FeaturedImg = styled(Img)``
+
+const FeaturedBtn = styled(Btn)`
+  margin-top: 2rem;
+`
+
+const Series = styled(Col)`
+  margin-bottom: 2rem;
+  text-align: center;
+`
+
+const SeriesTitle = styled.p`
+  color: ${({ theme }) => theme.primary};
+  font-weight: bold;
+  text-transform: uppercase;
+`
+
+const SeriesImg = styled(Img)``
+
+const SeriesDescrip = styled.p`
+  color: ${({ theme }) => theme.body};
+  font-size: 0.85rem;
+`
+
+const SeriesBtn = styled(Btn)``
+
+const OverviewTitle = styled.h2`
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+`
+
+const OverviewContent = styled.div`
+  color: ${({ theme }) => theme.body};
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: ${({ theme }) => theme.primary};
+  }
+
+  a {
+    color: ${({ theme }) => theme.secondary};
+
+    &:hover,
+    &:focus {
+      color: ${({ theme }) => theme.secondary};
+      text-decoration-color: ${({ theme }) => theme.primary};
+    }
+  }
+
+  iframe {
+    display: block;
+    margin: 1rem auto;
+    max-width: 100%;
   }
 `

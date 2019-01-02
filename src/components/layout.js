@@ -10,25 +10,6 @@ import Header from './header'
 import Footer from './footer'
 import favicon from '../images/purofluxlogo.png'
 
-const GlobalStyles = createGlobalStyle`
-  ${styledNormalize}
-  
-  .modal-backdrop.show {
-    opacity: 0.9 !important;
-  }
-`
-
-const theme = {
-  primary: '#09A198',
-  secondary: '#ffa200',
-  alt: '#000000',
-  body: '#7F7F7F',
-}
-
-const Main = styled.main`
-  font-family: 'Lato', sans-serif;
-`
-
 const Layout = ({ children }) => (
   <StaticQuery
     query={graphql`
@@ -178,3 +159,22 @@ Layout.propTypes = {
 }
 
 export default Layout
+
+const GlobalStyles = createGlobalStyle`
+  ${styledNormalize}
+  
+  .modal-backdrop.show {
+    opacity: 0.9 !important;
+  }
+`
+
+const theme = {
+  primary: '#09A198',
+  secondary: '#ffa200',
+  alt: '#000000',
+  body: '#7F7F7F',
+}
+
+const Main = styled.main`
+  font-family: 'Lato', sans-serif;
+`

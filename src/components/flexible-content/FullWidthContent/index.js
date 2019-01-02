@@ -4,6 +4,32 @@ import styled from 'styled-components'
 
 import Btn from '../../styled/button'
 
+const FullWidthContent = props => {
+  return (
+    <Row>
+      <Container>
+        {props.acf.background_image && (
+          <BGimg
+            fluid={props.acf.background_image.localFile.childImageSharp.fluid}
+          />
+        )}
+        <Content dangerouslySetInnerHTML={{ __html: props.acf.content }} />
+        {props.acf.link && (
+          <ButtonLink
+            secondary="true"
+            to={`/${props.acf.link.url}/`}
+            target={props.acf.link.target}
+          >
+            {props.acf.link.title}
+          </ButtonLink>
+        )}
+      </Container>
+    </Row>
+  )
+}
+
+export default FullWidthContent
+
 const Row = styled.div`
   background-color: rgba(127, 127, 127, 0.1);
 `
@@ -35,29 +61,3 @@ const Content = styled.div`
 `
 
 const ButtonLink = styled(Btn)``
-
-const FullWidthContent = props => {
-  return (
-    <Row>
-      <Container>
-        {props.acf.background_image && (
-          <BGimg
-            fluid={props.acf.background_image.localFile.childImageSharp.fluid}
-          />
-        )}
-        <Content dangerouslySetInnerHTML={{ __html: props.acf.content }} />
-        {props.acf.link && (
-          <ButtonLink
-            secondary="true"
-            to={`/${props.acf.link.url}/`}
-            target={props.acf.link.target}
-          >
-            {props.acf.link.title}
-          </ButtonLink>
-        )}
-      </Container>
-    </Row>
-  )
-}
-
-export default FullWidthContent

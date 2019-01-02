@@ -9,10 +9,6 @@ import Layout from '../components/layout'
 import HeroUnit from '../components/Hero/HeroUnit'
 import HeroContent from '../components/Hero/HeroContent-Page'
 
-const Main = styled(Container)`
-  padding: 45px 15px;
-`
-
 const GalleryTemplate = ({ data: { page } }) => (
   <Layout>
     <HeroUnit>
@@ -73,4 +69,8 @@ export const query = graphql`
       }
     }
   }
+`
+
+const Main = styled(Container)`
+  padding: 45px 15px;
 `

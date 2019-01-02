@@ -6,6 +6,165 @@ import styled from 'styled-components'
 import Button from './styled/button'
 import NewsletterForm from './forms/NewsletterForm'
 
+class SignUpLink extends Component {
+  constructor(props, context) {
+    super(props, context)
+
+    this.toggleForm = this.toggleForm.bind(this)
+
+    this.state = {
+      showForm: false,
+    }
+  }
+
+  toggleForm() {
+    this.setState(prevState => ({ showForm: !prevState.showForm }))
+  }
+
+  render() {
+    const { showForm } = this.state
+    return (
+      <Fragment>
+        <SignUpBtn as="button" secondary="true" onClick={this.toggleForm}>
+          Sign Up
+        </SignUpBtn>
+        <FormModal centered show={showForm} onHide={this.toggleForm}>
+          <Modal.Header closeButton>
+            <Modal.Title>JOIN OUR NEWSLETTER</Modal.Title>
+            <h6 className="text-center text-uppercase">
+              Enter your name and email to get news & more!
+            </h6>
+          </Modal.Header>
+          <Modal.Body>
+            <NewsletterForm />
+          </Modal.Body>
+        </FormModal>
+      </Fragment>
+    )
+  }
+}
+
+const FormModal = styled(Modal)`
+  .modal-content {
+    background: transparent;
+    border: 0;
+    color: #fff;
+  }
+
+  .modal-header {
+    border-bottom: 0;
+    text-transform: uppercase;
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: center;
+
+    .h4 {
+      margin-bottom: 1rem;
+    }
+
+    .close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: ${({ theme }) => theme.secondary};
+      font-size: 2rem;
+      opacity: 1;
+      text-shadow: none;
+
+      &:not(:disabled) {
+        &:not(.disabled) {
+          &:hover,
+          &:focus {
+            color: ${({ theme }) => theme.primary};
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+`
+
+const Footer = props => {
+  return (
+    <FooterWrapper>
+      <CallToAction>
+        <CTAcontainer>
+          <CTArow>
+            <Col xs={12} md={6} lg={5}>
+              <Headline>Ready to get started?</Headline>
+            </Col>
+            <Col xs={12} md={6} lg={7}>
+              <Action>
+                Call us at{' '}
+                <PhoneNumber
+                  href="tel:805-579-0216"
+                  title="Dial (805) 579-0216"
+                >
+                  (805) 579-0216
+                </PhoneNumber>{' '}
+                or{' '}
+                <CTAlink alt="true" to="/contact/">
+                  Contact Us
+                </CTAlink>
+              </Action>
+            </Col>
+          </CTArow>
+        </CTAcontainer>
+      </CallToAction>
+      <Container>
+        <MenusRow>
+          <ProductsColumn xs={12} sm={4} md={3}>
+            <ColumnTitle>{props.productsMenu.name}</ColumnTitle>
+            <Menu>
+              {props.productsMenu.items.map((item, index) => (
+                <MenuItem key={index}>
+                  <MenuLink to={`/${item.object_slug}/`}>{item.title}</MenuLink>
+                </MenuItem>
+              ))}
+            </Menu>
+          </ProductsColumn>
+          <PagesColumn xs={12} sm={4} md={{ span: 3, offset: 1 }}>
+            <ColumnTitle>{props.pagesMenu.name}</ColumnTitle>
+            <Menu>
+              {props.pagesMenu.items.map((item, index) => (
+                <MenuItem key={index}>
+                  <MenuLink
+                    className={item.object_slug === 'rep-login' ? `alt` : ``}
+                    to={`/${item.object_slug}/`}
+                  >
+                    {item.title}
+                  </MenuLink>
+                </MenuItem>
+              ))}
+            </Menu>
+          </PagesColumn>
+          <SignUpColumn xs={12} sm={4} md={5}>
+            <Row>
+              <Col sm={12} md={6} lg={7} xl={8}>
+                <ColumnTitle>Sign up for our newsletter</ColumnTitle>
+              </Col>
+              <Col sm={12} md={6} lg={5} xl={4}>
+                <SignUpLink />
+              </Col>
+            </Row>
+          </SignUpColumn>
+        </MenusRow>
+      </Container>
+      <Copyright>
+        <p>&copy; Copyright 2018 - PUROFLUX. All rights reserved.</p>
+        <a href="https://www.netlify.com">
+          <img
+            alt="Deployed by Netlify"
+            src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"
+          />
+        </a>
+      </Copyright>
+    </FooterWrapper>
+  )
+}
+
+export default Footer
+
 const FooterWrapper = styled.footer`
   background: black;
   color: white;
@@ -177,165 +336,6 @@ const Copyright = styled.div`
   @media (min-width: 538px) {
     p {
       margin-bottom: 0;
-    }
-  }
-`
-
-const Footer = props => {
-  return (
-    <FooterWrapper>
-      <CallToAction>
-        <CTAcontainer>
-          <CTArow>
-            <Col xs={12} md={6} lg={5}>
-              <Headline>Ready to get started?</Headline>
-            </Col>
-            <Col xs={12} md={6} lg={7}>
-              <Action>
-                Call us at{' '}
-                <PhoneNumber
-                  href="tel:805-579-0216"
-                  title="Dial (805) 579-0216"
-                >
-                  (805) 579-0216
-                </PhoneNumber>{' '}
-                or{' '}
-                <CTAlink alt="true" to="/contact/">
-                  Contact Us
-                </CTAlink>
-              </Action>
-            </Col>
-          </CTArow>
-        </CTAcontainer>
-      </CallToAction>
-      <Container>
-        <MenusRow>
-          <ProductsColumn xs={12} sm={4} md={3}>
-            <ColumnTitle>{props.productsMenu.name}</ColumnTitle>
-            <Menu>
-              {props.productsMenu.items.map((item, index) => (
-                <MenuItem key={index}>
-                  <MenuLink to={`/${item.object_slug}/`}>{item.title}</MenuLink>
-                </MenuItem>
-              ))}
-            </Menu>
-          </ProductsColumn>
-          <PagesColumn xs={12} sm={4} md={{ span: 3, offset: 1 }}>
-            <ColumnTitle>{props.pagesMenu.name}</ColumnTitle>
-            <Menu>
-              {props.pagesMenu.items.map((item, index) => (
-                <MenuItem key={index}>
-                  <MenuLink
-                    className={item.object_slug === 'rep-login' ? `alt` : ``}
-                    to={`/${item.object_slug}/`}
-                  >
-                    {item.title}
-                  </MenuLink>
-                </MenuItem>
-              ))}
-            </Menu>
-          </PagesColumn>
-          <SignUpColumn xs={12} sm={4} md={5}>
-            <Row>
-              <Col sm={12} md={6} lg={7} xl={8}>
-                <ColumnTitle>Sign up for our newsletter</ColumnTitle>
-              </Col>
-              <Col sm={12} md={6} lg={5} xl={4}>
-                <SignUpLink />
-              </Col>
-            </Row>
-          </SignUpColumn>
-        </MenusRow>
-      </Container>
-      <Copyright>
-        <p>&copy; Copyright 2018 - PUROFLUX. All rights reserved.</p>
-        <a href="https://www.netlify.com">
-          <img
-            alt="Deployed by Netlify"
-            src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"
-          />
-        </a>
-      </Copyright>
-    </FooterWrapper>
-  )
-}
-
-export default Footer
-
-class SignUpLink extends Component {
-  constructor(props, context) {
-    super(props, context)
-
-    this.toggleForm = this.toggleForm.bind(this)
-
-    this.state = {
-      showForm: false,
-    }
-  }
-
-  toggleForm() {
-    this.setState(prevState => ({ showForm: !prevState.showForm }))
-  }
-
-  render() {
-    const { showForm } = this.state
-    return (
-      <Fragment>
-        <SignUpBtn as="button" secondary="true" onClick={this.toggleForm}>
-          Sign Up
-        </SignUpBtn>
-        <FormModal centered show={showForm} onHide={this.toggleForm}>
-          <Modal.Header closeButton>
-            <Modal.Title>JOIN OUR NEWSLETTER</Modal.Title>
-            <h6 className="text-center text-uppercase">
-              Enter your name and email to get news & more!
-            </h6>
-          </Modal.Header>
-          <Modal.Body>
-            <NewsletterForm />
-          </Modal.Body>
-        </FormModal>
-      </Fragment>
-    )
-  }
-}
-
-const FormModal = styled(Modal)`
-  .modal-content {
-    background: transparent;
-    border: 0;
-    color: #fff;
-  }
-
-  .modal-header {
-    border-bottom: 0;
-    text-transform: uppercase;
-    display: grid;
-    grid-template-columns: 1fr;
-    text-align: center;
-
-    .h4 {
-      margin-bottom: 1rem;
-    }
-
-    .close {
-      position: absolute;
-      top: 0;
-      right: 0;
-      color: ${({ theme }) => theme.secondary};
-      font-size: 2rem;
-      opacity: 1;
-      text-shadow: none;
-
-      &:not(:disabled) {
-        &:not(.disabled) {
-          &:hover,
-          &:focus {
-            color: ${({ theme }) => theme.primary};
-            opacity: 1;
-          }
-        }
-      }
     }
   }
 `

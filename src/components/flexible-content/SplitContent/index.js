@@ -4,6 +4,63 @@ import styled from 'styled-components'
 
 import Btn from '../../styled/button'
 
+const SplitContent = props => {
+  return (
+    <Row>
+      <LeftSide>
+        {props.acf.left_background_image && (
+          <BGimage
+            fluid={
+              props.acf.left_background_image.localFile.childImageSharp.fluid
+            }
+          />
+        )}
+        <LeftContainer>
+          <Title>{props.acf.left_title}</Title>
+          <Content
+            dangerouslySetInnerHTML={{ __html: props.acf.left_content }}
+          />
+          {props.acf.left_link && (
+            <ButtonLink
+              primary="true"
+              to={`/${props.acf.left_link.url}/`}
+              target={props.acf.left_link.target}
+            >
+              {props.acf.left_link.title}
+            </ButtonLink>
+          )}
+        </LeftContainer>
+      </LeftSide>
+      <RightSide>
+        {props.acf.right_background_image && (
+          <BGimage
+            fluid={
+              props.acf.right_background_image.localFile.childImageSharp.fluid
+            }
+          />
+        )}
+        <RightContainer>
+          <Title>{props.acf.right_title}</Title>
+          <Content
+            dangerouslySetInnerHTML={{ __html: props.acf.right_content }}
+          />
+          {props.acf.right_link && (
+            <ButtonLink
+              secondary="true"
+              to={`/${props.acf.right_link.url}/`}
+              target={props.acf.right_link.target}
+            >
+              {props.acf.right_link.title}
+            </ButtonLink>
+          )}
+        </RightContainer>
+      </RightSide>
+    </Row>
+  )
+}
+
+export default SplitContent
+
 const Row = styled.div`
   display: flex;
   flex-flow: row wrap;
@@ -88,60 +145,3 @@ const Title = styled.h2``
 const ButtonLink = styled(Btn)`
   color: white;
 `
-
-const SplitContent = props => {
-  return (
-    <Row>
-      <LeftSide>
-        {props.acf.left_background_image && (
-          <BGimage
-            fluid={
-              props.acf.left_background_image.localFile.childImageSharp.fluid
-            }
-          />
-        )}
-        <LeftContainer>
-          <Title>{props.acf.left_title}</Title>
-          <Content
-            dangerouslySetInnerHTML={{ __html: props.acf.left_content }}
-          />
-          {props.acf.left_link && (
-            <ButtonLink
-              primary="true"
-              to={`/${props.acf.left_link.url}/`}
-              target={props.acf.left_link.target}
-            >
-              {props.acf.left_link.title}
-            </ButtonLink>
-          )}
-        </LeftContainer>
-      </LeftSide>
-      <RightSide>
-        {props.acf.right_background_image && (
-          <BGimage
-            fluid={
-              props.acf.right_background_image.localFile.childImageSharp.fluid
-            }
-          />
-        )}
-        <RightContainer>
-          <Title>{props.acf.right_title}</Title>
-          <Content
-            dangerouslySetInnerHTML={{ __html: props.acf.right_content }}
-          />
-          {props.acf.right_link && (
-            <ButtonLink
-              secondary="true"
-              to={`/${props.acf.right_link.url}/`}
-              target={props.acf.right_link.target}
-            >
-              {props.acf.right_link.title}
-            </ButtonLink>
-          )}
-        </RightContainer>
-      </RightSide>
-    </Row>
-  )
-}
-
-export default SplitContent

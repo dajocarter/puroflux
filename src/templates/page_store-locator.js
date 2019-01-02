@@ -11,44 +11,6 @@ import Accordion, {
   AccordionContent,
 } from '../components/Accordion'
 
-const Main = styled(Container)`
-  padding: 45px 15px;
-`
-
-const Firms = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  width: 100%;
-
-  ul {
-    padding: 1rem 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
-    &:nth-child(even) {
-      background: #f2f2f2;
-      margin: 0 -1rem;
-      padding: 1rem;
-    }
-  }
-
-  @media (max-width: 575px) {
-    ul {
-      grid-template-columns: 1fr;
-    }
-
-    li {
-      &:nth-child(odd) {
-        order: 1;
-      }
-
-      &:nth-child(even) {
-        order: 2;
-      }
-    }
-  }
-`
-
 const formatPhoneNumber = number => {
   const parts = number.split('-')
   return `(${parts[0]}) ${parts[1]}-${parts[2]}`
@@ -199,6 +161,44 @@ export const query = graphql`
             name
           }
         }
+      }
+    }
+  }
+`
+
+const Main = styled(Container)`
+  padding: 45px 15px;
+`
+
+const Firms = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+
+  ul {
+    padding: 1rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    &:nth-child(even) {
+      background: #f2f2f2;
+      margin: 0 -1rem;
+      padding: 1rem;
+    }
+  }
+
+  @media (max-width: 575px) {
+    ul {
+      grid-template-columns: 1fr;
+    }
+
+    li {
+      &:nth-child(odd) {
+        order: 1;
+      }
+
+      &:nth-child(even) {
+        order: 2;
       }
     }
   }

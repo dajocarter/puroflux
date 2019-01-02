@@ -12,34 +12,6 @@ import Accordion, {
   AccordionContent,
 } from '../components/Accordion'
 
-const Main = styled(Container)`
-  padding: 45px 15px;
-`
-
-const Content = styled.div`
-  margin: 0 auto;
-  max-width: 960px;
-  padding: 1.45rem 1.0875rem;
-`
-
-const Installation = styled.div`
-  &:first-of-type {
-    margin-bottom: 45px;
-  }
-
-  .text--center {
-    text-align: center;
-  }
-
-  h2 {
-    text-transform: uppercase;
-  }
-
-  h4 {
-    color: #ccc;
-  }
-`
-
 const TypicalInstallTemplate = ({ data }) => (
   <Layout>
     <HeroUnit>
@@ -203,5 +175,33 @@ export const query = graphql`
         }
       }
     }
+  }
+`
+
+const Main = styled(Container)`
+  padding: 45px 15px;
+`
+
+const Content = styled.div`
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 1.45rem 1.0875rem;
+`
+
+const Installation = styled.div`
+  &:first-of-type {
+    margin-bottom: 45px;
+  }
+
+  .text--center {
+    text-align: center;
+  }
+
+  h2 {
+    text-transform: uppercase;
+  }
+
+  h4 {
+    color: #ccc;
   }
 `

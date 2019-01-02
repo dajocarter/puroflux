@@ -7,26 +7,6 @@ import Layout from '../components/layout'
 import HeroUnit from '../components/Hero/HeroUnit'
 import HeroContent from '../components/Hero/HeroContent-Page'
 
-const Main = styled(Container)`
-  padding: 45px 15px;
-`
-
-const Content = styled.div`
-  color: ${props => props.theme.body};
-  margin: 0 auto;
-  max-width: 960px;
-  padding: 45px 15px;
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: ${props => props.theme.primary};
-  }
-`
-
 const PageTemplate = ({ data: { page } }) => (
   <Layout>
     <HeroUnit>
@@ -61,5 +41,25 @@ export const query = graphql`
         }
       }
     }
+  }
+`
+
+const Main = styled(Container)`
+  padding: 45px 15px;
+`
+
+const Content = styled.div`
+  color: ${props => props.theme.body};
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 45px 15px;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: ${props => props.theme.primary};
   }
 `
