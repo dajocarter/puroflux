@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import { Container, Row, Col } from 'react-bootstrap'
@@ -153,7 +153,7 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
         </Col>
       </Row>
       {series.acf.products && (
-        <>
+        <Fragment>
           <Row>
             <Col>
               <ProductTitle>{series.acf.products[0].title}</ProductTitle>
@@ -176,7 +176,7 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
                   </RelatedModel>
                 ))}
           </Row>
-        </>
+        </Fragment>
       )}
     </Main>
   </Layout>

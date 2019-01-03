@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { node } from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
@@ -127,7 +127,7 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <ThemeProvider theme={theme}>
-        <>
+        <Fragment>
           <Helmet
             title={data.site.siteMetadata.title}
             link={[
@@ -148,7 +148,7 @@ const Layout = ({ children }) => (
           />
           <Main>{children}</Main>
           <Footer productsMenu={data.productsMenu} pagesMenu={data.pagesMenu} />
-        </>
+        </Fragment>
       </ThemeProvider>
     )}
   />

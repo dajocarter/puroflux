@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 import { Container, Row, Col } from 'react-bootstrap'
@@ -29,7 +29,7 @@ export default class Header extends Component {
               </Col>
             )}
             {menu && (
-              <>
+              <Fragment>
                 <Col className='d-none d-lg-block' lg={9}>
                   <Nav role={`navigation`} aria-label={menu.name}>
                     <NavMenu>
@@ -114,7 +114,7 @@ export default class Header extends Component {
                     </NavMenu>
                   </Nav>
                 </Overlay>
-              </>
+              </Fragment>
             )}
           </Row>
         </Container>
