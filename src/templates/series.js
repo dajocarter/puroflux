@@ -268,11 +268,11 @@ const SeriesDescription = styled.p`
 
 const FeaturedImg = styled(Img)``
 const FeaturedTitle = styled.h2`
-  color: ${props => props.theme.primary};
+  color: ${({ theme }) => theme.primary};
   font-size: 36px;
 `
 const FeaturedContent = styled.div`
-  color: ${props => props.theme.body};
+  color: ${({ theme }) => theme.body};
   font-size: 18px;
 `
 
@@ -294,19 +294,19 @@ const Download = styled.div`
     flex-direction: column;
     margin-bottom: 0;
     margin-left: 10px;
-    color: ${props => props.theme.body};
+    color: ${({ theme }) => theme.body};
   }
 
   a {
     text-transform: uppercase;
     &,
     &:hover {
-      color: ${props => props.theme.secondary};
+      color: ${({ theme }) => theme.secondary};
     }
   }
 `
 const PDFicon = styled(FaFilePdf)`
-  color: ${props => props.theme.primary};
+  color: ${({ theme }) => theme.primary};
   font-size: 3rem;
 `
 
@@ -356,12 +356,12 @@ const RelatedModel = styled(Col)`
 `
 
 const RelatedTitle = styled.h4`
-  color: ${props => props.theme.primary};
+  color: ${({ theme }) => theme.primary};
   font-size: 1.5rem;
 `
 
 const RelatedExcerpt = styled.p`
-  color: ${props => props.theme.body};
+  color: ${({ theme }) => theme.body};
 `
 
 const RelatedBtn = styled(Btn)``

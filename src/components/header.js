@@ -163,7 +163,7 @@ const SubMenu = styled(NavMenu)`
   justify-content: flex-start;
   align-items: flex-start;
   position: absolute;
-  border-top: ${props => `4px solid ${props.theme.primary}`};
+  border-top: ${({ theme }) => `4px solid ${theme.primary}`};
   width: max-content;
   min-width: 120px;
   z-index: 20;
@@ -189,12 +189,12 @@ const ChildMenu = styled(SubMenu)`
   padding-top: 1rem;
 
   a {
-    color: ${props => props.theme.primary};
+    color: ${({ theme }) => theme.primary};
   }
 `
 
 const GrandChildMenu = styled(SubMenu)`
-  background-color: ${props => props.theme.primary};
+  background-color: ${({ theme }) => theme.primary};
   border-top: 0;
   top: 0;
   left: 100%;
@@ -232,7 +232,7 @@ const NavItem = styled.li`
 const SubMenuItem = styled(NavItem)``
 
 const NavLink = styled(Link)`
-  color: #fff;
+  color: white;
   display: block;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 0.8rem;
@@ -242,13 +242,13 @@ const NavLink = styled(Link)`
   padding: 24.5px 0;
 
   &.alt {
-    color: #ffa200; // orange
+    color: ${({ theme }) => theme.secondary};
   }
 
   &:hover,
   &:focus,
   &.active {
-    color: #05c6c7; // teal
+    color: ${({ theme }) => theme.primary};
   }
 `
 
@@ -260,8 +260,8 @@ const MenuToggle = styled.div`
   justify-content: center;
 
   > svg {
-    color: ${props =>
-    props.menuIsOpen ? props.theme.secondary : props.theme.primary};
+    color: ${({ menuIsOpen, theme }) =>
+    menuIsOpen ? theme.secondary : theme.primary};
     font-size: 2rem;
     cursor: pointer;
     position: absolute;
@@ -271,17 +271,17 @@ const MenuToggle = styled.div`
 `
 
 const Overlay = styled.div`
-  position: ${props => (props.menuIsOpen ? `fixed` : `absolute`)};
+  position: ${({ menuIsOpen }) => (menuIsOpen ? `fixed` : `absolute`)};
   top: 0;
   right: 0;
-  width: ${props => (props.menuIsOpen ? `100vw` : `0px`)};
-  height: ${props => (props.menuIsOpen ? `100vh` : `0px`)};
+  width: ${({ menuIsOpen }) => (menuIsOpen ? `100vw` : `0px`)};
+  height: ${({ menuIsOpen }) => (menuIsOpen ? `100vh` : `0px`)};
   background-color: rgba(0, 0, 0, 0.9);
   z-index: 10;
   transition: all 0.15s ease-in-out;
 
   ${Nav} {
-    display: ${props => (props.menuIsOpen ? `flex` : `none`)};
+    display: ${({ menuIsOpen }) => (menuIsOpen ? `flex` : `none`)};
     justify-content: flex-start;
     padding: 1rem 3rem;
     height: 100%;

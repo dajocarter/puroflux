@@ -4,53 +4,53 @@ import styled from 'styled-components'
 
 import Btn from '../../styled/button'
 
-const SplitContent = props => {
+const SplitContent = ({ acf }) => {
   return (
     <Row>
       <LeftSide>
-        {props.acf.left_background_image && (
+        {acf.left_background_image && (
           <BGimage
             fluid={
-              props.acf.left_background_image.localFile.childImageSharp.fluid
+              acf.left_background_image.localFile.childImageSharp.fluid
             }
           />
         )}
         <LeftContainer>
-          <Title>{props.acf.left_title}</Title>
+          <Title>{acf.left_title}</Title>
           <Content
-            dangerouslySetInnerHTML={{ __html: props.acf.left_content }}
+            dangerouslySetInnerHTML={{ __html: acf.left_content }}
           />
-          {props.acf.left_link && (
+          {acf.left_link && (
             <ButtonLink
               primary='true'
-              to={`/${props.acf.left_link.url}/`}
-              target={props.acf.left_link.target}
+              to={`/${acf.left_link.url}/`}
+              target={acf.left_link.target}
             >
-              {props.acf.left_link.title}
+              {acf.left_link.title}
             </ButtonLink>
           )}
         </LeftContainer>
       </LeftSide>
       <RightSide>
-        {props.acf.right_background_image && (
+        {acf.right_background_image && (
           <BGimage
             fluid={
-              props.acf.right_background_image.localFile.childImageSharp.fluid
+              acf.right_background_image.localFile.childImageSharp.fluid
             }
           />
         )}
         <RightContainer>
-          <Title>{props.acf.right_title}</Title>
+          <Title>{acf.right_title}</Title>
           <Content
-            dangerouslySetInnerHTML={{ __html: props.acf.right_content }}
+            dangerouslySetInnerHTML={{ __html: acf.right_content }}
           />
-          {props.acf.right_link && (
+          {acf.right_link && (
             <ButtonLink
               secondary='true'
-              to={`/${props.acf.right_link.url}/`}
-              target={props.acf.right_link.target}
+              to={`/${acf.right_link.url}/`}
+              target={acf.right_link.target}
             >
-              {props.acf.right_link.title}
+              {acf.right_link.title}
             </ButtonLink>
           )}
         </RightContainer>
@@ -95,8 +95,8 @@ const BGimage = styled(Img)`
   z-index: -1;
   height: 420px;
   & > img {
-    object-fit: cover !important; // or whatever
-    object-position: 50% 50% !important; // or whatever
+    object-fit: cover !important;
+    object-position: 50% 50% !important;
     font-family: 'object-fit: cover !important; object-position: 0% 0% !important;'; // needed for IE9+ polyfill
   }
 `

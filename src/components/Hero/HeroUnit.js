@@ -3,7 +3,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
-const HeroUnit = props => (
+const HeroUnit = ({ children, isHome }) => (
   <StaticQuery
     query={graphql`
       query HeroUnitQuery {
@@ -29,19 +29,19 @@ const HeroUnit = props => (
         }
       }
     `}
-    render={data => (
-      <Background isHome={props.isHome}>
-        {data.homeHero &&
-          data.defaultHero && (
+    render={({ homeHero, defaultHero }) => (
+      <Background isHome={isHome}>
+        {homeHero &&
+          defaultHero && (
           <HeroImg
             fluid={
-              props.isHome
-                ? data.homeHero.localFile.childImageSharp.fluid
-                : data.defaultHero.localFile.childImageSharp.fluid
+              isHome
+                ? homeHero.localFile.childImageSharp.fluid
+                : defaultHero.localFile.childImageSharp.fluid
             }
           />
         )}
-        <Content>{props.children}</Content>
+        <Content>{children}</Content>
       </Background>
     )}
   />
@@ -63,8 +63,8 @@ const HeroImg = styled(Img)`
   z-index: -1;
   height: 450px;
   & > img {
-    object-fit: cover !important; // or whatever
-    object-position: 50% 50% !important; // or whatever
+    object-fit: cover !important;
+    object-position: 50% 50% !important;
     font-family: 'object-fit: cover !important; object-position: 0% 0% !important;'; // needed for IE9+ polyfill
   }
 `

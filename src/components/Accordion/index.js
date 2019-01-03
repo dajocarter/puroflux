@@ -111,13 +111,13 @@ const Content = styled(Collapse)`
 
   span {
     &:first-of-type {
-      color: ${props => props.theme.primary};
+      color: ${({ theme }) => theme.primary};
       text-transform: uppercase;
     }
 
     + br + span,
     + span {
-      color: ${props => props.theme.body};
+      color: ${({ theme }) => theme.body};
     }
   }
 
@@ -127,7 +127,7 @@ const Content = styled(Collapse)`
     padding: 0;
 
     a {
-      color: ${props => props.theme.secondary};
+      color: ${({ theme }) => theme.secondary};
       text-decoration: none;
 
       &:hover {

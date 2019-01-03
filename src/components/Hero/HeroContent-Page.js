@@ -140,7 +140,7 @@ export default HeroContentPage
 const Buttons = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: ${props => (props.single ? `center` : `space-between`)};
+  justify-content: ${({ single }) => (single ? `center` : `space-between`)};
   align-items: center;
 `
 

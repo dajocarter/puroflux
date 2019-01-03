@@ -12,21 +12,21 @@ import Accordion, {
   AccordionContent
 } from '../components/Accordion'
 
-const TypicalInstallTemplate = ({ data }) => (
+const TypicalInstallTemplate = ({ data: { page, filterInstalls, sepInstalls } }) => (
   <Layout>
     <HeroUnit>
       <HeroContent
-        html={data.page.acf.content}
-        buttons={data.page.acf.buttons}
+        html={page.acf.content}
+        buttons={page.acf.buttons}
       />
     </HeroUnit>
     <Main>
       <Row>
         <Col xs={12}>
-          {data.page.content && (
-            <Content dangerouslySetInnerHTML={{ __html: data.page.content }} />
+          {page.content && (
+            <Content dangerouslySetInnerHTML={{ __html: page.content }} />
           )}
-          {data.filterInstalls && (
+          {filterInstalls && (
             <Installation>
               <div className='text--center'>
                 <h2>Filter Installations</h2>
@@ -34,7 +34,7 @@ const TypicalInstallTemplate = ({ data }) => (
                 <h4>View product summary</h4>
               </div>
               <Accordion>
-                {data.filterInstalls.edges.map(({ node }, i) => (
+                {filterInstalls.edges.map(({ node }, i) => (
                   <div key={node.id}>
                     <AccordionTitle accordionIndex={i}>
                       {node.title}
@@ -50,7 +50,7 @@ const TypicalInstallTemplate = ({ data }) => (
               </Accordion>
             </Installation>
           )}
-          {data.sepInstalls && (
+          {sepInstalls && (
             <Installation>
               <div className='text--center'>
                 <h2>Separator Installations</h2>
@@ -58,7 +58,7 @@ const TypicalInstallTemplate = ({ data }) => (
                 <h4>View product summary</h4>
               </div>
               <Accordion>
-                {data.sepInstalls.edges.map(({ node }, i) => (
+                {sepInstalls.edges.map(({ node }, i) => (
                   <div key={node.id}>
                     <AccordionTitle accordionIndex={i}>
                       {node.title}

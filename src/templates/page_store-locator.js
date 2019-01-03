@@ -47,49 +47,51 @@ const groupRepsByState = reps => {
       <AccordionTitle accordionIndex={i}>{state}</AccordionTitle>
       <AccordionContent accordionIndex={i}>
         <Firms>
-          {firms.map((firm, j) => (
+          {/* eslint-disable camelcase */}
+          {firms.map(({ title, acf: { territory, phone_number, fax_number, address, website } }, j) => (
             <ul key={j}>
               <li>
                 <span>Territory:</span>{' '}
-                <span>{firm.acf.territory || state}</span>
+                <span>{territory || state}</span>
               </li>
               <li>
                 <span>Phone:</span>{' '}
-                {firm.acf.phone_number && (
-                  <a href={`tel:${firm.acf.phone_number}`}>
-                    {formatPhoneNumber(firm.acf.phone_number)}
+                {phone_number && (
+                  <a href={`tel:${phone_number}`}>
+                    {formatPhoneNumber(phone_number)}
                   </a>
                 )}
               </li>
               <li>
                 <span>Firm:</span>{' '}
-                <span dangerouslySetInnerHTML={{ __html: firm.title }} />
+                <span dangerouslySetInnerHTML={{ __html: title }} />
               </li>
               <li>
                 <span>Fax:</span>{' '}
-                {firm.acf.fax_number && (
-                  <a href={`fax:${firm.acf.fax_number}`}>
-                    {formatPhoneNumber(firm.acf.fax_number)}
+                {fax_number && (
+                  <a href={`fax:${fax_number}`}>
+                    {formatPhoneNumber(fax_number)}
                   </a>
                 )}
               </li>
               <li>
                 <span>Address:</span>
                 <br />
-                <span dangerouslySetInnerHTML={{ __html: firm.acf.address }} />
+                <span dangerouslySetInnerHTML={{ __html: address }} />
               </li>
               <li>
                 <span>Website:</span>{' '}
                 <a
-                  href={firm.acf.website}
+                  href={website}
                   target='_blank'
                   rel='noopener noreferrer nofollow'
                 >
-                  {firm.acf.website}
+                  {website}
                 </a>
               </li>
             </ul>
           ))}
+          {/* eslint-enable */}
         </Firms>
       </AccordionContent>
     </Fragment>

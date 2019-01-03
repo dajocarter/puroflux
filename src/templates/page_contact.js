@@ -106,7 +106,7 @@ const Address = styled.p`
 const ContactInfo = styled.p``
 
 const Title = styled.span`
-  color: ${props => props.theme.primary};
+  color: ${({ theme }) => theme.primary};
 `
 
 const Value = styled.a`

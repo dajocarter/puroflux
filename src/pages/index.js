@@ -84,12 +84,12 @@ const IndexPage = () => (
         }
       }
     `}
-    render={data => (
+    render={({ page: { acf } }) => (
       <Layout>
         <HeroUnit isHome>
           <HeroContent
-            html={data.page.acf.content}
-            buttons={data.page.acf.buttons}
+            html={acf.content}
+            buttons={acf.buttons}
           />
         </HeroUnit>
         <FeatureContainer>
@@ -100,10 +100,10 @@ const IndexPage = () => (
           </Row>
           <Row>
             <Column xs={12} lg={6}>
-              {data.page.acf.featured_image && (
+              {acf.featured_image && (
                 <FeatureImage
                   fluid={
-                    data.page.acf.featured_image.localFile.childImageSharp.fluid
+                    acf.featured_image.localFile.childImageSharp.fluid
                   }
                 />
               )}
@@ -111,7 +111,7 @@ const IndexPage = () => (
             <Column xs={12} lg={6}>
               <WPcontent
                 dangerouslySetInnerHTML={{
-                  __html: data.page.acf.featured_content
+                  __html: acf.featured_content
                 }}
               />
               <Btn secondary='true' to={`/gallery/`}>
@@ -120,8 +120,8 @@ const IndexPage = () => (
             </Column>
           </Row>
         </FeatureContainer>
-        {data.page.acf.layouts_page && (
-          <FlexibleContent layouts={data.page.acf.layouts_page} />
+        {acf.layouts_page && (
+          <FlexibleContent layouts={acf.layouts_page} />
         )}
       </Layout>
     )}
@@ -146,7 +146,7 @@ const Column = styled(Col)`
   }
 
   blockquote {
-    border-left: ${props => `0.5rem solid ${props.theme.primary}`};
+    border-left: ${({ theme }) => `0.5rem solid ${theme.primary}`};
     padding: 1rem;
     background: #f7f7f7;
     font-style: italic;
@@ -175,7 +175,7 @@ const FeatureImage = styled(Img)`
 `
 
 const FeatureTitle = styled.h2`
-  border-bottom: ${props => `3px solid ${props.theme.primary}`};
+  border-bottom: ${({ theme }) => `3px solid ${theme.primary}`};
   color: #7f7f7f;
   padding: 0 0.5rem 0.5rem;
   font-family: 'Josefin Sans', sans-serif;
@@ -192,5 +192,5 @@ const FeatureTitle = styled.h2`
 `
 
 const WPcontent = styled.div`
-  color: ${props => props.theme.body};
+  color: ${({ theme }) => theme.body};
 `

@@ -63,20 +63,20 @@ const NavItem = styled.li`
 
 const NavLink = styled(Link)`
   background-color: transparent;
-  border: ${props =>
-    props.light ? `2px solid white` : `2px solid ${props.theme.primary}`};
-  color: ${props => (props.light ? `white` : props.theme.body)};
+  border: ${({ light, theme }) =>
+    `2px solid ${light ? `white` : theme.primary}`};
+  color: ${({ light, theme }) => (light ? `white` : theme.body)};
   display: block;
   height: 100%;
   line-height: 1;
-  font-size: ${props => (props.light ? `11px` : `1rem`)};
+  font-size: ${({ light }) => (light ? `11px` : `1rem`)};
   padding: 0.5rem 0.75rem;
   transition: all 0.15s ease-in-out;
   text-transform: uppercase;
 
   &:hover {
-    background-color: ${props => (props.light ? `white` : props.theme.primary)};
-    color: ${props => (props.light ? props.theme.primary : `white`)};
+    background-color: ${({ light, theme }) => (light ? `white` : theme.primary)};
+    color: ${({ light, theme }) => (light ? theme.primary : `white`)};
     text-decoration: none;
   }
 `

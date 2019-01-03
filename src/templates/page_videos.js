@@ -61,7 +61,7 @@ const Main = styled(Container)`
 `
 
 const Content = styled.div`
-  color: ${props => props.theme.body};
+  color: ${({ theme }) => theme.body};
   margin: 0 auto;
   max-width: 960px;
   padding: 45px 15px;
@@ -72,7 +72,7 @@ const Content = styled.div`
   h4,
   h5,
   h6 {
-    color: ${props => props.theme.primary};
+    color: ${({ theme }) => theme.primary};
   }
 `
 

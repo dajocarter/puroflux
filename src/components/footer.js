@@ -23,6 +23,7 @@ class SignUpLink extends Component {
 
   render () {
     const { showForm } = this.state
+
     return (
       <Fragment>
         <SignUpBtn as='button' secondary='true' onClick={this.toggleForm}>

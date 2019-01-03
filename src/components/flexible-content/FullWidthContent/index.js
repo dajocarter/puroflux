@@ -4,23 +4,21 @@ import styled from 'styled-components'
 
 import Btn from '../../styled/button'
 
-const FullWidthContent = props => {
+const FullWidthContent = ({ acf }) => {
   return (
     <Row>
       <Container>
-        {props.acf.background_image && (
-          <BGimg
-            fluid={props.acf.background_image.localFile.childImageSharp.fluid}
-          />
+        {acf.background_image && (
+          <BGimg fluid={acf.background_image.localFile.childImageSharp.fluid} />
         )}
-        <Content dangerouslySetInnerHTML={{ __html: props.acf.content }} />
-        {props.acf.link && (
+        <Content dangerouslySetInnerHTML={{ __html: acf.content }} />
+        {acf.link && (
           <ButtonLink
-            to={`/${props.acf.link.url}/`}
-            target={props.acf.link.target}
             secondary='true'
+            to={`/${acf.link.url}/`}
+            target={acf.link.target}
           >
-            {props.acf.link.title}
+            {acf.link.title}
           </ButtonLink>
         )}
       </Container>
@@ -49,8 +47,8 @@ const BGimg = styled(Img)`
   z-index: -1;
   height: 420px;
   & > img {
-    object-fit: cover !important; // or whatever
-    object-position: 50% 50% !important; // or whatever
+    object-fit: cover !important;
+    object-position: 50% 50% !important;
     font-family: 'object-fit: cover !important; object-position: 0% 0% !important;'; // needed for IE9+ polyfill
   }
 `

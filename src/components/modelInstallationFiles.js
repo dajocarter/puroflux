@@ -1,5 +1,13 @@
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
+import {
+  string,
+  oneOfType,
+  bool,
+  arrayOf,
+  shape,
+  number,
+  array
+} from 'prop-types'
 
 const FileOutput = ({ title, files }) => (
   <div>
@@ -10,8 +18,8 @@ const FileOutput = ({ title, files }) => (
           <li key={file.wordpress_id}>
             <a
               href={`${process.env.SOURCE_URL}${file.url.source_url}`}
-              target="_blank"
-              rel="noopener noreferrer"
+              target='_blank'
+              rel='noopener noreferrer'
             >
               {file.title}
             </a>
@@ -25,46 +33,46 @@ const FileOutput = ({ title, files }) => (
 )
 
 FileOutput.propTypes = {
-  title: PropTypes.string.isRequired,
-  files: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        file: PropTypes.shape({
-          wordpress_id: PropTypes.number.isRequired,
-          title: PropTypes.string.isRequired,
-          url: PropTypes.shape({
-            source_url: PropTypes.string.isRequired,
-          }).isRequired,
-        }),
+  title: string.isRequired,
+  files: oneOfType([
+    bool,
+    arrayOf(
+      shape({
+        file: shape({
+          wordpress_id: number.isRequired,
+          title: string.isRequired,
+          url: shape({
+            source_url: string.isRequired
+          }).isRequired
+        })
       })
-    ),
-  ]),
+    )
+  ])
 }
 
 const ModelInstallationFiles = ({
   slipStream,
   sweeperPiping,
   fullFlow,
-  sideStream,
+  sideStream
 }) => {
   return (
     <Fragment>
-      {slipStream && <FileOutput title="Slip Stream" files={slipStream} />}
+      {slipStream && <FileOutput title='Slip Stream' files={slipStream} />}
       {sweeperPiping && (
-        <FileOutput title="Sweeper Piping" files={sweeperPiping} />
+        <FileOutput title='Sweeper Piping' files={sweeperPiping} />
       )}
-      {fullFlow && <FileOutput title="Full Flow" files={fullFlow} />}
-      {sideStream && <FileOutput title="Side Stream" files={sideStream} />}
+      {fullFlow && <FileOutput title='Full Flow' files={fullFlow} />}
+      {sideStream && <FileOutput title='Side Stream' files={sideStream} />}
     </Fragment>
   )
 }
 
 ModelInstallationFiles.propTypes = {
-  slipStream: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
-  sweeperPiping: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
-  fullFlow: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
-  sideStream: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  slipStream: oneOfType([bool, array]),
+  sweeperPiping: oneOfType([bool, array]),
+  fullFlow: oneOfType([bool, array]),
+  sideStream: oneOfType([bool, array])
 }
 
 export default ModelInstallationFiles
