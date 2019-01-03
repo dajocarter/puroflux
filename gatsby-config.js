@@ -55,63 +55,73 @@ module.exports = {
           )
 
           return entities.map(e => {
-            if (e.__type === 'wordpress__wp_products') {
-              let hasSeries =
-                e.acf &&
-                e.acf.product_series &&
-                Array.isArray(e.acf.product_series) &&
-                e.acf.product_series.length
-              if (hasSeries) {
-                e.acf.series___NODE = e.acf.product_series.map(
-                  ps => series.find(s => ps.wordpress_id === s.wordpress_id).id
-                )
-                delete e.acf.product_series
-              }
-            } else if (e.__type === 'wordpress__wp_series') {
-              let hasModels =
-                e.acf &&
-                e.acf.series_models &&
-                Array.isArray(e.acf.series_models) &&
-                e.acf.series_models.length
-              if (hasModels) {
-                e.acf.models___NODE = e.acf.series_models.map(
-                  sm => models.find(m => sm.wordpress_id === m.wordpress_id).id
-                )
-                delete e.acf.series_models
-              }
-              let hasProducts =
-                e.acf &&
-                e.acf.product_series &&
-                Array.isArray(e.acf.product_series) &&
-                e.acf.product_series.length
-              if (hasProducts) {
-                e.acf.products___NODE = e.acf.product_series.map(
-                  ps =>
-                    products.find(p => ps.wordpress_id === p.wordpress_id).id
-                )
-                delete e.acf.product_series
-              }
-            } else if (e.__type === 'wordpress__wp_models') {
-              let hasSeries =
-                e.acf &&
-                e.acf.series_models &&
-                Array.isArray(e.acf.series_models) &&
-                e.acf.series_models.length
-              if (hasSeries) {
-                e.acf.series___NODE = e.acf.series_models.map(
-                  sm => series.find(s => sm.wordpress_id === s.wordpress_id).id
-                )
-                delete e.acf.series_models
-              }
-            } else if (e.__type === 'wordpress__wp_reps') {
-              let hasState =
-                e.states && Array.isArray(e.states) && e.states.length
-              if (hasState) {
-                e.states___NODE = e.states.map(
-                  s => states.find(state => s === state.wordpress_id).id
-                )
-                delete e.states
-              }
+            switch (e.__type) {
+              case 'wordpress__wp_products':
+                let productHasSeries =
+                  e.acf &&
+                  e.acf.product_series &&
+                  Array.isArray(e.acf.product_series) &&
+                  e.acf.product_series.length
+                if (productHasSeries) {
+                  e.acf.series___NODE = e.acf.product_series.map(
+                    ps =>
+                      series.find(s => ps.wordpress_id === s.wordpress_id).id
+                  )
+                  delete e.acf.product_series
+                }
+                break
+              case 'wordpress__wp_series':
+                let seriesHasModels =
+                  e.acf &&
+                  e.acf.series_models &&
+                  Array.isArray(e.acf.series_models) &&
+                  e.acf.series_models.length
+                if (seriesHasModels) {
+                  e.acf.models___NODE = e.acf.series_models.map(
+                    sm =>
+                      models.find(m => sm.wordpress_id === m.wordpress_id).id
+                  )
+                  delete e.acf.series_models
+                }
+                let seriesHasProducts =
+                  e.acf &&
+                  e.acf.product_series &&
+                  Array.isArray(e.acf.product_series) &&
+                  e.acf.product_series.length
+                if (seriesHasProducts) {
+                  e.acf.products___NODE = e.acf.product_series.map(
+                    ps =>
+                      products.find(p => ps.wordpress_id === p.wordpress_id).id
+                  )
+                  delete e.acf.product_series
+                }
+                break
+              case 'wordpress__wp_models':
+                let modelHasSeries =
+                  e.acf &&
+                  e.acf.series_models &&
+                  Array.isArray(e.acf.series_models) &&
+                  e.acf.series_models.length
+                if (modelHasSeries) {
+                  e.acf.series___NODE = e.acf.series_models.map(
+                    sm =>
+                      series.find(s => sm.wordpress_id === s.wordpress_id).id
+                  )
+                  delete e.acf.series_models
+                }
+                break
+              case 'wordpress__wp_reps':
+                let repHasState =
+                  e.states && Array.isArray(e.states) && e.states.length
+                if (repHasState) {
+                  e.states___NODE = e.states.map(
+                    s => states.find(state => s === state.wordpress_id).id
+                  )
+                  delete e.states
+                }
+                break
+              default:
+                return e
             }
             return e
           })
