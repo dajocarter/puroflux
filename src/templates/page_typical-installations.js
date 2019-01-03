@@ -9,7 +9,7 @@ import HeroContent from '../components/Hero/HeroContent-Page'
 import ModelInstallationFiles from '../components/modelInstallationFiles'
 import Accordion, {
   AccordionTitle,
-  AccordionContent,
+  AccordionContent
 } from '../components/Accordion'
 
 const TypicalInstallTemplate = ({ data }) => (
@@ -28,7 +28,7 @@ const TypicalInstallTemplate = ({ data }) => (
           )}
           {data.filterInstalls && (
             <Installation>
-              <div className="text--center">
+              <div className='text--center'>
                 <h2>Filter Installations</h2>
                 <h3>Select a Model</h3>
                 <h4>View product summary</h4>
@@ -52,7 +52,7 @@ const TypicalInstallTemplate = ({ data }) => (
           )}
           {data.sepInstalls && (
             <Installation>
-              <div className="text--center">
+              <div className='text--center'>
                 <h2>Separator Installations</h2>
                 <h3>Select a Model</h3>
                 <h4>View product summary</h4>

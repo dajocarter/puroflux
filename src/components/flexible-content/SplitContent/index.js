@@ -22,7 +22,7 @@ const SplitContent = props => {
           />
           {props.acf.left_link && (
             <ButtonLink
-              primary="true"
+              primary='true'
               to={`/${props.acf.left_link.url}/`}
               target={props.acf.left_link.target}
             >
@@ -46,7 +46,7 @@ const SplitContent = props => {
           />
           {props.acf.right_link && (
             <ButtonLink
-              secondary="true"
+              secondary='true'
               to={`/${props.acf.right_link.url}/`}
               target={props.acf.right_link.target}
             >

@@ -10,7 +10,7 @@ import HeroUnit from '../components/Hero/HeroUnit'
 import ProductNav from '../components/productNav'
 import Accordion, {
   AccordionTitle,
-  AccordionContent,
+  AccordionContent
 } from '../components/Accordion'
 import Btn from '../components/styled/button'
 
@@ -22,8 +22,8 @@ const DownloadCol = ({ title, file }) => (
         <span>{title}</span>
         <a
           href={`${process.env.SOURCE_URL}${file.url.source_url}`}
-          target="_blank"
-          rel="noopener noreferrer"
+          target='_blank'
+          rel='noopener noreferrer'
         >
           DOWNLOAD
         </a>
@@ -37,12 +37,12 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
     <HeroUnit>
       <Row>
         <Col>
-          <ProductNav light="true" />
+          <ProductNav light='true' />
         </Col>
       </Row>
       <Row>
         <Col>
-          <div className="content">
+          <div className='content'>
             <SeriesTitle>{series.title} Series</SeriesTitle>
             <SeriesDescription>{series.acf.description}</SeriesDescription>
           </div>
@@ -125,8 +125,8 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
                                   href={`${process.env.SOURCE_URL}${
                                     mf.file.url.source_url
                                   }`}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
+                                  target='_blank'
+                                  rel='noopener noreferrer'
                                 >
                                   DOWNLOAD
                                 </a>
@@ -170,7 +170,7 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
                     <RelatedExcerpt>
                       {relatedSeries.acf.description}
                     </RelatedExcerpt>
-                    <RelatedBtn primary="true" to={relatedSeries.slug}>
+                    <RelatedBtn primary='true' to={relatedSeries.slug}>
                       View Product
                     </RelatedBtn>
                   </RelatedModel>

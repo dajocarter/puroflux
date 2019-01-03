@@ -8,7 +8,7 @@ import {
   TabContainer,
   TabContent,
   TabPane,
-  Nav,
+  Nav
 } from 'react-bootstrap'
 import { FaTimes, FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import styled, { css } from 'styled-components'
@@ -20,7 +20,7 @@ import ProductNav from '../components/productNav'
 import Btn from '../components/styled/button'
 
 export default class ProductsPageTemplate extends Component {
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context)
 
     this.prevPane = this.prevPane.bind(this)
@@ -28,35 +28,35 @@ export default class ProductsPageTemplate extends Component {
     this.closePane = this.closePane.bind(this)
 
     this.state = {
-      key: ``,
+      key: ``
     }
   }
 
-  prevPane() {
+  prevPane () {
     document.getElementById(`panes`) &&
       document.getElementById(`panes`).scrollIntoView({ behavior: 'smooth' })
     this.setState(prevState => ({ key: parseInt(prevState.key) - 1 }))
   }
 
-  nextPane() {
+  nextPane () {
     document.getElementById(`panes`) &&
       document.getElementById(`panes`).scrollIntoView({ behavior: 'smooth' })
     this.setState(prevState => ({ key: parseInt(prevState.key) + 1 }))
   }
 
-  setPane(key) {
+  setPane (key) {
     document.getElementById(`panes`) &&
       document.getElementById(`panes`).scrollIntoView({ behavior: 'smooth' })
     this.setState({ key })
   }
 
-  closePane() {
+  closePane () {
     document.getElementById(`tabs`) &&
       document.getElementById(`tabs`).scrollIntoView({ behavior: 'smooth' })
     this.setState({ key: `` })
   }
 
-  render() {
+  render () {
     const { key } = this.state
     const { data } = this.props
 
@@ -76,68 +76,68 @@ export default class ProductsPageTemplate extends Component {
           </Row>
           {data.products &&
             data.addlItem && (
-              <TabContainer
-                id="product-selector"
-                activeKey={key}
-                onSelect={key => this.setPane(key)}
-              >
-                <Row id="tabs">
-                  <Col xs={12}>
-                    <Tabs>
-                      {data.products.edges.map(({ node }, index) => (
-                        <Nav.Item key={node.id}>
-                          <Nav.Link eventKey={index}>
-                            <Img
-                              fluid={
-                                node.featured_media.localFile.childImageSharp
-                                  .fluid
-                              }
-                            />
-                          </Nav.Link>
-                        </Nav.Item>
-                      ))}
-                      <Nav.Item>
-                        <Nav.Link eventKey={data.products.edges.length}>
+            <TabContainer
+              id='product-selector'
+              activeKey={key}
+              onSelect={key => this.setPane(key)}
+            >
+              <Row id='tabs'>
+                <Col xs={12}>
+                  <Tabs>
+                    {data.products.edges.map(({ node }, index) => (
+                      <Nav.Item key={node.id}>
+                        <Nav.Link eventKey={index}>
                           <Img
                             fluid={
-                              data.addlItem.featured_media.localFile
-                                .childImageSharp.fluid
+                              node.featured_media.localFile.childImageSharp
+                                .fluid
                             }
                           />
                         </Nav.Link>
                       </Nav.Item>
-                    </Tabs>
-                  </Col>
-                </Row>
-                <Row id="panes">
-                  <Col xs={12}>
-                    <TabContent animation="true">
-                      {data.products.edges.map(({ node }, index) => (
-                        <SelectablePane
-                          key={node.id}
-                          node={node}
-                          eventKey={index}
-                          closePane={this.closePane}
-                          next={true}
-                          nextPane={this.nextPane}
-                          prev={index > 0}
-                          prevPane={this.prevPane}
+                    ))}
+                    <Nav.Item>
+                      <Nav.Link eventKey={data.products.edges.length}>
+                        <Img
+                          fluid={
+                            data.addlItem.featured_media.localFile
+                              .childImageSharp.fluid
+                          }
                         />
-                      ))}
+                      </Nav.Link>
+                    </Nav.Item>
+                  </Tabs>
+                </Col>
+              </Row>
+              <Row id='panes'>
+                <Col xs={12}>
+                  <TabContent animation='true'>
+                    {data.products.edges.map(({ node }, index) => (
                       <SelectablePane
-                        node={data.addlItem}
-                        eventKey={data.products.edges.length}
+                        key={node.id}
+                        node={node}
+                        eventKey={index}
                         closePane={this.closePane}
-                        next={false}
+                        next
                         nextPane={this.nextPane}
-                        prev={data.products.edges.length - 1}
+                        prev={index > 0}
                         prevPane={this.prevPane}
                       />
-                    </TabContent>
-                  </Col>
-                </Row>
-              </TabContainer>
-            )}
+                    ))}
+                    <SelectablePane
+                      node={data.addlItem}
+                      eventKey={data.products.edges.length}
+                      closePane={this.closePane}
+                      next={false}
+                      nextPane={this.nextPane}
+                      prev={data.products.edges.length - 1}
+                      prevPane={this.prevPane}
+                    />
+                  </TabContent>
+                </Col>
+              </Row>
+            </TabContainer>
+          )}
         </Main>
       </Layout>
     )
@@ -151,7 +151,7 @@ const SelectablePane = ({
   next,
   nextPane,
   prev,
-  prevPane,
+  prevPane
 }) => (
   <TabPane eventKey={eventKey}>
     <Pane>
@@ -160,7 +160,7 @@ const SelectablePane = ({
         <h2>{node.title}</h2>
         <p
           dangerouslySetInnerHTML={{
-            __html: node.excerpt || node.acf.excerpt,
+            __html: node.excerpt || node.acf.excerpt
           }}
         />
         <Btn to={node.slug}>Learn More</Btn>

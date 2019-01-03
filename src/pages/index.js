@@ -111,10 +111,10 @@ const IndexPage = () => (
             <Column xs={12} lg={6}>
               <WPcontent
                 dangerouslySetInnerHTML={{
-                  __html: data.page.acf.featured_content,
+                  __html: data.page.acf.featured_content
                 }}
               />
-              <Btn secondary="true" to={`/gallery/`}>
+              <Btn secondary='true' to={`/gallery/`}>
                 View Gallery
               </Btn>
             </Column>

@@ -6,12 +6,12 @@ import { FaBars, FaTimes } from 'react-icons/fa'
 import styled from 'styled-components'
 
 export default class Header extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = { menuIsOpen: false }
   }
-  render() {
+  render () {
     const { logo, siteTitle, menu } = this.props
     const { menuIsOpen } = this.state
 
@@ -22,7 +22,7 @@ export default class Header extends Component {
             {logo && (
               <Col xs={9} lg={3}>
                 <NavBrand>
-                  <Link to="/" title={siteTitle}>
+                  <Link to='/' title={siteTitle}>
                     <Img fixed={logo.localFile.childImageSharp.fixed} />
                   </Link>
                 </NavBrand>
@@ -30,7 +30,7 @@ export default class Header extends Component {
             )}
             {menu && (
               <>
-                <Col className="d-none d-lg-block" lg={9}>
+                <Col className='d-none d-lg-block' lg={9}>
                   <Nav role={`navigation`} aria-label={menu.name}>
                     <NavMenu>
                       {menu.items.map(item => (
@@ -85,7 +85,7 @@ export default class Header extends Component {
                     </NavMenu>
                   </Nav>
                 </Col>
-                <Overlay className="d-lg-none" menuIsOpen={menuIsOpen}>
+                <Overlay className='d-lg-none' menuIsOpen={menuIsOpen}>
                   <MenuToggle
                     menuIsOpen={menuIsOpen}
                     onClick={() => this.setState({ menuIsOpen: !menuIsOpen })}
@@ -261,7 +261,7 @@ const MenuToggle = styled.div`
 
   > svg {
     color: ${props =>
-      props.menuIsOpen ? props.theme.secondary : props.theme.primary};
+    props.menuIsOpen ? props.theme.secondary : props.theme.primary};
     font-size: 2rem;
     cursor: pointer;
     position: absolute;

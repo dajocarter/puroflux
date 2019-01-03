@@ -7,31 +7,31 @@ import Button from './styled/button'
 import NewsletterForm from './forms/newsletter'
 
 class SignUpLink extends Component {
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context)
 
     this.toggleForm = this.toggleForm.bind(this)
 
     this.state = {
-      showForm: false,
+      showForm: false
     }
   }
 
-  toggleForm() {
+  toggleForm () {
     this.setState(prevState => ({ showForm: !prevState.showForm }))
   }
 
-  render() {
+  render () {
     const { showForm } = this.state
     return (
       <Fragment>
-        <SignUpBtn as="button" secondary="true" onClick={this.toggleForm}>
+        <SignUpBtn as='button' secondary='true' onClick={this.toggleForm}>
           Sign Up
         </SignUpBtn>
         <FormModal centered show={showForm} onHide={this.toggleForm}>
           <Modal.Header closeButton>
             <Modal.Title>JOIN OUR NEWSLETTER</Modal.Title>
-            <h6 className="text-center text-uppercase">
+            <h6 className='text-center text-uppercase'>
               Enter your name and email to get news & more!
             </h6>
           </Modal.Header>
@@ -97,13 +97,13 @@ const Footer = props => {
               <Action>
                 Call us at{' '}
                 <PhoneNumber
-                  href="tel:805-579-0216"
-                  title="Dial (805) 579-0216"
+                  href='tel:805-579-0216'
+                  title='Dial (805) 579-0216'
                 >
                   (805) 579-0216
                 </PhoneNumber>{' '}
                 or{' '}
-                <CTAlink alt="true" to="/contact/">
+                <CTAlink alt='true' to='/contact/'>
                   Contact Us
                 </CTAlink>
               </Action>
@@ -152,10 +152,10 @@ const Footer = props => {
       </Container>
       <Copyright>
         <p>&copy; Copyright 2018 - PUROFLUX. All rights reserved.</p>
-        <a href="https://www.netlify.com">
+        <a href='https://www.netlify.com'>
           <img
-            alt="Deployed by Netlify"
-            src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"
+            alt='Deployed by Netlify'
+            src='https://www.netlify.com/img/global/badges/netlify-color-bg.svg'
           />
         </a>
       </Copyright>

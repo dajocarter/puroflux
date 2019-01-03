@@ -6,28 +6,28 @@ import Btn from '../styled/button'
 import Request3dForm from '../forms/request3D'
 
 class ModalButton extends Component {
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context)
 
     this.toggleForm = this.toggleForm.bind(this)
 
     this.state = {
-      showForm: false,
+      showForm: false
     }
   }
 
-  toggleForm() {
+  toggleForm () {
     this.setState(prevState => ({ showForm: !prevState.showForm }))
   }
 
-  render() {
+  render () {
     const { primary, secondary } = this.props
     const { showForm } = this.state
 
     return (
       <Fragment>
         <Button
-          as="button"
+          as='button'
           primary={primary}
           secondary={secondary}
           onClick={this.toggleForm}
@@ -37,7 +37,7 @@ class ModalButton extends Component {
         <FormModal centered show={showForm} onHide={this.toggleForm}>
           <Modal.Header closeButton>
             <Modal.Title>3D Drawing Request</Modal.Title>
-            <h6 className="text-center text-uppercase">
+            <h6 className='text-center text-uppercase'>
               Enter your name and email to request a 3D drawing
             </h6>
           </Modal.Header>
@@ -94,7 +94,7 @@ const HeroContentPage = props => (
   <Fragment>
     {props.html && (
       <div
-        className="content"
+        className='content'
         dangerouslySetInnerHTML={{ __html: props.html }}
       />
     )}
@@ -104,10 +104,10 @@ const HeroContentPage = props => (
           return link.button_link.target ? (
             <Button
               key={i}
-              as="a"
+              as='a'
               href={link.button_link.url}
               target={link.button_link.target}
-              rel="noopener noreferrer"
+              rel='noopener noreferrer'
               primary={i % 2 === 0 ? `true` : `false`}
               secondary={i % 2 === 1 ? `true` : `false`}
             >
