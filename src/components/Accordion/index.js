@@ -38,6 +38,10 @@ export default class Accordion extends Component {
 }
 
 export class AccordionTitle extends Component {
+const Wrapper = styled.div`
+  border: 1px solid black;
+`
+
   static contextType = AccordionContext
 
   render() {
@@ -58,6 +62,22 @@ export class AccordionTitle extends Component {
 }
 
 export class AccordionContent extends Component {
+const Title = styled.h5`
+  background-color: ${props => (props['aria-expanded'] ? `black` : `white`)};
+  color: ${props => (props['aria-expanded'] ? `white` : `black`)};
+  cursor: pointer;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+
+  &:hover {
+    background-color: ${props =>
+    props['aria-expanded'] ? `black` : `#f2f2f2`};
+  }
+`
+
   static contextType = AccordionContext
 
   render() {
@@ -75,26 +95,6 @@ export class AccordionContent extends Component {
     )
   }
 }
-
-const Wrapper = styled.div`
-  border: 1px solid black;
-`
-
-const Title = styled.h5`
-  background-color: ${props => (props['aria-expanded'] ? `black` : `white`)};
-  color: ${props => (props['aria-expanded'] ? `white` : `black`)};
-  cursor: pointer;
-  text-transform: uppercase;
-  margin: 0;
-  padding: 0.5rem;
-  font-size: 1rem;
-  font-weight: bold;
-
-  &:hover {
-    background-color: ${props =>
-      props['aria-expanded'] ? `black` : `#f2f2f2`};
-  }
-`
 
 const Content = styled(Collapse)`
   border-bottom: ${props => (props.in ? `1px solid black` : 0)};
