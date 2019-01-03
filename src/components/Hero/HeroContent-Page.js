@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap'
 import styled from 'styled-components'
 
 import Btn from '../styled/button'
-import Request3dForm from '../forms/Request3dForm'
+import Request3dForm from '../forms/request3D'
 
 class ModalButton extends Component {
   constructor(props, context) {

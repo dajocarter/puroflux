@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import Layout from '../components/layout'
 import HeroUnit from '../components/Hero/HeroUnit'
 import HeroContent from '../components/Hero/HeroContent-Page'
-import Form from '../components/forms/ContactForm'
+import ContactForm from '../components/forms/contact'
 
 const Contact = ({ data: { page } }) => (
   <Layout>
@@ -45,7 +45,7 @@ const Contact = ({ data: { page } }) => (
         </Col>
         <Col md={{ span: 5, offset: 2 }}>
           <ColumnTitle>Contact Form</ColumnTitle>
-          <Form />
+          <ContactForm />
         </Col>
       </Row>
     </Main>

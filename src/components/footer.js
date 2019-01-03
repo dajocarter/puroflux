@@ -4,7 +4,7 @@ import { Container, Row, Col, Modal } from 'react-bootstrap'
 import styled from 'styled-components'
 
 import Button from './styled/button'
-import NewsletterForm from './forms/NewsletterForm'
+import NewsletterForm from './forms/newsletter'
 
 class SignUpLink extends Component {
   constructor(props, context) {
