@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 import { Container, Row, Col } from 'react-bootstrap'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import styled from 'styled-components'
 
-export default class Header extends Component {
+export default class Header extends PureComponent {
   constructor (props) {
     super(props)
 

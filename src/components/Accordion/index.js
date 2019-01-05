@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { Collapse } from 'react-bootstrap'
 import styled from 'styled-components'
 
@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 const AccordionContext = React.createContext()
 
-export default class Accordion extends Component {
+export default class Accordion extends PureComponent {
   constructor(props) {
     super(props)
 
@@ -37,11 +37,11 @@ export default class Accordion extends Component {
   }
 }
 
-export class AccordionTitle extends Component {
 const Wrapper = styled.div`
   border: 1px solid black;
 `
 
+export class AccordionTitle extends PureComponent {
   static contextType = AccordionContext
 
   render() {
@@ -61,7 +61,6 @@ const Wrapper = styled.div`
   }
 }
 
-export class AccordionContent extends Component {
 const Title = styled.h5`
   background-color: ${props => (props['aria-expanded'] ? `black` : `white`)};
   color: ${props => (props['aria-expanded'] ? `white` : `black`)};
@@ -78,6 +77,7 @@ const Title = styled.h5`
   }
 `
 
+export class AccordionContent extends PureComponent {
   static contextType = AccordionContext
 
   render() {

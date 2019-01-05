@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { Link } from 'gatsby'
 import { Container, Row, Col, Modal } from 'react-bootstrap'
 import styled from 'styled-components'
@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import Button from './styled/button'
 import NewsletterForm from './forms/newsletter'
 
-class SignUpLink extends Component {
+class SignUpLink extends PureComponent {
   constructor (props, context) {
     super(props, context)
 

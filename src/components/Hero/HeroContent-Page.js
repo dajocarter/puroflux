@@ -1,11 +1,11 @@
-import React, { Fragment, Component } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { Modal } from 'react-bootstrap'
 import styled from 'styled-components'
 
 import Btn from '../styled/button'
 import Request3dForm from '../forms/request3D'
 
-class ModalButton extends Component {
+class ModalButton extends PureComponent {
   constructor (props, context) {
     super(props, context)
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import {
@@ -19,7 +19,7 @@ import HeroContent from '../components/Hero/HeroContent-Page'
 import ProductNav from '../components/productNav'
 import Btn from '../components/styled/button'
 
-export default class ProductsPageTemplate extends Component {
+export default class ProductsPageTemplate extends PureComponent {
   constructor (props, context) {
     super(props, context)
 
