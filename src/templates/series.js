@@ -53,7 +53,7 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
       <Row>
         <Col sm={12} md={6}>
           {series.featured_media && (
-            <FeaturedImg
+            <Img
               fluid={series.featured_media.localFile.childImageSharp.fluid}
             />
           )}
@@ -170,9 +170,9 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
                     <RelatedExcerpt>
                       {relatedSeries.acf.description}
                     </RelatedExcerpt>
-                    <RelatedBtn primary='true' to={relatedSeries.slug}>
+                    <Btn primary='true' to={relatedSeries.slug}>
                       View Product
-                    </RelatedBtn>
+                    </Btn>
                   </RelatedModel>
                 ))}
           </Row>
@@ -266,7 +266,6 @@ const SeriesDescription = styled.p`
   text-transform: uppercase;
 `
 
-const FeaturedImg = styled(Img)``
 const FeaturedTitle = styled.h2`
   color: ${({ theme }) => theme.primary};
   font-size: 36px;
@@ -363,5 +362,3 @@ const RelatedTitle = styled.h4`
 const RelatedExcerpt = styled.p`
   color: ${({ theme }) => theme.body};
 `
-
-const RelatedBtn = styled(Btn)``

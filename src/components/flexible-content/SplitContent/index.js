@@ -16,7 +16,7 @@ const SplitContent = ({ acf }) => {
           />
         )}
         <LeftContainer>
-          <Title>{acf.left_title}</Title>
+          <h2>{acf.left_title}</h2>
           <Content
             dangerouslySetInnerHTML={{ __html: acf.left_content }}
           />
@@ -40,7 +40,7 @@ const SplitContent = ({ acf }) => {
           />
         )}
         <RightContainer>
-          <Title>{acf.right_title}</Title>
+          <h2>{acf.right_title}</h2>
           <Content
             dangerouslySetInnerHTML={{ __html: acf.right_content }}
           />
@@ -139,8 +139,6 @@ const RightContainer = styled(Container)`
     }
   }
 `
-
-const Title = styled.h2``
 
 const ButtonLink = styled(Btn)`
   color: white;

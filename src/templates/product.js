@@ -32,7 +32,7 @@ const ProductTemplate = ({ data: { product } }) => (
             product.acf.image.localFile.childImageSharp &&
             product.acf.image.localFile.childImageSharp.fixed && (
             <div>
-              <FeaturedImg
+              <Img
                 fixed={product.acf.image.localFile.childImageSharp.fixed}
               />
             </div>
@@ -59,13 +59,13 @@ const ProductTemplate = ({ data: { product } }) => (
           {product.acf.series.map(series => (
             <Series key={series.id} xs={12} sm={6} md={3}>
               <SeriesTitle>{series.title} Series</SeriesTitle>
-              <SeriesImg
+              <Img
                 fixed={series.featured_media.localFile.childImageSharp.fixed}
               />
               <SeriesDescrip>{series.acf.description}</SeriesDescrip>
-              <SeriesBtn primary='true' to={series.slug}>
+              <Btn primary='true' to={series.slug}>
                 View Product
-              </SeriesBtn>
+              </Btn>
             </Series>
           ))}
         </Row>
@@ -154,8 +154,6 @@ const FeaturedTitle = styled.p`
   text-transform: uppercase;
 `
 
-const FeaturedImg = styled(Img)``
-
 const FeaturedBtn = styled(Btn)`
   margin-top: 2rem;
 `
@@ -171,14 +169,10 @@ const SeriesTitle = styled.p`
   text-transform: uppercase;
 `
 
-const SeriesImg = styled(Img)``
-
 const SeriesDescrip = styled.p`
   color: ${({ theme }) => theme.body};
   font-size: 0.85rem;
 `
-
-const SeriesBtn = styled(Btn)``
 
 const OverviewTitle = styled.h2`
   margin-top: 3rem;

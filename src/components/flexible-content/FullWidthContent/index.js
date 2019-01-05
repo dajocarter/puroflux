@@ -13,13 +13,13 @@ const FullWidthContent = ({ acf }) => {
         )}
         <Content dangerouslySetInnerHTML={{ __html: acf.content }} />
         {acf.link && (
-          <ButtonLink
+          <Btn
             secondary='true'
             to={`/${acf.link.url}/`}
             target={acf.link.target}
           >
             {acf.link.title}
-          </ButtonLink>
+          </Btn>
         )}
       </Container>
     </Row>
@@ -57,5 +57,3 @@ const Content = styled.div`
   font-size: 24px;
   letter-spacing: 1px;
 `
-
-const ButtonLink = styled(Btn)``

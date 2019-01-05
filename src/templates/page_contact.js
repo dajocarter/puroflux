@@ -34,14 +34,14 @@ const Contact = ({ data: { page } }) => (
             2121 Union Place <br />
             Simi Valley, CA 93065
           </Address>
-          <ContactInfo>
+          <p>
             <Title>Tel:</Title>
             <Value href='tel:805-579-0216'>(805) 579-0216</Value> <br />
             <Title>Fax:</Title>
             <Value href='tel:805-579-6005'>(805) 579-6005</Value> <br />
             <Title>Email:</Title>
             <Value href='mailto:sales@puroflux.com'>sales@puroflux.com</Value>
-          </ContactInfo>
+          </p>
         </Col>
         <Col md={{ span: 5, offset: 2 }}>
           <ColumnTitle>Contact Form</ColumnTitle>
@@ -102,8 +102,6 @@ const GMap = styled.div`
 const Address = styled.p`
   margin-top: 1rem;
 `
-
-const ContactInfo = styled.p``
 
 const Title = styled.span`
   color: ${({ theme }) => theme.primary};

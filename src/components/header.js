@@ -51,32 +51,32 @@ export default class Header extends Component {
                           {item.wordpress_children && (
                             <ChildMenu>
                               {item.wordpress_children.map(child => (
-                                <SubMenuItem key={child.wordpress_id}>
-                                  <SubMenuLink
+                                <NavItem key={child.wordpress_id}>
+                                  <NavLink
                                     activeClassName={`active`}
                                     to={`/${child.object_slug}/`}
                                   >
                                     {child.title}
-                                  </SubMenuLink>
+                                  </NavLink>
                                   {child.wordpress_children && (
                                     <GrandChildMenu>
                                       {child.wordpress_children.map(
                                         grandchild => (
-                                          <SubMenuItem
+                                          <NavItem
                                             key={grandchild.wordpress_id}
                                           >
-                                            <SubMenuLink
+                                            <NavLink
                                               activeClassName={`active`}
                                               to={`/${grandchild.object_slug}/`}
                                             >
                                               {grandchild.title}
-                                            </SubMenuLink>
-                                          </SubMenuItem>
+                                            </NavLink>
+                                          </NavItem>
                                         )
                                       )}
                                     </GrandChildMenu>
                                   )}
-                                </SubMenuItem>
+                                </NavItem>
                               ))}
                             </ChildMenu>
                           )}
@@ -229,8 +229,6 @@ const NavItem = styled.li`
   }
 `
 
-const SubMenuItem = styled(NavItem)``
-
 const NavLink = styled(Link)`
   color: white;
   display: block;
@@ -251,8 +249,6 @@ const NavLink = styled(Link)`
     color: ${({ theme }) => theme.primary};
   }
 `
-
-const SubMenuLink = styled(NavLink)``
 
 const MenuToggle = styled.div`
   display: flex;

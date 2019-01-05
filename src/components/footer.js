@@ -89,8 +89,8 @@ const Footer = props => {
   return (
     <FooterWrapper>
       <CallToAction>
-        <CTAcontainer>
-          <CTArow>
+        <Container>
+          <Row>
             <Col xs={12} md={6} lg={5}>
               <Headline>Ready to get started?</Headline>
             </Col>
@@ -109,12 +109,12 @@ const Footer = props => {
                 </CTAlink>
               </Action>
             </Col>
-          </CTArow>
-        </CTAcontainer>
+          </Row>
+        </Container>
       </CallToAction>
       <Container>
         <MenusRow>
-          <ProductsColumn xs={12} sm={4} md={3}>
+          <Column xs={12} sm={4} md={3}>
             <ColumnTitle>{props.productsMenu.name}</ColumnTitle>
             <Menu>
               {props.productsMenu.items.map((item, index) => (
@@ -123,8 +123,8 @@ const Footer = props => {
                 </MenuItem>
               ))}
             </Menu>
-          </ProductsColumn>
-          <PagesColumn xs={12} sm={4} md={{ span: 3, offset: 1 }}>
+          </Column>
+          <Column xs={12} sm={4} md={{ span: 3, offset: 1 }}>
             <ColumnTitle>{props.pagesMenu.name}</ColumnTitle>
             <Menu>
               {props.pagesMenu.items.map((item, index) => (
@@ -138,7 +138,7 @@ const Footer = props => {
                 </MenuItem>
               ))}
             </Menu>
-          </PagesColumn>
+          </Column>
           <SignUpColumn xs={12} sm={4} md={5}>
             <Row>
               <Col sm={12} md={6} lg={7} xl={8}>
@@ -178,10 +178,6 @@ const CallToAction = styled.div`
   padding: 0.5rem 0;
   text-transform: uppercase;
 `
-
-const CTAcontainer = styled(Container)``
-
-const CTArow = styled(Row)``
 
 const Headline = styled.h2`
   color: black;
@@ -252,10 +248,6 @@ const Column = styled(Col)`
     text-align: center;
   }
 `
-
-const ProductsColumn = styled(Column)``
-
-const PagesColumn = styled(Column)``
 
 const SignUpColumn = styled(Column)`
   @media (min-width: 576px) {
