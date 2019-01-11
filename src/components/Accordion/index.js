@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { node, oneOfType, number, string } from 'prop-types'
 import { Collapse } from 'react-bootstrap'
 import styled from 'styled-components'
 
@@ -13,6 +14,10 @@ export default class Accordion extends PureComponent {
     this.state = { openItem: 0 }
 
     this.handleOpening = this.handleOpening.bind(this)
+  }
+
+  static propTypes = {
+    children: node.isRequired,
   }
 
   handleOpening(index) {
@@ -43,6 +48,11 @@ const Wrapper = styled.div`
 
 export class AccordionTitle extends PureComponent {
   static contextType = AccordionContext
+
+  static propTypes = {
+    accordionIndex: oneOfType([number, string]),
+    children: node,
+  }
 
   render() {
     const { accordionIndex, children } = this.props
@@ -79,6 +89,11 @@ const Title = styled.h5`
 
 export class AccordionContent extends PureComponent {
   static contextType = AccordionContext
+
+  static propTypes = {
+    accordionIndex: oneOfType([number, string]),
+    chilren: node,
+  }
 
   render() {
     const { accordionIndex, children } = this.props
