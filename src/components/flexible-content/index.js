@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import { object } from 'prop-types'
 
 import FullWidthContent from './FullWidthContent'
 import SplitContent from './SplitContent'
@@ -17,6 +18,10 @@ const Layouts = ({ layouts }) => {
         )}
     </Fragment>
   )
+}
+
+Layouts.propTypes = {
+  layout: object
 }
 
 export default Layouts

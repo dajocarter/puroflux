@@ -1,4 +1,5 @@
 import React from 'react'
+import { string, oneOf, oneOfType, shape, bool, object } from 'prop-types'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
@@ -57,6 +58,26 @@ const SplitContent = ({ acf }) => {
       </RightSide>
     </Row>
   )
+}
+
+SplitContent.propTypes = {
+  content_split: oneOf(['one_to_one', 'one_to_two', 'two_to_one']),
+  left_background_image: oneOfType([bool, object]),
+  left_title: string,
+  left_content: string,
+  left_link: oneOfType([bool, shape({
+    title: string,
+    url: string,
+    target: string
+  })]),
+  right_background_image: oneOfType([bool, object]),
+  right_title: string,
+  right_content: string,
+  right_link: oneOfType([bool, shape({
+    title: string,
+    url: string,
+    target: string
+  })])
 }
 
 export default SplitContent

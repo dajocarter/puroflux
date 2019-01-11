@@ -1,4 +1,5 @@
 import React from 'react'
+import { string, shape, oneOfType, bool } from 'prop-types'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
@@ -24,6 +25,15 @@ const FullWidthContent = ({ acf }) => {
       </Container>
     </Row>
   )
+}
+
+FullWidthContent.propTypes = {
+  content: string,
+  link: shape({
+    url: string.isRequired,
+    target: oneOfType([bool, string]).isRequired,
+    title: string.isRequired
+  })
 }
 
 export default FullWidthContent
