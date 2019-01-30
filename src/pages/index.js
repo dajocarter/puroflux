@@ -45,7 +45,6 @@ const IndexPage = () => (
                 }
               }
               ... on WordPressAcf_split_content {
-                content_split
                 left_background_image {
                   localFile {
                     childImageSharp {
