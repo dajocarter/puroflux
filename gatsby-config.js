@@ -30,7 +30,11 @@ module.exports = {
         hostingWPCOM: false,
         useACF: true,
         acfOptionPageIds: [],
-        auth: {},
+        auth: {
+          htaccess_user: process.env.WP_USERNAME,
+          htaccess_pass: process.env.WP_PASSWORD,
+          htaccess_sendImmediately: false
+        },
         verboseOutput: true,
         perPage: 100,
         // Search and Replace Urls across WordPress content.
