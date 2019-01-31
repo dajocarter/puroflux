@@ -43,7 +43,7 @@ module.exports = {
           replacementUrl: ''
         },
         concurrentRequests: 10,
-        excludedRoutes: ['/*/*/comments', '/yoast/**'],
+        excludedRoutes: ['/*/*/comments', '/*/*/themes', '/*/*/blocks', '/*/*/types', '/*/*/statuses', '/*/*/users*', '/*/*/search'],
         normalizer: function ({ entities }) {
           const products = entities.filter(
             e => e.__type === 'wordpress__wp_products'
