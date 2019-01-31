@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
-import { node } from 'prop-types'
-import Helmet from 'react-helmet'
+import { node, string } from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
 import styledNormalize from 'styled-normalize'
@@ -8,16 +7,14 @@ import styledNormalize from 'styled-normalize'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Header from './header'
 import Footer from './footer'
-import favicon from '../images/purofluxlogo.png'
+import Seo from './SEO'
 
-const Layout = ({ children }) => (
+const Layout = ({ children, pageTitle, pageSlug }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
+        settings: wordpressWpSettings {
+          title
         }
         logo: wordpressWpMedia(slug: { eq: "purofluxlogo_white_2x" }) {
           localFile {
@@ -128,22 +125,11 @@ const Layout = ({ children }) => (
     render={data => (
       <ThemeProvider theme={theme}>
         <Fragment>
-          <Helmet
-            title={data.site.siteMetadata.title}
-            link={[
-              { rel: 'shortcut icon', type: 'image/png', href: `${favicon}` }
-            ]}
-            meta={[
-              { name: 'description', content: 'Sample' },
-              { name: 'keywords', content: 'sample, something' }
-            ]}
-          >
-            <html lang='en' />
-          </Helmet>
+          <Seo pageTitle={pageTitle} pageSlug={pageSlug} />
           <GlobalStyles />
           <Header
             logo={data.logo}
-            siteTitle={data.site.siteMetadata.title}
+            siteTitle={data.settings.title}
             menu={data.mainMenu}
           />
           <Main>{children}</Main>
@@ -155,7 +141,9 @@ const Layout = ({ children }) => (
 )
 
 Layout.propTypes = {
-  children: node.isRequired
+  children: node.isRequired,
+  pageTitle: string.isRequired,
+  pageSlug: string
 }
 
 export default Layout
