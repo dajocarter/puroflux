@@ -18,7 +18,7 @@ const SEO = ({ pageTitle, pageSlug }) => (
       }
     `}
     render={({ wordpressWpSettings: settings }) => {
-      const url = `http://puroflux.com/${pageSlug}`
+      const url = `${window.origin}/${pageSlug}`
       const title = `${pageTitle} | ${settings.title}`
 
       return (
