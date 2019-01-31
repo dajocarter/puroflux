@@ -3,6 +3,9 @@ require('dotenv').config({
 })
 
 module.exports = {
+  siteMetadata: {
+    origin: process.env.ORIGIN
+  },
   plugins: [
     'gatsby-plugin-react-helmet',
     {

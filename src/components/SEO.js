@@ -11,14 +11,19 @@ const SEO = ({ pageTitle, pageSlug }) => (
   <StaticQuery
     query={graphql`
       query {
+        site {
+          siteMetadata {
+            origin
+          }
+        }
         wordpressWpSettings {
           title
           description
         }
       }
     `}
-    render={({ wordpressWpSettings: settings }) => {
-      const url = `${window.origin}/${pageSlug}`
+    render={({ site: { siteMetadata: { origin } }, wordpressWpSettings: settings }) => {
+      const url = `${window.origin || origin}/${pageSlug}`
       const title = `${pageTitle} | ${settings.title}`
 
       return (
