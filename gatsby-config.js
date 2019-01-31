@@ -3,9 +3,6 @@ require('dotenv').config({
 })
 
 module.exports = {
-  siteMetadata: {
-    title: 'Puroflux'
-  },
   plugins: [
     'gatsby-plugin-react-helmet',
     {
