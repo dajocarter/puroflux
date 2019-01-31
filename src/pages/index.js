@@ -16,7 +16,6 @@ const IndexPage = () => (
       query HomeQuery {
         page: wordpressPage(slug: { eq: "home" }) {
           title
-          slug
           acf {
             content
             buttons {
@@ -85,8 +84,8 @@ const IndexPage = () => (
         }
       }
     `}
-    render={({ page: { title, slug, acf } }) => (
-      <Layout pageTitle={title} pageSlug={slug}>
+    render={({ page: { title, acf } }) => (
+      <Layout pageTitle={title}>
         <HeroUnit isHome>
           <HeroContent
             html={acf.content}
