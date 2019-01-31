@@ -23,7 +23,7 @@ const SEO = ({ pageTitle, pageSlug }) => (
       }
     `}
     render={({ site: { siteMetadata: { origin } }, wordpressWpSettings: settings }) => {
-      const url = `${window.origin || origin}/${pageSlug}`
+      const url = `${origin}/${pageSlug}`
       const title = `${pageTitle} | ${settings.title}`
 
       return (
