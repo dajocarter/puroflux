@@ -61,7 +61,7 @@ export default class ProductsPageTemplate extends PureComponent {
     const { data } = this.props
 
     return (
-      <Layout>
+      <Layout pageTitle={data.page.title} pageSlug={data.page.slug}>
         <HeroUnit>
           <HeroContent
             html={data.page.acf.content}
@@ -177,6 +177,8 @@ const SelectablePane = ({
 export const query = graphql`
   query ProductsPageQuery($slug: String!) {
     page: wordpressPage(slug: { eq: $slug }) {
+      title
+      slug
       acf {
         content
         buttons {

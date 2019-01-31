@@ -13,7 +13,7 @@ import Accordion, {
 } from '../components/Accordion'
 
 const TypicalInstallTemplate = ({ data: { page, filterInstalls, sepInstalls } }) => (
-  <Layout>
+  <Layout pageTitle={page.title} pageSlug={page.slug}>
     <HeroUnit>
       <HeroContent
         html={page.acf.content}
@@ -86,6 +86,8 @@ export default TypicalInstallTemplate
 export const query = graphql`
   query TypicalInstallQuery($slug: String!) {
     page: wordpressPage(slug: { eq: $slug }) {
+      title
+      slug
       content
       acf {
         content

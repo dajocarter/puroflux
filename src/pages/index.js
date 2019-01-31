@@ -15,6 +15,8 @@ const IndexPage = () => (
     query={graphql`
       query HomeQuery {
         page: wordpressPage(slug: { eq: "home" }) {
+          title
+          slug
           acf {
             content
             buttons {
@@ -83,8 +85,8 @@ const IndexPage = () => (
         }
       }
     `}
-    render={({ page: { acf } }) => (
-      <Layout>
+    render={({ page: { title, slug, acf } }) => (
+      <Layout pageTitle={title} pageSlug={slug}>
         <HeroUnit isHome>
           <HeroContent
             html={acf.content}

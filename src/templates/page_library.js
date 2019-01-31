@@ -8,7 +8,7 @@ import HeroUnit from '../components/Hero/HeroUnit'
 import HeroContent from '../components/Hero/HeroContent-Page'
 
 const LibraryTemplate = ({ data: { page } }) => (
-  <Layout>
+  <Layout pageTitle={page.title} pageSlug={page.slug}>
     <HeroUnit>
       <HeroContent html={page.acf.content} buttons={page.acf.buttons} />
     </HeroUnit>
@@ -64,6 +64,8 @@ export default LibraryTemplate
 export const query = graphql`
   query LibraryQuery($slug: String!) {
     page: wordpressPage(slug: { eq: $slug }) {
+      title
+      slug
       content
       acf {
         content

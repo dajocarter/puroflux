@@ -1,10 +1,16 @@
 import React from 'react'
+
 import Layout from '../components/layout'
+import HeroUnit from '../components/Hero/HeroUnit'
+import HeroContent from '../components/Hero/HeroContent-Page'
 
 const NotFoundPage = () => (
-  <Layout>
-    <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
+  <Layout pageTitle={'Page Not Found'}>
+    <HeroUnit>
+      <HeroContent
+        html={`<h1>PAGE NOT FOUND</h1>`}
+      />
+    </HeroUnit>
   </Layout>
 )
 

@@ -33,7 +33,7 @@ const DownloadCol = ({ title, file }) => (
 )
 
 const SeriesTemplate = ({ data: { series }, pageContext }) => (
-  <Layout>
+  <Layout pageTitle={series.title} pageSlug={series.slug}>
     <HeroUnit>
       <Row>
         <Col>
@@ -188,6 +188,7 @@ export const query = graphql`
   query SeriesQuery($slug: String!) {
     series: wordpressWpSeries(slug: { eq: $slug }) {
       title
+      slug
       content
       featured_media {
         localFile {

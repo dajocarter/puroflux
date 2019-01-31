@@ -10,7 +10,7 @@ import HeroContent from '../components/Hero/HeroContent-Page'
 import ContactForm from '../components/forms/contact'
 
 const Contact = ({ data: { page } }) => (
-  <Layout>
+  <Layout pageTitle={page.title} pageSlug={page.slug}>
     <HeroUnit>
       <HeroContent html={page.acf.content} buttons={page.acf.buttons} />
     </HeroUnit>
@@ -57,6 +57,8 @@ export default Contact
 export const query = graphql`
   query ContactQuery($slug: String!) {
     page: wordpressPage(slug: { eq: $slug }) {
+      title
+      slug
       acf {
         content
         buttons {

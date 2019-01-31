@@ -9,7 +9,7 @@ import ProductNav from '../components/productNav'
 import Btn from '../components/styled/button'
 
 const ProductTemplate = ({ data: { product } }) => (
-  <Layout>
+  <Layout pageTitle={product.title} pageSlug={product.slug}>
     <Main>
       <Row>
         <Col>
@@ -88,6 +88,7 @@ export const query = graphql`
   query ProductQuery($slug: String!) {
     product: wordpressWpProducts(slug: { eq: $slug }) {
       title
+      slug
       content
       acf {
         description
