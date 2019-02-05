@@ -153,12 +153,9 @@ const Footer = props => {
       </Container>
       <Copyright>
         <p>&copy; Copyright 2018 - PUROFLUX. All rights reserved.</p>
-        <a href='https://www.netlify.com'>
-          <img
-            alt='Deployed by Netlify'
-            src='https://www.netlify.com/img/global/badges/netlify-color-bg.svg'
-          />
-        </a>
+        <span id='siteseal'>
+          <script async type='text/javascript' src='https://seal.godaddy.com/getSeal?sealID=fiOziWaDhv7W4ZLaOmHYe54M6u06K6hcE2hyk4nbkgWZGQNRfppQw4TnBWy1' />
+        </span>
       </Copyright>
     </FooterWrapper>
   )
