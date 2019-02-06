@@ -85,83 +85,91 @@ const FormModal = styled(Modal)`
   }
 `
 
-const Footer = props => {
-  return (
-    <FooterWrapper>
-      <CallToAction>
-        <Container>
-          <Row>
-            <Col xs={12} md={6} lg={5}>
-              <Headline>Ready to get started?</Headline>
-            </Col>
-            <Col xs={12} md={6} lg={7}>
-              <Action>
-                Call us at{' '}
-                <PhoneNumber
-                  href='tel:805-579-0216'
-                  title='Dial (805) 579-0216'
-                >
-                  (805) 579-0216
-                </PhoneNumber>{' '}
-                or{' '}
-                <CTAlink alt='true' to='/contact/'>
-                  Contact Us
-                </CTAlink>
-              </Action>
-            </Col>
-          </Row>
-        </Container>
-      </CallToAction>
-      <Container>
-        <MenusRow>
-          <Column xs={12} sm={4} md={3}>
-            <ColumnTitle>{props.productsMenu.name}</ColumnTitle>
-            <Menu>
-              {props.productsMenu.items.map((item, index) => (
-                <MenuItem key={index}>
-                  <MenuLink to={`/${item.object_slug}/`}>{item.title}</MenuLink>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Column>
-          <Column xs={12} sm={4} md={{ span: 3, offset: 1 }}>
-            <ColumnTitle>{props.pagesMenu.name}</ColumnTitle>
-            <Menu>
-              {props.pagesMenu.items.map((item, index) => (
-                <MenuItem key={index}>
-                  <MenuLink
-                    className={item.object_slug === 'rep-login' ? `alt` : ``}
-                    to={`/${item.object_slug}/`}
-                  >
-                    {item.title}
-                  </MenuLink>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Column>
-          <SignUpColumn xs={12} sm={4} md={5}>
+export default class Footer extends PureComponent {
+  componentDidMount () {
+    const script = document.createElement('script')
+
+    script.src = 'https://seal.godaddy.com/getSeal?sealID=fiOziWaDhv7W4ZLaOmHYe54M6u06K6hcE2hyk4nbkgWZGQNRfppQw4TnBWy1'
+    script.async = true
+
+    document.getElementById('siteseal').appendChild(script)
+  }
+  render () {
+    const { productsMenu, pagesMenu } = this.props
+
+    return (
+      <FooterWrapper>
+        <CallToAction>
+          <Container>
             <Row>
-              <Col sm={12} md={6} lg={7} xl={8}>
-                <ColumnTitle>Sign up for our newsletter</ColumnTitle>
+              <Col xs={12} md={6} lg={5}>
+                <Headline>Ready to get started?</Headline>
               </Col>
-              <Col sm={12} md={6} lg={5} xl={4}>
-                <SignUpLink />
+              <Col xs={12} md={6} lg={7}>
+                <Action>
+                  Call us at{' '}
+                  <PhoneNumber
+                    href='tel:805-579-0216'
+                    title='Dial (805) 579-0216'
+                  >
+                    (805) 579-0216
+                  </PhoneNumber>{' '}
+                  or{' '}
+                  <CTAlink alt='true' to='/contact/'>
+                    Contact Us
+                  </CTAlink>
+                </Action>
               </Col>
             </Row>
-          </SignUpColumn>
-        </MenusRow>
-      </Container>
-      <Copyright>
-        <p>&copy; Copyright 2018 - PUROFLUX. All rights reserved.</p>
-        <span id='siteseal'>
-          <script async type='text/javascript' src='https://seal.godaddy.com/getSeal?sealID=fiOziWaDhv7W4ZLaOmHYe54M6u06K6hcE2hyk4nbkgWZGQNRfppQw4TnBWy1' />
-        </span>
-      </Copyright>
-    </FooterWrapper>
-  )
+          </Container>
+        </CallToAction>
+        <Container>
+          <MenusRow>
+            <Column xs={12} sm={4} md={3}>
+              <ColumnTitle>{productsMenu.name}</ColumnTitle>
+              <Menu>
+                {productsMenu.items.map((item, index) => (
+                  <MenuItem key={index}>
+                    <MenuLink to={`/${item.object_slug}/`}>{item.title}</MenuLink>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Column>
+            <Column xs={12} sm={4} md={{ span: 3, offset: 1 }}>
+              <ColumnTitle>{pagesMenu.name}</ColumnTitle>
+              <Menu>
+                {pagesMenu.items.map((item, index) => (
+                  <MenuItem key={index}>
+                    <MenuLink
+                      className={item.object_slug === 'rep-login' ? `alt` : ``}
+                      to={`/${item.object_slug}/`}
+                    >
+                      {item.title}
+                    </MenuLink>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Column>
+            <SignUpColumn xs={12} sm={4} md={5}>
+              <Row>
+                <Col sm={12} md={6} lg={7} xl={8}>
+                  <ColumnTitle>Sign up for our newsletter</ColumnTitle>
+                </Col>
+                <Col sm={12} md={6} lg={5} xl={4}>
+                  <SignUpLink />
+                </Col>
+              </Row>
+            </SignUpColumn>
+          </MenusRow>
+        </Container>
+        <Copyright>
+          <p>&copy; Copyright 2018 - PUROFLUX. All rights reserved.</p>
+          <span id='siteseal' />
+        </Copyright>
+      </FooterWrapper>
+    )
+  }
 }
-
-export default Footer
 
 const FooterWrapper = styled.footer`
   background: black;
