@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 
 import 'bootstrap/dist/css/bootstrap.css'
+import { formatPhoneNumber } from '../helpers/formatting'
 import Layout from '../components/layout'
 import HeroUnit from '../components/Hero/HeroUnit'
 import HeroContent from '../components/Hero/HeroContent-Page'
@@ -29,18 +30,14 @@ const Contact = ({ data: { page } }) => (
               allowFullScreen
             />
           </GMap>
-          <Address>
-            Puroflux Corporation <br />
-            2121 Union Place <br />
-            Simi Valley, CA 93065
-          </Address>
+          <Address dangerouslySetInnerHTML={{ __html: page.acf.address }} />
           <p>
             <Title>Tel:</Title>
-            <Value href='tel:805-579-0216'>(805) 579-0216</Value> <br />
+            <Value href={`tel:${formatPhoneNumber(page.acf.phone_number, 'back')}`}>{formatPhoneNumber(page.acf.phone_number, 'front')}</Value> <br />
             <Title>Fax:</Title>
-            <Value href='tel:805-579-6005'>(805) 579-6005</Value> <br />
+            <Value href={`tel:${formatPhoneNumber(page.acf.fax_number, 'back')}`}>{formatPhoneNumber(page.acf.fax_number, 'front')}</Value> <br />
             <Title>Email:</Title>
-            <Value href='mailto:sales@puroflux.com'>sales@puroflux.com</Value>
+            <Value href={`mailto:${page.acf.contact_email}`}>{page.acf.contact_email}</Value>
           </p>
         </Col>
         <Col md={{ span: 5, offset: 2 }}>
