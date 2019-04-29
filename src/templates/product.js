@@ -43,9 +43,7 @@ const ProductTemplate = ({ data: { product } }) => (
             <FeaturedBtn
               as='a'
               primary='true'
-              href={`${process.env.SOURCE_URL}${
-                product.acf.file.url.source_url
-              }`}
+              href={product.acf.file.url.source_url}
               target='_blank'
               rel='noopener noreferrer'
             >

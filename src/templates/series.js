@@ -21,7 +21,7 @@ const DownloadCol = ({ title, file }) => (
       <p>
         <span>{title}</span>
         <a
-          href={`${process.env.SOURCE_URL}${file.url.source_url}`}
+          href={file.url.source_url}
           target='_blank'
           rel='noopener noreferrer'
         >
@@ -122,9 +122,7 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
                               {mf.title}:
                               {mf.file ? (
                                 <a
-                                  href={`${process.env.SOURCE_URL}${
-                                    mf.file.url.source_url
-                                  }`}
+                                  href={mf.file.url.source_url}
                                   target='_blank'
                                   rel='noopener noreferrer'
                                 >
