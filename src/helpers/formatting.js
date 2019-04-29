@@ -33,9 +33,9 @@ export const formatURL = (url) => {
   const baseURL = process.env.BASE_URL
   const httpLink = `http://${baseURL}`
   const httpsLink = `https://${baseURL}`
-
+  let formattedURL = url
   if (url.match(filePath)) return url
-  if (url.match(httpLink)) return url.replace(httpLink, '')
-  if (url.match(httpsLink)) return url.replace(httpsLink, '')
-  return url
+  if (url.match(httpLink)) formattedURL = url.replace(httpLink, '')
+  if (url.match(httpsLink)) formattedURL = url.replace(httpsLink, '')
+  return formattedURL
 }
