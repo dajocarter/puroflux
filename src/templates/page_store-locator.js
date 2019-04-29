@@ -11,10 +11,7 @@ import Accordion, {
   AccordionContent
 } from '../components/Accordion'
 
-const formatPhoneNumber = number => {
-  const parts = number.split('-')
-  return `(${parts[0]}) ${parts[1]}-${parts[2]}`
-}
+import { formatPhoneNumber } from '../helpers/formatting'
 
 const groupRepsByState = reps => {
   const statesExtracted = reps.reduce((acc, { node }) => {
@@ -57,8 +54,8 @@ const groupRepsByState = reps => {
               <li>
                 <span>Phone:</span>{' '}
                 {phone_number && (
-                  <a href={`tel:${phone_number}`}>
-                    {formatPhoneNumber(phone_number)}
+                  <a href={`tel:${formatPhoneNumber(phone_number, 'back')}`}>
+                    {formatPhoneNumber(phone_number, 'front')}
                   </a>
                 )}
               </li>
@@ -69,8 +66,8 @@ const groupRepsByState = reps => {
               <li>
                 <span>Fax:</span>{' '}
                 {fax_number && (
-                  <a href={`fax:${fax_number}`}>
-                    {formatPhoneNumber(fax_number)}
+                  <a href={`fax:${formatPhoneNumber(fax_number, 'back')}`}>
+                    {formatPhoneNumber(fax_number, 'front')}
                   </a>
                 )}
               </li>
