@@ -21,3 +21,21 @@ export const formatPhoneNumber = (phoneNumber, formatType = 'back') => {
   }
   return formatted
 }
+
+/**
+ * Formats a URL
+ * @param {string} URL - The URL to format
+ * @returns {string} The formatted URL
+ */
+export const formatURL = (url) => {
+  // Determine if the URL contains /wp-content/
+  const filePath = `wp-content/uploads`
+  const baseURL = process.env.BASE_URL
+  const httpLink = `http://${baseURL}`
+  const httpsLink = `https://${baseURL}`
+  let formattedURL = url
+  if (url.match(filePath)) return url
+  if (url.match(httpLink)) formattedURL = url.replace(httpLink, '')
+  if (url.match(httpsLink)) formattedURL = url.replace(httpsLink, '')
+  return formattedURL
+}

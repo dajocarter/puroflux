@@ -39,7 +39,7 @@ module.exports = {
         perPage: 100,
         // Search and Replace Urls across WordPress content.
         searchAndReplaceContentUrls: {
-          sourceUrl: process.env.SOURCE_URL,
+          sourceUrl: '',
           replacementUrl: ''
         },
         concurrentRequests: 10,

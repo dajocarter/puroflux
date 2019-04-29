@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import Btn from '../styled/button'
 import Request3dForm from '../forms/request3D'
+import { formatURL } from '../../helpers/formatting'
 
 class ModalButton extends PureComponent {
   constructor (props, context) {
@@ -105,7 +106,7 @@ const HeroContentPage = props => (
             <Button
               key={i}
               as='a'
-              href={link.button_link.url}
+              href={formatURL(link.button_link.url)}
               target={link.button_link.target}
               rel='noopener noreferrer'
               primary={i % 2 === 0 ? `true` : `false`}
@@ -122,7 +123,7 @@ const HeroContentPage = props => (
           ) : (
             <Button
               key={i}
-              to={`/${link.button_link.url}/`}
+              to={formatURL(link.button_link.url)}
               primary={i % 2 === 0 ? `true` : `false`}
               secondary={i % 2 === 1 ? `true` : `false`}
             >
