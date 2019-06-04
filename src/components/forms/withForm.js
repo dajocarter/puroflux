@@ -10,7 +10,7 @@ export default function withForm (FormInputs, formName, formSubject = 'New Form 
         <form
           name={formName}
           method='POST'
-          action='https://formspree.io/dajocarter@gmail.com'
+          action='https://formspree.io/djamison@puroflux.com'
         >
           <FormInputs />
           <input
