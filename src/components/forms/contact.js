@@ -15,11 +15,11 @@ const ContactForm = () => (
     </FormGroup>
     <FormGroup controlId='message'>
       <FormLabel>Message</FormLabel>
-      <FormControl as='textarea' placeholder='Your message' />
+      <FormControl as='textarea' name='message' placeholder='Your message' />
     </FormGroup>
     <FormGroup controlId='location'>
       <FormLabel>Location</FormLabel>
-      <FormControl type='text' placeholder='Your location' />
+      <FormControl type='text' name='location' placeholder='Your location' />
     </FormGroup>
   </Fragment>
 )
