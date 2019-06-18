@@ -16,4 +16,4 @@ const NewsletterForm = () => (
   </Fragment>
 )
 
-export default withForm(NewsletterForm)
+export default withForm(NewsletterForm, 'Newsletter')
