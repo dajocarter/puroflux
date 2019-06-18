@@ -24,4 +24,4 @@ const ContactForm = () => (
   </Fragment>
 )
 
-export default withForm(ContactForm)
+export default withForm(ContactForm, 'Contact Us')

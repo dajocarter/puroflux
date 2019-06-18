@@ -28,4 +28,4 @@ const Request3dForm = () => (
   </Fragment>
 )
 
-export default withForm(Request3dForm)
+export default withForm(Request3dForm, '3D Request Form')
