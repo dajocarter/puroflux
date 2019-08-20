@@ -5259,11 +5259,12 @@ gatsby-cli@^2.4.4:
     yurnalist "^0.2.1"
 
 gatsby-image@^2.0.19:
-  version "2.0.19"
-  resolved "https://registry.yarnpkg.com/gatsby-image/-/gatsby-image-2.0.19.tgz#375d570e04b3d442b50e409fd84c272c40d7cabf"
-  integrity sha512-fKWEYD9LvGH97on12xlwUqwz3RvOV3oqW8tXwEDBAUM1tsN9wwc2k19CPVCgWNbFJd0dVe2ZOQB+6Az4elPmWw==
+  version "2.2.9"
+  resolved "https://registry.yarnpkg.com/gatsby-image/-/gatsby-image-2.2.9.tgz#f4b89d9ca939591ab7aa20b43c3c82a2d794aae3"
+  integrity sha512-jmHoEgVDBsSLxWD+W78UgZRHcsKQMN2+i0wR/bbLzILESLirs4s4LeiPmSquj+cqMEtwaZ7CIDEeHSamelY+zQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
+    object-fit-images "^3.2.4"
     prop-types "^15.6.1"
 
 gatsby-link@^2.0.6:
@@ -8370,6 +8371,11 @@ object-copy@^0.1.0:
     copy-descriptor "^0.1.0"
     define-property "^0.2.5"
     kind-of "^3.0.3"
+
+object-fit-images@^3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/object-fit-images/-/object-fit-images-3.2.4.tgz#6c299d38fdf207746e5d2d46c2877f6f25d15b52"
+  integrity sha512-G+7LzpYfTfqUyrZlfrou/PLLLAPNC52FTy5y1CBywX+1/FkxIloOyQXBmZ3Zxa2AWO+lMF0JTuvqbr7G5e5CWg==
 
 object-hash@^1.1.4:
   version "1.3.0"
