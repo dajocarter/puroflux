@@ -16,8 +16,10 @@ import { formatPhoneNumber } from '../helpers/formatting'
 const groupRepsByState = reps => {
   const statesExtracted = reps.reduce((acc, { node }) => {
     const newNode = Object.assign({}, node)
-    newNode.states = newNode.states.length ? newNode.states[0].name : ''
-    acc.push(newNode)
+    if (newNode.states) {
+      newNode.states = newNode.states[0].name
+      acc.push(newNode)
+    }
     return acc
   }, [])
   const sortedReps = statesExtracted.sort((a, b) => {
