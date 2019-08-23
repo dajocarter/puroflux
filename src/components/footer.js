@@ -1,90 +1,9 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { Link } from 'gatsby'
-import { Container, Row, Col, Modal } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 
 import Button from './styled/button'
-import NewsletterForm from './forms/newsletter'
-
-class SignUpLink extends PureComponent {
-  constructor (props, context) {
-    super(props, context)
-
-    this.toggleForm = this.toggleForm.bind(this)
-
-    this.state = {
-      showForm: false
-    }
-  }
-
-  toggleForm () {
-    this.setState(prevState => ({ showForm: !prevState.showForm }))
-  }
-
-  render () {
-    const { showForm } = this.state
-
-    return (
-      <Fragment>
-        <SignUpBtn as='button' secondary='true' onClick={this.toggleForm}>
-          Sign Up
-        </SignUpBtn>
-        <FormModal centered show={showForm} onHide={this.toggleForm}>
-          <Modal.Header closeButton>
-            <Modal.Title>JOIN OUR NEWSLETTER</Modal.Title>
-            <h6 className='text-center text-uppercase'>
-              Enter your name and email to get news & more!
-            </h6>
-          </Modal.Header>
-          <Modal.Body>
-            <NewsletterForm />
-          </Modal.Body>
-        </FormModal>
-      </Fragment>
-    )
-  }
-}
-
-const FormModal = styled(Modal)`
-  .modal-content {
-    background: transparent;
-    border: 0;
-    color: #fff;
-  }
-
-  .modal-header {
-    border-bottom: 0;
-    text-transform: uppercase;
-    display: grid;
-    grid-template-columns: 1fr;
-    text-align: center;
-
-    .h4 {
-      margin-bottom: 1rem;
-    }
-
-    .close {
-      position: absolute;
-      top: 0;
-      right: 0;
-      color: ${({ theme }) => theme.secondary};
-      font-size: 2rem;
-      opacity: 1;
-      text-shadow: none;
-
-      &:not(:disabled) {
-        &:not(.disabled) {
-          &:hover,
-          &:focus {
-            color: ${({ theme }) => theme.primary};
-            opacity: 1;
-          }
-        }
-      }
-    }
-  }
-`
-
 export default class Footer extends PureComponent {
   componentDidMount () {
     const script = document.createElement('script')
@@ -94,6 +13,11 @@ export default class Footer extends PureComponent {
 
     document.getElementById('siteseal').appendChild(script)
   }
+
+  componentWillUnmount () {
+    document.getElementById('siteseal').remove()
+  }
+
   render () {
     const { productsMenu, pagesMenu } = this.props
 
@@ -156,7 +80,7 @@ export default class Footer extends PureComponent {
                   <ColumnTitle>Sign up for our newsletter</ColumnTitle>
                 </Col>
                 <Col sm={12} md={6} lg={5} xl={4}>
-                  <SignUpLink />
+                  <SignUpLink to={`/newsletter`}>Sign up</SignUpLink>
                 </Col>
               </Row>
             </SignUpColumn>
@@ -303,16 +227,20 @@ const MenuLink = styled(Link)`
   }
 `
 
-const SignUpBtn = styled(Button)`
+const SignUpLink = styled(Link)`
   background-color: ${props => props.theme.secondary};
+  border: 3px solid ${props => props.theme.secondary};
   color: white;
+  display: inline-block;
+  letter-spacing: 1px;
   max-width: 100%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding: 0.5rem 1.25rem;
+  text-transform: uppercase;
 
   &:hover,
   &:focus {
     background-color: white;
+    text-decoration: none;
     border-color: white;
     color: black;
   }
