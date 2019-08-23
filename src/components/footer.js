@@ -94,6 +94,11 @@ export default class Footer extends PureComponent {
 
     document.getElementById('siteseal').appendChild(script)
   }
+
+  componentWillUnmount () {
+    document.getElementById('siteseal').remove()
+  }
+
   render () {
     const { productsMenu, pagesMenu } = this.props
 
