@@ -84,47 +84,50 @@ const IndexPage = () => (
         }
       }
     `}
-    render={({ page: { title, acf } }) => (
-      <Layout pageTitle={title}>
-        <HeroUnit isHome>
-          <HeroContent
-            html={acf.content}
-            buttons={acf.buttons}
-          />
-        </HeroUnit>
-        <FeatureContainer>
-          <Row>
-            <Col>
-              <FeatureTitle>Featured</FeatureTitle>
-            </Col>
-          </Row>
-          <Row>
-            <Column xs={12} lg={6}>
-              {acf.featured_image && (
-                <FeatureImage
-                  fluid={
-                    acf.featured_image.localFile.childImageSharp.fluid
-                  }
-                />
+    render={({ page: { title, acf } }) => {
+      const hasFeaturedImage = !!acf.featured_image.localFile
+      return (
+        <Layout pageTitle={title}>
+          <HeroUnit isHome>
+            <HeroContent
+              html={acf.content}
+              buttons={acf.buttons}
+            />
+          </HeroUnit>
+          <FeatureContainer>
+            <Row>
+              <Col>
+                <FeatureTitle hasFeaturedImage={hasFeaturedImage}>Featured</FeatureTitle>
+              </Col>
+            </Row>
+            <Row>
+              {hasFeaturedImage && (
+                <Column xs={12} lg={6}>
+                  <FeatureImage
+                    fluid={
+                      acf.featured_image.localFile.childImageSharp.fluid
+                    }
+                  />
+                </Column>
               )}
-            </Column>
-            <Column xs={12} lg={6}>
-              <WPcontent
-                dangerouslySetInnerHTML={{
-                  __html: acf.featured_content
-                }}
-              />
-              <Btn secondary='true' to={`/gallery/`}>
-                View Gallery
-              </Btn>
-            </Column>
-          </Row>
-        </FeatureContainer>
-        {acf.layouts_page && (
-          <FlexibleContent layouts={acf.layouts_page} />
-        )}
-      </Layout>
-    )}
+              <Column xs={12} lg={hasFeaturedImage ? 6 : 12}>
+                <WPcontent
+                  dangerouslySetInnerHTML={{
+                    __html: acf.featured_content
+                  }}
+                />
+                <Btn secondary='true' to={`/gallery/`}>
+                  View Gallery
+                </Btn>
+              </Column>
+            </Row>
+          </FeatureContainer>
+          {acf.layouts_page && (
+            <FlexibleContent layouts={acf.layouts_page} />
+          )}
+        </Layout>
+      )
+    }}
   />
 )
 
@@ -158,6 +161,7 @@ const Column = styled(Col)`
 
   &:first-of-type {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
@@ -185,10 +189,12 @@ const FeatureTitle = styled.h2`
   left: 50%;
   transform: translateX(-50%);
 
-  @media (min-width: 992px) {
-    left: 75%;
-    transform: translateX(-75%);
-  }
+  ${({ hasFeaturedImage }) => hasFeaturedImage ? `
+    @media (min-width: 992px) {
+      left: 75%;
+      transform: translateX(-75%);
+    }
+  ` : ``}
 `
 
 const WPcontent = styled.div`

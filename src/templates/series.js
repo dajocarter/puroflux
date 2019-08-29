@@ -85,71 +85,77 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
           />
         )}
       </DownloadRow>
-      <Row>
-        <Col>
-          <ModelTitle>Select a Model</ModelTitle>
-          <ModelDescription>View product summary</ModelDescription>
-        </Col>
-      </Row>
-      <AccordionRow>
-        <Col>
-          <Accordion>
-            {series.acf.models.map((model, i) => (
-              <div key={model.slug}>
-                <AccordionTitle accordionIndex={i}>
-                  {model.title}
-                </AccordionTitle>
-                <AccordionContent accordionIndex={i}>
-                  <Row>
-                    {model.acf.model_stats && (
-                      <Col xs={12} md={8}>
-                        <ul>
-                          {model.acf.model_stats.map((stat, s) => (
-                            <li key={s}>
-                              <span>{stat.title}:</span>{' '}
-                              <span>{stat.value}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </Col>
-                    )}
-                    {model.acf.model_files && (
-                      <Col xs={12} md={4}>
-                        <strong>{model.acf.file_names}</strong>
-                        <ul>
-                          {model.acf.model_files.map((mf, f) => (
-                            <li key={f}>
-                              {mf.title}:
-                              {mf.file ? (
-                                <a
-                                  href={mf.file.url.source_url}
-                                  target='_blank'
-                                  rel='noopener noreferrer'
-                                >
-                                  DOWNLOAD
-                                </a>
-                              ) : (
-                                <span>* Consult Factory</span>
-                              )}
-                            </li>
-                          ))}
-                        </ul>
-                      </Col>
-                    )}
-                  </Row>
-                </AccordionContent>
-              </div>
-            ))}
-          </Accordion>
-        </Col>
-      </AccordionRow>
-      <Row>
-        <Col>
-          <ModelNotes
-            dangerouslySetInnerHTML={{ __html: series.acf.model_notes }}
-          />
-        </Col>
-      </Row>
+      {series.acf.models &&
+        <Row>
+          <Col>
+            <ModelTitle>Select a Model</ModelTitle>
+            <ModelDescription>View product summary</ModelDescription>
+          </Col>
+        </Row>
+      }
+      {series.acf.models &&
+        <AccordionRow>
+          <Col>
+            <Accordion>
+              {series.acf.models.map((model, i) => (
+                <div key={model.slug}>
+                  <AccordionTitle accordionIndex={i}>
+                    {model.title}
+                  </AccordionTitle>
+                  <AccordionContent accordionIndex={i}>
+                    <Row>
+                      {model.acf.model_stats && (
+                        <Col xs={12} md={8}>
+                          <ul>
+                            {model.acf.model_stats.map((stat, s) => (
+                              <li key={s}>
+                                <span>{stat.title}:</span>{' '}
+                                <span>{stat.value}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </Col>
+                      )}
+                      {model.acf.model_files && (
+                        <Col xs={12} md={4}>
+                          <strong>{model.acf.file_names}</strong>
+                          <ul>
+                            {model.acf.model_files.map((mf, f) => (
+                              <li key={f}>
+                                {mf.title}:
+                                {mf.file ? (
+                                  <a
+                                    href={mf.file.url.source_url}
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                  >
+                                    DOWNLOAD
+                                  </a>
+                                ) : (
+                                  <span>* Consult Factory</span>
+                                )}
+                              </li>
+                            ))}
+                          </ul>
+                        </Col>
+                      )}
+                    </Row>
+                  </AccordionContent>
+                </div>
+              ))}
+            </Accordion>
+          </Col>
+        </AccordionRow>
+      }
+      {series.acf.model_notes &&
+        <Row>
+          <Col>
+            <ModelNotes
+              dangerouslySetInnerHTML={{ __html: series.acf.model_notes }}
+            />
+          </Col>
+        </Row>
+      }
       {series.acf.products && (
         <Fragment>
           <Row>
