@@ -163,7 +163,7 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
               <ProductTitle>{series.acf.products[0].title}</ProductTitle>
             </Col>
           </Row>
-          <Row>
+          <Row style={{ justifyContent: 'center' }}>
             {series.acf.products[0].acf &&
               series.acf.products[0].acf.series &&
               series.acf.products[0].acf.series

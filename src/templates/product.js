@@ -53,7 +53,7 @@ const ProductTemplate = ({ data: { product } }) => (
         </FeaturedProduct>
       </Row>
       {product.acf.series && (
-        <Row>
+        <Row style={{ justifyContent: 'center' }}>
           {product.acf.series.map(series => (
             <Series key={series.id} xs={12} sm={6} md={3}>
               <SeriesTitle>{series.title} Series</SeriesTitle>
