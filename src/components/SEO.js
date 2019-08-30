@@ -16,15 +16,11 @@ const SEO = ({ pageTitle, pageSlug }) => (
             origin
           }
         }
-        wordpressWpSettings {
-          title
-          description
-        }
       }
     `}
-    render={({ site: { siteMetadata: { origin } }, wordpressWpSettings: settings }) => {
+    render={({ site: { siteMetadata: { origin } } }) => {
       const url = `${origin}/${pageSlug}`
-      const title = `${pageTitle} | ${settings.title}`
+      const title = `${pageTitle} | Puroflux Corporation`
 
       return (
         <Fragment>
@@ -32,26 +28,26 @@ const SEO = ({ pageTitle, pageSlug }) => (
             {/* General tags */}
             <html lang='en' />
             <title>{title}</title>
-            <meta name='description' content={settings.description} />
+            <meta name='description' content='Industrial & Commercial Water Filtration and Control Systems' />
             <meta name='image' content={image} />
             <link rel='shortcut icon' href={favicon} />
 
             {/* OpenGraph tags */}
             <meta property='og:url' content={url} />
             <meta property='og:title' content={title} />
-            <meta property='og:description' content={settings.description} />
+            <meta property='og:description' content='Industrial & Commercial Water Filtration and Control Systems' />
             <meta property='og:image' content={image} />
 
             {/* Twitter Card tags */}
             <meta name='twitter:card' content='summary_large_image' />
             <meta name='twitter:title' content={title} />
-            <meta name='twitter:description' content={settings.description} />
+            <meta name='twitter:description' content='Industrial & Commercial Water Filtration and Control Systems' />
             <meta name='twitter:image' content={image} />
           </Helmet>
           <SchemaOrg
             url={url}
             title={title}
-            description={settings.description}
+            description='Industrial & Commercial Water Filtration and Control Systems'
             image={image}
           />
         </Fragment>

@@ -13,9 +13,6 @@ const Layout = ({ children, pageTitle, pageSlug }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
-        settings: wordpressWpSettings {
-          title
-        }
         logo: wordpressWpMedia(slug: { eq: "purofluxlogo_white_2x" }) {
           localFile {
             childImageSharp {
@@ -129,7 +126,7 @@ const Layout = ({ children, pageTitle, pageSlug }) => (
           <GlobalStyles />
           <Header
             logo={data.logo}
-            siteTitle={data.settings.title}
+            siteTitle='Puroflux Corporation'
             menu={data.mainMenu}
           />
           <Main>{children}</Main>
