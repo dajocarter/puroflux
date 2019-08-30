@@ -15,7 +15,7 @@ import Accordion, {
 import Btn from '../components/styled/button'
 
 const DownloadCol = ({ title, file }) => (
-  <Col xs={12} sm={4}>
+  <Col xs={12} sm={3}>
     <Download>
       <PDFicon />
       <p>
@@ -82,6 +82,12 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
           <DownloadCol
             title={`Sample Spec. Sheet`}
             file={series.acf.sample_spec_sheet}
+          />
+        )}
+        {series.acf.optional_file && (
+          <DownloadCol
+            title={series.acf.optional_file.title}
+            file={series.acf.optional_file}
           />
         )}
       </DownloadRow>
@@ -220,6 +226,12 @@ export const query = graphql`
             source_url
           }
         }
+        optional_file {
+          title
+          url {
+            source_url
+          }
+        }
         model_notes
         models {
           slug
@@ -281,6 +293,7 @@ const FeaturedContent = styled.div`
 `
 
 const DownloadRow = styled(Row)`
+  justify-content: center;
   margin-top: 3rem;
 `
 
