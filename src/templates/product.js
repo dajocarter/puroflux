@@ -57,8 +57,8 @@ const ProductTemplate = ({ data: { product } }) => (
           {product.acf.series.map(series => (
             <Series key={series.id} xs={12} sm={6} md={3}>
               <SeriesTitle>{series.title} Series</SeriesTitle>
-              {series.featured_media &&
                 <Img
+              {series.featured_media.localFile &&
                   fixed={series.featured_media.localFile.childImageSharp.fixed}
                 />
               }

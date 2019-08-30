@@ -52,7 +52,7 @@ const SeriesTemplate = ({ data: { series }, pageContext }) => (
     <Main>
       <Row>
         <Col sm={12} md={6}>
-          {series.featured_media && (
+          {series.featured_media.localFile && (
             <Img
               fluid={series.featured_media.localFile.childImageSharp.fluid}
             />
