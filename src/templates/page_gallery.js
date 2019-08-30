@@ -1,8 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
-import { Container, Row, Col } from 'react-bootstrap'
-import Carousel from 'react-bootstrap/lib/Carousel'
+import { Container, Row, Col, Carousel } from 'react-bootstrap'
 import styled from 'styled-components'
 
 import Layout from '../components/layout'
