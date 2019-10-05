@@ -89,6 +89,14 @@ const Content = styled.div`
       font-size: 2rem;
     }
 
+    .alignleft {
+      float: left;
+    }
+
+    .alignright {
+      float: right;
+    }
+
     a {
       color: white;
       font-size: 1.5rem;
