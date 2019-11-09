@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import {
   string,
   oneOfType,
@@ -17,7 +17,7 @@ const FileOutput = ({ title, files }) => (
         {files.map(({ file }) => (
           <li key={file.wordpress_id}>
             <a
-              href={`${process.env.SOURCE_URL}${file.url.source_url}`}
+              href={file.url.source_url}
               target='_blank'
               rel='noopener noreferrer'
             >
@@ -57,14 +57,14 @@ const ModelInstallationFiles = ({
   sideStream
 }) => {
   return (
-    <Fragment>
+    <>
       {slipStream && <FileOutput title='Slip Stream' files={slipStream} />}
       {sweeperPiping && (
         <FileOutput title='Sweeper Piping' files={sweeperPiping} />
       )}
       {fullFlow && <FileOutput title='Full Flow' files={fullFlow} />}
       {sideStream && <FileOutput title='Side Stream' files={sideStream} />}
-    </Fragment>
+    </>
   )
 }
 
