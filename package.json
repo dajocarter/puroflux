@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-starter-default",
-  "description": "Gatsby default starter",
+  "name": "puroflux",
+  "description": "Website for Puroflux Corporation",
   "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "David Carter <dajocarter@gmail.com>",
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.6",
     "bootstrap": "^4.3.1",
@@ -43,6 +43,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/dajocarter/puroflux"
   }
 }
