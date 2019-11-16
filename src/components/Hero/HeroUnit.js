@@ -1,12 +1,12 @@
 import React from 'react'
 import { node, bool } from 'prop-types'
-import { StaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
-const HeroUnit = ({ children, isHome }) => (
-  <StaticQuery
-    query={graphql`
+const HeroUnit = ({ children, isHome }) => {
+  const { homeHero, defaultHero } = useStaticQuery(
+    graphql`
       query HeroUnitQuery {
         defaultHero: wordpressWpMedia(
           slug: { eq: "puroflux_home_hero_sample" }
@@ -19,7 +19,9 @@ const HeroUnit = ({ children, isHome }) => (
             }
           }
         }
-        homeHero: wordpressWpMedia(slug: { eq: "puroflux_home_hero_pf_4060" }) {
+        homeHero: wordpressWpMedia(
+          slug: { eq: "puroflux_home_hero_pf_4060" }
+        ) {
           localFile {
             childImageSharp {
               fluid(maxHeight: 450) {
@@ -29,19 +31,19 @@ const HeroUnit = ({ children, isHome }) => (
           }
         }
       }
-    `}
-    render={({ homeHero, defaultHero }) => (
-      <Background isHome={isHome}>
-        {isHome ? (
-          homeHero && <HeroImg fluid={homeHero.localFile.childImageSharp.fluid} />
-        ) : (
-          defaultHero && <HeroImg fluid={defaultHero.localFile.childImageSharp.fluid} />
-        )}
-        <Content>{children}</Content>
-      </Background>
-    )}
-  />
-)
+    `
+  )
+  return (
+    <Background isHome={isHome}>
+      {isHome ? (
+        homeHero && <HeroImg fluid={homeHero.localFile.childImageSharp.fluid} />
+      ) : (
+        defaultHero && <HeroImg fluid={defaultHero.localFile.childImageSharp.fluid} />
+      )}
+      <Content>{children}</Content>
+    </Background>
+  )
+}
 
 HeroUnit.propTypes = {
   children: node,
