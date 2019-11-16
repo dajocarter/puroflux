@@ -1,38 +1,15 @@
 import React from 'react'
 import { node, bool } from 'prop-types'
-import { useStaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
+import useHomeHero from '../useStaticQuery/homeHero'
+import useDefaultHero from '../useStaticQuery/defaultHero'
+
 const HeroUnit = ({ children, isHome }) => {
-  const { homeHero, defaultHero } = useStaticQuery(
-    graphql`
-      query HeroUnitQuery {
-        defaultHero: wordpressWpMedia(
-          slug: { eq: "puroflux_home_hero_sample" }
-        ) {
-          localFile {
-            childImageSharp {
-              fluid(maxHeight: 450) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
-        homeHero: wordpressWpMedia(
-          slug: { eq: "puroflux_home_hero_pf_4060" }
-        ) {
-          localFile {
-            childImageSharp {
-              fluid(maxHeight: 450) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
-      }
-    `
-  )
+  const homeHero = useHomeHero()
+  const defaultHero = useDefaultHero()
+
   return (
     <Background isHome={isHome}>
       {isHome ? (
