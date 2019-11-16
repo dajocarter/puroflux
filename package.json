@@ -48,7 +48,8 @@
       "jest",
       "describe",
       "it",
-      "expect"
+      "expect",
+      "beforeEach"
     ]
   },
   "engines": {
