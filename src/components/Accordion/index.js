@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { node, number } from 'prop-types'
 import { Collapse } from 'react-bootstrap'
 import styled from 'styled-components'
 
@@ -6,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 const AccordionContext = React.createContext()
 
-export default function Accordion ({ children }) {
+const Accordion = ({ children }) => {
   const [openItem, setOpenItem] = useState(0)
 
   const handleOpening = (index) => setOpenItem(index)
@@ -23,11 +24,17 @@ export default function Accordion ({ children }) {
   )
 }
 
+Accordion.propTypes = {
+  children: node.isRequired
+}
+
+export default Accordion
+
 const Wrapper = styled.div`
   border: 1px solid black;
 `
 
-export function AccordionTitle ({ accordionIndex, children }) {
+const AccordionTitle = ({ accordionIndex, children }) => {
   const { openItem, handleOpening } = useContext(AccordionContext)
 
   return (
@@ -41,6 +48,17 @@ export function AccordionTitle ({ accordionIndex, children }) {
     </Title>
   )
 }
+
+AccordionTitle.propTypes = {
+  accordionIndex: number.isRequired,
+  children: node.isRequired
+}
+
+AccordionTitle.defaultProps = {
+  accordionIndex: 0
+}
+
+export { AccordionTitle }
 
 const Title = styled.h5`
   background-color: ${props => (props['aria-expanded'] ? `black` : `white`)};
@@ -58,7 +76,7 @@ const Title = styled.h5`
   }
 `
 
-export function AccordionContent ({ accordionIndex, children }) {
+const AccordionContent = ({ accordionIndex, children }) => {
   const { openItem } = useContext(AccordionContext)
 
   return (
@@ -72,6 +90,17 @@ export function AccordionContent ({ accordionIndex, children }) {
     </Content>
   )
 }
+
+AccordionContent.propTypes = {
+  accordionIndex: number.isRequired,
+  children: node.isRequired
+}
+
+AccordionContent.defaultProps = {
+  accordionIndex: 0
+}
+
+export { AccordionContent }
 
 const Content = styled(Collapse)`
   border-bottom: ${props => (props.in ? `1px solid black` : 0)};

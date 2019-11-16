@@ -1,4 +1,5 @@
 import React from 'react'
+import { bool } from 'prop-types'
 import { StaticQuery, graphql, Link } from 'gatsby'
 import styled from 'styled-components'
 
@@ -33,6 +34,10 @@ const ProductNav = ({ light }) => (
     )}
   />
 )
+
+ProductNav.propTypes = {
+  light: bool
+}
 
 export default ProductNav
 

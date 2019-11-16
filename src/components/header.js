@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
+import { string, object, shape, arrayOf, number } from 'prop-types'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 import { Container, Row, Col } from 'react-bootstrap'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import styled from 'styled-components'
 
-export default function Header ({ logo, siteTitle, menu }) {
+const Header = ({ logo, siteTitle, menu }) => {
   const [menuIsOpen, setMenu] = useState(false)
 
   return (
@@ -114,6 +115,31 @@ export default function Header ({ logo, siteTitle, menu }) {
     </Wrapper>
   )
 }
+
+Header.propTypes = {
+  logo: object,
+  siteTitle: string,
+  menu: shape({
+    name: string,
+    items: arrayOf(shape({
+      wordpress_id: number,
+      object_slug: string,
+      title: string,
+      wordpress_children: arrayOf(shape({
+        wordpress_id: number,
+        object_slug: string,
+        title: string,
+        wordpress_children: arrayOf(shape({
+          wordpress_id: number,
+          object_slug: string,
+          title: string
+        }))
+      }))
+    }))
+  })
+}
+
+export default Header
 
 const Wrapper = styled.header`
   background: black;
