@@ -1,12 +1,12 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import ContactForm from './contact'
+import NewsletterForm from '../../../src/components/forms/newsletter'
 
-describe('Contact Form', () => {
+describe('Newsletter Form', () => {
   it('renders correctly', () => {
     const tree = renderer
-      .create(<ContactForm />)
+      .create(<NewsletterForm />)
       .toJSON()
     expect(tree).toMatchSnapshot()
   })

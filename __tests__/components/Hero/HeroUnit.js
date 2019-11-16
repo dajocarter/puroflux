@@ -1,7 +1,7 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import { HeroUnitComponent as HeroUnit } from './HeroUnit'
+import { HeroUnitComponent as HeroUnit } from '../../../src/components/Hero/HeroUnit'
 
 describe('Hero Unit', () => {
   const homeHero = {

@@ -1,7 +1,7 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import Request3DForm from './request3D'
+import Request3DForm from '../../../src/components/forms/request3D'
 
 describe('Request 3D Form', () => {
   it('renders correctly', () => {
