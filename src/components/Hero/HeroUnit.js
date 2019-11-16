@@ -1,30 +1,40 @@
 import React from 'react'
-import { node, bool } from 'prop-types'
+import { node, bool, object } from 'prop-types'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
 import useHomeHero from '../useStaticQuery/homeHero'
 import useDefaultHero from '../useStaticQuery/defaultHero'
 
-const HeroUnit = ({ children, isHome }) => {
+export const HeroUnitComponent = ({ children, isHome, homeHero, defaultHero }) => (
+  <Background isHome={isHome}>
+    {isHome ? (
+      homeHero && <HeroImg fluid={homeHero.localFile.childImageSharp.fluid} />
+    ) : (
+      defaultHero && <HeroImg fluid={defaultHero.localFile.childImageSharp.fluid} />
+    )}
+    <Content>{children}</Content>
+  </Background>
+)
+
+HeroUnitComponent.propTypes = {
+  children: node,
+  isHome: bool,
+  homeHero: object,
+  defaultHero: object
+}
+
+const HeroUnit = props => {
   const homeHero = useHomeHero()
   const defaultHero = useDefaultHero()
 
   return (
-    <Background isHome={isHome}>
-      {isHome ? (
-        homeHero && <HeroImg fluid={homeHero.localFile.childImageSharp.fluid} />
-      ) : (
-        defaultHero && <HeroImg fluid={defaultHero.localFile.childImageSharp.fluid} />
-      )}
-      <Content>{children}</Content>
-    </Background>
+    <HeroUnitComponent
+      {...props}
+      homeHero={homeHero}
+      defaultHero={defaultHero}
+    />
   )
-}
-
-HeroUnit.propTypes = {
-  children: node,
-  isHome: bool
 }
 
 export default HeroUnit
