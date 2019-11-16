@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { string } from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
@@ -23,7 +23,7 @@ const SEO = ({ pageTitle, pageSlug }) => (
       const title = `${pageTitle} | Puroflux Corporation`
 
       return (
-        <Fragment>
+        <>
           <Helmet>
             {/* General tags */}
             <html lang='en' />
@@ -50,7 +50,7 @@ const SEO = ({ pageTitle, pageSlug }) => (
             description='Industrial & Commercial Water Filtration and Control Systems'
             image={image}
           />
-        </Fragment>
+        </>
       )
     }}
   />
@@ -62,8 +62,8 @@ SEO.propTypes = {
 }
 
 SEO.defaultProps = {
-  pageTitle: ``,
-  pageSlug: ``
+  pageTitle: '',
+  pageSlug: ''
 }
 
 export default SEO

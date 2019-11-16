@@ -1,4 +1,5 @@
 import React from 'react'
+import { node, bool } from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
@@ -31,21 +32,21 @@ const HeroUnit = ({ children, isHome }) => (
     `}
     render={({ homeHero, defaultHero }) => (
       <Background isHome={isHome}>
-        {homeHero &&
-          defaultHero && (
-          <HeroImg
-            fluid={
-              isHome
-                ? homeHero.localFile.childImageSharp.fluid
-                : defaultHero.localFile.childImageSharp.fluid
-            }
-          />
+        {isHome ? (
+          homeHero && <HeroImg fluid={homeHero.localFile.childImageSharp.fluid} />
+        ) : (
+          defaultHero && <HeroImg fluid={defaultHero.localFile.childImageSharp.fluid} />
         )}
         <Content>{children}</Content>
       </Background>
     )}
   />
 )
+
+HeroUnit.propTypes = {
+  children: node,
+  isHome: bool
+}
 
 export default HeroUnit
 
