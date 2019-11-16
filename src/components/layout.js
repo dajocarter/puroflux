@@ -1,141 +1,32 @@
 import React, { Fragment } from 'react'
 import { node, string } from 'prop-types'
-import { StaticQuery, graphql } from 'gatsby'
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
 import styledNormalize from 'styled-normalize'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import useSiteLayout from './useStaticQuery/siteLayout'
 import Header from './header'
 import Footer from './footer'
 import Seo from './SEO'
 
-const Layout = ({ children, pageTitle, pageSlug }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        logo: wordpressWpMedia(slug: { eq: "purofluxlogo_white_2x" }) {
-          localFile {
-            childImageSharp {
-              fixed(width: 200, height: 42) {
-                ...GatsbyImageSharpFixed_withWebp
-              }
-            }
-          }
-        }
-        mainMenu: wordpressWpApiMenusMenusItems(slug: { eq: "main-menu" }) {
-          wordpress_id
-          name
-          slug
-          count
-          items {
-            wordpress_id
-            order
-            wordpress_parent
-            title
-            attr
-            target
-            classes
-            object_id
-            object_slug
-            wordpress_children {
-              wordpress_id
-              order
-              wordpress_parent
-              title
-              attr
-              target
-              classes
-              object_id
-              object_slug
-              wordpress_children {
-                wordpress_id
-                order
-                wordpress_parent
-                title
-                attr
-                target
-                classes
-                object_id
-                object_slug
-              }
-            }
-          }
-        }
-        pagesMenu: wordpressWpApiMenusMenusItems(slug: { eq: "explore" }) {
-          wordpress_id
-          name
-          slug
-          count
-          items {
-            wordpress_id
-            order
-            wordpress_parent
-            title
-            attr
-            target
-            classes
-            object_id
-            object_slug
-            wordpress_children {
-              wordpress_id
-              order
-              wordpress_parent
-              title
-              attr
-              target
-              classes
-              object_id
-              object_slug
-            }
-          }
-        }
-        productsMenu: wordpressWpApiMenusMenusItems(slug: { eq: "products" }) {
-          wordpress_id
-          name
-          slug
-          count
-          items {
-            wordpress_id
-            order
-            wordpress_parent
-            title
-            attr
-            target
-            classes
-            object_id
-            object_slug
-            wordpress_children {
-              wordpress_id
-              order
-              wordpress_parent
-              title
-              attr
-              target
-              classes
-              object_id
-              object_slug
-            }
-          }
-        }
-      }
-    `}
-    render={data => (
-      <ThemeProvider theme={theme}>
-        <Fragment>
-          <Seo pageTitle={pageTitle} pageSlug={pageSlug} />
-          <GlobalStyles />
-          <Header
-            logo={data.logo}
-            siteTitle='Puroflux Corporation'
-            menu={data.mainMenu}
-          />
-          <Main>{children}</Main>
-          <Footer productsMenu={data.productsMenu} pagesMenu={data.pagesMenu} />
-        </Fragment>
-      </ThemeProvider>
-    )}
-  />
-)
+const Layout = ({ children, pageTitle, pageSlug }) => {
+  const { logo, mainMenu, pagesMenu, productsMenu } = useSiteLayout()
+  return (
+    <ThemeProvider theme={theme}>
+      <Fragment>
+        <Seo pageTitle={pageTitle} pageSlug={pageSlug} />
+        <GlobalStyles />
+        <Header
+          logo={logo}
+          siteTitle='Puroflux Corporation'
+          menu={mainMenu}
+        />
+        <Main>{children}</Main>
+        <Footer productsMenu={productsMenu} pagesMenu={pagesMenu} />
+      </Fragment>
+    </ThemeProvider>
+  )
+}
 
 Layout.propTypes = {
   children: node.isRequired,

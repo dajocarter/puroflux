@@ -1,135 +1,61 @@
 import React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 
+import useHomePage from '../components/useStaticQuery/homePage'
 import Layout from '../components/layout'
 import HeroUnit from '../components/Hero/HeroUnit'
 import HeroContent from '../components/Hero/HeroContent-Page'
 import FlexibleContent from '../components/flexible-content'
 import Btn from '../components/styled/button'
 
-const IndexPage = () => (
-  <StaticQuery
-    query={graphql`
-      query HomeQuery {
-        page: wordpressPage(slug: { eq: "home" }) {
-          title
-          acf {
-            content
-            buttons {
-              button_link {
-                title
-                target
-                url
-              }
-            }
-            featured_content
-            featured_image {
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 768) {
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
+const IndexPage = () => {
+  const { title, acf } = useHomePage()
+  const hasFeaturedImage = !!acf.featured_image.localFile
+
+  return (
+    <Layout pageTitle={title}>
+      <HeroUnit isHome>
+        <HeroContent
+          html={acf.content}
+          buttons={acf.buttons}
+        />
+      </HeroUnit>
+      <FeatureContainer>
+        <Row>
+          <Col>
+            <FeatureTitle hasFeaturedImage={hasFeaturedImage}>Featured</FeatureTitle>
+          </Col>
+        </Row>
+        <Row>
+          {hasFeaturedImage && (
+            <Column xs={12} lg={6}>
+              <FeatureImage
+                fluid={
+                  acf.featured_image.localFile.childImageSharp.fluid
                 }
-              }
-            }
-            layouts_page {
-              __typename
-              ... on WordPressAcf_full_width_content {
-                content
-                link {
-                  title
-                  url
-                  target
-                }
-              }
-              ... on WordPressAcf_split_content {
-                left_background_image {
-                  localFile {
-                    childImageSharp {
-                      fluid(maxWidth: 768) {
-                        ...GatsbyImageSharpFluid_withWebp
-                      }
-                    }
-                  }
-                }
-                left_title
-                left_content
-                left_link {
-                  title
-                  url
-                  target
-                }
-                right_background_image {
-                  localFile {
-                    childImageSharp {
-                      fluid(maxWidth: 768) {
-                        ...GatsbyImageSharpFluid_withWebp
-                      }
-                    }
-                  }
-                }
-                right_title
-                right_content
-                right_link {
-                  title
-                  url
-                  target
-                }
-              }
-            }
-          }
-        }
-      }
-    `}
-    render={({ page: { title, acf } }) => {
-      const hasFeaturedImage = !!acf.featured_image.localFile
-      return (
-        <Layout pageTitle={title}>
-          <HeroUnit isHome>
-            <HeroContent
-              html={acf.content}
-              buttons={acf.buttons}
-            />
-          </HeroUnit>
-          <FeatureContainer>
-            <Row>
-              <Col>
-                <FeatureTitle hasFeaturedImage={hasFeaturedImage}>Featured</FeatureTitle>
-              </Col>
-            </Row>
-            <Row>
-              {hasFeaturedImage && (
-                <Column xs={12} lg={6}>
-                  <FeatureImage
-                    fluid={
-                      acf.featured_image.localFile.childImageSharp.fluid
-                    }
-                  />
-                </Column>
-              )}
-              <Column xs={12} lg={hasFeaturedImage ? 6 : 12}>
-                <WPcontent
-                  dangerouslySetInnerHTML={{
-                    __html: acf.featured_content
-                  }}
-                />
-                <Btn secondary='true' to={`/gallery/`}>
-                  View Gallery
-                </Btn>
-              </Column>
-            </Row>
-          </FeatureContainer>
-          {acf.layouts_page && (
-            <FlexibleContent layouts={acf.layouts_page} />
+              />
+            </Column>
           )}
-        </Layout>
-      )
-    }}
-  />
-)
+          <Column xs={12} lg={hasFeaturedImage ? 6 : 12}>
+            <WPcontent
+              dangerouslySetInnerHTML={{
+                __html: acf.featured_content
+              }}
+            />
+            <Btn secondary='true' to={`/gallery/`}>
+              View Gallery
+            </Btn>
+          </Column>
+        </Row>
+      </FeatureContainer>
+      {acf.layouts_page && (
+        <FlexibleContent layouts={acf.layouts_page} />
+      )}
+    </Layout>
+  )
+}
 
 export default IndexPage
 
