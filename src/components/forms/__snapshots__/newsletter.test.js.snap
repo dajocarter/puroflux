@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Newsletter Form renders correctly 1`] = `
+<form
+  data-netlify="true"
+  data-netlify-honeypot="bot-field"
+  method="POST"
+  name="Newsletter"
+>
+  <input
+    name="form-name"
+    type="hidden"
+    value="Newsletter"
+  />
+  <p
+    className="d-none"
+  >
+    <label>
+      Don’t fill this out:
+       
+      <input
+        name="bot-field"
+        type="text"
+      />
+    </label>
+  </p>
+  <div
+    className="form-group"
+  >
+    <label
+      className="form-label"
+      htmlFor="name"
+    >
+      Name
+    </label>
+    <input
+      className="form-control"
+      id="name"
+      name="name"
+      placeholder="Your name"
+      type="text"
+    />
+  </div>
+  <div
+    className="form-group"
+  >
+    <label
+      className="form-label"
+      htmlFor="email"
+    >
+      Email
+    </label>
+    <input
+      className="form-control"
+      id="email"
+      name="_replyto"
+      placeholder="Your email"
+      type="email"
+    />
+  </div>
+  <input
+    name="_subject"
+    type="hidden"
+    value="New submission from Newsletter form."
+  />
+  <button
+    className="btn btn-light"
+    disabled={false}
+    type="submit"
+  >
+    Submit
+  </button>
+</form>
+`;

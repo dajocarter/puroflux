@@ -3,8 +3,8 @@ import { Button } from 'react-bootstrap'
 
 import 'bootstrap/dist/css/bootstrap.css'
 
-export default function withForm (FormInputs, formName) {
-  return function ContactForm () {
+export default function withForm (InputFields, formName) {
+  return function FormInputs () {
     return (
       <form
         name={formName}
@@ -23,7 +23,7 @@ export default function withForm (FormInputs, formName) {
             <input type='text' name='bot-field' />
           </label>
         </p>
-        <FormInputs />
+        <InputFields />
         <input
           type='hidden'
           name='_subject'
