@@ -43,6 +43,11 @@
     "prettier": "^1.19.1",
     "react-test-renderer": "^16.12.0"
   },
+  "standard": {
+    "globals": [
+      "jest"
+    ]
+  },
   "engines": {
     "node": ">=12.9.0"
   },
