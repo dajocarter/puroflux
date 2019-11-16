@@ -28,12 +28,13 @@ const FullWidthContent = ({ acf }) => (
 FullWidthContent.propTypes = {
   acf: shape({
     background_image: object,
+    content: string.isRequired,
     link: shape({
-      url: string,
-      target: string,
-      title: string
+      url: string.isRequired,
+      target: string.isRequired,
+      title: string.isRequired
     })
-  })
+  }).isRequired
 }
 
 export default FullWidthContent
