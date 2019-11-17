@@ -1,38 +1,30 @@
 import React from 'react'
-import { StaticQuery, graphql, Link } from 'gatsby'
+import { bool } from 'prop-types'
+import { Link } from 'gatsby'
 import styled from 'styled-components'
+import useProducts from './useStaticQuery/products'
 
-const ProductNav = ({ light }) => (
-  <StaticQuery
-    query={graphql`
-      query {
-        products: allWordpressWpProducts {
-          edges {
-            node {
-              id
-              title
-              slug
-            }
-          }
-        }
-      }
-    `}
-    render={({ products }) => (
-      <Nav>
-        <NavTitle>Products</NavTitle>
-        <NavMenu>
-          {products.edges.map(({ node }) => (
-            <NavItem key={node.id}>
-              <NavLink light={light} to={node.slug}>
-                {node.title}
-              </NavLink>
-            </NavItem>
-          ))}
-        </NavMenu>
-      </Nav>
-    )}
-  />
-)
+const ProductNav = ({ light }) => {
+  const products = useProducts()
+  return (
+    <Nav>
+      <NavTitle>Products</NavTitle>
+      <NavMenu>
+        {products.map(({ node }) => (
+          <NavItem key={node.id}>
+            <NavLink light={light} to={node.slug}>
+              {node.title}
+            </NavLink>
+          </NavItem>
+        ))}
+      </NavMenu>
+    </Nav>
+  )
+}
+
+ProductNav.propTypes = {
+  light: bool
+}
 
 export default ProductNav
 

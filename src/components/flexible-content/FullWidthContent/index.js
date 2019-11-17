@@ -1,29 +1,40 @@
 import React from 'react'
+import { shape, string, object } from 'prop-types'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
 import Btn from '../../styled/button'
 
-const FullWidthContent = ({ acf }) => {
-  return (
-    <Row>
-      <Container>
-        {acf.background_image && (
-          <BGimg fluid={acf.background_image.localFile.childImageSharp.fluid} />
-        )}
-        <Content dangerouslySetInnerHTML={{ __html: acf.content }} />
-        {acf.link && (
-          <Btn
-            secondary='true'
-            to={`/${acf.link.url}/`}
-            target={acf.link.target}
-          >
-            {acf.link.title}
-          </Btn>
-        )}
-      </Container>
-    </Row>
-  )
+const FullWidthContent = ({ acf }) => (
+  <Row>
+    <Container>
+      {acf.background_image && (
+        <BGimg fluid={acf.background_image.localFile.childImageSharp.fluid} />
+      )}
+      <Content dangerouslySetInnerHTML={{ __html: acf.content }} />
+      {acf.link && (
+        <Btn
+          secondary='true'
+          to={`/${acf.link.url}/`}
+          target={acf.link.target}
+        >
+          {acf.link.title}
+        </Btn>
+      )}
+    </Container>
+  </Row>
+)
+
+FullWidthContent.propTypes = {
+  acf: shape({
+    background_image: object,
+    content: string.isRequired,
+    link: shape({
+      url: string.isRequired,
+      target: string.isRequired,
+      title: string.isRequired
+    })
+  }).isRequired
 }
 
 export default FullWidthContent

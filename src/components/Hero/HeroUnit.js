@@ -1,51 +1,41 @@
 import React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
+import { node, bool, object } from 'prop-types'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
-const HeroUnit = ({ children, isHome }) => (
-  <StaticQuery
-    query={graphql`
-      query HeroUnitQuery {
-        defaultHero: wordpressWpMedia(
-          slug: { eq: "puroflux_home_hero_sample" }
-        ) {
-          localFile {
-            childImageSharp {
-              fluid(maxHeight: 450) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
-        homeHero: wordpressWpMedia(slug: { eq: "puroflux_home_hero_pf_4060" }) {
-          localFile {
-            childImageSharp {
-              fluid(maxHeight: 450) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
-      }
-    `}
-    render={({ homeHero, defaultHero }) => (
-      <Background isHome={isHome}>
-        {homeHero &&
-          defaultHero && (
-          <HeroImg
-            fluid={
-              isHome
-                ? homeHero.localFile.childImageSharp.fluid
-                : defaultHero.localFile.childImageSharp.fluid
-            }
-          />
-        )}
-        <Content>{children}</Content>
-      </Background>
+import useHomeHero from '../useStaticQuery/homeHero'
+import useDefaultHero from '../useStaticQuery/defaultHero'
+
+export const HeroUnitComponent = ({ children, isHome, homeHero, defaultHero }) => (
+  <Background isHome={isHome}>
+    {isHome ? (
+      homeHero && <HeroImg fluid={homeHero.localFile.childImageSharp.fluid} />
+    ) : (
+      defaultHero && <HeroImg fluid={defaultHero.localFile.childImageSharp.fluid} />
     )}
-  />
+    <Content>{children}</Content>
+  </Background>
 )
+
+HeroUnitComponent.propTypes = {
+  children: node,
+  isHome: bool,
+  homeHero: object,
+  defaultHero: object
+}
+
+const HeroUnit = props => {
+  const homeHero = useHomeHero()
+  const defaultHero = useDefaultHero()
+
+  return (
+    <HeroUnitComponent
+      {...props}
+      homeHero={homeHero}
+      defaultHero={defaultHero}
+    />
+  )
+}
 
 export default HeroUnit
 

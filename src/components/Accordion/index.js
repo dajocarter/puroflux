@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react'
+import React, { useContext, useState } from 'react'
+import { node, number } from 'prop-types'
 import { Collapse } from 'react-bootstrap'
 import styled from 'styled-components'
 
@@ -6,60 +7,58 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 const AccordionContext = React.createContext()
 
-export default class Accordion extends PureComponent {
-  constructor(props) {
-    super(props)
+const Accordion = ({ children }) => {
+  const [openItem, setOpenItem] = useState(0)
 
-    this.state = { openItem: 0 }
+  const handleOpening = (index) => setOpenItem(index)
 
-    this.handleOpening = this.handleOpening.bind(this)
-  }
-
-  handleOpening(index) {
-    this.setState({ openItem: index })
-  }
-
-  render() {
-    const { openItem } = this.state
-    const { children } = this.props
-    const { handleOpening } = this
-
-    return (
-      <AccordionContext.Provider
-        value={{
-          openItem,
-          handleOpening,
-        }}
-      >
-        <Wrapper>{children}</Wrapper>
-      </AccordionContext.Provider>
-    )
-  }
+  return (
+    <AccordionContext.Provider
+      value={{
+        openItem,
+        handleOpening
+      }}
+    >
+      <Wrapper>{children}</Wrapper>
+    </AccordionContext.Provider>
+  )
 }
+
+Accordion.propTypes = {
+  children: node.isRequired
+}
+
+export default Accordion
 
 const Wrapper = styled.div`
   border: 1px solid black;
 `
 
-export class AccordionTitle extends PureComponent {
-  static contextType = AccordionContext
+const AccordionTitle = ({ accordionIndex, children }) => {
+  const { openItem, handleOpening } = useContext(AccordionContext)
 
-  render() {
-    const { accordionIndex, children } = this.props
-    const { openItem, handleOpening } = this.context
-
-    return (
-      <Title
-        role="button"
-        onClick={() => handleOpening(accordionIndex)}
-        aria-expanded={openItem === accordionIndex}
-        aria-controls={`accordion--content-${accordionIndex}`}
-      >
-        {children}
-      </Title>
-    )
-  }
+  return (
+    <Title
+      role='button'
+      onClick={() => handleOpening(accordionIndex)}
+      aria-expanded={openItem === accordionIndex}
+      aria-controls={`accordion--content-${accordionIndex}`}
+    >
+      {children}
+    </Title>
+  )
 }
+
+AccordionTitle.propTypes = {
+  accordionIndex: number.isRequired,
+  children: node.isRequired
+}
+
+AccordionTitle.defaultProps = {
+  accordionIndex: 0
+}
+
+export { AccordionTitle }
 
 const Title = styled.h5`
   background-color: ${props => (props['aria-expanded'] ? `black` : `white`)};
@@ -77,24 +76,31 @@ const Title = styled.h5`
   }
 `
 
-export class AccordionContent extends PureComponent {
-  static contextType = AccordionContext
+const AccordionContent = ({ accordionIndex, children }) => {
+  const { openItem } = useContext(AccordionContext)
 
-  render() {
-    const { accordionIndex, children } = this.props
-    const { openItem } = this.context
-    return (
-      <Content in={openItem === accordionIndex}>
-        <div
-          id={`accordion--content-${accordionIndex}`}
-          className="accordion-content"
-        >
-          {children}
-        </div>
-      </Content>
-    )
-  }
+  return (
+    <Content in={openItem === accordionIndex}>
+      <div
+        id={`accordion--content-${accordionIndex}`}
+        className='accordion-content'
+      >
+        {children}
+      </div>
+    </Content>
+  )
 }
+
+AccordionContent.propTypes = {
+  accordionIndex: number.isRequired,
+  children: node.isRequired
+}
+
+AccordionContent.defaultProps = {
+  accordionIndex: 0
+}
+
+export { AccordionContent }
 
 const Content = styled(Collapse)`
   border-bottom: ${props => (props.in ? `1px solid black` : 0)};

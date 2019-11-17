@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import {
@@ -19,129 +19,114 @@ import HeroContent from '../components/Hero/HeroContent-Page'
 import ProductNav from '../components/productNav'
 import Btn from '../components/styled/button'
 
-export default class ProductsPageTemplate extends PureComponent {
-  constructor (props, context) {
-    super(props, context)
+export default function ProductsPageTemplate ({ data }) {
+  const [key, setKey] = useState('')
 
-    this.prevPane = this.prevPane.bind(this)
-    this.nextPane = this.nextPane.bind(this)
-    this.closePane = this.closePane.bind(this)
-
-    this.state = {
-      key: ``
-    }
-  }
-
-  prevPane () {
+  const prevPane = () => {
     document.getElementById(`panes`) &&
       document.getElementById(`panes`).scrollIntoView({ behavior: 'smooth' })
-    this.setState(prevState => ({ key: parseInt(prevState.key) - 1 }))
+    setKey(prevKey => parseInt(prevKey) - 1)
   }
 
-  nextPane () {
+  const nextPane = () => {
     document.getElementById(`panes`) &&
       document.getElementById(`panes`).scrollIntoView({ behavior: 'smooth' })
-    this.setState(prevState => ({ key: parseInt(prevState.key) + 1 }))
+    setKey(prevKey => parseInt(prevKey) + 1)
   }
 
-  setPane (key) {
+  const setPane = key => {
     document.getElementById(`panes`) &&
       document.getElementById(`panes`).scrollIntoView({ behavior: 'smooth' })
-    this.setState({ key })
+    setKey(key)
   }
 
-  closePane () {
+  const closePane = () => {
     document.getElementById(`tabs`) &&
       document.getElementById(`tabs`).scrollIntoView({ behavior: 'smooth' })
-    this.setState({ key: `` })
+    setKey('')
   }
 
-  render () {
-    const { key } = this.state
-    const { data } = this.props
-
-    return (
-      <Layout pageTitle={data.page.title} pageSlug={data.page.slug}>
-        <HeroUnit>
-          <HeroContent
-            html={data.page.acf.content}
-            buttons={data.page.acf.buttons}
-          />
-        </HeroUnit>
-        <Main>
-          <Row>
-            <Col xs={12}>
-              <ProductNav />
-            </Col>
-          </Row>
-          {data.products &&
-            data.addlItem && (
-            <TabContainer
-              id='product-selector'
-              activeKey={key}
-              onSelect={key => this.setPane(key)}
-            >
-              <Row id='tabs'>
-                <Col xs={12}>
-                  <Tabs>
-                    {data.products.edges.map(({ node }, index) => (
-                      <Nav.Item key={node.id}>
-                        <Nav.Link eventKey={index}>
-                          <Img
-                            fluid={
-                              node.featured_media.localFile.childImageSharp
-                                .fluid
-                            }
-                          />
-                        </Nav.Link>
-                      </Nav.Item>
-                    ))}
-                    <Nav.Item>
-                      <Nav.Link eventKey={data.products.edges.length}>
+  return (
+    <Layout pageTitle={data.page.title} pageSlug={data.page.slug}>
+      <HeroUnit>
+        <HeroContent
+          html={data.page.acf.content}
+          buttons={data.page.acf.buttons}
+        />
+      </HeroUnit>
+      <Main>
+        <Row>
+          <Col xs={12}>
+            <ProductNav />
+          </Col>
+        </Row>
+        {data.products &&
+          data.addlItem && (
+          <TabContainer
+            id='product-selector'
+            activeKey={key}
+            onSelect={key => setPane(key)}
+          >
+            <Row id='tabs'>
+              <Col xs={12}>
+                <Tabs>
+                  {data.products.edges.map(({ node }, index) => (
+                    <Nav.Item key={node.id}>
+                      <Nav.Link eventKey={index}>
                         <Img
                           fluid={
-                            data.addlItem.featured_media.localFile
-                              .childImageSharp.fluid
+                            node.featured_media.localFile.childImageSharp
+                              .fluid
                           }
                         />
                       </Nav.Link>
                     </Nav.Item>
-                  </Tabs>
-                </Col>
-              </Row>
-              <Row id='panes'>
-                <Col xs={12}>
-                  <TabContent animation='true'>
-                    {data.products.edges.map(({ node }, index) => (
-                      <SelectablePane
-                        key={node.id}
-                        node={node}
-                        eventKey={index}
-                        closePane={this.closePane}
-                        next
-                        nextPane={this.nextPane}
-                        prev={index > 0}
-                        prevPane={this.prevPane}
+                  ))}
+                  <Nav.Item>
+                    <Nav.Link eventKey={data.products.edges.length}>
+                      <Img
+                        fluid={
+                          data.addlItem.featured_media.localFile
+                            .childImageSharp.fluid
+                        }
                       />
-                    ))}
+                    </Nav.Link>
+                  </Nav.Item>
+                </Tabs>
+              </Col>
+            </Row>
+            <Row id='panes'>
+              <Col xs={12}>
+                <TabContent animation='true'>
+                  {data.products.edges.map(({ node }, index) => (
                     <SelectablePane
-                      node={data.addlItem}
-                      eventKey={data.products.edges.length}
-                      closePane={this.closePane}
-                      next={false}
-                      nextPane={this.nextPane}
-                      prev={data.products.edges.length - 1}
-                      prevPane={this.prevPane}
+                      key={node.id}
+                      node={node}
+                      eventKey={index}
+                      closePane={closePane}
+                      next
+                      nextPane={nextPane}
+                      prev={index > 0}
+                      prevPane={prevPane}
                     />
-                  </TabContent>
-                </Col>
-              </Row>
-            </TabContainer>
-          )}
-        </Main>
-      </Layout>
-    )
-  }
+                  ))}
+                  <SelectablePane
+                    node={data.addlItem}
+                    eventKey={data.products.edges.length}
+                    closePane={closePane}
+                    next={false}
+                    nextPane={nextPane}
+                    prev={data.products.edges.length - 1}
+                    prevPane={prevPane}
+                  />
+                </TabContent>
+              </Col>
+            </Row>
+          </TabContainer>
+        )}
+      </Main>
+    </Layout>
+  )
 }
 
 const SelectablePane = ({

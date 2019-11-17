@@ -1,20 +1,21 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import { string, arrayOf, shape } from 'prop-types'
 import styled from 'styled-components'
 
 import Btn from '../styled/button'
 import { formatURL } from '../../helpers/formatting'
 
-const HeroContentPage = props => (
-  <Fragment>
-    {props.html && (
+const HeroContentPage = ({ html, buttons }) => (
+  <>
+    {html && (
       <div
         className='content'
-        dangerouslySetInnerHTML={{ __html: props.html }}
+        dangerouslySetInnerHTML={{ __html: html }}
       />
     )}
-    {props.buttons && (
-      <Buttons single={props.buttons.length > 1 ? `false` : `true`}>
-        {props.buttons.map((link, i) => {
+    {buttons && (
+      <Buttons single={buttons.length > 1 ? `false` : `true`}>
+        {buttons.map((link, i) => {
           return link.button_link.target ? (
             <Button
               key={i}
@@ -40,8 +41,19 @@ const HeroContentPage = props => (
         })}
       </Buttons>
     )}
-  </Fragment>
+  </>
 )
+
+HeroContentPage.propTypes = {
+  html: string,
+  buttons: arrayOf(shape({
+    button_link: shape({
+      url: string,
+      target: string,
+      title: string
+    })
+  }))
+}
 
 export default HeroContentPage
 

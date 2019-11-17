@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Request 3D Form renders correctly 1`] = `
+<form
+  data-netlify="true"
+  data-netlify-honeypot="bot-field"
+  method="POST"
+  name="3D Request Form"
+>
+  <input
+    name="form-name"
+    type="hidden"
+    value="3D Request Form"
+  />
+  <p
+    className="d-none"
+  >
+    <label>
+      Don’t fill this out:
+       
+      <input
+        name="bot-field"
+        type="text"
+      />
+    </label>
+  </p>
+  <div
+    className="form-group"
+  >
+    <label
+      className="form-label"
+      htmlFor="name"
+    >
+      Name
+    </label>
+    <input
+      className="form-control"
+      id="name"
+      name="name"
+      placeholder="Your name"
+      type="text"
+    />
+  </div>
+  <div
+    className="form-group"
+  >
+    <label
+      className="form-label"
+      htmlFor="email"
+    >
+      Email
+    </label>
+    <input
+      className="form-control"
+      id="email"
+      name="_replyto"
+      placeholder="Your email"
+      type="email"
+    />
+  </div>
+  <div
+    className="form-group"
+  >
+    <label
+      className="form-label"
+      htmlFor="company"
+    >
+      Company
+    </label>
+    <input
+      className="form-control"
+      id="company"
+      name="company"
+      placeholder="Your company"
+      type="text"
+    />
+  </div>
+  <div
+    className="form-group"
+  >
+    <label
+      className="form-label"
+      htmlFor="model"
+    >
+      Model
+    </label>
+    <input
+      className="form-control"
+      id="model"
+      name="model"
+      placeholder="Requested model name"
+      type="text"
+    />
+  </div>
+  <input
+    name="_subject"
+    type="hidden"
+    value="New submission from 3D Request Form form."
+  />
+  <button
+    className="btn btn-light"
+    disabled={false}
+    type="submit"
+  >
+    Submit
+  </button>
+</form>
+`;
