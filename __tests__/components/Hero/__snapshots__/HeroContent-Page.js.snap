@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hero Content renders HTML 1`] = `
+<div
+  className="content"
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "<p>Some HTML</p>",
+    }
+  }
+/>
+`;
+
+exports[`Hero Content renders both HTML and buttons 1`] = `
+Array [
+  <div
+    className="content"
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "<p>Some HTML</p>",
+      }
+    }
+  />,
+  <div
+    className="sc-bwzfXH iqaXvV"
+  >
+    <a
+      className="sc-bdVaJa sc-htpNat jEQdjd"
+      href="https://helloworld.com"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      External Link
+    </a>
+    <a
+      className="sc-bdVaJa sc-htpNat jEQdjd"
+      href="/page"
+      primary="false"
+      secondary="true"
+    >
+      Local Link
+    </a>
+  </div>,
+]
+`;
+
+exports[`Hero Content renders buttons 1`] = `
+<div
+  className="sc-bwzfXH iqaXvV"
+>
+  <a
+    className="sc-bdVaJa sc-htpNat jEQdjd"
+    href="https://helloworld.com"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    External Link
+  </a>
+  <a
+    className="sc-bdVaJa sc-htpNat jEQdjd"
+    href="/page"
+    primary="false"
+    secondary="true"
+  >
+    Local Link
+  </a>
+</div>
+`;
+
+exports[`Hero Content renders nothing without props 1`] = `null`;
