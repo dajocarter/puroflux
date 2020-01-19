@@ -9,7 +9,7 @@ module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: 'gatsby-plugin-manifest',
       options: {
         name: 'puroflux',
         short_name: 'puroflux',
@@ -59,13 +59,30 @@ module.exports = {
           )
 
           return entities.map(e => {
+            const productHasSeries =
+              e.acf &&
+              e.acf.product_series &&
+              Array.isArray(e.acf.product_series) &&
+              e.acf.product_series.length
+            const seriesHasModels =
+              e.acf &&
+              e.acf.series_models &&
+              Array.isArray(e.acf.series_models) &&
+              e.acf.series_models.length
+            const seriesHasProducts =
+              e.acf &&
+              e.acf.product_series &&
+              Array.isArray(e.acf.product_series) &&
+              e.acf.product_series.length
+            const modelHasSeries =
+              e.acf &&
+              e.acf.series_models &&
+              Array.isArray(e.acf.series_models) &&
+              e.acf.series_models.length
+            const repHasState =
+              e.states && Array.isArray(e.states) && e.states.length
             switch (e.__type) {
               case 'wordpress__wp_products':
-                let productHasSeries =
-                  e.acf &&
-                  e.acf.product_series &&
-                  Array.isArray(e.acf.product_series) &&
-                  e.acf.product_series.length
                 if (productHasSeries) {
                   e.acf.series___NODE = e.acf.product_series.map(
                     ps =>
@@ -75,11 +92,6 @@ module.exports = {
                 }
                 break
               case 'wordpress__wp_series':
-                let seriesHasModels =
-                  e.acf &&
-                  e.acf.series_models &&
-                  Array.isArray(e.acf.series_models) &&
-                  e.acf.series_models.length
                 if (seriesHasModels) {
                   e.acf.models___NODE = e.acf.series_models.map(
                     sm =>
@@ -87,11 +99,6 @@ module.exports = {
                   )
                   delete e.acf.series_models
                 }
-                let seriesHasProducts =
-                  e.acf &&
-                  e.acf.product_series &&
-                  Array.isArray(e.acf.product_series) &&
-                  e.acf.product_series.length
                 if (seriesHasProducts) {
                   e.acf.products___NODE = e.acf.product_series.map(
                     ps =>
@@ -101,11 +108,6 @@ module.exports = {
                 }
                 break
               case 'wordpress__wp_models':
-                let modelHasSeries =
-                  e.acf &&
-                  e.acf.series_models &&
-                  Array.isArray(e.acf.series_models) &&
-                  e.acf.series_models.length
                 if (modelHasSeries) {
                   e.acf.series___NODE = e.acf.series_models.map(
                     sm =>
@@ -115,8 +117,6 @@ module.exports = {
                 }
                 break
               case 'wordpress__wp_reps':
-                let repHasState =
-                  e.states && Array.isArray(e.states) && e.states.length
                 if (repHasState) {
                   e.states___NODE = e.states.map(
                     s => states.find(state => s === state.wordpress_id).id
