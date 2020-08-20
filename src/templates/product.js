@@ -37,18 +37,22 @@ const ProductTemplate = ({ data: { product } }) => (
               />
             </div>
           )}
-          {product.acf.file &&
-            product.acf.file.url &&
-            product.acf.file.title && (
-            <FeaturedBtn
-              as='a'
-              primary='true'
-              href={product.acf.file.url.source_url}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              {product.acf.file.title}
-            </FeaturedBtn>
+          {product.acf.files && (
+            <Row style={{ justifyContent: 'center' }}>
+              {product.acf.files.map(({ file: { url, title } }) => (
+                <Col>
+                  <FeaturedBtn
+                    as='a'
+                    primary='true'
+                    href={url.source_url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    {title}
+                  </FeaturedBtn>
+                </Col>
+              ))}
+            </Row>
           )}
         </FeaturedProduct>
       </Row>
@@ -57,14 +61,14 @@ const ProductTemplate = ({ data: { product } }) => (
           {product.acf.series.map(series => (
             <Series key={series.id} xs={12} sm={6} md={3}>
               <SeriesTitle>{series.title} Series</SeriesTitle>
-              {series.featured_media.localFile &&
+              {series.featured_media.localFile && (
                 <Img
                   fixed={series.featured_media.localFile.childImageSharp.fixed}
                 />
-              }
-              {series.acf.description &&
+              )}
+              {series.acf.description && (
                 <SeriesDescrip>{series.acf.description}</SeriesDescrip>
-              }
+              )}
               <Btn primary='true' to={series.slug}>
                 View Product
               </Btn>
@@ -104,10 +108,12 @@ export const query = graphql`
             }
           }
         }
-        file {
-          title
-          url {
-            source_url
+        files {
+          file {
+            title
+            url {
+              source_url
+            }
           }
         }
         series {
