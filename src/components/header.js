@@ -14,7 +14,7 @@ const Header = ({ logo, siteTitle, menu }) => {
       <Container>
         <Row>
           {logo && (
-            <Col xs={9} lg={3}>
+            <Col xs={9} xl={3}>
               <NavBrand>
                 <Link to='/' title={siteTitle}>
                   <Img fixed={logo.localFile.childImageSharp.fixed} />
@@ -24,7 +24,7 @@ const Header = ({ logo, siteTitle, menu }) => {
           )}
           {menu && (
             <>
-              <Col className='d-none d-lg-block' lg={9}>
+              <Col className='d-none d-xl-block' xl={9}>
                 <Nav role={`navigation`} aria-label={menu.name}>
                   <NavMenu>
                     {menu.items.map(item => (
@@ -79,7 +79,7 @@ const Header = ({ logo, siteTitle, menu }) => {
                   </NavMenu>
                 </Nav>
               </Col>
-              <Overlay className='d-lg-none' menuIsOpen={menuIsOpen}>
+              <Overlay className='d-xl-none' menuIsOpen={menuIsOpen}>
                 <MenuToggle
                   menuIsOpen={menuIsOpen}
                   onClick={() => setMenu(menuIsOpen => !menuIsOpen)}
