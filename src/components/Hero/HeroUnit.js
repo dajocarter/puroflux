@@ -8,13 +8,13 @@ import useDefaultHero from '../useStaticQuery/defaultHero'
 import usePFIndustrialHero from '../useStaticQuery/pfIndustrialHero'
 
 export const HeroUnitComponent = ({ children, isHome, isPFIndustrial, homeHero, defaultHero, pfIndustrialHero }) => (
-  <Background isHome={isHome}>
+  <Background isPFIndustrial={isPFIndustrial}>
     {isHome ? (
-      homeHero && <HeroImg fit='cover' fluid={homeHero.localFile.childImageSharp.fluid} />
+      homeHero && <HeroImg fluid={homeHero.localFile.childImageSharp.fluid} />
     ) : isPFIndustrial ? (
-      pfIndustrialHero && <HeroImg fit='contain' fluid={pfIndustrialHero.localFile.childImageSharp.fluid} />
+      pfIndustrialHero && <HeroImg isPFIndustrial fluid={pfIndustrialHero.localFile.childImageSharp.fluid} />
     ) : (
-      defaultHero && <HeroImg fit='cover' fluid={defaultHero.localFile.childImageSharp.fluid} />
+      defaultHero && <HeroImg fluid={defaultHero.localFile.childImageSharp.fluid} />
     )}
     <Content>{children}</Content>
   </Background>
@@ -45,7 +45,7 @@ const HeroUnit = props => {
 export default HeroUnit
 
 const Background = styled.div`
-  height: 450px;
+  height: ${({ isPFIndustrial }) => isPFIndustrial ? '265px' : '450px'};
   width: 100%;
   position: relative;
 `
@@ -56,12 +56,7 @@ const HeroImg = styled(Img)`
   left: 0;
   width: 100%;
   z-index: -1;
-  height: 450px;
-  & img {
-    object-fit: ${({ fit }) => fit} !important;
-    object-position: 50% 50% !important;
-    font-family: 'object-fit: ${({ fit }) => fit} !important; object-position: 0% 0% !important;'; // needed for IE9+ polyfill
-  }
+  height: ${({ isPFIndustrial }) => isPFIndustrial ? '265px' : '450px'};
 `
 
 const Content = styled.div`
