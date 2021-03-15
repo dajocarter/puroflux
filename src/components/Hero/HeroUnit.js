@@ -5,13 +5,16 @@ import styled from 'styled-components'
 
 import useHomeHero from '../useStaticQuery/homeHero'
 import useDefaultHero from '../useStaticQuery/defaultHero'
+import usePFIndustrialHero from '../useStaticQuery/pfIndustrialHero'
 
-export const HeroUnitComponent = ({ children, isHome, homeHero, defaultHero }) => (
+export const HeroUnitComponent = ({ children, isHome, isPFIndustrial, homeHero, defaultHero, pfIndustrialHero }) => (
   <Background isHome={isHome}>
     {isHome ? (
-      homeHero && <HeroImg fluid={homeHero.localFile.childImageSharp.fluid} />
+      homeHero && <HeroImg fit='cover' fluid={homeHero.localFile.childImageSharp.fluid} />
+    ) : isPFIndustrial ? (
+      pfIndustrialHero && <HeroImg fit='contain' fluid={pfIndustrialHero.localFile.childImageSharp.fluid} />
     ) : (
-      defaultHero && <HeroImg fluid={defaultHero.localFile.childImageSharp.fluid} />
+      defaultHero && <HeroImg fit='cover' fluid={defaultHero.localFile.childImageSharp.fluid} />
     )}
     <Content>{children}</Content>
   </Background>
@@ -27,12 +30,14 @@ HeroUnitComponent.propTypes = {
 const HeroUnit = props => {
   const homeHero = useHomeHero()
   const defaultHero = useDefaultHero()
+  const pfIndustrialHero = usePFIndustrialHero()
 
   return (
     <HeroUnitComponent
       {...props}
       homeHero={homeHero}
       defaultHero={defaultHero}
+      pfIndustrialHero={pfIndustrialHero}
     />
   )
 }
@@ -52,10 +57,10 @@ const HeroImg = styled(Img)`
   width: 100%;
   z-index: -1;
   height: 450px;
-  & > img {
-    object-fit: cover !important;
+  & img {
+    object-fit: ${({ fit }) => fit} !important;
     object-position: 50% 50% !important;
-    font-family: 'object-fit: cover !important; object-position: 0% 0% !important;'; // needed for IE9+ polyfill
+    font-family: 'object-fit: ${({ fit }) => fit} !important; object-position: 0% 0% !important;'; // needed for IE9+ polyfill
   }
 `
 
