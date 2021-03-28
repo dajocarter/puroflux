@@ -72,10 +72,8 @@ exports.createPages = ({ graphql, actions }) => {
       const seriesTemplate = path.resolve('./src/templates/series.js')
       const pfIndustrialTemplate = path.resolve('./src/templates/pf-industrial.js')
 
-      const industrialSeries = ['pfi-pump-package-systems']
-
       result.data.allWordpressWpSeries.edges.forEach(({ node }) =>
-        industrialSeries.includes(node.slug)
+        node.slug.startsWith('pfi')
           ? (
             createPage({
               path: `/${node.slug}/`,
