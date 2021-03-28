@@ -70,15 +70,30 @@ exports.createPages = ({ graphql, actions }) => {
 
       // ==== SERIES ====
       const seriesTemplate = path.resolve('./src/templates/series.js')
-      result.data.allWordpressWpSeries.edges.forEach(({ node }) => {
-        createPage({
-          path: `/${node.slug}/`,
-          component: seriesTemplate,
-          context: {
-            slug: node.slug
-          }
-        })
-      })
+      const pfIndustrialTemplate = path.resolve('./src/templates/pf-industrial.js')
+
+      const industrialSeries = ['pfi-pump-package-systems']
+
+      result.data.allWordpressWpSeries.edges.forEach(({ node }) =>
+        industrialSeries.includes(node.slug)
+          ? (
+            createPage({
+              path: `/${node.slug}/`,
+              component: pfIndustrialTemplate,
+              context: {
+                slug: node.slug
+              }
+            })
+          ) : (
+            createPage({
+              path: `/${node.slug}/`,
+              component: seriesTemplate,
+              context: {
+                slug: node.slug
+              }
+            })
+          )
+      )
       // ==== END SERIES ====
       resolve()
     })
