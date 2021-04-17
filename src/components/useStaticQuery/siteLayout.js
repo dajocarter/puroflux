@@ -13,7 +13,7 @@ const useSiteLayout = () => {
             }
           }
         }
-        mainMenu: wordpressWpApiMenusMenusItems(slug: { eq: "main-menu" }) {
+        mainMenu: wordpressWpApiMenusMenusItems(slug: { eq: "header-desktop" }) {
           wordpress_id
           name
           slug
