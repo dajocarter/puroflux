@@ -52,9 +52,6 @@
       "beforeEach"
     ]
   },
-  "engines": {
-    "node": ">=14.17.6"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/dajocarter/puroflux"
