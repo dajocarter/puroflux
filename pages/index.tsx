@@ -1,6 +1,7 @@
-import type { NextPage } from 'next'
+import type { GetStaticProps, GetStaticPropsContext, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import getNavbarData from '../data/navbar'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
@@ -70,3 +71,12 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+  const navbarData = await getNavbarData()
+  return {
+    props: {
+      navbarData
+    }
+  }
+}
