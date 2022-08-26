@@ -1,17 +1,15 @@
-import { wpClient } from "."
+import { wpClient } from '.'
 
 const logoQueryParams = new URLSearchParams({
   slug: 'purofluxlogo_white_2x'
 })
 
-async function getHeaderData () {
+async function getHeaderData() {
   const [logo] = await wpClient.media().find(logoQueryParams)
   const headerDesktopMenu = await wpClient.headerDesktopMenu()
   const headerMobileMenu = await wpClient.headerMobileMenu()
   const siteSettings = wpClient.siteSettings()
   const { title } = await siteSettings.find()
-
-  
 
   return {
     logo,
@@ -23,7 +21,7 @@ async function getHeaderData () {
   }
 }
 
-async function getFooterData () {
+async function getFooterData() {
   const footerExploreMenu = await wpClient.footerExploreMenu()
   const footerPagesMenu = await wpClient.footerPagesMenu()
 
@@ -35,7 +33,7 @@ async function getFooterData () {
   }
 }
 
-export default async function getLayoutData () {
+export default async function getLayoutData() {
   const headerData = await getHeaderData()
   const footerData = await getFooterData()
 

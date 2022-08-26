@@ -6,12 +6,12 @@ import styled from 'styled-components'
 export const StyledButtonLink = styled.a`
   border-width: 3px;
   border-style: solid;
-  border-color: ${props =>
+  border-color: ${(props) =>
     props.primary === 'true'
       ? props.theme.primary
       : props.secondary === 'true'
-        ? props.theme.secondary
-        : props.theme.alt};
+      ? props.theme.secondary
+      : props.theme.alt};
   background-color: transparent;
   color: black;
   display: inline-block;
@@ -28,10 +28,10 @@ export const StyledButtonLink = styled.a`
 
   &:hover,
   &:focus {
-    background-color: ${props =>
-    props.primary === 'true'
-      ? props.theme.primary
-      : props.secondary === 'true'
+    background-color: ${(props) =>
+      props.primary === 'true'
+        ? props.theme.primary
+        : props.secondary === 'true'
         ? props.theme.secondary
         : props.theme.alt};
     color: white;
@@ -56,7 +56,7 @@ export const ActiveLink = ({ children, activeClassName, ...props }) => {
   return (
     <Link {...props}>
       {React.cloneElement(child, {
-        className: className || null,
+        className: className || null
       })}
     </Link>
   )

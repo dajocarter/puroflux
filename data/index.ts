@@ -46,17 +46,25 @@ class WpClient extends WpApiClient {
   constructor() {
     super(`${process.env.SOURCE_URL}`, {
       auth: {
-          type: 'basic',
-          username: `${process.env.WP_USERNAME}`,
-          password: `${process.env.WP_PASSWORD}`
+        type: 'basic',
+        username: `${process.env.WP_USERNAME}`,
+        password: `${process.env.WP_PASSWORD}`
       }
     })
   }
 
-  headerDesktopMenu = this.createEndpointCustomGet<WP_MENU>(HEADER_DESKTOP_MENU_PATH)
-  headerMobileMenu = this.createEndpointCustomGet<WP_MENU>(HEADER_MOBILE_MENU_PATH)
-  footerExploreMenu = this.createEndpointCustomGet<WP_MENU>(FOOTER_EXPLORE_MENU_PATH)
-  footerPagesMenu = this.createEndpointCustomGet<WP_MENU>(FOOTER_PAGES_MENU_PATH)
+  headerDesktopMenu = this.createEndpointCustomGet<WP_MENU>(
+    HEADER_DESKTOP_MENU_PATH
+  )
+  headerMobileMenu = this.createEndpointCustomGet<WP_MENU>(
+    HEADER_MOBILE_MENU_PATH
+  )
+  footerExploreMenu = this.createEndpointCustomGet<WP_MENU>(
+    FOOTER_EXPLORE_MENU_PATH
+  )
+  footerPagesMenu = this.createEndpointCustomGet<WP_MENU>(
+    FOOTER_PAGES_MENU_PATH
+  )
 }
 
 export const wpClient = new WpClient()

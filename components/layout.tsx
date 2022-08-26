@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import Header from "./header";
-import Footer from "./footer";
+import Header from './header'
+import Footer from './footer'
 
-export default function Layout (props) {
+export default function Layout(props) {
   return (
     <>
       <Header {...props.header} />

@@ -7,7 +7,11 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import styled from 'styled-components'
 
-export default function Header ({ logo, siteTitle, navs }: InferProps<typeof Header.propTypes>) {
+export default function Header({
+  logo,
+  siteTitle,
+  navs
+}: InferProps<typeof Header.propTypes>) {
   const [menuIsOpen, setMenu] = useState(false)
 
   return (
@@ -36,35 +40,49 @@ export default function Header ({ logo, siteTitle, navs }: InferProps<typeof Hea
               <Col className='d-none d-xl-block' xl={9}>
                 <Nav role='navigation' aria-label={navs.desktop.name}>
                   <NavMenu>
-                    {navs.desktop.items.map(item => (
+                    {navs.desktop.items.map((item) => (
                       <NavItem key={item.object_id}>
-                        <ActiveLink href={item.object_slug === 'home' ? `/` : `/${item.object_slug}/`} passHref activeClassName='active'>
-                        <NavLink className={item.object_slug === 'rep-login' ? `alt` : ``}>
-                          {item.title}
-                        </NavLink>
+                        <ActiveLink
+                          href={
+                            item.object_slug === 'home'
+                              ? `/`
+                              : `/${item.object_slug}/`
+                          }
+                          passHref
+                          activeClassName='active'
+                        >
+                          <NavLink
+                            className={
+                              item.object_slug === 'rep-login' ? `alt` : ``
+                            }
+                          >
+                            {item.title}
+                          </NavLink>
                         </ActiveLink>
                         {item.children && (
                           <ChildMenu>
-                            {item.children.map(child => (
+                            {item.children.map((child) => (
                               <NavItem key={child.object_id}>
-                                <ActiveLink href={`/${child.object_slug}/`} passHref activeClassName='active'>
-                                <NavLink>
-                                  {child.title}
-                                </NavLink>
+                                <ActiveLink
+                                  href={`/${child.object_slug}/`}
+                                  passHref
+                                  activeClassName='active'
+                                >
+                                  <NavLink>{child.title}</NavLink>
                                 </ActiveLink>
                                 {child.children && (
                                   <GrandChildMenu>
-                                    {child.children.map(
-                                      grandchild => (
-                                        <NavItem key={grandchild.object_id}>
-                                          <ActiveLink href={`/${grandchild.object_slug}/`} passHref activeClassName='active'>
-                                          <NavLink>
-                                            {grandchild.title}
-                                          </NavLink>
-                                          </ActiveLink>
-                                        </NavItem>
-                                      )
-                                    )}
+                                    {child.children.map((grandchild) => (
+                                      <NavItem key={grandchild.object_id}>
+                                        <ActiveLink
+                                          href={`/${grandchild.object_slug}/`}
+                                          passHref
+                                          activeClassName='active'
+                                        >
+                                          <NavLink>{grandchild.title}</NavLink>
+                                        </ActiveLink>
+                                      </NavItem>
+                                    ))}
                                   </GrandChildMenu>
                                 )}
                               </NavItem>
@@ -79,16 +97,28 @@ export default function Header ({ logo, siteTitle, navs }: InferProps<typeof Hea
               <Overlay className='d-xl-none' menuIsOpen={menuIsOpen}>
                 <MenuToggle
                   menuIsOpen={menuIsOpen}
-                  onClick={() => setMenu(menuIsOpen => !menuIsOpen)}
+                  onClick={() => setMenu((menuIsOpen) => !menuIsOpen)}
                 >
                   {menuIsOpen ? <FaTimes /> : <FaBars />}
                 </MenuToggle>
                 <Nav role={`navigation`} aria-label={navs.mobile.name}>
                   <NavMenu>
-                    {navs.mobile.items.map(item => (
+                    {navs.mobile.items.map((item) => (
                       <NavItem key={item.object_id}>
-                        <ActiveLink href={item.object_slug === 'home' ? `/` : `/${item.object_slug}/`} passHref activeClassName='active'>
-                          <NavLink className={item.object_slug === 'rep-login' ? `alt` : ``}>
+                        <ActiveLink
+                          href={
+                            item.object_slug === 'home'
+                              ? `/`
+                              : `/${item.object_slug}/`
+                          }
+                          passHref
+                          activeClassName='active'
+                        >
+                          <NavLink
+                            className={
+                              item.object_slug === 'rep-login' ? `alt` : ``
+                            }
+                          >
                             {item.title}
                           </NavLink>
                         </ActiveLink>
@@ -110,21 +140,27 @@ Header.propTypes = {
   siteTitle: string,
   menu: shape({
     name: string,
-    items: arrayOf(shape({
-      object_id: number,
-      object_slug: string,
-      title: string,
-      wordpress_children: arrayOf(shape({
+    items: arrayOf(
+      shape({
         object_id: number,
         object_slug: string,
         title: string,
-        wordpress_children: arrayOf(shape({
-          object_id: number,
-          object_slug: string,
-          title: string
-        }))
-      }))
-    }))
+        wordpress_children: arrayOf(
+          shape({
+            object_id: number,
+            object_slug: string,
+            title: string,
+            wordpress_children: arrayOf(
+              shape({
+                object_id: number,
+                object_slug: string,
+                title: string
+              })
+            )
+          })
+        )
+      })
+    )
   })
 }
 
@@ -136,7 +172,7 @@ const Wrapper = styled.header`
   }
 `
 
-const Nav = styled.nav.attrs(props => ({
+const Nav = styled.nav.attrs((props) => ({
   'aria-label': props['aria-label']
 }))`
   display: flex;
@@ -264,7 +300,7 @@ const MenuToggle = styled.div`
 
   > svg {
     color: ${({ menuIsOpen, theme }) =>
-    menuIsOpen ? theme.secondary : theme.primary};
+      menuIsOpen ? theme.secondary : theme.primary};
     font-size: 2rem;
     cursor: pointer;
     position: absolute;

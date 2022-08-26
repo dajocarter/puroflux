@@ -1,12 +1,17 @@
 import React from 'react'
 import { shape, string, arrayOf, InferProps } from 'prop-types'
-import  Link  from 'next/link'
+import Link from 'next/link'
 import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 
 import { StyledButtonLink } from './links'
 
-export default function Footer ({ navs }: InferProps<typeof Footer.propTypes>) {
+export default function Footer({ navs }: InferProps<typeof Footer.propTypes>) {
+  const pagesMenuName = navs?.pages?.name || ''
+  const pagesMenuItems = navs?.pages?.items || []
+  const exploreMenuName = navs?.explore?.name || ''
+  const exploreMenuItems = navs?.explore?.items || []
+
   return (
     <FooterWrapper>
       <CallToAction>
@@ -26,9 +31,7 @@ export default function Footer ({ navs }: InferProps<typeof Footer.propTypes>) {
                 </PhoneNumber>{' '}
                 or{' '}
                 <Link href='/contact' passHref>
-                  <CTAlink alt='true'>
-                    Contact Us
-                  </CTAlink>
+                  <CTAlink>Contact Us</CTAlink>
                 </Link>
               </Action>
             </Col>
@@ -38,31 +41,39 @@ export default function Footer ({ navs }: InferProps<typeof Footer.propTypes>) {
       <Container>
         <MenusRow>
           <Column xs={12} sm={4} md={3}>
-            <ColumnTitle>{navs.pages.name}</ColumnTitle>
+            <ColumnTitle>{pagesMenuName}</ColumnTitle>
             <Menu>
-              {navs.pages.items.map((item, index) => (
-                <MenuItem key={index}>
-                  <Link href={`/${item.object_slug}`} passHref>
-                    <MenuLink>
-                      {item.title}
-                    </MenuLink>
-                  </Link>
-                </MenuItem>
-              ))}
+              {pagesMenuItems.map((item, index) => {
+                if (!item) return null
+                return (
+                  <MenuItem key={index}>
+                    <Link href={`/${item.object_slug}`} passHref>
+                      <MenuLink>{item.title}</MenuLink>
+                    </Link>
+                  </MenuItem>
+                )
+              })}
             </Menu>
           </Column>
           <Column xs={12} sm={4} md={{ span: 3, offset: 1 }}>
-            <ColumnTitle>{navs.explore.name}</ColumnTitle>
+            <ColumnTitle>{exploreMenuName}</ColumnTitle>
             <Menu>
-              {navs.explore.items.map((item, index) => (
-                <MenuItem key={index}>
-                  <Link href={`/${item.object_slug}`} passHref>
-                    <MenuLink className={item.object_slug === 'rep-login' ? `alt` : ``}>
-                      {item.title}
-                    </MenuLink>
-                  </Link>
-                </MenuItem>
-              ))}
+              {exploreMenuItems.map((item, index) => {
+                if (!item) return null
+                return (
+                  <MenuItem key={index}>
+                    <Link href={`/${item.object_slug}`} passHref>
+                      <MenuLink
+                        className={
+                          item.object_slug === 'rep-login' ? `alt` : ``
+                        }
+                      >
+                        {item.title}
+                      </MenuLink>
+                    </Link>
+                  </MenuItem>
+                )
+              })}
             </Menu>
           </Column>
           <SignUpColumn xs={12} sm={4} md={5}>
@@ -71,7 +82,9 @@ export default function Footer ({ navs }: InferProps<typeof Footer.propTypes>) {
                 <ColumnTitle>Sign up for our newsletter</ColumnTitle>
               </Col>
               <Col sm={12} md={6} lg={5} xl={4}>
-                <Link href='/newsletter' passHref><SignUpLink>Sign up</SignUpLink></Link>
+                <Link href='/newsletter' passHref>
+                  <SignUpLink>Sign up</SignUpLink>
+                </Link>
               </Col>
             </Row>
           </SignUpColumn>
@@ -88,17 +101,21 @@ Footer.propTypes = {
   navs: shape({
     explore: shape({
       name: string.isRequired,
-      items: arrayOf(shape({
-        object_slug: string,
-        title: string
-      })).isRequired
+      items: arrayOf(
+        shape({
+          object_slug: string,
+          title: string
+        })
+      ).isRequired
     }),
     pages: shape({
       name: string.isRequired,
-      items: arrayOf(shape({
-        object_slug: string,
-        title: string
-      })).isRequired
+      items: arrayOf(
+        shape({
+          object_slug: string,
+          title: string
+        })
+      ).isRequired
     })
   }).isRequired
 }
@@ -110,7 +127,7 @@ const FooterWrapper = styled.footer`
 `
 
 const CallToAction = styled.div`
-  background: ${props => props.theme.secondary};
+  background: ${(props) => props.theme.secondary};
   border-top: 1px solid white;
   padding: 0.5rem 0;
   text-transform: uppercase;
@@ -217,27 +234,27 @@ const MenuItem = styled.li`
 `
 
 const MenuLink = styled.a`
-  color: ${props => props.theme.primary};
+  color: ${(props) => props.theme.primary};
   font-size: 14px;
   letter-spacing: 1px;
   text-decoration: none;
   text-transform: uppercase;
 
   &.alt {
-    color: ${props => props.theme.secondary};
+    color: ${(props) => props.theme.secondary};
   }
 
   &:hover,
   &:focus {
-    color: ${props => props.theme.primary};
+    color: ${(props) => props.theme.primary};
     text-decoration: underline;
-    text-decoration-color: ${props => props.theme.secondary};
+    text-decoration-color: ${(props) => props.theme.secondary};
   }
 `
 
 const SignUpLink = styled.a`
-  background-color: ${props => props.theme.secondary};
-  border: 3px solid ${props => props.theme.secondary};
+  background-color: ${(props) => props.theme.secondary};
+  border: 3px solid ${(props) => props.theme.secondary};
   color: white;
   display: inline-block;
   letter-spacing: 1px;
