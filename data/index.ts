@@ -44,14 +44,13 @@ interface WP_MENU {
 
 class WpClient extends WpApiClient {
   constructor() {
-    // super(`${process.env.SOURCE_URL}`, {
-    //   auth: {
-    //       type: 'basic',
-    //       username: `${process.env.WP_USERNAME}`,
-    //       password: `${process.env.WP_PASSWORD}`
-    //   }
-    // })
-    super(`${process.env.SOURCE_URL}`)
+    super(`${process.env.SOURCE_URL}`, {
+      auth: {
+          type: 'basic',
+          username: `${process.env.WP_USERNAME}`,
+          password: `${process.env.WP_PASSWORD}`
+      }
+    })
   }
 
   headerDesktopMenu = this.createEndpointCustomGet<WP_MENU>(HEADER_DESKTOP_MENU_PATH)
