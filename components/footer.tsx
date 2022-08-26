@@ -38,9 +38,9 @@ export default function Footer ({ navs }: InferProps<typeof Footer.propTypes>) {
       <Container>
         <MenusRow>
           <Column xs={12} sm={4} md={3}>
-            <ColumnTitle>{navs.explore.name}</ColumnTitle>
+            <ColumnTitle>{navs.pages.name}</ColumnTitle>
             <Menu>
-              {navs.explore.items.map((item, index) => (
+              {navs.pages.items.map((item, index) => (
                 <MenuItem key={index}>
                   <Link href={`/${item.object_slug}`} passHref>
                     <MenuLink>
@@ -52,9 +52,9 @@ export default function Footer ({ navs }: InferProps<typeof Footer.propTypes>) {
             </Menu>
           </Column>
           <Column xs={12} sm={4} md={{ span: 3, offset: 1 }}>
-            <ColumnTitle>{navs.pages.name}</ColumnTitle>
+            <ColumnTitle>{navs.explore.name}</ColumnTitle>
             <Menu>
-              {navs.pages.items.map((item, index) => (
+              {navs.explore.items.map((item, index) => (
                 <MenuItem key={index}>
                   <Link href={`/${item.object_slug}`} passHref>
                     <MenuLink className={item.object_slug === 'rep-login' ? `alt` : ``}>
@@ -243,6 +243,7 @@ const SignUpLink = styled.a`
   letter-spacing: 1px;
   max-width: 100%;
   padding: 0.5rem 1.25rem;
+  text-decoration: none;
   text-transform: uppercase;
 
   &:hover,
