@@ -4,7 +4,7 @@ import  Link  from 'next/link'
 import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 
-import Button from './button'
+import { StyledButtonLink } from './links'
 
 export default function Footer ({ navs }: InferProps<typeof Footer.propTypes>) {
   return (
@@ -153,7 +153,7 @@ const PhoneNumber = styled.a`
   }
 `
 
-const CTAlink = styled(Button)`
+const CTAlink = styled(StyledButtonLink)`
   background-color: black;
   color: white;
   margin: 0.5rem 0 0.5rem 0.5rem;
