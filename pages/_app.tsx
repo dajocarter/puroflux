@@ -4,6 +4,7 @@ import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import { ThemeProvider, DefaultTheme } from 'styled-components'
 import GlobalStyle from '../components/globalstyles'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const theme = {
   primary: '#09A198',
