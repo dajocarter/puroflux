@@ -8,6 +8,9 @@ async function getHeaderData () {
   const [logo] = await wpClient.media().find(logoQueryParams)
   const headerDesktopMenu = await wpClient.headerDesktopMenu()
   const headerMobileMenu = await wpClient.headerMobileMenu()
+  const siteSettings = wpClient.siteSettings()
+  const { title } = await siteSettings.find()
+
   
 
   return {
@@ -15,7 +18,8 @@ async function getHeaderData () {
     navs: {
       desktop: headerDesktopMenu,
       mobile: headerMobileMenu
-    }
+    },
+    siteTitle: title
   }
 }
 
