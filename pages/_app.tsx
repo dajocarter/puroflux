@@ -6,7 +6,7 @@ import { ThemeProvider, DefaultTheme } from 'styled-components'
 import GlobalStyle from '../components/globalstyles'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-const theme = {
+const theme: DefaultTheme = {
   primary: '#09A198',
   secondary: '#ffa200',
   alt: '#000000',

@@ -1,15 +1,18 @@
-import React, { Children } from 'react'
+import React, { Children, ReactNode } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import styled from 'styled-components'
 
-export const StyledButtonLink = styled.a`
+export const StyledButtonLink = styled.a<{
+  primary: boolean
+  secondary: boolean
+}>`
   border-width: 3px;
   border-style: solid;
   border-color: ${(props) =>
-    props.primary === 'true'
+    props.primary
       ? props.theme.primary
-      : props.secondary === 'true'
+      : props.secondary
       ? props.theme.secondary
       : props.theme.alt};
   background-color: transparent;
@@ -29,9 +32,9 @@ export const StyledButtonLink = styled.a`
   &:hover,
   &:focus {
     background-color: ${(props) =>
-      props.primary === 'true'
+      props.primary
         ? props.theme.primary
-        : props.secondary === 'true'
+        : props.secondary
         ? props.theme.secondary
         : props.theme.alt};
     color: white;
@@ -40,10 +43,20 @@ export const StyledButtonLink = styled.a`
   }
 `
 
-export const ActiveLink = ({ children, activeClassName, ...props }) => {
+export const ActiveLink = ({
+  children,
+  activeClassName = 'active',
+  ...props
+}: {
+  children: ReactNode
+  activeClassName: string
+  href: string
+  as?: string
+}) => {
   const { asPath } = useRouter()
   const child = Children.only(children)
-  const childClassName = child.props.className || ''
+  if (!child) return null
+  const childClassName: string = child.props.className || ''
 
   // pages/index.js will be matched via props.href
   // pages/about.js will be matched via props.href
