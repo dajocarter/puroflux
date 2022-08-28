@@ -5,13 +5,8 @@ import Image from 'next/image'
 import { Container, Row, Col } from 'react-bootstrap'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import styled from 'styled-components'
+import { WordPressMenu } from '../data'
 
-interface MenuItem {
-  object_id: number
-  object_slug: string
-  title: string
-  children?: MenuItem[]
-}
 export interface HeaderProps {
   logo: {
     media_details: {
@@ -26,14 +21,8 @@ export interface HeaderProps {
   }
   siteTitle: string
   navs: {
-    desktop: {
-      name: string
-      items: MenuItem[]
-    }
-    mobile: {
-      name: string
-      items: MenuItem[]
-    }
+    desktop: WordPressMenu
+    mobile: WordPressMenu
   }
 }
 

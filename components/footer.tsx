@@ -4,23 +4,12 @@ import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 
 import { StyledButtonLink } from './links'
+import { WordPressMenu } from '../data'
 
 export interface FooterProps {
   navs: {
-    explore: {
-      name: string
-      items: {
-        object_slug: string
-        title: string
-      }[]
-    }
-    pages: {
-      name: string
-      items: {
-        object_slug: string
-        title: string
-      }[]
-    }
+    explore: WordPressMenu
+    pages: WordPressMenu
   }
 }
 
