@@ -10,7 +10,9 @@ import {
   HeroContent,
   HeroContentProps
 } from '../components/hero-unit'
-import { Col, Container, Row } from 'react-bootstrap'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import styled from 'styled-components'
 import Image from 'next/image'
 import { StyledButtonLink } from '../components/links'

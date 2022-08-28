@@ -1,4 +1,4 @@
-import React, { Children, ReactNode } from 'react'
+import { Children, cloneElement, ReactElement, ReactNode } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import styled from 'styled-components'
@@ -55,7 +55,7 @@ export const ActiveLink = ({
   as?: string
 }) => {
   const { asPath } = useRouter()
-  const child = Children.only(children) as React.ReactElement
+  const child = Children.only(children) as ReactElement
   if (!child) return null
   const childClassName: string = child.props.className || ''
 
@@ -69,7 +69,7 @@ export const ActiveLink = ({
 
   return (
     <Link {...props}>
-      {React.cloneElement(child, {
+      {cloneElement(child, {
         className: className || null
       })}
     </Link>

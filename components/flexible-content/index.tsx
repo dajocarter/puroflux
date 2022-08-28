@@ -1,4 +1,3 @@
-import React from 'react'
 import FullWidthContent, { FullWidthContentProps } from './full-width-content'
 import SplitContent, { SplitContentProps } from './split-content'
 

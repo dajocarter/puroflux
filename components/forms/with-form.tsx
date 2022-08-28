@@ -1,5 +1,4 @@
-import { ReactNode } from 'react'
-import { Button } from 'react-bootstrap'
+import Button from 'react-bootstrap/Button'
 
 export default function withForm(
   InputFields: () => JSX.Element,
