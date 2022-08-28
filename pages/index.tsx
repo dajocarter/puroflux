@@ -14,6 +14,7 @@ import { Col, Container, Row } from 'react-bootstrap'
 import styled from 'styled-components'
 import Image from 'next/image'
 import { StyledButtonLink } from '../components/links'
+import FlexibleContent, { Layouts } from '../components/flexible-content'
 
 interface HomePageProps {
   header: HeaderProps
@@ -38,7 +39,7 @@ interface HomePageProps {
         }
       }
       featured_content: string
-      layouts: {}[]
+      layouts: Layouts[]
     }
   }
 }
@@ -94,9 +95,9 @@ export default function Home(props: HomePageProps) {
           </Column>
         </Row>
       </FeatureContainer>
-      {/* {props.page.acf.layouts && (
+      {props.page.acf.layouts && (
         <FlexibleContent layouts={props.page.acf.layouts} />
-      )} */}
+      )}
     </Layout>
   )
 }
