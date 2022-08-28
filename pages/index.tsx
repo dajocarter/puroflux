@@ -4,10 +4,28 @@ import getLayoutData from '../data/layout'
 import Layout from '../components/layout'
 import { HeaderProps } from '../components/header'
 import { FooterProps } from '../components/footer'
+import getHomePageData from '../data/home'
+import {
+  HeroUnit,
+  HeroContent,
+  HeroContentProps
+} from '../components/hero-unit'
 
 interface HomePageProps {
   header: HeaderProps
   footer: FooterProps
+  heroImg: {
+    media_details: {
+      sizes: {
+        full: {
+          source_url: string
+        }
+      }
+    }
+  }
+  page: {
+    acf: HeroContentProps
+  }
 }
 
 export default function Home(props: HomePageProps) {
@@ -19,6 +37,12 @@ export default function Home(props: HomePageProps) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
+      <HeroUnit imgSrc={props.heroImg.media_details.sizes.full.source_url}>
+        <HeroContent
+          content={props.page.acf.content}
+          buttons={props.page.acf.buttons}
+        />
+      </HeroUnit>
     </Layout>
   )
 }
@@ -27,9 +51,11 @@ export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext
 ) => {
   const layoutData = await getLayoutData()
+  const pageData = await getHomePageData()
   return {
     props: {
-      ...layoutData
+      ...layoutData,
+      ...pageData
     }
   }
 }

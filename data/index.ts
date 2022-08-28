@@ -65,3 +65,38 @@ class WpClient extends WpApiClient {
 }
 
 export const wpClient = new WpClient()
+
+export const formatPhoneNumber = (
+  phoneNumber: string,
+  formatType: 'back' | 'front' = 'back'
+): string => {
+  // Replace any non-number with an empty string and trim
+  const numbersOnly = phoneNumber.replace(/\D/g, '').trim()
+  // Group string of numbers into telephone parts
+  const grouped = numbersOnly.match(/^(\d{3})(\d{3})(\d{4})$/)
+  if (!grouped) return phoneNumber
+  let formatted
+  switch (formatType) {
+    case 'front':
+      formatted = `(${grouped[1]}) ${grouped[2]}-${grouped[3]}`
+      break
+    case 'back':
+    default:
+      formatted = `${grouped[1]}-${grouped[2]}-${grouped[3]}`
+      break
+  }
+  return formatted
+}
+
+export const formatURL = (url: string): string => {
+  // Determine if the URL contains /wp-content/
+  const filePath = 'wp-content/uploads'
+  const baseURL = process.env.NEXT_PUBLIC_BASE_URL
+  const httpLink = `http://${baseURL}`
+  const httpsLink = `https://${baseURL}`
+  let formattedURL = url
+  if (url.match(filePath)) return url
+  if (url.match(httpLink)) formattedURL = url.replace(httpLink, '')
+  if (url.match(httpsLink)) formattedURL = url.replace(httpsLink, '')
+  return formattedURL
+}
