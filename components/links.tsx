@@ -4,8 +4,8 @@ import Link from 'next/link'
 import styled from 'styled-components'
 
 export const StyledButtonLink = styled.a<{
-  primary: boolean
-  secondary: boolean
+  primary?: boolean
+  secondary?: boolean
 }>`
   border-width: 3px;
   border-style: solid;
@@ -51,6 +51,7 @@ export const ActiveLink = ({
   children: ReactNode
   activeClassName: string
   href: string
+  passHref: boolean
   as?: string
 }) => {
   const { asPath } = useRouter()

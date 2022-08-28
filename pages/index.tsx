@@ -1,11 +1,17 @@
 import type { GetStaticProps, GetStaticPropsContext } from 'next'
-import { arrayOf, InferProps, shape, string } from 'prop-types'
 import Head from 'next/head'
 import getLayoutData from '../data/layout'
 import styles from '../styles/Home.module.css'
 import Layout from '../components/layout'
+import { HeaderProps } from '../components/header'
+import { FooterProps } from '../components/footer'
 
-export default function Home(props: InferProps<typeof Home.propTypes>) {
+interface HomePageProps {
+  header: HeaderProps
+  footer: FooterProps
+}
+
+export default function Home(props: HomePageProps) {
   return (
     <Layout {...props}>
       <Head>
@@ -52,31 +58,6 @@ export default function Home(props: InferProps<typeof Home.propTypes>) {
       </div>
     </Layout>
   )
-}
-
-Home.propTypes = {
-  footer: shape({
-    navs: shape({
-      explore: shape({
-        name: string,
-        items: arrayOf(
-          shape({
-            object_slug: string,
-            title: string
-          })
-        )
-      }),
-      pages: shape({
-        name: string,
-        items: arrayOf(
-          shape({
-            object_slug: string,
-            title: string
-          })
-        )
-      })
-    })
-  })
 }
 
 export const getStaticProps: GetStaticProps = async (

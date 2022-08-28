@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { string, shape, arrayOf, number, InferProps } from 'prop-types'
 import Link from 'next/link'
 import { ActiveLink } from './links'
 import Image from 'next/image'
@@ -7,217 +6,158 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import styled from 'styled-components'
 
-export default function Header({
-  logo,
-  siteTitle,
-  navs
-}: InferProps<typeof Header.propTypes>) {
+interface MenuItem {
+  object_id: number
+  object_slug: string
+  title: string
+  children?: MenuItem[]
+}
+export interface HeaderProps {
+  logo: {
+    media_details: {
+      sizes: {
+        medium: {
+          source_url: string
+          height: number
+          width: number
+        }
+      }
+    }
+  }
+  siteTitle: string
+  navs: {
+    desktop: {
+      name: string
+      items: MenuItem[]
+    }
+    mobile: {
+      name: string
+      items: MenuItem[]
+    }
+  }
+}
+
+export default function Header({ logo, siteTitle, navs }: HeaderProps) {
   const [menuIsOpen, setMenu] = useState(false)
-  const title = siteTitle || ''
-  const logoSrc = logo?.media_details?.sizes?.medium?.source_url || ''
-  const desktopMenuName = navs?.desktop?.name || ''
-  const desktopMenuItems = navs?.desktop?.items || []
-  const mobileMenuName = navs?.mobile?.name || ''
-  const mobileMenuItems = navs?.mobile?.items || []
+  const logoSrc = logo.media_details.sizes.medium.source_url
+  const desktopMenuName = navs.desktop.name
+  const desktopMenuItems = navs.desktop.items
+  const mobileMenuName = navs.mobile.name
+  const mobileMenuItems = navs.mobile.items
 
   return (
     <Wrapper>
       <Container>
         <Row>
-          {logo && (
-            <Col xs={9} xl={3}>
-              <NavBrand>
-                <Link href='/'>
-                  <a>
-                    <Image
-                      alt={title}
-                      src={logoSrc}
-                      height={42}
-                      width={200}
-                      layout='fixed'
-                    />
-                  </a>
-                </Link>
-              </NavBrand>
-            </Col>
-          )}
-          {navs && (
-            <>
-              <Col className='d-none d-xl-block' xl={9}>
-                <Nav role='navigation' aria-label={desktopMenuName}>
-                  <NavMenu>
-                    {desktopMenuItems.map((item) => {
-                      if (!item) return null
-                      return (
-                        <NavItem key={item.object_id}>
-                          <ActiveLink
-                            href={
-                              item.object_slug === 'home'
-                                ? `/`
-                                : `/${item.object_slug}/`
-                            }
-                            passHref
-                            activeClassName='active'
-                          >
-                            <NavLink
-                              className={
-                                item.object_slug === 'rep-login' ? `alt` : ``
-                              }
+          <Col xs={9} xl={3}>
+            <NavBrand>
+              <Link href='/'>
+                <a>
+                  <Image
+                    alt={siteTitle}
+                    src={logoSrc}
+                    height={42}
+                    width={200}
+                    layout='fixed'
+                  />
+                </a>
+              </Link>
+            </NavBrand>
+          </Col>
+          <Col className='d-none d-xl-block' xl={9}>
+            <Nav role='navigation' aria-label={desktopMenuName}>
+              <NavMenu>
+                {desktopMenuItems.map((item) => (
+                  <NavItem key={item.object_id}>
+                    <ActiveLink
+                      href={
+                        item.object_slug === 'home'
+                          ? `/`
+                          : `/${item.object_slug}/`
+                      }
+                      passHref
+                      activeClassName='active'
+                    >
+                      <NavLink
+                        className={
+                          item.object_slug === 'rep-login' ? `alt` : ``
+                        }
+                      >
+                        {item.title}
+                      </NavLink>
+                    </ActiveLink>
+                    {item.children && (
+                      <ChildMenu>
+                        {item.children.map((child) => (
+                          <NavItem key={child.object_id}>
+                            <ActiveLink
+                              href={`/${child.object_slug}/`}
+                              passHref
+                              activeClassName='active'
                             >
-                              {item.title}
-                            </NavLink>
-                          </ActiveLink>
-                          {item.children && (
-                            <ChildMenu>
-                              {item.children.map((child) => {
-                                if (!child) return null
-                                return (
-                                  <NavItem key={child.object_id}>
+                              <NavLink>{child.title}</NavLink>
+                            </ActiveLink>
+                            {child.children && (
+                              <GrandChildMenu>
+                                {child.children.map((grandchild) => (
+                                  <NavItem key={grandchild.object_id}>
                                     <ActiveLink
-                                      href={`/${child.object_slug}/`}
+                                      href={`/${grandchild.object_slug}/`}
                                       passHref
                                       activeClassName='active'
                                     >
-                                      <NavLink>{child.title}</NavLink>
+                                      <NavLink>{grandchild.title}</NavLink>
                                     </ActiveLink>
-                                    {child.children && (
-                                      <GrandChildMenu>
-                                        {child.children.map((grandchild) => {
-                                          if (!grandchild) return null
-                                          return (
-                                            <NavItem key={grandchild.object_id}>
-                                              <ActiveLink
-                                                href={`/${grandchild.object_slug}/`}
-                                                passHref
-                                                activeClassName='active'
-                                              >
-                                                <NavLink>
-                                                  {grandchild.title}
-                                                </NavLink>
-                                              </ActiveLink>
-                                            </NavItem>
-                                          )
-                                        })}
-                                      </GrandChildMenu>
-                                    )}
                                   </NavItem>
-                                )
-                              })}
-                            </ChildMenu>
-                          )}
-                        </NavItem>
-                      )
-                    })}
-                  </NavMenu>
-                </Nav>
-              </Col>
-              <Overlay className='d-xl-none' menuIsOpen={menuIsOpen}>
-                <MenuToggle
-                  menuIsOpen={menuIsOpen}
-                  onClick={() => setMenu((menuIsOpen) => !menuIsOpen)}
-                >
-                  {menuIsOpen ? <FaTimes /> : <FaBars />}
-                </MenuToggle>
-                <Nav role={`navigation`} aria-label={mobileMenuName}>
-                  <NavMenu>
-                    {mobileMenuItems.map((item) => {
-                      if (!item) return null
-                      return (
-                        <NavItem key={item.object_id}>
-                          <ActiveLink
-                            href={
-                              item.object_slug === 'home'
-                                ? `/`
-                                : `/${item.object_slug}/`
-                            }
-                            passHref
-                            activeClassName='active'
-                          >
-                            <NavLink
-                              className={
-                                item.object_slug === 'rep-login' ? `alt` : ``
-                              }
-                            >
-                              {item.title}
-                            </NavLink>
-                          </ActiveLink>
-                        </NavItem>
-                      )
-                    })}
-                  </NavMenu>
-                </Nav>
-              </Overlay>
-            </>
-          )}
+                                ))}
+                              </GrandChildMenu>
+                            )}
+                          </NavItem>
+                        ))}
+                      </ChildMenu>
+                    )}
+                  </NavItem>
+                ))}
+              </NavMenu>
+            </Nav>
+          </Col>
+          <Overlay className='d-xl-none' menuIsOpen={menuIsOpen}>
+            <MenuToggle
+              menuIsOpen={menuIsOpen}
+              onClick={() => setMenu((menuIsOpen) => !menuIsOpen)}
+            >
+              {menuIsOpen ? <FaTimes /> : <FaBars />}
+            </MenuToggle>
+            <Nav role={`navigation`} aria-label={mobileMenuName}>
+              <NavMenu>
+                {mobileMenuItems.map((item) => (
+                  <NavItem key={item.object_id}>
+                    <ActiveLink
+                      href={
+                        item.object_slug === 'home'
+                          ? `/`
+                          : `/${item.object_slug}/`
+                      }
+                      passHref
+                      activeClassName='active'
+                    >
+                      <NavLink
+                        className={
+                          item.object_slug === 'rep-login' ? `alt` : ``
+                        }
+                      >
+                        {item.title}
+                      </NavLink>
+                    </ActiveLink>
+                  </NavItem>
+                ))}
+              </NavMenu>
+            </Nav>
+          </Overlay>
         </Row>
       </Container>
     </Wrapper>
   )
-}
-
-Header.propTypes = {
-  logo: shape({
-    media_details: shape({
-      sizes: shape({
-        medium: shape({
-          source_url: string,
-          height: number,
-          width: number
-        })
-      })
-    })
-  }),
-  siteTitle: string,
-  navs: shape({
-    desktop: shape({
-      name: string,
-      items: arrayOf(
-        shape({
-          object_id: number,
-          object_slug: string,
-          title: string,
-          children: arrayOf(
-            shape({
-              object_id: number,
-              object_slug: string,
-              title: string,
-              children: arrayOf(
-                shape({
-                  object_id: number,
-                  object_slug: string,
-                  title: string
-                })
-              )
-            })
-          )
-        })
-      )
-    }),
-    mobile: shape({
-      name: string,
-      items: arrayOf(
-        shape({
-          object_id: number,
-          object_slug: string,
-          title: string,
-          children: arrayOf(
-            shape({
-              object_id: number,
-              object_slug: string,
-              title: string,
-              children: arrayOf(
-                shape({
-                  object_id: number,
-                  object_slug: string,
-                  title: string
-                })
-              )
-            })
-          )
-        })
-      )
-    })
-  })
 }
 
 const Wrapper = styled.header`

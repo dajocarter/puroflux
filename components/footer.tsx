@@ -1,16 +1,34 @@
 import React from 'react'
-import { shape, string, arrayOf, InferProps } from 'prop-types'
 import Link from 'next/link'
 import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 
 import { StyledButtonLink } from './links'
 
-export default function Footer({ navs }: InferProps<typeof Footer.propTypes>) {
-  const pagesMenuName = navs?.pages?.name || ''
-  const pagesMenuItems = navs?.pages?.items || []
-  const exploreMenuName = navs?.explore?.name || ''
-  const exploreMenuItems = navs?.explore?.items || []
+export interface FooterProps {
+  navs: {
+    explore: {
+      name: string
+      items: {
+        object_slug: string
+        title: string
+      }[]
+    }
+    pages: {
+      name: string
+      items: {
+        object_slug: string
+        title: string
+      }[]
+    }
+  }
+}
+
+export default function Footer({ navs }: FooterProps) {
+  const pagesMenuName = navs.pages.name
+  const pagesMenuItems = navs.pages.items
+  const exploreMenuName = navs.explore.name
+  const exploreMenuItems = navs.explore.items
 
   return (
     <FooterWrapper>
@@ -43,37 +61,29 @@ export default function Footer({ navs }: InferProps<typeof Footer.propTypes>) {
           <Column xs={12} sm={4} md={3}>
             <ColumnTitle>{pagesMenuName}</ColumnTitle>
             <Menu>
-              {pagesMenuItems.map((item, index) => {
-                if (!item) return null
-                return (
-                  <MenuItem key={index}>
-                    <Link href={`/${item.object_slug}`} passHref>
-                      <MenuLink>{item.title}</MenuLink>
-                    </Link>
-                  </MenuItem>
-                )
-              })}
+              {pagesMenuItems.map((item, index) => (
+                <MenuItem key={index}>
+                  <Link href={`/${item.object_slug}`} passHref>
+                    <MenuLink>{item.title}</MenuLink>
+                  </Link>
+                </MenuItem>
+              ))}
             </Menu>
           </Column>
           <Column xs={12} sm={4} md={{ span: 3, offset: 1 }}>
             <ColumnTitle>{exploreMenuName}</ColumnTitle>
             <Menu>
-              {exploreMenuItems.map((item, index) => {
-                if (!item) return null
-                return (
-                  <MenuItem key={index}>
-                    <Link href={`/${item.object_slug}`} passHref>
-                      <MenuLink
-                        className={
-                          item.object_slug === 'rep-login' ? `alt` : ``
-                        }
-                      >
-                        {item.title}
-                      </MenuLink>
-                    </Link>
-                  </MenuItem>
-                )
-              })}
+              {exploreMenuItems.map((item, index) => (
+                <MenuItem key={index}>
+                  <Link href={`/${item.object_slug}`} passHref>
+                    <MenuLink
+                      className={item.object_slug === 'rep-login' ? `alt` : ``}
+                    >
+                      {item.title}
+                    </MenuLink>
+                  </Link>
+                </MenuItem>
+              ))}
             </Menu>
           </Column>
           <SignUpColumn xs={12} sm={4} md={5}>
@@ -95,29 +105,6 @@ export default function Footer({ navs }: InferProps<typeof Footer.propTypes>) {
       </Copyright>
     </FooterWrapper>
   )
-}
-
-Footer.propTypes = {
-  navs: shape({
-    explore: shape({
-      name: string.isRequired,
-      items: arrayOf(
-        shape({
-          object_slug: string,
-          title: string
-        })
-      ).isRequired
-    }),
-    pages: shape({
-      name: string.isRequired,
-      items: arrayOf(
-        shape({
-          object_slug: string,
-          title: string
-        })
-      ).isRequired
-    })
-  }).isRequired
 }
 
 const FooterWrapper = styled.footer`
