@@ -41,11 +41,11 @@ export interface WordPressMenu {
 
 class WpClient extends WpApiClient {
   constructor() {
-    super(`${process.env.SOURCE_URL}`, {
+    super(`${process.env.NEXT_PUBLIC_SOURCE_URL}`, {
       auth: {
         type: 'basic',
-        username: `${process.env.WP_USERNAME}`,
-        password: `${process.env.WP_PASSWORD}`
+        username: `${process.env.NEXT_PUBLIC_WP_USERNAME}`,
+        password: `${process.env.NEXT_PUBLIC_WP_PASSWORD}`
       }
     })
   }
