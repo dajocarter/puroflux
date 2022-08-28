@@ -55,7 +55,7 @@ export const ActiveLink = ({
   as?: string
 }) => {
   const { asPath } = useRouter()
-  const child = Children.only(children)
+  const child = Children.only(children) as React.ReactElement
   if (!child) return null
   const childClassName: string = child.props.className || ''
 
