@@ -66,6 +66,8 @@ class WpClient extends WpApiClient {
 
 export const wpClient = new WpClient()
 
+export const queryBySlug = (slug: string) => new URLSearchParams({ slug })
+
 export const formatPhoneNumber = (
   phoneNumber: string,
   formatType: 'back' | 'front' = 'back'
