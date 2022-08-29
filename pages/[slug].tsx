@@ -13,6 +13,7 @@ import StoreLocatorTemplate, {
   StoreLocatorProps
 } from '../templates/store-locator'
 import VideoPageTemplate, { VideoPageProps } from '../templates/videos'
+import GalleryPageTemplate, { GalleryPageProps } from '../templates/gallery'
 
 export interface PageProps {
   header: HeaderProps
@@ -30,6 +31,7 @@ export interface PageProps {
     template:
       | 'page_contact.php'
       | 'page_form.php'
+      | 'page_gallery.php'
       | 'page_library.php'
       | 'page_store-locator.php'
       | 'page_videos.php'
@@ -45,6 +47,7 @@ export default function Page(
   props:
     | ContactPageProps
     | FormPageProps
+    | GalleryPageProps
     | LibraryTemplateProps
     | StoreLocatorProps
     | VideoPageProps
@@ -54,6 +57,8 @@ export default function Page(
       return <ContactPage {...(props as ContactPageProps)} />
     case 'page_form.php':
       return <FormPage {...(props as FormPageProps)} />
+    case 'page_gallery.php':
+      return <GalleryPageTemplate {...(props as GalleryPageProps)} />
     case 'page_library.php':
       return <LibraryTemplate {...(props as LibraryTemplateProps)} />
     case 'page_store-locator.php':

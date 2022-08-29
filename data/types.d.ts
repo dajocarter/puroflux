@@ -32,6 +32,34 @@ export interface WordPressMenu {
   }
 }
 
+export interface WordPressImage {
+  ID: number
+  id: number
+  alt: string
+  title: string
+  caption: string
+  sizes: {
+    thumbnail: string
+    'thumbnail-height': number
+    'thumbnail-width': number
+    medium: string
+    'medium-height': number
+    'medium-width': number
+    medium_large: string
+    'medium_large-height': number
+    'medium_large-width': number
+    large: string
+    'large-height': number
+    'large-width': number
+    '1536x1536': string
+    '1536x1536-height': number
+    '1536x1536-width': number
+    '2048x2048': string
+    '2048x2048-height': number
+    '2048x2048-width': number
+  }
+}
+
 export interface RepPostType {
   id: number
   date: Date
