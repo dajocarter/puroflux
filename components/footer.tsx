@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col'
 import styled from 'styled-components'
 
 import { StyledButtonLink } from './links'
-import { WordPressMenu } from '../data'
+import { WordPressMenu } from '../data/types'
 
 export interface FooterProps {
   navs: {

@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import styled from 'styled-components'
-import { WordPressMenu } from '../data'
+import { WordPressMenu } from '../data/types'
 
 export interface HeaderProps {
   logo: {
