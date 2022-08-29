@@ -1,22 +1,22 @@
 import { queryBySlug, wpClient } from '.'
 
-export async function getHomePageData() {
-  const [heroImg] = await wpClient
-    .media()
-    .find(queryBySlug('puroflux_home_hero_pf_4060'))
-  const [page] = await wpClient.page().find(queryBySlug('home'))
-
-  return {
-    heroImg,
-    page
-  }
-}
-
 export async function getPageData(slug: string) {
-  const [heroImg] = await wpClient
-    .media()
-    .find(queryBySlug('puroflux_home_hero_sample'))
+  const heroImgSlug =
+    slug === 'home' ? 'puroflux_home_hero_pf_4060' : 'puroflux_home_hero_sample'
+  const [heroImg] = await wpClient.media().find(queryBySlug(heroImgSlug))
   const [page] = await wpClient.page().find(queryBySlug(slug))
+
+  if (page && page.template === 'page_store-locator.php') {
+    const reps = await wpClient.rep().find()
+    const states = await wpClient.state().find()
+
+    return {
+      heroImg,
+      page,
+      reps,
+      states
+    }
+  }
 
   return {
     heroImg,

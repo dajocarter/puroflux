@@ -9,6 +9,9 @@ import PageTemplate from '../templates/page'
 import LibraryTemplate, { LibraryTemplateProps } from '../templates/library'
 import ContactPage, { ContactPageProps } from '../templates/contact'
 import FormPage, { FormPageProps } from '../templates/form'
+import StoreLocatorTemplate, {
+  StoreLocatorProps
+} from '../templates/store-locator'
 
 export interface PageProps {
   header: HeaderProps
@@ -23,7 +26,12 @@ export interface PageProps {
     }
   }
   page: {
-    template: 'page_contact.php' | 'page_form.php' | 'page_library.php' | ''
+    template:
+      | 'page_contact.php'
+      | 'page_form.php'
+      | 'page_library.php'
+      | 'page_store-locator.php'
+      | ''
     content: {
       rendered: string
     }
@@ -32,7 +40,11 @@ export interface PageProps {
 }
 
 export default function Page(
-  props: ContactPageProps | FormPageProps | LibraryTemplateProps
+  props:
+    | ContactPageProps
+    | FormPageProps
+    | LibraryTemplateProps
+    | StoreLocatorProps
 ) {
   switch (props.page.template) {
     case 'page_contact.php':
@@ -41,6 +53,8 @@ export default function Page(
       return <FormPage {...(props as FormPageProps)} />
     case 'page_library.php':
       return <LibraryTemplate {...(props as LibraryTemplateProps)} />
+    case 'page_store-locator.php':
+      return <StoreLocatorTemplate {...(props as StoreLocatorProps)} />
     default:
       return <PageTemplate {...props} />
   }

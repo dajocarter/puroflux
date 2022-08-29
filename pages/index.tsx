@@ -4,7 +4,7 @@ import getLayoutData from '../data/layout'
 import Layout from '../components/layout'
 import { HeaderProps } from '../components/header'
 import { FooterProps } from '../components/footer'
-import { getHomePageData } from '../data/page'
+import { getPageData } from '../data/page'
 import {
   HeroUnit,
   HeroContent,
@@ -108,7 +108,7 @@ export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext
 ) => {
   const layoutData = await getLayoutData()
-  const pageData = await getHomePageData()
+  const pageData = await getPageData('home')
   return {
     props: {
       ...layoutData,
