@@ -1,12 +1,20 @@
 import WpApiClient, { DefaultEndpoint } from 'wordpress-api-client'
-import { RepPostType, StatePostType, WordPressMenu } from './types'
+import {
+  ProductPostType,
+  RepPostType,
+  SeriesPostType,
+  StatePostType,
+  WordPressMenu
+} from './types'
 
 const HEADER_DESKTOP_MENU_PATH = 'wp-api-menus/v2/menus/7'
 const FOOTER_PAGES_MENU_PATH = 'wp-api-menus/v2/menus/8'
 const FOOTER_EXPLORE_MENU_PATH = 'wp-api-menus/v2/menus/9'
 const HEADER_MOBILE_MENU_PATH = 'wp-api-menus/v2/menus/63'
 
+const PRODUCTS_POST_TYPE_PATH = 'wp/v2/products'
 const REPS_POST_TYPE_PATH = 'wp/v2/reps'
+const SERIES_POST_TYPE_PATH = 'wp/v2/series'
 const STATES_POST_TYPE_PATH = 'wp/v2/states'
 
 class WpClient extends WpApiClient {
@@ -33,8 +41,16 @@ class WpClient extends WpApiClient {
     FOOTER_PAGES_MENU_PATH
   )
 
+  public product(): DefaultEndpoint<ProductPostType> {
+    return this.addPostType<ProductPostType>(PRODUCTS_POST_TYPE_PATH)
+  }
+
   public rep(): DefaultEndpoint<RepPostType> {
     return this.addPostType<RepPostType>(REPS_POST_TYPE_PATH)
+  }
+
+  public series(): DefaultEndpoint<SeriesPostType> {
+    return this.addPostType<SeriesPostType>(SERIES_POST_TYPE_PATH)
   }
 
   public state(): DefaultEndpoint<StatePostType> {

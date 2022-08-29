@@ -1,11 +1,9 @@
-import { wpClient } from '.'
-
-const logoQueryParams = new URLSearchParams({
-  slug: 'purofluxlogo_white_2x'
-})
+import { queryBySlug, wpClient } from '.'
 
 async function getHeaderData() {
-  const [logo] = await wpClient.media().find(logoQueryParams)
+  const [logo] = await wpClient
+    .media()
+    .find(queryBySlug('purofluxlogo_white_2x'))
   const headerDesktopMenu = await wpClient.headerDesktopMenu()
   const headerMobileMenu = await wpClient.headerMobileMenu()
   const siteSettings = wpClient.siteSettings()

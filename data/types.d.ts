@@ -60,6 +60,47 @@ export interface WordPressImage {
   }
 }
 
+interface LinkedPost {
+  ID: number
+  post_content: string
+  post_title: string
+  post_name: string
+}
+
+export interface ProductPostType {
+  id: number
+  date: Date
+  date_gmt: Date
+  guid: {
+    rendered: string
+  }
+  modified: Date
+  modified_gmt: Date
+  slug: string
+  status: 'publish'
+  type: 'product'
+  link: string
+  title: {
+    rendered: string
+  }
+  content: {
+    rendered: string
+  }
+  featured_media: number
+  template: string
+  acf: {
+    title: string | null
+    image: WordPressImage | null
+    product_series: LinkedPost[] | null
+    description: string | null
+    excerpt: string | null
+    files?: { file: WordPressFile }[]
+    datasheet?: WordPressFile | null
+    'operation_&_maint_manual'?: WordPressFile | null
+    sample_spec_sheet?: WordPressFile | null
+  }
+}
+
 export interface RepPostType {
   id: number
   date: Date
@@ -90,6 +131,52 @@ export interface RepPostType {
     phone_number: string
     fax_number: string
     website: string
+  }
+}
+
+interface WordPressFile {
+  ID: number
+  id: number
+  title: string
+  filename: string
+  url: string
+  name: string
+}
+
+export interface SeriesPostType {
+  id: number
+  date: Date
+  date_gmt: Date
+  guid: {
+    rendered: string
+  }
+  modified: Date
+  modified_gmt: Date
+  slug: string
+  status: 'publish'
+  type: 'series'
+  link: string
+  title: {
+    rendered: string
+  }
+  content: {
+    rendered: string
+  }
+  featured_media: number
+  template: string
+  acf: {
+    model_notes: string | null
+    series_models: LinkedPost[] | null
+    product_series: LinkedPost[] | null
+    description: string | null
+    datasheet: WordPressFile | null
+    'operation_&_maint_manual': WordPressFile | null
+    sample_spec_sheet: WordPressFile | null
+    optional_file: WordPressFile | null
+    slip_stream_files: { file: WordPressFile }[] | null
+    sweeper_piping_files: { file: WordPressFile }[] | null
+    full_flow_files: { file: WordPressFile }[] | null
+    side_stream_files: { file: WordPressFile }[] | null
   }
 }
 
