@@ -1,5 +1,4 @@
 import Form from 'react-bootstrap/Form'
-
 import withForm from './with-form'
 
 function ContactForm() {
