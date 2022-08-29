@@ -34,6 +34,7 @@ export interface PageProps {
       | 'page_gallery.php'
       | 'page_library.php'
       | 'page_store-locator.php'
+      | 'page_typical-installations.php'
       | 'page_videos.php'
       | ''
     content: {
