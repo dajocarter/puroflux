@@ -12,6 +12,7 @@ import FormPage, { FormPageProps } from '../templates/form'
 import StoreLocatorTemplate, {
   StoreLocatorProps
 } from '../templates/store-locator'
+import VideoPageTemplate, { VideoPageProps } from '../templates/videos'
 
 export interface PageProps {
   header: HeaderProps
@@ -31,6 +32,7 @@ export interface PageProps {
       | 'page_form.php'
       | 'page_library.php'
       | 'page_store-locator.php'
+      | 'page_videos.php'
       | ''
     content: {
       rendered: string
@@ -45,6 +47,7 @@ export default function Page(
     | FormPageProps
     | LibraryTemplateProps
     | StoreLocatorProps
+    | VideoPageProps
 ) {
   switch (props.page.template) {
     case 'page_contact.php':
@@ -55,6 +58,8 @@ export default function Page(
       return <LibraryTemplate {...(props as LibraryTemplateProps)} />
     case 'page_store-locator.php':
       return <StoreLocatorTemplate {...(props as StoreLocatorProps)} />
+    case 'page_videos.php':
+      return <VideoPageTemplate {...(props as VideoPageProps)} />
     default:
       return <PageTemplate {...props} />
   }
