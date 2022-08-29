@@ -1,4 +1,3 @@
-import { GetStaticProps, GetStaticPropsContext } from 'next'
 import Head from 'next/head'
 import {
   HeroContent,
@@ -7,29 +6,16 @@ import {
 } from '../components/hero-unit'
 import Layout from '../components/layout'
 import { formatPhoneNumber } from '../data'
-import getLayoutData from '../data/layout'
 import styled from 'styled-components'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { getPageData } from '../data/page'
-import { HeaderProps } from '../components/header'
-import { FooterProps } from '../components/footer'
 import ContactForm from '../components/forms/contact'
+import { PageProps } from '../pages/[slug]'
 
-interface ContactPageProps {
-  header: HeaderProps
-  footer: FooterProps
-  heroImg: {
-    media_details: {
-      sizes: {
-        full: {
-          source_url: string
-        }
-      }
-    }
-  }
+export interface ContactPageProps extends PageProps {
   page: {
+    template: 'page_contact.php'
     content: {
       rendered: string
     }
@@ -110,20 +96,6 @@ export default function ContactPage(props: ContactPageProps) {
       </Main>
     </Layout>
   )
-}
-
-export const getStaticProps: GetStaticProps = async (
-  context: GetStaticPropsContext
-) => {
-  const layoutData = await getLayoutData()
-  const pageData = await getPageData('contact')
-
-  return {
-    props: {
-      ...layoutData,
-      ...pageData
-    }
-  }
 }
 
 const Main = styled(Container)`
