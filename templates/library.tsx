@@ -11,28 +11,27 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { Fragment } from 'react'
 import { PageProps } from '../pages/[slug]'
+import { WordPressPage } from '../data/types'
 
-export interface LibraryTemplateProps extends PageProps {
-  page: {
-    template: 'page_library.php'
-    content: {
-      rendered: string
-    }
-    acf: HeroContentProps & {
-      file_groups: {
-        group_name: string
-        file_group: {
-          list_name: string | null
-          files: {
-            title: string
-            file: {
-              url: string
-            }
-          }[]
+interface LibraryPage extends WordPressPage {
+  template: 'page_library.php'
+  acf: HeroContentProps & {
+    file_groups: {
+      group_name: string
+      file_group: {
+        list_name: string | null
+        files: {
+          title: string
+          file: {
+            url: string
+          }
         }[]
       }[]
-    }
+    }[]
   }
+}
+export interface LibraryTemplateProps extends PageProps {
+  page: LibraryPage
 }
 
 export default function LibraryTemplate(props: LibraryTemplateProps) {

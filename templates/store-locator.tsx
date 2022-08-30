@@ -15,7 +15,7 @@ import Accordion, {
   AccordionTitle
 } from '../components/accordion'
 import { PageProps } from '../pages/[slug]'
-import { RepPostType, StatePostType } from '../data/types'
+import { RepPostType, StatePostType, WordPressPage } from '../data/types'
 
 const groupRepsByState = (reps: RepPostType[], states: StatePostType[]) => {
   const statesExtracted = reps.reduce(
@@ -116,14 +116,12 @@ const groupRepsByState = (reps: RepPostType[], states: StatePostType[]) => {
   return html
 }
 
+interface StoreLocatorPage extends WordPressPage {
+  template: 'page_store-locator.php'
+}
+
 export interface StoreLocatorProps extends PageProps {
-  page: {
-    template: 'page_store-locator.php'
-    content: {
-      rendered: string
-    }
-    acf: HeroContentProps
-  }
+  page: StoreLocatorPage
   reps: RepPostType[]
   states: StatePostType[]
 }

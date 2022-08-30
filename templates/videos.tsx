@@ -10,17 +10,16 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { PageProps } from '../pages/[slug]'
+import { WordPressPage } from '../data/types'
 
-export interface VideoPageProps extends PageProps {
-  page: {
-    template: 'page_videos.php'
-    content: {
-      rendered: string
-    }
-    acf: HeroContentProps & {
-      videos: { video: string }[]
-    }
+interface VideoPage extends WordPressPage {
+  template: 'page_videos.php'
+  acf: HeroContentProps & {
+    videos: { video: string }[]
   }
+}
+export interface VideoPageProps extends PageProps {
+  page: VideoPage
 }
 
 export default function VideoPageTemplate(props: VideoPageProps) {

@@ -60,11 +60,56 @@ export interface WordPressImage {
   }
 }
 
+export interface WordPressPage {
+  template:
+    | 'page_contact.php'
+    | 'page_form.php'
+    | 'page_gallery.php'
+    | 'page_library.php'
+    | 'page_products.php'
+    | 'page_store-locator.php'
+    | 'page_typical-installations.php'
+    | 'page_videos.php'
+    | ''
+  title: {
+    rendered: string
+  }
+  excerpt: {
+    rendered: string
+  }
+  content: {
+    rendered: string
+  }
+  slug: string
+  type: 'page'
+  acf: HeroContentProps
+}
+
 interface LinkedPost {
   ID: number
   post_content: string
   post_title: string
   post_name: string
+}
+
+export interface EmbeddedFeaturedMedia {
+  'wp:featuredmedia': {
+    alt_text: string
+    media_details: {
+      sizes: {
+        medium: {
+          source_url: string
+          height: number
+          width: number
+        }
+        full: {
+          source_url: string
+          height: number
+          width: number
+        }
+      }
+    }
+  }[]
 }
 
 export interface ProductPostType {
@@ -99,6 +144,7 @@ export interface ProductPostType {
     'operation_&_maint_manual'?: WordPressFile | null
     sample_spec_sheet?: WordPressFile | null
   }
+  _embedded: EmbeddedFeaturedMedia
 }
 
 export interface RepPostType {

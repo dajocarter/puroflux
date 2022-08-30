@@ -13,17 +13,16 @@ import ContactForm from '../components/forms/contact'
 import NewsletterForm from '../components/forms/newsletter'
 import Request3dForm from '../components/forms/request-3d'
 import { PageProps } from '../pages/[slug]'
+import { WordPressPage } from '../data/types'
 
-export interface FormPageProps extends PageProps {
-  page: {
-    template: 'page_form.php'
-    content: {
-      rendered: string
-    }
-    acf: HeroContentProps & {
-      form: 'newsletter' | 'request-3d' | 'contact'
-    }
+interface FormPage extends WordPressPage {
+  template: 'page_form.php'
+  acf: HeroContentProps & {
+    form: 'newsletter' | 'request-3d' | 'contact'
   }
+}
+export interface FormPageProps extends PageProps {
+  page: FormPage
 }
 
 export default function FormPage(props: FormPageProps) {

@@ -17,6 +17,7 @@ import GalleryPageTemplate, { GalleryPageProps } from '../templates/gallery'
 import TypicalInstallationsPage, {
   TypicalInstallationsPageProps
 } from '../templates/typical-installations'
+import { WordPressPage } from '../data/types'
 
 export interface PageProps {
   header: HeaderProps
@@ -30,21 +31,7 @@ export interface PageProps {
       }
     }
   }
-  page: {
-    template:
-      | 'page_contact.php'
-      | 'page_form.php'
-      | 'page_gallery.php'
-      | 'page_library.php'
-      | 'page_store-locator.php'
-      | 'page_typical-installations.php'
-      | 'page_videos.php'
-      | ''
-    content: {
-      rendered: string
-    }
-    acf: HeroContentProps
-  }
+  page: WordPressPage
 }
 
 export default function Page(

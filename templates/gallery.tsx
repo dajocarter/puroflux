@@ -11,19 +11,17 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Carousel from 'react-bootstrap/Carousel'
 import { PageProps } from '../pages/[slug]'
-import { WordPressImage } from '../data/types'
+import { WordPressImage, WordPressPage } from '../data/types'
 import Image from 'next/image'
 
-export interface GalleryPageProps extends PageProps {
-  page: {
-    template: 'page_gallery.php'
-    content: {
-      rendered: string
-    }
-    acf: HeroContentProps & {
-      gallery: WordPressImage[]
-    }
+interface GalleryPage extends WordPressPage {
+  template: 'page_gallery.php'
+  acf: HeroContentProps & {
+    gallery: WordPressImage[]
   }
+}
+export interface GalleryPageProps extends PageProps {
+  page: GalleryPage
 }
 
 export default function GalleryPageTemplate(props: GalleryPageProps) {

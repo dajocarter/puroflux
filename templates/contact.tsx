@@ -12,20 +12,19 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import ContactForm from '../components/forms/contact'
 import { PageProps } from '../pages/[slug]'
+import { WordPressPage } from '../data/types'
 
-export interface ContactPageProps extends PageProps {
-  page: {
-    template: 'page_contact.php'
-    content: {
-      rendered: string
-    }
-    acf: HeroContentProps & {
-      address: string
-      phone_number: string
-      fax_number: string
-      contact_email: string
-    }
+interface ContactPage extends WordPressPage {
+  template: 'page_contact.php'
+  acf: HeroContentProps & {
+    address: string
+    phone_number: string
+    fax_number: string
+    contact_email: string
   }
+}
+export interface ContactPageProps extends PageProps {
+  page: ContactPage
 }
 
 export default function ContactPage(props: ContactPageProps) {

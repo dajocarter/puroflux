@@ -14,17 +14,14 @@ import Accordion, {
   AccordionContent,
   AccordionTitle
 } from '../components/accordion'
-import { SeriesPostType } from '../data/types'
+import { SeriesPostType, WordPressPage } from '../data/types'
 import ModelInstallationFiles from '../components/model-installation-files'
 
+interface TypicalInstallationsPage extends WordPressPage {
+  template: 'page_typical-installations.php'
+}
 export interface TypicalInstallationsPageProps extends PageProps {
-  page: {
-    template: 'page_typical-installations.php'
-    content: {
-      rendered: string
-    }
-    acf: HeroContentProps
-  }
+  page: TypicalInstallationsPage
   filterSeries: SeriesPostType[]
   separatorSeries: SeriesPostType[]
 }
