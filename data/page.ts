@@ -1,4 +1,5 @@
 import { queryBySlug, wpClient } from '.'
+import { SeriesPostType } from './types'
 
 export async function getPageData(slug: string) {
   const heroImgSlug =
@@ -15,6 +16,35 @@ export async function getPageData(slug: string) {
       page,
       reps,
       states
+    }
+  }
+
+  if (page && page.template === 'page_typical-installations.php') {
+    const series = await wpClient.series().find()
+
+    const filterSeries: SeriesPostType[] = []
+    const separatorSeries: SeriesPostType[] = []
+
+    series.forEach((elt) => {
+      if (!elt) return
+      if (
+        elt.acf.product_series?.find(
+          (p) => p.post_title === 'Permanent Media Filters'
+        )
+      ) {
+        filterSeries.push(elt)
+      } else if (
+        elt.acf.product_series?.find((p) => p.post_title === 'Separators')
+      ) {
+        separatorSeries.push(elt)
+      }
+    })
+
+    return {
+      heroImg,
+      page,
+      filterSeries,
+      separatorSeries
     }
   }
 

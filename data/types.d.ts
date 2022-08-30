@@ -134,7 +134,7 @@ export interface RepPostType {
   }
 }
 
-interface WordPressFile {
+export interface WordPressFile {
   ID: number
   id: number
   title: string

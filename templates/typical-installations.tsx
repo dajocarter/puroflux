@@ -1,5 +1,9 @@
 import Head from 'next/head'
-import { HeroContent, HeroUnit } from '../components/hero-unit'
+import {
+  HeroContent,
+  HeroContentProps,
+  HeroUnit
+} from '../components/hero-unit'
 import Layout from '../components/layout'
 import styled from 'styled-components'
 import Container from 'react-bootstrap/Container'
@@ -10,8 +14,20 @@ import Accordion, {
   AccordionContent,
   AccordionTitle
 } from '../components/accordion'
+import { SeriesPostType } from '../data/types'
+import ModelInstallationFiles from '../components/model-installation-files'
 
-export interface TypicalInstallationsPageProps extends PageProps {}
+export interface TypicalInstallationsPageProps extends PageProps {
+  page: {
+    template: 'page_typical-installations.php'
+    content: {
+      rendered: string
+    }
+    acf: HeroContentProps
+  }
+  filterSeries: SeriesPostType[]
+  separatorSeries: SeriesPostType[]
+}
 
 export default function TypicalInstallationsPage(
   props: TypicalInstallationsPageProps
@@ -40,55 +56,55 @@ export default function TypicalInstallationsPage(
                 }}
               />
             )}
-            {/* {props.filterInstalls && (
-            <Installation>
-              <div className='text--center'>
-                <h2>Filter Installations</h2>
-                <h3>Select a Model</h3>
-                <h4>View product summary</h4>
-              </div>
-              <Accordion>
-                {props.filterInstalls.map(({ node }, i) => (
-                  <div key={node.id}>
-                    <AccordionTitle accordionIndex={i}>
-                      {node.title}
-                    </AccordionTitle>
-                    <AccordionContent accordionIndex={i}>
-                      <ModelInstallationFiles
-                        slipStream={node.acf.slip_stream_files || true}
-                        sweeperPiping={node.acf.sweeper_piping_files || true}
-                      />
-                    </AccordionContent>
-                  </div>
-                ))}
-              </Accordion>
-            </Installation>
-          )} */}
-            {/* {props.sepInstalls && (
-            <Installation>
-              <div className='text--center'>
-                <h2>Separator Installations</h2>
-                <h3>Select a Model</h3>
-                <h4>View product summary</h4>
-              </div>
-              <Accordion>
-                {props.sepInstalls.map(({ node }, i) => (
-                  <div key={node.id}>
-                    <AccordionTitle accordionIndex={i}>
-                      {node.title}
-                    </AccordionTitle>
-                    <AccordionContent accordionIndex={i}>
-                      <ModelInstallationFiles
-                        sweeperPiping={node.acf.sweeper_piping_files || true}
-                        fullFlow={node.acf.full_flow_files || true}
-                        sideStream={node.acf.side_stream_files || true}
-                      />
-                    </AccordionContent>
-                  </div>
-                ))}
-              </Accordion>
-            </Installation>
-          )} */}
+            {props.filterSeries && (
+              <Installation>
+                <div className='text--center'>
+                  <h2>Filter Installations</h2>
+                  <h3>Select a Model</h3>
+                  <h4>View product summary</h4>
+                </div>
+                <Accordion>
+                  {props.filterSeries.map((node, i) => (
+                    <div key={node.id}>
+                      <AccordionTitle accordionIndex={i}>
+                        {node.title.rendered}
+                      </AccordionTitle>
+                      <AccordionContent accordionIndex={i}>
+                        <ModelInstallationFiles
+                          slipStream={node.acf.slip_stream_files || true}
+                          sweeperPiping={node.acf.sweeper_piping_files || true}
+                        />
+                      </AccordionContent>
+                    </div>
+                  ))}
+                </Accordion>
+              </Installation>
+            )}
+            {props.separatorSeries && (
+              <Installation>
+                <div className='text--center'>
+                  <h2>Separator Installations</h2>
+                  <h3>Select a Model</h3>
+                  <h4>View product summary</h4>
+                </div>
+                <Accordion>
+                  {props.separatorSeries.map((node, i) => (
+                    <div key={node.id}>
+                      <AccordionTitle accordionIndex={i}>
+                        {node.title.rendered}
+                      </AccordionTitle>
+                      <AccordionContent accordionIndex={i}>
+                        <ModelInstallationFiles
+                          sweeperPiping={node.acf.sweeper_piping_files || true}
+                          fullFlow={node.acf.full_flow_files || true}
+                          sideStream={node.acf.side_stream_files || true}
+                        />
+                      </AccordionContent>
+                    </div>
+                  ))}
+                </Accordion>
+              </Installation>
+            )}
           </Col>
         </Row>
       </Main>

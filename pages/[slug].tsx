@@ -14,6 +14,9 @@ import StoreLocatorTemplate, {
 } from '../templates/store-locator'
 import VideoPageTemplate, { VideoPageProps } from '../templates/videos'
 import GalleryPageTemplate, { GalleryPageProps } from '../templates/gallery'
+import TypicalInstallationsPage, {
+  TypicalInstallationsPageProps
+} from '../templates/typical-installations'
 
 export interface PageProps {
   header: HeaderProps
@@ -51,6 +54,7 @@ export default function Page(
     | GalleryPageProps
     | LibraryTemplateProps
     | StoreLocatorProps
+    | TypicalInstallationsPageProps
     | VideoPageProps
 ) {
   switch (props.page.template) {
@@ -64,6 +68,12 @@ export default function Page(
       return <LibraryTemplate {...(props as LibraryTemplateProps)} />
     case 'page_store-locator.php':
       return <StoreLocatorTemplate {...(props as StoreLocatorProps)} />
+    case 'page_typical-installations.php':
+      return (
+        <TypicalInstallationsPage
+          {...(props as TypicalInstallationsPageProps)}
+        />
+      )
     case 'page_videos.php':
       return <VideoPageTemplate {...(props as VideoPageProps)} />
     default:
