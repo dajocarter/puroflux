@@ -7,6 +7,23 @@ export async function getPageData(slug: string) {
   const [heroImg] = await wpClient.media().find(queryBySlug(heroImgSlug))
   const [page] = await wpClient.page().find(queryBySlug(slug))
 
+  if (page && page.template === 'page_products.php') {
+    const [addlItem] = await wpClient.page().find(queryBySlug('installations'))
+    const products = await wpClient.product().find()
+    products.sort((a, b) => {
+      if (!a) return 1 // sort a after b
+      if (!b) return -1 // sort a before b
+      return b.id - a.id
+    })
+
+    return {
+      heroImg,
+      page,
+      addlItem,
+      products
+    }
+  }
+
   if (page && page.template === 'page_store-locator.php') {
     const reps = await wpClient.rep().find()
     const states = await wpClient.state().find()

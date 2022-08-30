@@ -17,6 +17,7 @@ import GalleryPageTemplate, { GalleryPageProps } from '../templates/gallery'
 import TypicalInstallationsPage, {
   TypicalInstallationsPageProps
 } from '../templates/typical-installations'
+import ProductsPageTemplate, { ProductsPageProps } from '../templates/products'
 import { WordPressPage } from '../data/types'
 
 export interface PageProps {
@@ -40,6 +41,7 @@ export default function Page(
     | FormPageProps
     | GalleryPageProps
     | LibraryTemplateProps
+    | ProductsPageProps
     | StoreLocatorProps
     | TypicalInstallationsPageProps
     | VideoPageProps
@@ -53,6 +55,8 @@ export default function Page(
       return <GalleryPageTemplate {...(props as GalleryPageProps)} />
     case 'page_library.php':
       return <LibraryTemplate {...(props as LibraryTemplateProps)} />
+    case 'page_products.php':
+      return <ProductsPageTemplate {...(props as ProductsPageProps)} />
     case 'page_store-locator.php':
       return <StoreLocatorTemplate {...(props as StoreLocatorProps)} />
     case 'page_typical-installations.php':
