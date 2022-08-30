@@ -41,8 +41,14 @@ class WpClient extends WpApiClient {
     FOOTER_PAGES_MENU_PATH
   )
 
-  public product(): DefaultEndpoint<ProductPostType> {
-    return this.addPostType<ProductPostType>(PRODUCTS_POST_TYPE_PATH)
+  public product<P = ProductPostType>(): DefaultEndpoint<P> {
+    const queryParams = new URLSearchParams({
+      order: 'desc',
+      orderBy: 'id'
+    })
+    return {
+      ...this.defaultEndpoints(PRODUCTS_POST_TYPE_PATH, queryParams)
+    }
   }
 
   public rep(): DefaultEndpoint<RepPostType> {
