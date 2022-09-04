@@ -1,5 +1,4 @@
 import { GetStaticProps, GetStaticPropsContext } from 'next'
-import { HeroContentProps } from '../components/hero-unit'
 import { wpClient } from '../data'
 import getLayoutData from '../data/layout'
 import { getPageData } from '../data/page'
@@ -19,6 +18,7 @@ import TypicalInstallationsPage, {
 } from '../templates/typical-installations'
 import ProductsPageTemplate, { ProductsPageProps } from '../templates/products'
 import { WordPressPage } from '../data/types'
+import ProductTemplate from '../templates/product'
 
 export interface PageProps {
   header: HeaderProps
@@ -46,6 +46,9 @@ export default function Page(
     | TypicalInstallationsPageProps
     | VideoPageProps
 ) {
+  if (!props.page.template) {
+    return <ProductTemplate {...props} />
+  }
   switch (props.page.template) {
     case 'page_contact.php':
       return <ContactPage {...(props as ContactPageProps)} />
@@ -73,10 +76,24 @@ export default function Page(
 }
 
 export async function getStaticPaths() {
+  let paths: { params: { slug: string } }[] = []
+
   const pages = await wpClient.page().find()
-  const paths = pages.map((page) => ({
-    params: { slug: page?.slug }
-  }))
+  pages.forEach((page) => {
+    if (page && page.slug)
+      paths.push({
+        params: { slug: page.slug }
+      })
+  })
+
+  const products = await wpClient.product().find()
+  products.forEach((page) => {
+    if (page && page.slug)
+      paths.push({
+        params: { slug: page.slug }
+      })
+  })
+
   return {
     paths,
     fallback: false

@@ -24,6 +24,7 @@ import {
   ProductPostType,
   WordPressPage
 } from '../data/types'
+import { getImageData } from '../data'
 
 interface ProductsPage extends WordPressPage {
   template: 'page_products.php'
@@ -68,6 +69,10 @@ export default function ProductsPageTemplate(props: ProductsPageProps) {
     setKey(undefined)
   }
 
+  const addlItemImage = getImageData(
+    props.addlItem._embedded['wp:featuredmedia'][0]
+  )
+
   return (
     <Layout {...props}>
       <Head>
@@ -97,48 +102,29 @@ export default function ProductsPageTemplate(props: ProductsPageProps) {
             <Row ref={tabsRef}>
               <Col xs={12}>
                 <Tabs>
-                  {props.products.map((product, index) => (
-                    <Nav.Item key={product.id}>
-                      <Nav.Link eventKey={index}>
-                        <Image
-                          alt={
-                            product._embedded['wp:featuredmedia'][0].alt_text
-                          }
-                          src={
-                            product._embedded['wp:featuredmedia'][0]
-                              .media_details.sizes.full.source_url
-                          }
-                          height={
-                            product._embedded['wp:featuredmedia'][0]
-                              .media_details.sizes.full.height
-                          }
-                          width={
-                            product._embedded['wp:featuredmedia'][0]
-                              .media_details.sizes.full.width
-                          }
-                        />
-                      </Nav.Link>
-                    </Nav.Item>
-                  ))}
+                  {props.products.map((product, index) => {
+                    const { imgAlt, imgSrc, imgHeight, imgWidth } =
+                      getImageData(product._embedded['wp:featuredmedia'][0])
+                    return (
+                      <Nav.Item key={product.id}>
+                        <Nav.Link eventKey={index}>
+                          <Image
+                            alt={imgAlt}
+                            src={imgSrc}
+                            height={imgHeight}
+                            width={imgWidth}
+                          />
+                        </Nav.Link>
+                      </Nav.Item>
+                    )
+                  })}
                   <Nav.Item>
                     <Nav.Link eventKey={props.products.length}>
                       <Image
-                        alt={
-                          props.addlItem._embedded['wp:featuredmedia'][0]
-                            .alt_text
-                        }
-                        src={
-                          props.addlItem._embedded['wp:featuredmedia'][0]
-                            .media_details.sizes.full.source_url
-                        }
-                        height={
-                          props.addlItem._embedded['wp:featuredmedia'][0]
-                            .media_details.sizes.full.height
-                        }
-                        width={
-                          props.addlItem._embedded['wp:featuredmedia'][0]
-                            .media_details.sizes.full.width
-                        }
+                        alt={addlItemImage.imgAlt}
+                        src={addlItemImage.imgSrc}
+                        height={addlItemImage.imgHeight}
+                        width={addlItemImage.imgWidth}
                       />
                     </Nav.Link>
                   </Nav.Item>
@@ -198,23 +184,13 @@ function SelectablePane({
   prev: boolean
   prevPane: () => void
 }) {
+  const { imgAlt, imgSrc, imgHeight, imgWidth } = getImageData(
+    node._embedded['wp:featuredmedia'][0]
+  )
   return (
     <TabPane eventKey={eventKey}>
       <Pane>
-        <Image
-          alt={node._embedded['wp:featuredmedia'][0].alt_text}
-          src={
-            node._embedded['wp:featuredmedia'][0].media_details.sizes.full
-              .source_url
-          }
-          height={
-            node._embedded['wp:featuredmedia'][0].media_details.sizes.full
-              .height
-          }
-          width={
-            node._embedded['wp:featuredmedia'][0].media_details.sizes.full.width
-          }
-        />
+        <Image alt={imgAlt} src={imgSrc} height={imgHeight} width={imgWidth} />
         <div>
           <h2>{node.title.rendered}</h2>
           {node.type === 'product' && node.acf.excerpt && (

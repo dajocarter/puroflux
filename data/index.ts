@@ -1,9 +1,11 @@
 import WpApiClient, { DefaultEndpoint } from 'wordpress-api-client'
 import {
+  FeaturedMedia,
   ProductPostType,
   RepPostType,
   SeriesPostType,
   StatePostType,
+  WordPressImage,
   WordPressMenu
 } from './types'
 
@@ -101,4 +103,48 @@ export const formatURL = (url: string): string => {
   if (url.match(httpLink)) formattedURL = url.replace(httpLink, '')
   if (url.match(httpsLink)) formattedURL = url.replace(httpsLink, '')
   return formattedURL
+}
+
+export function getImageData(imageData: WordPressImage | FeaturedMedia | null) {
+  let imgAlt = ''
+  let imgSrc = ''
+  let imgHeight = 0
+  let imgWidth = 0
+
+  if (imageData) {
+    if (typeof imageData.title === 'string') {
+      imgAlt = imageData.title
+    } else if (typeof imageData.title === 'object') {
+      imgAlt = imageData.title.rendered
+    }
+    if (!imgAlt) {
+      if ('alt' in imageData) {
+        imgAlt = imageData.alt
+      } else if ('alt_text' in imageData) {
+        imgAlt = imageData.alt_text
+      }
+    }
+    if ('media_details' in imageData) {
+      imgSrc =
+        imageData.media_details.sizes['full' || 'medium']?.source_url || ''
+      imgHeight =
+        imageData.media_details.sizes['full' || 'medium']?.height ||
+        imageData.media_details.height
+      imgWidth =
+        imageData.media_details.sizes['full' || 'medium']?.width ||
+        imageData.media_details.width
+    } else if ('sizes' in imageData) {
+      imgSrc = imageData.sizes['large' || 'medium_large'] || ''
+      imgHeight = imageData.sizes['large-height' || 'medium_large-height'] || 0
+      imgWidth = imageData.sizes['large-width' || 'medium_large-width'] || 0
+    }
+    if (!imgSrc) imgSrc = imageData.source_url
+  }
+
+  return {
+    imgAlt,
+    imgSrc,
+    imgHeight,
+    imgWidth
+  }
 }
