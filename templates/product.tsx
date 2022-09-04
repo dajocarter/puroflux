@@ -9,7 +9,6 @@ import ProductNav from '../components/product-nav'
 import Image from 'next/image'
 import { StyledButtonLink } from '../components/links'
 import {
-  FeaturedMedia,
   ProductPostType,
   SeriesPostType,
   WordPressFile,

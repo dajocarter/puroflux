@@ -18,7 +18,7 @@ import TypicalInstallationsPage, {
 } from '../templates/typical-installations'
 import ProductsPageTemplate, { ProductsPageProps } from '../templates/products'
 import { WordPressPage } from '../data/types'
-import ProductTemplate from '../templates/product'
+import ProductTemplate, { ProductPageProps } from '../templates/product'
 
 export interface PageProps {
   header: HeaderProps
@@ -41,13 +41,14 @@ export default function Page(
     | FormPageProps
     | GalleryPageProps
     | LibraryTemplateProps
+    | ProductPageProps
     | ProductsPageProps
     | StoreLocatorProps
     | TypicalInstallationsPageProps
     | VideoPageProps
 ) {
   if (!props.page.template) {
-    return <ProductTemplate {...props} />
+    return <ProductTemplate {...(props as ProductPageProps)} />
   }
   switch (props.page.template) {
     case 'page_contact.php':
