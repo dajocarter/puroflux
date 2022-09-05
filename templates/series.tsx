@@ -33,7 +33,7 @@ export interface SeriesPageProps extends PageProps {
 
 export default function SeriesTemplate(props: SeriesPageProps) {
   const { imgAlt, imgSrc, imgHeight, imgWidth } = getImageData(
-    props.page._embedded['wp:featuredmedia'][0]
+    props.page?._embedded?.['wp:featuredmedia'][0]
   )
   return (
     <Layout {...props}>
@@ -175,29 +175,25 @@ export default function SeriesTemplate(props: SeriesPageProps) {
             </Col>
           </Row>
         )}
-        {props.seriesProduct && (
-          <>
-            <Row>
-              <Col>
-                <ProductTitle>
-                  {props.seriesProduct.title.rendered}
-                </ProductTitle>
-              </Col>
-            </Row>
-            <Row style={{ justifyContent: 'center' }}>
-              {props.relatedSeries.map((relatedSeries) => (
-                <RelatedModel key={relatedSeries.id} xs={12} md={4}>
-                  <RelatedTitle>{relatedSeries.title.rendered}</RelatedTitle>
-                  <RelatedExcerpt>
-                    {relatedSeries.acf.description}
-                  </RelatedExcerpt>
-                  <StyledButtonLink primary href={relatedSeries.slug}>
-                    View Product
-                  </StyledButtonLink>
-                </RelatedModel>
-              ))}
-            </Row>
-          </>
+        {props.seriesProduct?.title && (
+          <Row>
+            <Col>
+              <ProductTitle>{props.seriesProduct.title.rendered}</ProductTitle>
+            </Col>
+          </Row>
+        )}
+        {props.relatedSeries.length > 0 && (
+          <Row style={{ justifyContent: 'center' }}>
+            {props.relatedSeries.map((relatedSeries) => (
+              <RelatedModel key={relatedSeries.id} xs={12} md={4}>
+                <RelatedTitle>{relatedSeries.title.rendered}</RelatedTitle>
+                <RelatedExcerpt>{relatedSeries.acf.description}</RelatedExcerpt>
+                <StyledButtonLink primary href={relatedSeries.slug}>
+                  View Product
+                </StyledButtonLink>
+              </RelatedModel>
+            ))}
+          </Row>
         )}
       </Main>
     </Layout>
