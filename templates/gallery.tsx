@@ -13,6 +13,7 @@ import Carousel from 'react-bootstrap/Carousel'
 import { PageProps } from '../pages/[slug]'
 import { WordPressImage, WordPressPage } from '../data/types'
 import Image from 'next/image'
+import { getImageData } from '../data'
 
 interface GalleryPage extends WordPressPage {
   template: 'page_gallery.php'
@@ -44,21 +45,25 @@ export default function GalleryPageTemplate(props: GalleryPageProps) {
           <Row>
             <Col xs={12}>
               <Carousel>
-                {props.page.acf.gallery.map((img) => (
-                  <Carousel.Item key={img.id}>
-                    <Image
-                      alt={img.alt}
-                      src={img.sizes.large}
-                      height={img.sizes['large-height']}
-                      width={img.sizes['large-width']}
-                      layout='responsive'
-                    />
-                    <Carousel.Caption>
-                      <h3>{img.title}</h3>
-                      {img.caption && <p>{img.caption}</p>}
-                    </Carousel.Caption>
-                  </Carousel.Item>
-                ))}
+                {props.page.acf.gallery.map((img) => {
+                  const { imgAlt, imgSrc, imgHeight, imgWidth } =
+                    getImageData(img)
+                  return (
+                    <Carousel.Item key={img.id}>
+                      <Image
+                        alt={imgAlt}
+                        src={imgSrc}
+                        height={imgHeight}
+                        width={imgWidth}
+                        layout='responsive'
+                      />
+                      <Carousel.Caption>
+                        <h3>{img.title}</h3>
+                        {img.caption && <p>{img.caption}</p>}
+                      </Carousel.Caption>
+                    </Carousel.Item>
+                  )
+                })}
               </Carousel>
             </Col>
           </Row>

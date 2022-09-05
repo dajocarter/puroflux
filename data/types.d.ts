@@ -64,6 +64,18 @@ export interface WordPressImage {
 }
 
 export interface WordPressPage {
+  id: number
+  date: Date
+  date_gmt: Date
+  guid: {
+    rendered: string
+  }
+  modified: Date
+  modified_gmt: Date
+  slug: string
+  status: 'publish'
+  type: string
+  link: string
   template:
     | 'page_contact.php'
     | 'page_form.php'
@@ -83,9 +95,14 @@ export interface WordPressPage {
   content: {
     rendered: string
   }
-  slug: string
-  type: 'page'
   acf: HeroContentProps
+  title: {
+    rendered: string
+  }
+  content: {
+    rendered: string
+  }
+  _embedded: EmbeddedFeaturedMedia
 }
 
 interface LinkedPost {
@@ -123,27 +140,9 @@ export interface EmbeddedFeaturedMedia {
   'wp:featuredmedia': FeaturedMedia[]
 }
 
-export interface ProductPostType {
-  id: number
-  date: Date
-  date_gmt: Date
-  guid: {
-    rendered: string
-  }
-  modified: Date
-  modified_gmt: Date
-  slug: string
-  status: 'publish'
+export interface ProductPostType extends WordPressPage {
+  template: ''
   type: 'product'
-  link: string
-  title: {
-    rendered: string
-  }
-  content: {
-    rendered: string
-  }
-  featured_media: number
-  template: string
   acf: {
     title: string | null
     image: WordPressImage | null
@@ -155,26 +154,11 @@ export interface ProductPostType {
     'operation_&_maint_manual'?: WordPressFile | null
     sample_spec_sheet?: WordPressFile | null
   }
-  _embedded: EmbeddedFeaturedMedia
 }
 
-export interface RepPostType {
-  id: number
-  date: Date
-  date_gmt: Date
-  guid: {
-    rendered: string
-  }
-  modified: Date
-  modified_gmt: Date
-  slug: string
-  status: 'publish'
+export interface RepPostType extends WordPressPage {
+  template: ''
   type: 'rep'
-  link: string
-  title: {
-    rendered: string
-  }
-  template: string
   states: number[]
   state?: string
   acf: {
@@ -200,27 +184,9 @@ export interface WordPressFile {
   name: string
 }
 
-export interface SeriesPostType {
-  id: number
-  date: Date
-  date_gmt: Date
-  guid: {
-    rendered: string
-  }
-  modified: Date
-  modified_gmt: Date
-  slug: string
-  status: 'publish'
+export interface SeriesPostType extends WordPressPage {
+  template: ''
   type: 'series'
-  link: string
-  title: {
-    rendered: string
-  }
-  content: {
-    rendered: string
-  }
-  featured_media: number
-  template: string
   acf: {
     model_notes: string | null
     series_models: LinkedPost[] | null
@@ -235,7 +201,6 @@ export interface SeriesPostType {
     full_flow_files: { file: WordPressFile }[] | null
     side_stream_files: { file: WordPressFile }[] | null
   }
-  _embedded: EmbeddedFeaturedMedia
 }
 
 export interface StatePostType {
@@ -246,4 +211,18 @@ export interface StatePostType {
   name: string
   slug: string
   taxonomy: 'state'
+}
+
+export interface ModelPostType extends WordPressPage {
+  type: 'model'
+  template: ''
+  acf: {
+    model_stats: {
+      title: string
+      value: string
+    }[]
+    model_series: LinkedPost[]
+    file_names: null | string
+    model_files: null | { title: string; file: WordPressFile }[]
+  }
 }

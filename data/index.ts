@@ -1,6 +1,7 @@
 import WpApiClient, { DefaultEndpoint } from 'wordpress-api-client'
 import {
   FeaturedMedia,
+  ModelPostType,
   ProductPostType,
   RepPostType,
   SeriesPostType,
@@ -14,6 +15,7 @@ const FOOTER_PAGES_MENU_PATH = 'wp-api-menus/v2/menus/8'
 const FOOTER_EXPLORE_MENU_PATH = 'wp-api-menus/v2/menus/9'
 const HEADER_MOBILE_MENU_PATH = 'wp-api-menus/v2/menus/63'
 
+const MODELS_POST_TYPE_PATH = 'wp/v2/models'
 const PRODUCTS_POST_TYPE_PATH = 'wp/v2/products'
 const REPS_POST_TYPE_PATH = 'wp/v2/reps'
 const SERIES_POST_TYPE_PATH = 'wp/v2/series'
@@ -42,6 +44,10 @@ class WpClient extends WpApiClient {
   footerPagesMenu = this.createEndpointCustomGet<WordPressMenu>(
     FOOTER_PAGES_MENU_PATH
   )
+
+  public model(): DefaultEndpoint<ModelPostType> {
+    return this.addPostType<ModelPostType>(MODELS_POST_TYPE_PATH)
+  }
 
   public product<P = ProductPostType>(): DefaultEndpoint<P> {
     const queryParams = new URLSearchParams({

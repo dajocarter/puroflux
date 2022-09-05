@@ -19,6 +19,7 @@ import TypicalInstallationsPage, {
 import ProductsPageTemplate, { ProductsPageProps } from '../templates/products'
 import { WordPressPage } from '../data/types'
 import ProductTemplate, { ProductPageProps } from '../templates/product'
+import SeriesTemplate, { SeriesPageProps } from '../templates/series'
 
 export interface PageProps {
   header: HeaderProps
@@ -43,12 +44,18 @@ export default function Page(
     | LibraryTemplateProps
     | ProductPageProps
     | ProductsPageProps
+    | SeriesPageProps
     | StoreLocatorProps
     | TypicalInstallationsPageProps
     | VideoPageProps
 ) {
   if (!props.page.template) {
-    return <ProductTemplate {...(props as ProductPageProps)} />
+    switch (props.page.type) {
+      case 'product':
+        return <ProductTemplate {...(props as ProductPageProps)} />
+      case 'series':
+        return <SeriesTemplate {...(props as SeriesPageProps)} />
+    }
   }
   switch (props.page.template) {
     case 'page_contact.php':
@@ -89,6 +96,14 @@ export async function getStaticPaths() {
 
   const products = await wpClient.product().find()
   products.forEach((page) => {
+    if (page && page.slug)
+      paths.push({
+        params: { slug: page.slug }
+      })
+  })
+
+  const series = await wpClient.series().find()
+  series.forEach((page) => {
     if (page && page.slug)
       paths.push({
         params: { slug: page.slug }

@@ -28,6 +28,7 @@ interface ProductPageACF extends HeroContentProps {
 
 interface ProductPage extends WordPressPage {
   template: ''
+  type: 'product'
   acf: ProductPageACF
 }
 

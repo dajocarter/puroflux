@@ -1,5 +1,5 @@
 import { queryBySlug, wpClient } from '.'
-import { SeriesPostType } from './types'
+import { ModelPostType, ProductPostType, SeriesPostType } from './types'
 
 export async function getPageData(slug: string) {
   const heroImgSlug =
@@ -10,6 +10,57 @@ export async function getPageData(slug: string) {
   if (!page) {
     const products = await wpClient.product().find()
     const product = products.find((p) => p && p.slug === slug)
+
+    if (!product) {
+      const series = await wpClient.series().find()
+      const seriesPage = series.find((p) => p && p.slug === slug)
+      let seriesProduct = {} as ProductPostType
+      let relatedSeries: SeriesPostType[] = []
+      // we need more info about the models than what the ACF data provides so we have to fetch :(
+      let models: ModelPostType[] = []
+      if (seriesPage) {
+        const product = products.find(
+          (p) => p && p.slug === seriesPage.acf.product_series?.[0].post_name
+        )
+        if (product) {
+          seriesProduct = product
+          const productSeries = product.acf.product_series
+          if (productSeries) {
+            productSeries.forEach((node) => {
+              if (node.post_name !== seriesPage.slug) {
+                const related = series.find(
+                  (p) => p && p.slug === node.post_name
+                )
+                if (related) {
+                  relatedSeries.push(related)
+                }
+              }
+            })
+          }
+        }
+
+        const seriesModels = seriesPage.acf.series_models
+        if (seriesModels) {
+          const modelsData = await Promise.all(
+            seriesModels.map((node) => wpClient.model().find(node.ID))
+          )
+          modelsData.forEach((node) => {
+            const data = node[0]
+            if (data) models.push(data)
+          })
+        }
+      }
+
+      return {
+        heroImg,
+        page: seriesPage,
+        models,
+        products,
+        series,
+        seriesProduct,
+        relatedSeries
+      }
+    }
 
     // we need more info about the series than what the ACF data provides so we have to fetch :(
     let series: SeriesPostType[] = []
