@@ -35,6 +35,9 @@ export default function SeriesTemplate(props: SeriesPageProps) {
   const { imgAlt, imgSrc, imgHeight, imgWidth } = getImageData(
     props.page?._embedded?.['wp:featuredmedia'][0]
   )
+
+  const isPFIpage = props.page.slug.startsWith('pfi')
+
   return (
     <Layout {...props}>
       <Head>
@@ -43,24 +46,45 @@ export default function SeriesTemplate(props: SeriesPageProps) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <HeroUnit imgSrc={props.heroImg.media_details.sizes.full.source_url}>
-        <Row>
-          <Col>
-            <ProductNav products={props.products} light />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className='content'>
-              <SeriesTitle>{props.page.title.rendered} Series</SeriesTitle>
-              <SeriesDescription>
-                {props.page.acf.description}
-              </SeriesDescription>
-            </div>
-          </Col>
-        </Row>
+      <HeroUnit
+        imgSrc={props.heroImg.media_details.sizes.full.source_url}
+        isPFIndustrial={isPFIpage}
+      >
+        {!isPFIpage && (
+          <>
+            <Row>
+              <Col>
+                <ProductNav products={props.products} light />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <div className='content'>
+                  <SeriesTitle isPFIpage={false}>
+                    {props.page.title.rendered} Series
+                  </SeriesTitle>
+                  <SeriesDescription isPFIpage={false}>
+                    {props.page.acf.description}
+                  </SeriesDescription>
+                </div>
+              </Col>
+            </Row>
+          </>
+        )}
       </HeroUnit>
       <Main>
+        {isPFIpage && (
+          <Row>
+            <Col>
+              <SeriesTitle isPFIpage>
+                {props.page.title.rendered} Series
+              </SeriesTitle>
+              <SeriesDescription isPFIpage>
+                {props.page.acf.description}
+              </SeriesDescription>
+            </Col>
+          </Row>
+        )}
         <Row>
           <Col sm={12} md={6}>
             <Image
@@ -224,13 +248,20 @@ const Main = styled(Container)`
   padding: 45px 15px;
 `
 
-const SeriesTitle = styled.h1`
+const SeriesTitle = styled.h1<{ isPFIpage: boolean }>`
   margin-top: 3rem;
   text-transform: uppercase;
+  ${(props) => props.isPFIpage && 'text-align: center;'}
 `
-const SeriesDescription = styled.p`
+const SeriesDescription = styled.p<{ isPFIpage: boolean }>`
   font-size: 18px;
   text-transform: uppercase;
+  ${(props) =>
+    props.isPFIpage &&
+    `
+      text-align: center;
+      margin-bottom: 3rem;
+  `}
 `
 
 const FeaturedTitle = styled.h2`

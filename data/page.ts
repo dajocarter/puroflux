@@ -3,7 +3,11 @@ import { ModelPostType, ProductPostType, SeriesPostType } from './types'
 
 export async function getPageData(slug: string) {
   const heroImgSlug =
-    slug === 'home' ? 'puroflux_home_hero_pf_4060' : 'puroflux_home_hero_sample'
+    slug === 'home'
+      ? 'puroflux_home_hero_pf_4060'
+      : slug.startsWith('pfi')
+      ? 'pfi-logo'
+      : 'puroflux_home_hero_sample'
   const [heroImg] = await wpClient.media().find(queryBySlug(heroImgSlug))
 
   const [page] = await wpClient.page().find(queryBySlug(slug))
