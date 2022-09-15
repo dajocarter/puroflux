@@ -38,7 +38,7 @@ export default function FullWidthContent(props: FullWidthContentProps) {
         {props.link && (
           <a
             className={`${links.buttonLink} ${links.secondary}`}
-            href={`/${props.link.url}/`}
+            href={props.link.url}
             target={props.link.target}
           >
             {props.link.title}
