@@ -12,7 +12,7 @@ export default function PageSEO({
   const pageTitle = `${title} | Puroflux Corporation`
   const url = `https://www.puroflux.com/${slug}`
 
-  const image = '/puroflux_home_resources_bg.png'
+  const image = '/purofluxlogo_white_2x.png'
   const favicon = '/puroflux-logo-white.png'
 
   const schema = [
