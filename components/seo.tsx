@@ -10,9 +10,10 @@ export default function PageSEO({
   const description =
     'Industrial & Commercial Water Filtration and Control Systems'
   const pageTitle = `${title} | Puroflux Corporation`
-  const url = `https://www.puroflux.com/${slug}`
+  const baseURL = 'https://puronext.vercel.app'
+  const url = `${baseURL}/${slug}`
 
-  const image = '/purofluxlogo_white_2x.png'
+  const image = `${baseURL}/public/purofluxlogo_white_2x.png`
   const favicon = '/puroflux-logo-white.png'
 
   const schema = [
