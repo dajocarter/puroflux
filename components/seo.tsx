@@ -31,7 +31,6 @@ export default function PageSEO({
 
   return (
     <Head>
-      <html lang='en' />
       <title>{pageTitle}</title>
       <meta name='description' content={description} />
       <meta name='image' content={image} />
