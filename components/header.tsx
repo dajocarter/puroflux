@@ -10,27 +10,14 @@ import styles from './header.module.scss'
 import { WordPressMenu } from '../data/types'
 
 export interface HeaderProps {
-  logo: {
-    media_details: {
-      sizes: {
-        medium: {
-          source_url: string
-          height: number
-          width: number
-        }
-      }
-    }
-  }
-  siteTitle: string
   navs: {
     desktop: WordPressMenu
     mobile: WordPressMenu
   }
 }
 
-export default function Header({ logo, siteTitle, navs }: HeaderProps) {
+export default function Header({ navs }: HeaderProps) {
   const [menuIsOpen, setMenu] = useState(false)
-  const logoSrc = logo.media_details.sizes.medium.source_url
   const desktopMenuName = navs.desktop.name
   const desktopMenuItems = navs.desktop.items
   const mobileMenuName = navs.mobile.name
@@ -45,8 +32,8 @@ export default function Header({ logo, siteTitle, navs }: HeaderProps) {
               <Link href='/'>
                 <a>
                   <Image
-                    alt={siteTitle}
-                    src={logoSrc}
+                    alt='Puroflux Corporation'
+                    src='/purofluxlogo_white_2x.png'
                     height={42}
                     width={200}
                     layout='fixed'

@@ -1,21 +1,14 @@
-import { queryBySlug, wpClient } from '.'
+import { wpClient } from '.'
 
 async function getHeaderData() {
-  const [logo] = await wpClient
-    .media()
-    .find(queryBySlug('purofluxlogo_white_2x'))
   const headerDesktopMenu = await wpClient.headerDesktopMenu()
   const headerMobileMenu = await wpClient.headerMobileMenu()
-  const siteSettings = wpClient.siteSettings()
-  const { title } = await siteSettings.find()
 
   return {
-    logo,
     navs: {
       desktop: headerDesktopMenu,
       mobile: headerMobileMenu
-    },
-    siteTitle: title
+    }
   }
 }
 
