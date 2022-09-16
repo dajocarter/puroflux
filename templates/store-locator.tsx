@@ -12,6 +12,7 @@ import Accordion, {
 } from '../components/accordion'
 import { PageProps } from '../pages/[slug]'
 import { RepPostType, StatePostType, WordPressPage } from '../data/types'
+import PageSEO from '../components/seo'
 
 const groupRepsByState = (reps: RepPostType[], states: StatePostType[]) => {
   const statesExtracted = reps.reduce(
@@ -126,12 +127,15 @@ export default function StoreLocatorTemplate(props: StoreLocatorProps) {
   const sortedReps = groupRepsByState(props.reps, props.states)
   return (
     <Layout {...props}>
+      <PageSEO title={props.page.title.rendered} slug={props.page.slug} />
+
       <HeroUnit imgSrc={props.heroImg.media_details.sizes.full.source_url}>
         <HeroContent
           content={props.page.acf.content}
           buttons={props.page.acf.buttons}
         />
       </HeroUnit>
+
       <Container className={styles.main}>
         {props.page.content.rendered && (
           <Row>
