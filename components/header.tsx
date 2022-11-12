@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { ActiveLink } from './links'
+import ActiveLink from './active-link'
 import Image from 'next/image'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -8,7 +8,6 @@ import Col from 'react-bootstrap/Col'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import styles from './header.module.scss'
 import { WordPressMenu } from '../data/types'
-import { josefinSans } from '../pages/_app'
 
 export interface HeaderProps {
   navs: {
@@ -55,18 +54,9 @@ export default function Header({ navs }: HeaderProps) {
                           ? '/'
                           : `/${item.object_slug}`
                       }
-                      activeClassName={styles.active}
-                    >
-                      <a
-                        className={
-                          item.object_slug === 'rep-login'
-                            ? `${styles.navLink} ${styles.alt} ${josefinSans.className}`
-                            : `${styles.navLink} ${josefinSans.className}`
-                        }
-                      >
-                        {item.title}
-                      </a>
-                    </ActiveLink>
+                      alt={item.object_slug === 'rep-login'}
+                      text={item.title}
+                    />
                     {item.children && (
                       <ul
                         className={`${styles.navMenu} ${styles.subMenu} ${styles.childMenu}`}
@@ -75,14 +65,8 @@ export default function Header({ navs }: HeaderProps) {
                           <li className={styles.navItem} key={child.object_id}>
                             <ActiveLink
                               href={`/${child.object_slug}`}
-                              activeClassName={styles.active}
-                            >
-                              <a
-                                className={`${styles.navLink} ${josefinSans.className}`}
-                              >
-                                {child.title}
-                              </a>
-                            </ActiveLink>
+                              text={child.title}
+                            />
                             {child.children && (
                               <ul
                                 className={`${styles.navMenu} ${styles.subMenu} ${styles.grandchildMenu}`}
@@ -94,14 +78,8 @@ export default function Header({ navs }: HeaderProps) {
                                   >
                                     <ActiveLink
                                       href={`/${grandchild.object_slug}`}
-                                      activeClassName={styles.active}
-                                    >
-                                      <a
-                                        className={`${styles.navLink} ${josefinSans.className}`}
-                                      >
-                                        {grandchild.title}
-                                      </a>
-                                    </ActiveLink>
+                                      text={grandchild.title}
+                                    />
                                   </li>
                                 ))}
                               </ul>
@@ -150,18 +128,9 @@ export default function Header({ navs }: HeaderProps) {
                           ? `/`
                           : `/${item.object_slug}`
                       }
-                      activeClassName={styles.active}
-                    >
-                      <a
-                        className={
-                          item.object_slug === 'rep-login'
-                            ? `${styles.navLink} ${styles.alt} ${josefinSans.className}`
-                            : `${styles.navLink} ${josefinSans.className}`
-                        }
-                      >
-                        {item.title}
-                      </a>
-                    </ActiveLink>
+                      alt={item.object_slug === 'rep-login'}
+                      text={item.title}
+                    />
                   </li>
                 ))}
               </ul>
