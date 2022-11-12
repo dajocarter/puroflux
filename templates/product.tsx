@@ -73,6 +73,10 @@ export default function ProductTemplate(props: ProductPageProps) {
                 src={imgSrc}
                 height={(imgHeight * 250) / imgWidth}
                 width={250}
+                style={{
+                  maxWidth: '100%',
+                  height: 'auto'
+                }}
               />
             )}
             {props.page.acf.files && (
@@ -115,6 +119,10 @@ export default function ProductTemplate(props: ProductPageProps) {
                     src={imgSrc}
                     height={175}
                     width={(imgWidth * 175) / imgHeight}
+                    style={{
+                      maxWidth: '100%',
+                      height: 'auto'
+                    }}
                   />
                   {series.acf.description && (
                     <p className={styles.seriesDescrip}>

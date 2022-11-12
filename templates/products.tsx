@@ -111,6 +111,10 @@ export default function ProductsPageTemplate(props: ProductsPageProps) {
                             src={imgSrc}
                             height={imgHeight}
                             width={imgWidth}
+                            style={{
+                              maxWidth: '100%',
+                              height: 'auto'
+                            }}
                           />
                         </Nav.Link>
                       </Nav.Item>
@@ -126,6 +130,10 @@ export default function ProductsPageTemplate(props: ProductsPageProps) {
                         src={addlItemImage.imgSrc}
                         height={addlItemImage.imgHeight}
                         width={addlItemImage.imgWidth}
+                        style={{
+                          maxWidth: '100%',
+                          height: 'auto'
+                        }}
                       />
                     </Nav.Link>
                   </Nav.Item>
@@ -191,7 +199,16 @@ function SelectablePane({
   return (
     <TabPane eventKey={eventKey}>
       <div className={styles.pane}>
-        <Image alt={imgAlt} src={imgSrc} height={imgHeight} width={imgWidth} />
+        <Image
+          alt={imgAlt}
+          src={imgSrc}
+          height={imgHeight}
+          width={imgWidth}
+          style={{
+            maxWidth: '100%',
+            height: 'auto'
+          }}
+        />
         <div>
           <h2>{node.title.rendered}</h2>
           {node.type === 'product' && node.acf.excerpt && (

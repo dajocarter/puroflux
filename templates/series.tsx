@@ -92,7 +92,11 @@ export default function SeriesTemplate(props: SeriesPageProps) {
               src={imgSrc}
               height={imgHeight}
               width={imgWidth}
-              layout='responsive'
+              sizes='100vw'
+              style={{
+                width: '100%',
+                height: 'auto'
+              }}
             />
           </Col>
           <Col sm={12} md={6}>

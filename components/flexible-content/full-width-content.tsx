@@ -29,6 +29,10 @@ export default function FullWidthContent(props: FullWidthContentProps) {
             src={imgSrc}
             height={imgHeight}
             width={imgWidth}
+            style={{
+              maxWidth: '100%',
+              height: 'auto'
+            }}
           />
         )}
         <div

@@ -53,7 +53,11 @@ export default function GalleryPageTemplate(props: GalleryPageProps) {
                         src={imgSrc}
                         height={imgHeight}
                         width={imgWidth}
-                        layout='responsive'
+                        sizes='100vw'
+                        style={{
+                          width: '100%',
+                          height: 'auto'
+                        }}
                       />
                       <Carousel.Caption>
                         <h3>{img.title}</h3>

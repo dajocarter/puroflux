@@ -27,7 +27,9 @@ export function HeroUnit({
         }
         alt='background-image'
         src={imgSrc}
-        layout='fill'
+        fill
+        priority
+        sizes='100vw'
       />
       <div className={styles.contentWrapper}>{children}</div>
     </div>

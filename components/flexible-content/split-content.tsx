@@ -32,7 +32,12 @@ export default function SplitContent(props: SplitContentProps) {
     <div className={styles.row}>
       <div className={`${styles.side} ${styles.left}`}>
         {props.left_background_image && (
-          <Image alt={leftBgImg.imgAlt} src={leftBgImg.imgSrc} layout='fill' />
+          <Image
+            alt={leftBgImg.imgAlt}
+            src={leftBgImg.imgSrc}
+            fill
+            sizes='100vw'
+          />
         )}
         <div className={`${styles.container} ${styles.left}`}>
           <h2>{props.left_title}</h2>
@@ -56,7 +61,8 @@ export default function SplitContent(props: SplitContentProps) {
           <Image
             alt={rightBgImg.imgAlt}
             src={rightBgImg.imgSrc}
-            layout='fill'
+            fill
+            sizes='100vw'
           />
         )}
         <div className={`${styles.container} ${styles.right}`}>
