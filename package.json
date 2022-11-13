@@ -1,59 +1,32 @@
 {
-  "name": "puroflux",
-  "description": "Website for Puroflux Corporation",
-  "version": "1.0.0",
-  "author": "David Carter <dajocarter@gmail.com>",
-  "dependencies": {
-    "babel-plugin-styled-components": "^1.10.6",
-    "bootstrap": "^4.3.1",
-    "dotenv": "^8.2.0",
-    "gatsby": "^2.17.15",
-    "gatsby-image": "^2.2.33",
-    "gatsby-plugin-google-fonts": "^1.0.1",
-    "gatsby-plugin-manifest": "^2.2.28",
-    "gatsby-plugin-offline": "^3.0.21",
-    "gatsby-plugin-react-helmet": "^3.1.15",
-    "gatsby-plugin-sharp": "^2.3.0",
-    "gatsby-plugin-styled-components": "^3.1.13",
-    "gatsby-source-wordpress": "^3.1.48",
-    "gatsby-transformer-sharp": "^2.3.5",
-    "react": "^16.12.0",
-    "react-bootstrap": "~1.0.0-beta.14",
-    "react-dom": "^16.12.0",
-    "react-helmet": "^5.2.1",
-    "react-icons": "^3.8.0",
-    "styled-components": "^4.4.1",
-    "styled-normalize": "^8.0.6"
-  },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
+  "name": "puronext",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --write '**/*.js'",
-    "test": "jest"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@next/font": "13.0.3",
+    "bootstrap": "5.2.0",
+    "next": "13.0.3",
+    "react": "18.2.0",
+    "react-bootstrap": "2.5.0",
+    "react-dom": "18.2.0",
+    "react-icons": "4.4.0",
+    "sharp": "0.31.2",
+    "wordpress-api-client": "0.4.8"
   },
   "devDependencies": {
-    "babel-jest": "^24.9.0",
-    "babel-preset-gatsby": "^0.2.22",
-    "identity-obj-proxy": "^3.0.0",
-    "jest": "^24.9.0",
-    "prettier": "^1.19.1",
-    "react-test-renderer": "^16.12.0"
-  },
-  "standard": {
-    "globals": [
-      "jest",
-      "describe",
-      "it",
-      "expect",
-      "beforeEach"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/dajocarter/puroflux"
+    "@types/node": "18.7.13",
+    "@types/react": "18.0.17",
+    "@types/react-dom": "18.0.6",
+    "eslint": "8.22.0",
+    "eslint-config-next": "13.0.3",
+    "eslint-config-prettier": "8.5.0",
+    "sass": "1.54.8",
+    "typescript": "4.7.4"
   }
 }
