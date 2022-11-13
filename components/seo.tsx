@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Script from 'next/script'
 
 export default function PageSEO({
   slug,
@@ -31,32 +32,48 @@ export default function PageSEO({
   ]
 
   return (
-    <Head>
-      <title>{pageTitle}</title>
-      <meta name='description' content={description} />
-      <meta name='image' content={image} />
-      <link rel='shortcut icon' href={favicon} />
+    <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta name='description' content={description} />
+        <meta name='image' content={image} />
+        <link rel='shortcut icon' href={favicon} />
 
-      {/* OpenGraph tags */}
-      <meta property='og:url' content={url} />
-      <meta property='og:title' content={pageTitle} />
-      <meta
-        property='og:description'
-        content='Industrial & Commercial Water Filtration and Control Systems'
+        {/* OpenGraph tags */}
+        <meta property='og:url' content={url} />
+        <meta property='og:title' content={pageTitle} />
+        <meta
+          property='og:description'
+          content='Industrial & Commercial Water Filtration and Control Systems'
+        />
+        <meta property='og:image' content={image} />
+
+        {/* Twitter Card tags */}
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:title' content={pageTitle} />
+        <meta
+          name='twitter:description'
+          content='Industrial & Commercial Water Filtration and Control Systems'
+        />
+        <meta name='twitter:image' content={image} />
+
+        {/* Schema.org tags */}
+        <script type='application/ld+json'>{JSON.stringify(schema)}</script>
+      </Head>
+      {/* Global site tag (gtag.js) - Google Analytics */}
+      <Script
+        src='https://www.googletagmanager.com/gtag/js?id=G-GMSESPXRVJ'
+        strategy='afterInteractive'
       />
-      <meta property='og:image' content={image} />
+      <Script id='google-analytics' strategy='afterInteractive'>
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
 
-      {/* Twitter Card tags */}
-      <meta name='twitter:card' content='summary_large_image' />
-      <meta name='twitter:title' content={pageTitle} />
-      <meta
-        name='twitter:description'
-        content='Industrial & Commercial Water Filtration and Control Systems'
-      />
-      <meta name='twitter:image' content={image} />
-
-      {/* Schema.org tags */}
-      <script type='application/ld+json'>{JSON.stringify(schema)}</script>
-    </Head>
+          gtag('config', 'G-GMSESPXRVJ');
+        `}
+      </Script>
+    </>
   )
 }
